@@ -5,7 +5,7 @@ import 'package:tabbed_view/tabbed_view.dart';
 class MobileTheme extends TabbedViewThemeData {
   MobileTheme._(
       {required this.borderColor,
-      required this.highlightedColor,
+      required this.hoveredColor,
       required this.selectedColor});
 
   factory MobileTheme(
@@ -19,11 +19,11 @@ class MobileTheme extends TabbedViewThemeData {
     Color normalButtonColor = colorSet[700]!;
     Color disabledButtonColor = colorSet[300]!;
     Color hoverButtonColor = colorSet[900]!;
-    Color highlightedColor = colorSet[300]!;
+    Color hoveredColor = colorSet[300]!;
 
     MobileTheme theme = MobileTheme._(
         borderColor: borderColor,
-        highlightedColor: highlightedColor,
+        hoveredColor: hoveredColor,
         selectedColor: accentColor);
 
     theme.divider = BorderSide(width: 5, color: borderColor);
@@ -36,7 +36,7 @@ class MobileTheme extends TabbedViewThemeData {
     tabsArea.hoverButtonColor = hoverButtonColor;
     tabsArea.disabledButtonColor = disabledButtonColor;
     tabsArea.buttonsAreaPadding = EdgeInsets.all(2);
-    tabsArea.hoverButtonBackground = BoxDecoration(color: highlightedColor);
+    tabsArea.hoverButtonBackground = BoxDecoration(color: hoveredColor);
     tabsArea.buttonPadding = const EdgeInsets.all(2);
     tabsArea.border = BorderSide(color: borderColor, width: 5);
     tabsArea.color = backgroundColor;
@@ -51,7 +51,7 @@ class MobileTheme extends TabbedViewThemeData {
     tab.buttonsOffset = 4;
     tab.padding = EdgeInsets.fromLTRB(6, 3, 3, 3);
     tab.paddingWithoutButton = EdgeInsets.fromLTRB(6, 3, 6, 3);
-    tab.hoverButtonBackground = BoxDecoration(color: highlightedColor);
+    tab.hoverButtonBackground = BoxDecoration(color: hoveredColor);
     tab.buttonPadding = const EdgeInsets.all(2);
     tab.draggingDecoration =
         BoxDecoration(border: Border.all(color: borderColor, width: 1));
@@ -71,7 +71,7 @@ class MobileTheme extends TabbedViewThemeData {
   }
 
   Color borderColor;
-  Color highlightedColor;
+  Color hoveredColor;
   Color selectedColor;
 
   TabBorder _tabBorderBuilder(
@@ -81,8 +81,8 @@ class MobileTheme extends TabbedViewThemeData {
       case TabStatus.selected:
         color = selectedColor;
         break;
-      case TabStatus.highlighted:
-        color = highlightedColor;
+      case TabStatus.hovered:
+        color = hoveredColor;
         break;
       case TabStatus.normal:
         color = Colors.transparent;

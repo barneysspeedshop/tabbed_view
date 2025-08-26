@@ -129,7 +129,7 @@ class _TabsAreaState extends State<TabsArea> {
         controller.selectedIndex == tabIndex) {
       return TabStatus.selected;
     } else if (_highlightedIndex != null && _highlightedIndex == tabIndex) {
-      return TabStatus.highlighted;
+      return TabStatus.hovered;
     }
     return TabStatus.normal;
   }

@@ -10,7 +10,7 @@ class ClassicTheme extends TabbedViewThemeData {
       required double fontSize,
       required Color borderColor}) {
     Color backgroundColor = colorSet[50]!;
-    Color highlightedColor = colorSet[300]!;
+    Color hoveredColor = colorSet[300]!;
     Color fontColor = colorSet[900]!;
     Color normalButtonColor = colorSet[900]!;
     Color disabledButtonColor = colorSet[400]!;
@@ -26,7 +26,7 @@ class ClassicTheme extends TabbedViewThemeData {
     tabsArea.hoverButtonColor = hoverButtonColor;
     tabsArea.disabledButtonColor = disabledButtonColor;
     tabsArea.buttonPadding = const EdgeInsets.all(2);
-    tabsArea.hoverButtonBackground = BoxDecoration(color: highlightedColor);
+    tabsArea.hoverButtonBackground = BoxDecoration(color: hoveredColor);
     tabsArea.buttonsAreaDecoration = BoxDecoration(
         color: backgroundColor,
         border: Border.all(color: borderColor, width: 1));
@@ -42,7 +42,7 @@ class ClassicTheme extends TabbedViewThemeData {
     tab.normalButtonColor = normalButtonColor;
     tab.hoverButtonColor = hoverButtonColor;
     tab.disabledButtonColor = disabledButtonColor;
-    tab.hoverButtonBackground = BoxDecoration(color: highlightedColor);
+    tab.hoverButtonBackground = BoxDecoration(color: hoveredColor);
     tab.buttonsOffset = 4;
     tab.buttonPadding = const EdgeInsets.all(2);
     tab.padding = EdgeInsets.fromLTRB(6, 3, 3, 3);

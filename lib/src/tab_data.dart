@@ -31,8 +31,8 @@ import 'package:tabbed_view/tabbed_view.dart';
 /// The [selectedStatusTheme] overrides the default theme to customize the
 /// appearance of the tab when it is currently selected.
 ///
-/// The [highlightedStatusTheme] overrides the default theme to change
-/// the visual look of the tab when it's in a highlighted state.
+/// The [hoveredStatusTheme] overrides the default theme to change
+/// the visual look of the tab when it's in a hovered state.
 ///
 /// See also:
 ///
@@ -49,7 +49,7 @@ class TabData extends ChangeNotifier with TabIndex {
       this.draggable = true,
       this.keepAlive = false,
       this.normalStatusTheme,
-      this.highlightedStatusTheme,
+      this.hoveredStatusTheme,
       this.selectedStatusTheme})
       : _value = value,
         _text = text,
@@ -146,7 +146,7 @@ class TabData extends ChangeNotifier with TabIndex {
 
   final TabStatusThemeData? normalStatusTheme;
   final TabStatusThemeData? selectedStatusTheme;
-  final TabStatusThemeData? highlightedStatusTheme;
+  final TabStatusThemeData? hoveredStatusTheme;
 
   /// Gets the theme of a tab according to its status.
   TabStatusThemeData? getTabThemeFor(TabStatus status) {
@@ -155,8 +155,8 @@ class TabData extends ChangeNotifier with TabIndex {
         return normalStatusTheme;
       case TabStatus.selected:
         return selectedStatusTheme;
-      case TabStatus.highlighted:
-        return highlightedStatusTheme;
+      case TabStatus.hovered:
+        return hoveredStatusTheme;
     }
   }
 

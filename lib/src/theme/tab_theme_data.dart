@@ -34,7 +34,7 @@ class TabThemeData {
       this.rotateCaptionsInVerticalTabs = false,
       this.showCloseIconWhenNotFocused = false,
       this.selectedStatus,
-      this.highlightedStatus})
+      this.hoveredStatus})
       : this.buttonsOffset = buttonsOffset >= 0 ? buttonsOffset : 0,
         this.buttonsGap = buttonsGap >= 0 ? buttonsGap : 0,
         this.buttonIconSize =
@@ -72,7 +72,7 @@ class TabThemeData {
   /// in a column.
   VerticalTabLayoutStyle verticalLayoutStyle;
   TabStatusThemeData? selectedStatus;
-  TabStatusThemeData? highlightedStatus;
+  TabStatusThemeData? hoveredStatus;
 
   /// Padding for tab content
   EdgeInsetsGeometry? padding;
@@ -105,7 +105,7 @@ class TabThemeData {
 
   /// Gets an optional theme for a tab based on its [status].
   ///
-  /// If a theme is returned (for [TabStatus.selected] or [TabStatus.highlighted]),
+  /// If a theme is returned (for [TabStatus.selected] or [TabStatus.hovered]),
   /// its non-null properties will override the corresponding properties of the main tab theme.
   /// For [TabStatus.normal], it returns `null` as there is no specific theme to apply.
   TabStatusThemeData? getTabThemeFor(TabStatus status) {
@@ -114,8 +114,8 @@ class TabThemeData {
         return null;
       case TabStatus.selected:
         return selectedStatus;
-      case TabStatus.highlighted:
-        return highlightedStatus;
+      case TabStatus.hovered:
+        return hoveredStatus;
     }
   }
 
@@ -132,7 +132,7 @@ class TabThemeData {
           showCloseIconWhenNotFocused == other.showCloseIconWhenNotFocused &&
           verticalLayoutStyle == other.verticalLayoutStyle &&
           selectedStatus == other.selectedStatus &&
-          highlightedStatus == other.highlightedStatus &&
+          hoveredStatus == other.hoveredStatus &&
           padding == other.padding &&
           paddingWithoutButton == other.paddingWithoutButton &&
           verticalAlignment == other.verticalAlignment &&
@@ -161,7 +161,7 @@ class TabThemeData {
       showCloseIconWhenNotFocused.hashCode ^
       verticalLayoutStyle.hashCode ^
       selectedStatus.hashCode ^
-      highlightedStatus.hashCode ^
+      hoveredStatus.hashCode ^
       padding.hashCode ^
       paddingWithoutButton.hashCode ^
       verticalAlignment.hashCode ^

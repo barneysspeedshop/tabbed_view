@@ -1,2 +1,2 @@
 /// Inner enum for tab status.
-enum TabStatus { selected, highlighted, normal }
+enum TabStatus { selected, hovered, normal }
