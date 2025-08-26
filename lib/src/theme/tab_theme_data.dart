@@ -30,7 +30,6 @@ class TabThemeData {
       this.maxWidth,
       this.padding,
       this.paddingWithoutButton,
-      this.margin,
       TabStatusThemeData? selectedStatus,
       this.verticalLayoutStyle = VerticalTabLayoutStyle.inline,
       this.rotateCaptionsInVerticalTabs = false,
@@ -81,16 +80,10 @@ class TabThemeData {
   TabStatusThemeData highlightedStatus;
   final TabStatusThemeData disabledStatus;
 
-  /// Empty space to inscribe inside the [decoration]. The tab child, if any, is
-  /// placed inside this padding.
-  ///
-  /// This padding is in addition to any padding inherent in the [decoration];
-  /// see [Decoration.padding].
+  /// Padding for tab content
   EdgeInsetsGeometry? padding;
 
   EdgeInsetsGeometry? paddingWithoutButton;
-
-  EdgeInsetsGeometry? margin;
 
   VerticalAlignment verticalAlignment;
 
@@ -145,7 +138,6 @@ class TabThemeData {
           disabledStatus == other.disabledStatus &&
           padding == other.padding &&
           paddingWithoutButton == other.paddingWithoutButton &&
-          margin == other.margin &&
           verticalAlignment == other.verticalAlignment &&
           buttonsOffset == other.buttonsOffset &&
           draggingDecoration == other.draggingDecoration &&
@@ -176,7 +168,6 @@ class TabThemeData {
       disabledStatus.hashCode ^
       padding.hashCode ^
       paddingWithoutButton.hashCode ^
-      margin.hashCode ^
       verticalAlignment.hashCode ^
       buttonsOffset.hashCode ^
       draggingDecoration.hashCode ^
