@@ -18,10 +18,6 @@ class TabsAreaCorner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(listenable: hiddenTabs, builder: _builder);
-  }
-
-  Widget _builder(BuildContext context, Widget? child) {
     final List<Widget> children = [
       TabsAreaButtonsWidget(provider: provider, hiddenTabs: hiddenTabs)
     ];

@@ -4,12 +4,12 @@ import 'package:meta/meta.dart';
 /// Parent data for [_TabsAreaLayoutRenderBox] class.
 @internal
 class TabsAreaLayoutParentData extends ContainerBoxParentData<RenderBox> {
-  bool visible = false;
+  bool visible = true;
   bool selected = false;
 
   /// Resets all values.
   void reset() {
-    visible = false;
+    visible = true;
     selected = false;
   }
 }

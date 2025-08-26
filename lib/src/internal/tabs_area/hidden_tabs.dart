@@ -21,7 +21,7 @@ class HiddenTabs extends ChangeNotifier {
     bool hasHiddenTabs = _indexes.isNotEmpty;
     if (_hasHiddenTabs != hasHiddenTabs) {
       _hasHiddenTabs = hasHiddenTabs;
-      Future.microtask(() => notifyListeners());
+      Future.delayed(Duration.zero, () => notifyListeners());
     }
   }
 }

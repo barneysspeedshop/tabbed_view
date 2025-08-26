@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tabbed_view/src/icon_provider.dart';
 import 'package:tabbed_view/src/tabbed_view_icons.dart';
+import 'package:tabbed_view/src/theme/tabs_area_cross_axis_alignment.dart';
 import 'package:tabbed_view/src/theme/tabs_area_cross_axis_fit.dart';
 import 'package:tabbed_view/src/theme/tabbed_view_theme_constants.dart';
 
@@ -17,6 +18,7 @@ class TabsAreaThemeData {
       this.gapBottomBorder = BorderSide.none,
       this.gapSideBorder = BorderSide.none,
       this.crossAxisFit = TabsAreaCrossAxisFit.none,
+      this.crossAxisAlignment = TabsAreaCrossAxisAlignment.inner,
       this.buttonsAreaDecoration,
       this.buttonsAreaPadding,
       this.buttonPadding,
@@ -66,6 +68,7 @@ class TabsAreaThemeData {
   BorderSide gapBottomBorder;
   BorderSide gapSideBorder;
   TabsAreaCrossAxisFit crossAxisFit;
+  TabsAreaCrossAxisAlignment crossAxisAlignment;
 
   /// Icon for the hidden tabs menu when it is open.
   final IconProvider menuIconOpen;

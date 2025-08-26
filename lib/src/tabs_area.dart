@@ -33,6 +33,10 @@ class _TabsAreaState extends State<TabsArea> {
 
   @override
   Widget build(BuildContext context) {
+    return ListenableBuilder(listenable: _hiddenTabs, builder: _builder);
+  }
+
+  Widget _builder(BuildContext context, Widget? child) {
     TabbedViewController controller = widget.provider.controller;
     TabbedViewThemeData theme = TabbedViewTheme.of(context);
     TabsAreaThemeData tabsAreaTheme = theme.tabsArea;
