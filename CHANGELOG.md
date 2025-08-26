@@ -16,7 +16,7 @@
     * `closeOtherTabs(int tabIndex)`
     * `closeTabsToTheRight(int tabIndex)`
   * Refactored `closeAllClosableTabs` to be more robust and reusable.
-* `TabStatus.highlighted` renamed to `TabStatus.hovered`
+* `TabStatus.highlighted` renamed to `TabStatus.hovered`.
 
 ## 1.22.1
 

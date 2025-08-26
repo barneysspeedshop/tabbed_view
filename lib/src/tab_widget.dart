@@ -7,7 +7,7 @@ import 'package:tabbed_view/src/tab_button_widget.dart';
 import 'package:tabbed_view/tabbed_view.dart';
 
 /// Listener for the tabs with the mouse over.
-typedef UpdateHighlightedIndex = void Function(int? tabIndex);
+typedef UpdateHoveredIndex = void Function(int? tabIndex);
 
 /// The tab widget. Displays the tab text and its buttons.
 class TabWidget extends StatelessWidget {
@@ -16,14 +16,14 @@ class TabWidget extends StatelessWidget {
       required this.index,
       required this.status,
       required this.provider,
-      required this.updateHighlightedIndex,
+      required this.updateHoveredIndex,
       required this.onClose})
       : super(key: key);
 
   final int index;
   final TabStatus status;
   final TabbedViewProvider provider;
-  final UpdateHighlightedIndex updateHighlightedIndex;
+  final UpdateHoveredIndex updateHoveredIndex;
   final Function onClose;
 
   @override
@@ -92,8 +92,8 @@ class TabWidget extends StatelessWidget {
 
     widget = MouseRegion(
         cursor: cursor,
-        onEnter: (event) => updateHighlightedIndex(index),
-        onExit: (event) => updateHighlightedIndex(null),
+        onEnter: (event) => updateHoveredIndex(index),
+        onExit: (event) => updateHoveredIndex(null),
         child: provider.draggingTabIndex == null
             ? GestureDetector(
                 onTap: () => _onSelect(context, index),

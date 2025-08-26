@@ -18,7 +18,7 @@ class TabsArea extends StatefulWidget {
 
 /// The [TabsArea] state.
 class _TabsAreaState extends State<TabsArea> {
-  int? _highlightedIndex;
+  int? _hoveredIndex;
   Key? _tabsAreaLayoutKey;
   late bool _lastIsHorizontal;
 
@@ -51,7 +51,7 @@ class _TabsAreaState extends State<TabsArea> {
               index: index,
               status: status,
               provider: widget.provider,
-              updateHighlightedIndex: _updateHighlightedIndex,
+              updateHoveredIndex: _updateHoveredIndex,
               onClose: _onTabClose)));
     }
 
@@ -128,23 +128,23 @@ class _TabsAreaState extends State<TabsArea> {
     if (controller.selectedIndex != null &&
         controller.selectedIndex == tabIndex) {
       return TabStatus.selected;
-    } else if (_highlightedIndex != null && _highlightedIndex == tabIndex) {
+    } else if (_hoveredIndex != null && _hoveredIndex == tabIndex) {
       return TabStatus.hovered;
     }
     return TabStatus.normal;
   }
 
-  void _updateHighlightedIndex(int? tabIndex) {
-    if (_highlightedIndex != tabIndex) {
+  void _updateHoveredIndex(int? tabIndex) {
+    if (_hoveredIndex != tabIndex) {
       setState(() {
-        _highlightedIndex = tabIndex;
+        _hoveredIndex = tabIndex;
       });
     }
   }
 
   void _onTabClose() {
     setState(() {
-      _highlightedIndex = null;
+      _hoveredIndex = null;
     });
   }
 }
