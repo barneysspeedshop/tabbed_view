@@ -87,8 +87,6 @@ class DarkTheme {
     double bottomWidth = 3;
     return TabThemeData(
         buttonsOffset: 4,
-        innerBottomBorder:
-            BorderSide(color: Colors.transparent, width: bottomWidth),
         textStyle: TextStyle(fontSize: fontSize, color: fontColor),
         decoration: BoxDecoration(color: tabColor),
         draggingDecoration: BoxDecoration(color: tabColor),

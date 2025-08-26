@@ -44,9 +44,6 @@ class MobileTheme extends TabbedViewThemeData {
     final TabThemeData tab = theme.tab;
     BorderSide verticalBorderSide = BorderSide(color: borderColor, width: 5);
     double borderHeight = 4;
-    tab.innerLeftBorder = verticalBorderSide;
-    tab.innerRightBorder = verticalBorderSide;
-    tab.innerTopBorder = verticalBorderSide;
     tab.normalButtonColor = normalButtonColor;
     tab.hoverButtonColor = hoverButtonColor;
     tab.disabledButtonColor = disabledButtonColor;

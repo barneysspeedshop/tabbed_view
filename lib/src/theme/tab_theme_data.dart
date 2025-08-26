@@ -25,10 +25,6 @@ class TabThemeData {
       this.borderBuilder = TabThemeData.defaultBorderBuilder,
       this.draggingDecoration,
       this.draggingOpacity = 0.3,
-      this.innerBottomBorder,
-      this.innerTopBorder,
-      this.innerLeftBorder,
-      this.innerRightBorder,
       this.textStyle = const TextStyle(fontSize: 13),
       this.maxTextWidth,
       this.maxWidth,
@@ -102,11 +98,6 @@ class TabThemeData {
   BoxDecoration? draggingDecoration;
   double draggingOpacity;
 
-  BorderSide? innerBottomBorder;
-  BorderSide? innerTopBorder;
-  BorderSide? innerLeftBorder;
-  BorderSide? innerRightBorder;
-
   TextStyle? textStyle;
 
   double buttonIconSize;
@@ -149,10 +140,6 @@ class TabThemeData {
           borderBuilder == other.borderBuilder &&
           draggingDecoration == other.draggingDecoration &&
           draggingOpacity == other.draggingOpacity &&
-          innerBottomBorder == other.innerBottomBorder &&
-          innerTopBorder == other.innerTopBorder &&
-          innerLeftBorder == other.innerLeftBorder &&
-          innerRightBorder == other.innerRightBorder &&
           textStyle == other.textStyle &&
           maxTextWidth == other.maxTextWidth &&
           maxWidth == other.maxWidth &&
@@ -184,10 +171,6 @@ class TabThemeData {
       borderBuilder.hashCode ^
       draggingDecoration.hashCode ^
       draggingOpacity.hashCode ^
-      innerBottomBorder.hashCode ^
-      innerTopBorder.hashCode ^
-      innerLeftBorder.hashCode ^
-      innerRightBorder.hashCode ^
       textStyle.hashCode ^
       maxTextWidth.hashCode ^
       maxWidth.hashCode ^
