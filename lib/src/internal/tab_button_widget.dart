@@ -1,10 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 import 'package:tabbed_view/src/internal/tabbed_view_provider.dart';
 import 'package:tabbed_view/src/tab_button.dart';
 import 'package:tabbed_view/src/tabbed_view_menu_item.dart';
 
 /// Widget for tab buttons. Used for any tab button such as the close button.
+@internal
 class TabButtonWidget extends StatefulWidget {
   TabButtonWidget(
       {required this.provider,

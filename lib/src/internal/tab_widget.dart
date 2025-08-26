@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 import 'package:tabbed_view/src/internal/flow_layout.dart';
 import 'package:tabbed_view/src/internal/tabbed_view_provider.dart';
 import 'package:tabbed_view/src/internal/tabs_area/drop_tab_widget.dart';
 import 'package:tabbed_view/src/internal/tabs_area/tab_drag_feedback_widget.dart';
-import 'package:tabbed_view/src/tab_button_widget.dart';
+import 'package:tabbed_view/src/internal/tab_button_widget.dart';
 import 'package:tabbed_view/tabbed_view.dart';
 
 /// Listener for the tabs with the mouse over.
+@internal
 typedef UpdateHoveredIndex = void Function(int? tabIndex);
 
 /// The tab widget. Displays the tab text and its buttons.
+@internal
 class TabWidget extends StatelessWidget {
   const TabWidget(
       {required UniqueKey key,

@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tabbed_view/src/tab_button_widget.dart';
-import 'package:tabbed_view/src/tab_widget.dart';
+import 'package:tabbed_view/src/internal/tab_button_widget.dart';
+import 'package:tabbed_view/src/internal/tab_widget.dart';
 import 'package:tabbed_view/tabbed_view.dart';
 
 void main() {
