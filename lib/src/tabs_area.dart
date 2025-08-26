@@ -43,7 +43,7 @@ class _TabsAreaState extends State<TabsArea> {
     List<Widget> children = [];
     for (int index = 0; index < controller.tabs.length; index++) {
       TabStatus status = _getStatusFor(index);
-      TabStatusThemeData tabStatusTheme = theme.tab.getTabThemeFor(status);
+      TabStatusThemeData? tabStatusTheme = theme.tab.getTabThemeFor(status);
       //TODO use tabStatusTheme
       children.add(TabsAreaLayoutChild(
           child: TabWidget(

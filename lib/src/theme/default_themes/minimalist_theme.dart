@@ -41,11 +41,9 @@ class MinimalistTheme {
         hoverButtonColor: colorSet[900]!,
         disabledButtonColor: colorSet[400]!,
         buttonPadding: const EdgeInsets.all(2),
-        hoverButtonBackground: BoxDecoration(color: colorSet[300]!),
-        highlightedStatus: TabStatusThemeData(
-            border: BorderSide(color: colorSet[300]!, width: 1)),
-        selectedStatus: TabStatusThemeData(
-            border: BorderSide(color: colorSet[700]!, width: 1)));
+        hoverButtonBackground: BoxDecoration(color: colorSet[300]!));
+        //highlightedStatus: TabStatusThemeData(border: BorderSide(color: colorSet[300]!, width: 1)),
+        //selectedStatus: TabStatusThemeData(border: BorderSide(color: colorSet[700]!, width: 1)));
   }
 
   static ContentAreaThemeData contentAreaTheme(

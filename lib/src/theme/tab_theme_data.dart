@@ -30,21 +30,16 @@ class TabThemeData {
       this.maxWidth,
       this.padding,
       this.paddingWithoutButton,
-      TabStatusThemeData? selectedStatus,
       this.verticalLayoutStyle = VerticalTabLayoutStyle.inline,
       this.rotateCaptionsInVerticalTabs = false,
       this.showCloseIconWhenNotFocused = false,
-      TabStatusThemeData? highlightedStatus,
-      TabStatusThemeData? disabledStatus})
+      this.selectedStatus,
+      this.highlightedStatus})
       : this.buttonsOffset = buttonsOffset >= 0 ? buttonsOffset : 0,
         this.buttonsGap = buttonsGap >= 0 ? buttonsGap : 0,
         this.buttonIconSize =
             TabbedViewThemeConstants.normalize(buttonIconSize),
-        this.closeIcon = closeIcon ?? IconProvider.path(TabbedViewIcons.close),
-        this.selectedStatus = selectedStatus ?? const TabStatusThemeData(),
-        this.highlightedStatus =
-            highlightedStatus ?? const TabStatusThemeData(),
-        this.disabledStatus = disabledStatus ?? const TabStatusThemeData();
+        this.closeIcon = closeIcon ?? IconProvider.path(TabbedViewIcons.close);
 
   Color? background;
 
@@ -76,9 +71,8 @@ class TabThemeData {
   /// [VerticalTabLayoutStyle.stacked] will arrange the tab's internal components
   /// in a column.
   VerticalTabLayoutStyle verticalLayoutStyle;
-  TabStatusThemeData selectedStatus;
-  TabStatusThemeData highlightedStatus;
-  final TabStatusThemeData disabledStatus;
+  TabStatusThemeData? selectedStatus;
+  TabStatusThemeData? highlightedStatus;
 
   /// Padding for tab content
   EdgeInsetsGeometry? padding;
@@ -109,11 +103,15 @@ class TabThemeData {
 
   double buttonsGap;
 
-  /// Gets the theme of a tab according to its status.
-  TabStatusThemeData getTabThemeFor(TabStatus status) {
+  /// Gets an optional theme for a tab based on its [status].
+  ///
+  /// If a theme is returned (for [TabStatus.selected] or [TabStatus.highlighted]),
+  /// its non-null properties will override the corresponding properties of the main tab theme.
+  /// For [TabStatus.normal], it returns `null` as there is no specific theme to apply.
+  TabStatusThemeData? getTabThemeFor(TabStatus status) {
     switch (status) {
       case TabStatus.normal:
-        return TabStatusThemeData.empty;
+        return null;
       case TabStatus.selected:
         return selectedStatus;
       case TabStatus.highlighted:
@@ -135,7 +133,6 @@ class TabThemeData {
           verticalLayoutStyle == other.verticalLayoutStyle &&
           selectedStatus == other.selectedStatus &&
           highlightedStatus == other.highlightedStatus &&
-          disabledStatus == other.disabledStatus &&
           padding == other.padding &&
           paddingWithoutButton == other.paddingWithoutButton &&
           verticalAlignment == other.verticalAlignment &&
@@ -165,7 +162,6 @@ class TabThemeData {
       verticalLayoutStyle.hashCode ^
       selectedStatus.hashCode ^
       highlightedStatus.hashCode ^
-      disabledStatus.hashCode ^
       padding.hashCode ^
       paddingWithoutButton.hashCode ^
       verticalAlignment.hashCode ^

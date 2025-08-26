@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tabbed_view/src/theme/content_area_theme_data.dart';
 import 'package:tabbed_view/src/theme/tabs_area_cross_axis_fit.dart';
 import 'package:tabbed_view/src/theme/hidden_tabs_menu_theme_data.dart';
-import 'package:tabbed_view/src/theme/tab_status_theme_data.dart';
 import 'package:tabbed_view/src/theme/tab_theme_data.dart';
 import 'package:tabbed_view/src/theme/tabbed_view_theme_data.dart';
 import 'package:tabbed_view/src/theme/tabs_area_theme_data.dart';
@@ -94,14 +93,6 @@ class DarkTheme {
         paddingWithoutButton: EdgeInsets.fromLTRB(6, 3, 6, 3),
         hoverButtonBackground: BoxDecoration(color: highlightedColor),
         buttonPadding: const EdgeInsets.all(2),
-        selectedStatus: TabStatusThemeData(
-          decoration: BoxDecoration(color: selectedTabColor),
-          border: BorderSide(width: bottomWidth, color: selectedTabColor),
-        ),
-        highlightedStatus: TabStatusThemeData(
-          decoration: BoxDecoration(color: highlightedColor),
-          border: BorderSide(width: bottomWidth, color: highlightedColor),
-        ),
         normalButtonColor: normalButtonColor,
         hoverButtonColor: hoverButtonColor,
         disabledButtonColor: disabledButtonColor);

@@ -50,14 +50,6 @@ class ClassicTheme extends TabbedViewThemeData {
     tab.draggingDecoration = BoxDecoration(
         color: backgroundColor,
         border: Border.all(color: borderColor, width: 1));
-    tab.highlightedStatus = TabStatusThemeData(
-        decoration: BoxDecoration(
-            color: highlightedColor,
-            border: Border.all(color: borderColor, width: 1)));
-    // The border is now defined by a single BorderSide, allowing the
-    // TabWidget to build the correct border for any TabBarPosition.
-    tab.selectedStatus =
-        TabStatusThemeData(decoration: BoxDecoration(color: backgroundColor));
     tab.borderBuilder = theme._tabBorderBuilder;
 
     final ContentAreaThemeData contentArea = theme.contentArea;
