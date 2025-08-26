@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tabbed_view/src/flow_layout.dart';
+import 'package:tabbed_view/src/internal/flow_layout.dart';
 import 'package:tabbed_view/src/internal/tabbed_view_provider.dart';
 import 'package:tabbed_view/src/internal/tabs_area/drop_tab_widget.dart';
 import 'package:tabbed_view/src/internal/tabs_area/tab_drag_feedback_widget.dart';
