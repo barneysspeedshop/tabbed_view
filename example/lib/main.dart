@@ -199,6 +199,7 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
 
     return Scaffold(
         appBar: AppBar(title: Text('TabbedView Example (All properties)')),
+        backgroundColor: Colors.white,
         body: Container(padding: EdgeInsets.all(10), child: example));
   }
 

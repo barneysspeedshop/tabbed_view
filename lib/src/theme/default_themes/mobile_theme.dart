@@ -58,10 +58,6 @@ class MobileTheme extends TabbedViewThemeData {
     tab.buttonPadding = const EdgeInsets.all(2);
     tab.draggingDecoration =
         BoxDecoration(border: Border.all(color: borderColor, width: 1));
-    tab.highlightedStatus = TabStatusThemeData(
-        border: BorderSide(color: borderColor, width: borderHeight));
-    tab.selectedStatus = TabStatusThemeData(
-        border: BorderSide(color: accentColor, width: borderHeight));
     tab.borderBuilder = theme._tabBorderBuilder;
 
     final ContentAreaThemeData contentArea = theme.contentArea;

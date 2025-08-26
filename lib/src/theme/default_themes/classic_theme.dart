@@ -64,19 +64,13 @@ class ClassicTheme extends TabbedViewThemeData {
             border: Border.all(color: borderColor, width: 1)));
     // The border is now defined by a single BorderSide, allowing the
     // TabWidget to build the correct border for any TabBarPosition.
-    tab.selectedStatus = TabStatusThemeData(
-      decoration: BoxDecoration(color: backgroundColor),
-      border: BorderSide(color: borderColor, width: 1),
-      padding: EdgeInsets.fromLTRB(6, 3, 3, 8),
-    );
+    tab.selectedStatus =
+        TabStatusThemeData(decoration: BoxDecoration(color: backgroundColor));
     tab.borderBuilder = theme._tabBorderBuilder;
 
     final ContentAreaThemeData contentArea = theme.contentArea;
-    // The border is now defined by a single BorderSide, allowing the
-    // ContentArea to build the correct border for any TabBarPosition.
-    BorderSide borderSide = BorderSide(width: 1, color: borderColor);
     contentArea.color = backgroundColor;
-    contentArea.border = borderSide;
+    contentArea.border = BorderSide(width: 1, color: borderColor);
 
     final HiddenTabsMenuThemeData menu = theme.menu;
     menu.color = backgroundColor;
@@ -99,8 +93,8 @@ class ClassicTheme extends TabbedViewThemeData {
   TabBorder _tabBorderBuilder(
       {required TabBarPosition tabBarPosition, required TabStatus status}) {
     final BorderSide borderSide = status == TabStatus.selected
-        ? BorderSide(color: Colors.transparent, width: 5)
-        : BorderSide.none;
+        ? BorderSide(color: Colors.transparent, width: 8)
+        : divider ?? BorderSide.none;
     switch (tabBarPosition) {
       case TabBarPosition.top:
         return TabBorder(
