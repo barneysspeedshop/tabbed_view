@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tabbed_view/src/theme/content_area_theme_data.dart';
 import 'package:tabbed_view/src/theme/tabs_area_cross_axis_fit.dart';
 import 'package:tabbed_view/src/theme/hidden_tabs_menu_theme_data.dart';
-import 'package:tabbed_view/src/theme/tab_status_theme_data.dart';
 import 'package:tabbed_view/src/theme/tab_theme_data.dart';
 import 'package:tabbed_view/src/theme/tabbed_view_theme_data.dart';
 import 'package:tabbed_view/src/theme/tabs_area_theme_data.dart';
@@ -13,6 +12,9 @@ class MinimalistTheme extends TabbedViewThemeData {
 
   factory MinimalistTheme({required MaterialColor colorSet}) {
     final MinimalistTheme theme = MinimalistTheme._();
+
+    final BorderSide borderSide = BorderSide(width: 1, color: colorSet[900]!);
+    theme.divider = borderSide;
 
     final TabsAreaThemeData tabsArea = theme.tabsArea;
     tabsArea.buttonsAreaDecoration = BoxDecoration(color: colorSet[50]!);
@@ -25,22 +27,22 @@ class MinimalistTheme extends TabbedViewThemeData {
     tabsArea.crossAxisFit = TabsAreaCrossAxisFit.all;
 
     final TabThemeData tab = theme.tab;
+    tab.color = colorSet[50]!;
     tab.buttonsOffset = 4;
     tab.textStyle = TextStyle(color: colorSet[900]!, fontSize: 13);
     tab.padding = EdgeInsets.fromLTRB(6, 3, 3, 3);
     tab.paddingWithoutButton = EdgeInsets.fromLTRB(6, 3, 6, 3);
-    //decoration: BoxDecoration(color: colorSet[50]!),
     tab.draggingDecoration = BoxDecoration(color: colorSet[50]!);
     tab.normalButtonColor = colorSet[900]!;
     tab.hoverButtonColor = colorSet[900]!;
     tab.disabledButtonColor = colorSet[400]!;
     tab.buttonPadding = const EdgeInsets.all(2);
     tab.hoverButtonBackground = BoxDecoration(color: colorSet[300]!);
-    //highlightedStatus: TabStatusThemeData(border: BorderSide(color: colorSet[300]!, width: 1)),
-    //selectedStatus: TabStatusThemeData(border: BorderSide(color: colorSet[700]!, width: 1)));
+    tab.hoveredStatus.color = colorSet[100]!;
+    tab.selectedStatus.color = colorSet[600]!;
+    tab.selectedStatus.fontColor = colorSet[50]!;
 
     final ContentAreaThemeData contentArea = theme.contentArea;
-    BorderSide borderSide = BorderSide(width: 1, color: colorSet[900]!);
     contentArea.color = colorSet[50]!;
     contentArea.border = borderSide;
 

@@ -10,7 +10,7 @@ class TabThemeData {
 
   TabThemeData(
       {IconProvider? closeIcon,
-      this.background,
+      this.color,
       this.normalButtonColor = Colors.black,
       this.hoverButtonColor = Colors.black,
       this.disabledButtonColor = Colors.black12,
@@ -33,15 +33,15 @@ class TabThemeData {
       this.verticalLayoutStyle = VerticalTabLayoutStyle.inline,
       this.rotateCaptionsInVerticalTabs = false,
       this.showCloseIconWhenNotFocused = false,
-      this.selectedStatus,
-      this.hoveredStatus})
+      required this.selectedStatus,
+      required this.hoveredStatus})
       : this.buttonsOffset = buttonsOffset >= 0 ? buttonsOffset : 0,
         this.buttonsGap = buttonsGap >= 0 ? buttonsGap : 0,
         this.buttonIconSize =
             TabbedViewThemeConstants.normalize(buttonIconSize),
         this.closeIcon = closeIcon ?? IconProvider.path(TabbedViewIcons.close);
 
-  Color? background;
+  Color? color;
 
   TabBorderBuilder borderBuilder;
 
@@ -71,8 +71,8 @@ class TabThemeData {
   /// [VerticalTabLayoutStyle.stacked] will arrange the tab's internal components
   /// in a column.
   VerticalTabLayoutStyle verticalLayoutStyle;
-  TabStatusThemeData? selectedStatus;
-  TabStatusThemeData? hoveredStatus;
+  TabStatusThemeData selectedStatus;
+  TabStatusThemeData hoveredStatus;
 
   /// Padding for tab content
   EdgeInsetsGeometry? padding;
@@ -124,7 +124,7 @@ class TabThemeData {
       identical(this, other) ||
       other is TabThemeData &&
           runtimeType == other.runtimeType &&
-          background == other.background &&
+          color == other.color &&
           borderBuilder == other.borderBuilder &&
           maxTextWidth == other.maxTextWidth &&
           maxWidth == other.maxWidth &&
@@ -153,7 +153,7 @@ class TabThemeData {
 
   @override
   int get hashCode =>
-      background.hashCode ^
+      color.hashCode ^
       borderBuilder.hashCode ^
       maxTextWidth.hashCode ^
       maxWidth.hashCode ^

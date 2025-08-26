@@ -5,6 +5,7 @@ import 'package:tabbed_view/src/theme/default_themes/dark_theme.dart';
 import 'package:tabbed_view/src/theme/default_themes/minimalist_theme.dart';
 import 'package:tabbed_view/src/theme/default_themes/mobile_theme.dart';
 import 'package:tabbed_view/src/theme/hidden_tabs_menu_theme_data.dart';
+import 'package:tabbed_view/src/theme/tab_status_theme_data.dart';
 import 'package:tabbed_view/src/theme/tab_theme_data.dart';
 import 'package:tabbed_view/src/theme/tabs_area_theme_data.dart';
 
@@ -16,7 +17,10 @@ class TabbedViewThemeData {
       TabThemeData? tab,
       ContentAreaThemeData? contentArea,
       HiddenTabsMenuThemeData? menu})
-      : tab = tab ?? TabThemeData(),
+      : tab = tab ??
+            TabThemeData(
+                selectedStatus: TabStatusThemeData(),
+                hoveredStatus: TabStatusThemeData()),
         tabsArea = tabsArea ?? TabsAreaThemeData(),
         contentArea = contentArea ?? ContentAreaThemeData(),
         menu = menu ?? HiddenTabsMenuThemeData();

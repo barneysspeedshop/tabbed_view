@@ -34,6 +34,7 @@ class TabWidget extends StatelessWidget {
     final TabData tab = provider.controller.tabs[index];
     final TabbedViewThemeData theme = TabbedViewTheme.of(context);
     final TabThemeData tabTheme = theme.tab;
+    final TabStatusThemeData? statusTabTheme = theme.tab.getTabThemeFor(status);
     final bool isStacked = provider.tabBarPosition.isVertical &&
         tabTheme.verticalLayoutStyle == VerticalTabLayoutStyle.stacked;
 
@@ -67,8 +68,9 @@ class TabWidget extends StatelessWidget {
       borderBuilder = tabBorder.wrapperBorderBuilder;
     }
 
-    if (tabTheme.background != null) {
-      widget = Container(color: tabTheme.background, child: widget);
+    Color? color = statusTabTheme?.color ?? tabTheme.color;
+    if (color != null) {
+      widget = Container(color: color, child: widget);
     }
 
     final maxWidth = tabTheme.maxWidth;

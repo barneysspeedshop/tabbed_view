@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 /// Allows you to overwrite [TabThemeData] properties.
 class TabStatusThemeData {
   TabStatusThemeData(
-      {this.background,
+      {this.color,
       this.fontColor,
       this.padding,
       this.paddingWithoutButton,
@@ -15,7 +15,7 @@ class TabStatusThemeData {
       this.hoverButtonBackground,
       this.disabledButtonBackground});
 
-  Color? background;
+  Color? color;
 
   /// Padding for tab content
   EdgeInsetsGeometry? padding;
@@ -36,7 +36,7 @@ class TabStatusThemeData {
       identical(this, other) ||
       other is TabStatusThemeData &&
           runtimeType == other.runtimeType &&
-          background == other.background &&
+          color == other.color &&
           padding == other.padding &&
           paddingWithoutButton == other.paddingWithoutButton &&
           fontColor == other.fontColor &&
@@ -49,7 +49,7 @@ class TabStatusThemeData {
 
   @override
   int get hashCode =>
-      background.hashCode ^
+      color.hashCode ^
       padding.hashCode ^
       paddingWithoutButton.hashCode ^
       fontColor.hashCode ^

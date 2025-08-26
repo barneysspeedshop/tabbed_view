@@ -37,7 +37,7 @@ class ClassicTheme extends TabbedViewThemeData {
     tabsArea.gapSideBorder = BorderSide(color: borderColor, width: 1);
 
     final TabThemeData tab = theme.tab;
-    tab.background = backgroundColor;
+    tab.color = backgroundColor;
     tab.textStyle = TextStyle(fontSize: fontSize, color: fontColor);
     tab.normalButtonColor = normalButtonColor;
     tab.hoverButtonColor = hoverButtonColor;
