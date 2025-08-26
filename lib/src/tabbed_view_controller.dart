@@ -15,10 +15,6 @@ typedef TabCloseInterceptor = FutureOr<bool> Function(
 /// Event that will be triggered when a tab is closed.
 typedef OnTabClose = void Function(int tabIndex, TabData tabData);
 
-/// Builder for hidden tabs menu item.
-typedef HiddenTabsMenuItemBuilder = Widget Function(
-    BuildContext context, int tabIndex, TabData tabData);
-
 /// The [TabbedView] controller.
 ///
 /// Stores tabs and selection tab index.

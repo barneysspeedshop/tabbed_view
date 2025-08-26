@@ -54,6 +54,10 @@ typedef TabSelectInterceptor = bool Function(int newTabIndex);
 /// Event that will be triggered when the tab selection is changed.
 typedef OnTabSelection = void Function(TabData? tabData);
 
+/// Builder for hidden tabs menu item.
+typedef HiddenTabsMenuItemBuilder = Widget Function(
+    BuildContext context, int tabIndex, TabData tabData);
+
 /// Widget inspired by the classic Desktop-style tab component.
 ///
 /// Supports customizable themes.
