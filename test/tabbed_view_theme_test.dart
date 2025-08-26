@@ -90,15 +90,12 @@ void main() {
             widget is TabWidget && widget.status == TabStatus.selected);
         expect(selectedTab, findsOneWidget);
 
-        // Find the outer container of the TabWidget which has the frame border
-        final container = find
-            .descendant(
-                of: selectedTab,
-                matching: find.byWidgetPredicate(
-                    (w) => w is Container && w.margin != null))
-            .first;
-
-        final widget = tester.widget<Container>(container);
+        final decoratedBoxes = find.descendant(
+          of: selectedTab,
+          matching: find.byType(DecoratedBox),
+        );
+        expect(decoratedBoxes, findsWidgets);
+        final widget = tester.widget<DecoratedBox>(decoratedBoxes.first);
         final decoration = widget.decoration as BoxDecoration;
         final border = decoration.border as Border;
 
@@ -120,23 +117,20 @@ void main() {
             widget is TabWidget && widget.status == TabStatus.selected);
         expect(selectedTab, findsOneWidget);
 
-        final container = find
-            .descendant(
-                of: selectedTab,
-                matching: find.byWidgetPredicate(
-                    (w) => w is Container && w.margin != null))
-            .first;
-
-        final widget = tester.widget<Container>(container);
+        final decoratedBoxes = find.descendant(
+          of: selectedTab,
+          matching: find.byType(DecoratedBox),
+        );
+        expect(decoratedBoxes, findsWidgets);
+        final widget = tester.widget<DecoratedBox>(decoratedBoxes.first);
         final decoration = widget.decoration as BoxDecoration;
         final border = decoration.border as Border;
 
-        // For left position, the tab is rotated. The "open" side should be
-        // the bottom of the un-rotated widget, which becomes the right side.
-        expect(border.bottom, equals(BorderSide.none));
+        // For left position, the selected tab should be open on the right
+        expect(border.right, equals(BorderSide.none));
         expect(border.top, isNot(equals(BorderSide.none)));
         expect(border.left, isNot(equals(BorderSide.none)));
-        expect(border.right, isNot(equals(BorderSide.none)));
+        expect(border.bottom, isNot(equals(BorderSide.none)));
       });
 
       testWidgets(
@@ -150,21 +144,20 @@ void main() {
             widget is TabWidget && widget.status == TabStatus.selected);
         expect(selectedTab, findsOneWidget);
 
-        final container = find
-            .descendant(
-                of: selectedTab,
-                matching: find.byWidgetPredicate(
-                    (w) => w is Container && w.margin != null))
-            .first;
-
-        final widget = tester.widget<Container>(container);
+        final decoratedBoxes = find.descendant(
+          of: selectedTab,
+          matching: find.byType(DecoratedBox),
+        );
+        expect(decoratedBoxes, findsWidgets);
+        final widget = tester.widget<DecoratedBox>(decoratedBoxes.first);
         final decoration = widget.decoration as BoxDecoration;
         final border = decoration.border as Border;
 
-        expect(border.bottom, equals(BorderSide.none));
+        // For right position, the selected tab should be open on the left
+        expect(border.left, equals(BorderSide.none));
         expect(border.top, isNot(equals(BorderSide.none)));
-        expect(border.left, isNot(equals(BorderSide.none)));
         expect(border.right, isNot(equals(BorderSide.none)));
+        expect(border.bottom, isNot(equals(BorderSide.none)));
       });
     });
 
@@ -183,24 +176,20 @@ void main() {
             widget is TabWidget && widget.status == TabStatus.selected);
         expect(selectedTab, findsOneWidget);
 
-        // Find the inner container that holds the indicator border
-        final indicatorContainer = find.descendant(
-            of: selectedTab,
-            matching: find.byWidgetPredicate((w) =>
-                w is Container &&
-                w.decoration is BoxDecoration &&
-                (w.decoration as BoxDecoration).border != null &&
-                w.padding != null));
-
-        final widget = tester.widget<Container>(indicatorContainer.first);
+        final decoratedBoxes = find.descendant(
+          of: selectedTab,
+          matching: find.byType(DecoratedBox),
+        );
+        expect(decoratedBoxes, findsWidgets);
+        final widget = tester.widget<DecoratedBox>(decoratedBoxes.last);
         final decoration = widget.decoration as BoxDecoration;
         final border = decoration.border as Border;
 
-        // For left position, indicator is on the bottom of the un-rotated widget.
-        expect(border.bottom, isNot(equals(BorderSide.none)));
+        // For left position, indicator is on the right of the un-rotated widget.
+        expect(border.right, isNot(equals(BorderSide.none)));
         expect(border.top, equals(BorderSide.none));
         expect(border.left, equals(BorderSide.none));
-        expect(border.right, equals(BorderSide.none));
+        expect(border.bottom, equals(BorderSide.none));
       });
 
       testWidgets(
@@ -214,24 +203,20 @@ void main() {
             widget is TabWidget && widget.status == TabStatus.selected);
         expect(selectedTab, findsOneWidget);
 
-        // Find the inner container that holds the indicator border
-        final indicatorContainer = find.descendant(
-            of: selectedTab,
-            matching: find.byWidgetPredicate((w) =>
-                w is Container &&
-                w.decoration is BoxDecoration &&
-                (w.decoration as BoxDecoration).border != null &&
-                w.padding != null));
-
-        final widget = tester.widget<Container>(indicatorContainer.first);
+        final decoratedBoxes = find.descendant(
+          of: selectedTab,
+          matching: find.byType(DecoratedBox),
+        );
+        expect(decoratedBoxes, findsWidgets);
+        final widget = tester.widget<DecoratedBox>(decoratedBoxes.last);
         final decoration = widget.decoration as BoxDecoration;
         final border = decoration.border as Border;
 
-        // For right position, indicator is on the bottom of the un-rotated widget.
-        expect(border.bottom, isNot(equals(BorderSide.none)));
+        // For right position, indicator is on the left of the un-rotated widget.
+        expect(border.left, isNot(equals(BorderSide.none)));
         expect(border.top, equals(BorderSide.none));
-        expect(border.left, equals(BorderSide.none));
         expect(border.right, equals(BorderSide.none));
+        expect(border.bottom, equals(BorderSide.none));
       });
     });
 
