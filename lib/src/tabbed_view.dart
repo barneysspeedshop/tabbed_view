@@ -61,6 +61,9 @@ typedef OnTabSelection = void Function(TabData? tabData);
 typedef HiddenTabsMenuItemBuilder = Widget Function(
     BuildContext context, int tabIndex, TabData tabData);
 
+/// Event that will be triggered when the tab is reorder.
+typedef OnTabReorder = void Function(int oldIndex, int newIndex);
+
 /// Widget inspired by the classic Desktop-style tab component.
 ///
 /// Supports customizable themes.
@@ -74,6 +77,8 @@ class TabbedView extends StatefulWidget {
     required this.controller,
     this.contentBuilder,
     this.onTabClose,
+    this.onTabReorder,
+    this.tabReorderEnabled = true,
     this.tabCloseInterceptor,
     this.onTabSelection,
     this.tabSelectInterceptor,
@@ -95,7 +100,19 @@ class TabbedView extends StatefulWidget {
   final TabbedViewController controller;
   final bool contentClip;
   final IndexedWidgetBuilder? contentBuilder;
+
+  /// Callback triggered when a tab is closed by the user via the UI.
   final OnTabClose? onTabClose;
+
+  /// Callback triggered when a tab is reordered by the user via the UI.
+  final OnTabReorder? onTabReorder;
+
+  /// Whether tab reordering via drag-and-drop is enabled in the UI.
+  ///
+  /// This flag controls **user interactions only**. It does **not** affect
+  /// programmatic reordering through [TabbedViewController.reorderTab].
+  final bool tabReorderEnabled;
+
   final TabCloseInterceptor? tabCloseInterceptor;
   final OnTabSelection? onTabSelection;
   final TabSelectInterceptor? tabSelectInterceptor;
@@ -149,6 +166,8 @@ class _TabbedViewState extends State<TabbedView> {
     TabbedViewProvider provider = TabbedViewProvider(
         controller: widget.controller,
         contentBuilder: widget.contentBuilder,
+        tabReorderEnabled: widget.tabReorderEnabled,
+        onTabReorder: widget.onTabReorder,
         onTabClose: widget.onTabClose,
         tabCloseInterceptor: widget.tabCloseInterceptor,
         onTabSelection: widget.onTabSelection,

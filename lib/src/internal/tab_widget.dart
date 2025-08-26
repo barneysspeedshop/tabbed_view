@@ -166,8 +166,7 @@ class TabWidget extends StatelessWidget {
       }
     }
 
-    if (provider.controller.reorderEnable &&
-        provider.draggingTabIndex != tab.index) {
+    if (provider.tabReorderEnabled && provider.draggingTabIndex != tab.index) {
       return DropTabWidget(
           provider: provider,
           newIndex: tab.index,

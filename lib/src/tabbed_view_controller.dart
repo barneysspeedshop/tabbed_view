@@ -3,9 +3,6 @@ import 'dart:collection';
 import 'package:flutter/widgets.dart';
 import 'package:tabbed_view/src/tab_data.dart';
 
-/// Event that will be triggered when the tab is reorder.
-typedef OnReorder = void Function(int oldIndex, int newIndex);
-
 /// The [TabbedView] controller.
 ///
 /// Stores tabs and selection tab index.
@@ -14,9 +11,7 @@ typedef OnReorder = void Function(int oldIndex, int newIndex);
 ///
 /// Remember to dispose of the [TabbedView] when it is no longer needed. This will ensure we discard any resources used by the object.
 class TabbedViewController extends ChangeNotifier {
-  TabbedViewController(this._tabs,
-      {this.onReorder, this.data, bool reorderEnable = true})
-      : this._reorderEnable = reorderEnable {
+  TabbedViewController(this._tabs, {this.data}) {
     if (_tabs.isNotEmpty) {
       _selectedIndex = 0;
     }
@@ -33,19 +28,6 @@ class TabbedViewController extends ChangeNotifier {
   final dynamic data;
 
   int? _selectedIndex;
-
-  final OnReorder? onReorder;
-
-  bool _reorderEnable;
-
-  bool get reorderEnable => _reorderEnable;
-
-  set reorderEnable(bool value) {
-    if (_reorderEnable != value) {
-      _reorderEnable = value;
-      notifyListeners();
-    }
-  }
 
   /// The selected tab index
   int? get selectedIndex => _selectedIndex;
@@ -64,10 +46,7 @@ class TabbedViewController extends ChangeNotifier {
       _selectedIndex != null ? _tabs[_selectedIndex!] : null;
 
   /// Reorders a tab.
-  void reorderTab(int oldIndex, int newIndex) {
-    if (!reorderEnable) {
-      return;
-    }
+  bool reorderTab(int oldIndex, int newIndex) {
     if (_tabs.isEmpty) {
       throw ArgumentError('There are no tabs.');
     }
@@ -80,10 +59,10 @@ class TabbedViewController extends ChangeNotifier {
     final bool append = newIndex >= _tabs.length;
 
     if (oldIndex == newIndex) {
-      return;
+      return false;
     }
     if (oldIndex == newIndex - 1) {
-      return;
+      return false;
     }
 
     TabData? selectedTab;
@@ -105,9 +84,7 @@ class TabbedViewController extends ChangeNotifier {
       _selectedIndex = _tabs.indexOf(selectedTab);
     }
     notifyListeners();
-    if (onReorder != null) {
-      onReorder!(oldIndex, newIndex);
-    }
+    return true;
   }
 
   int get length => _tabs.length;

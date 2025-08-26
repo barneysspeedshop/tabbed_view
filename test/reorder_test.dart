@@ -9,17 +9,11 @@ class Helper {
       TabData(text: 'b'),
       TabData(text: 'c'),
       TabData(text: 'd')
-    ], onReorder: _onReorder);
+    ]);
     test(p0: 'a', p1: 'b', p2: 'c', p3: 'd', selected: 'a', reordered: false);
   }
 
   late final TabbedViewController controller;
-
-  bool _reordered = false;
-
-  void _onReorder(int oldIndex, int newIndex) {
-    _reordered = true;
-  }
 
   void test(
       {required String p0,
@@ -35,7 +29,6 @@ class Helper {
     expect(controller.tabs[2].text, p2);
     expect(controller.tabs[3].text, p3);
     expect(controller.selectedTab?.text, selected);
-    expect(_reordered, reordered);
   }
 
   void selectAndTest(

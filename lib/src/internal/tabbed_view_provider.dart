@@ -1,7 +1,15 @@
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 import 'package:tabbed_view/src/tabbed_view.dart'
-    show OnTabSelection, TabBarPosition, TabSelectInterceptor, TabsAreaButtonsBuilder, HiddenTabsMenuItemBuilder, OnTabClose, TabCloseInterceptor;
+    show
+        OnTabSelection,
+        TabBarPosition,
+        TabSelectInterceptor,
+        TabsAreaButtonsBuilder,
+        HiddenTabsMenuItemBuilder,
+        OnTabClose,
+        TabCloseInterceptor,
+        OnTabReorder;
 import 'package:tabbed_view/src/tabbed_view_controller.dart';
 import 'package:tabbed_view/src/tabbed_view_menu_item.dart';
 import 'package:tabbed_view/src/typedefs/on_before_drop_accept.dart';
@@ -15,6 +23,8 @@ class TabbedViewProvider {
   TabbedViewProvider(
       {required this.controller,
       this.contentBuilder,
+      required this.tabReorderEnabled,
+      this.onTabReorder,
       this.onTabClose,
       this.tabCloseInterceptor,
       required this.contentClip,
@@ -39,6 +49,8 @@ class TabbedViewProvider {
   final TabbedViewController controller;
   final bool contentClip;
   final IndexedWidgetBuilder? contentBuilder;
+  final bool tabReorderEnabled;
+  final OnTabReorder? onTabReorder;
   final OnTabClose? onTabClose;
   final TabCloseInterceptor? tabCloseInterceptor;
   final OnTabSelection? onTabSelection;

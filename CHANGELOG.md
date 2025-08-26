@@ -16,7 +16,9 @@
     * `closeOtherTabs(int tabIndex)`
     * `closeTabsToTheRight(int tabIndex)`
   * Refactored `closeAllClosableTabs` to be more robust and reusable.
-* `TabStatus.highlighted` renamed to `TabStatus.hovered`.
+* Attribute `TabStatus.highlighted` renamed to `TabStatus.hovered`.
+* Attribute `TabbedViewController.reorderEnable` moved to `TabbedView.reorderEnabled`
+* Attribute `TabbedViewController.onReorder` moved to `TabbedView.onTabReorder`
 
 ## 1.22.1
 
