@@ -96,7 +96,6 @@ class TabThemeData {
 
   double buttonsOffset;
 
-  BoxDecoration? decoration;
   BoxDecoration? draggingDecoration;
   double draggingOpacity;
 
@@ -149,7 +148,6 @@ class TabThemeData {
           margin == other.margin &&
           verticalAlignment == other.verticalAlignment &&
           buttonsOffset == other.buttonsOffset &&
-          decoration == other.decoration &&
           draggingDecoration == other.draggingDecoration &&
           draggingOpacity == other.draggingOpacity &&
           textStyle == other.textStyle &&
@@ -181,7 +179,6 @@ class TabThemeData {
       margin.hashCode ^
       verticalAlignment.hashCode ^
       buttonsOffset.hashCode ^
-      decoration.hashCode ^
       draggingDecoration.hashCode ^
       draggingOpacity.hashCode ^
       textStyle.hashCode ^
