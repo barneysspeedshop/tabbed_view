@@ -1,11 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 import 'package:tabbed_view/src/tabbed_view.dart'
-    show
-        OnTabSelection,
-        TabBarPosition,
-        TabSelectInterceptor,
-        TabsAreaButtonsBuilder;
+    show OnTabSelection, TabBarPosition, TabSelectInterceptor, TabsAreaButtonsBuilder, HiddenTabsMenuItemBuilder, OnTabClose, TabCloseInterceptor;
 import 'package:tabbed_view/src/tabbed_view_controller.dart';
 import 'package:tabbed_view/src/tabbed_view_menu_item.dart';
 import 'package:tabbed_view/src/typedefs/on_before_drop_accept.dart';

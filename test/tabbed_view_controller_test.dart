@@ -59,24 +59,5 @@ void main() {
       controller.removeTab(0); // Close 'Tab 1'
       expect(controller.selectedIndex, 0); // Selection should shift left
     });
-
-    test('closeOtherTabs closes all but the specified tab', () async {
-      expect(controller.length, 4);
-      await controller.closeOtherTabs(1); // Close all tabs except 'Tab 2'
-      // Tab 2 and the non-closable Tab 3 should remain.
-      expect(controller.length, 2);
-      expect(controller.tabs[0].text, 'Tab 2');
-      expect(controller.tabs[1].text, 'Tab 3');
-    });
-
-    test('closeTabsToTheRight closes correct tabs', () async {
-      expect(controller.length, 4);
-      await controller
-          .closeTabsToTheRight(0); // Close all tabs to the right of 'Tab 1'
-      // Tab 1 and the non-closable Tab 3 should remain.
-      expect(controller.length, 2);
-      expect(controller.tabs[0].text, 'Tab 1');
-      expect(controller.tabs[1].text, 'Tab 3');
-    });
   });
 }

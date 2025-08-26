@@ -41,7 +41,10 @@ enum TabBarPosition {
 typedef TabsAreaButtonsBuilder = List<TabButton> Function(
     BuildContext context, int tabsCount);
 
-/// The event that will be triggered after the tab close.
+/// The event triggered when the user closes a tab through the UI.
+///
+/// This callback is **not** called when tabs are removed programmatically
+/// using [TabbedViewController.removeTab] or [TabbedViewController.removeTabs].
 typedef OnTabClose = void Function(int tabIndex, TabData tabData);
 
 /// Intercepts a close event to indicates whether the tab can be closed.

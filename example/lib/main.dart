@@ -187,10 +187,10 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
       // The button color is derived from the selected tab's font color,
       // which acts as an accent. Use a default color if fontColor is null.
       ..normalButtonColor =
-          themeData.tab.selectedStatus?.fontColor ?? Colors.black
+          themeData.tab.selectedStatus.fontColor ?? Colors.black
       // Use a slightly modified color for the hover state for visual feedback.
       ..hoverButtonColor =
-          (themeData.tab.selectedStatus?.fontColor ?? Colors.black)
+          (themeData.tab.selectedStatus.fontColor ?? Colors.black)
               .withAlpha(200);
 
     Widget example = Column(children: [
