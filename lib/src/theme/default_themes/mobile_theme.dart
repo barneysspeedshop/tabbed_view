@@ -26,24 +26,22 @@ class MobileTheme extends TabbedViewThemeData {
         hoveredColor: hoveredColor,
         selectedColor: accentColor);
 
-    theme.divider = BorderSide(width: 5, color: borderColor);
+    theme.divider = BorderSide(color: borderColor, width: 1);
 
     final TabsAreaThemeData tabsArea = theme.tabsArea;
     tabsArea.crossAxisFit = TabsAreaCrossAxisFit.all;
-    tabsArea.initialGap = 10;
-    tabsArea.middleGap = 10;
+    tabsArea.initialGap = -1;
+    tabsArea.middleGap = -1;
     tabsArea.normalButtonColor = normalButtonColor;
     tabsArea.hoverButtonColor = hoverButtonColor;
     tabsArea.disabledButtonColor = disabledButtonColor;
     tabsArea.buttonsAreaPadding = EdgeInsets.all(2);
     tabsArea.hoverButtonBackground = BoxDecoration(color: hoveredColor);
     tabsArea.buttonPadding = const EdgeInsets.all(2);
-    tabsArea.border = BorderSide(color: borderColor, width: 5);
+    tabsArea.border = BorderSide(color: borderColor, width: 1);
     tabsArea.color = backgroundColor;
 
     final TabThemeData tab = theme.tab;
-    BorderSide verticalBorderSide = BorderSide(color: borderColor, width: 5);
-    double borderHeight = 4;
     tab.normalButtonColor = normalButtonColor;
     tab.hoverButtonColor = hoverButtonColor;
     tab.disabledButtonColor = disabledButtonColor;
