@@ -146,19 +146,21 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
         // Example of a custom menu item.
         // The default menu item is in:
         // lib/src/internal/tabs_area/hidden_tabs_menu_widget.dart
+        final brightness = Theme.of(context).brightness;
         final theme = TabbedViewTheme.of(context);
-        final isDark = Theme.of(context).brightness == Brightness.dark;
-        final textStyle =
-            isDark ? theme.menu.textStyleDark : theme.menu.textStyle;
+        final brightnessMenuTheme =
+            theme.menu.getBrightnessMenuTheme(brightness);
         return Padding(
           padding: theme.menu.menuItemPadding,
           child: Row(
             children: [
-              Icon(Icons.tab, size: 16, color: textStyle?.color),
+              Icon(Icons.tab,
+                  size: 16, color: brightnessMenuTheme.textStyle?.color),
               SizedBox(width: 8),
               Expanded(
                 child: Text('${tabData.text} (index $tabIndex)',
-                    style: textStyle, overflow: TextOverflow.ellipsis),
+                    style: brightnessMenuTheme.textStyle,
+                    overflow: TextOverflow.ellipsis),
               ),
             ],
           ),

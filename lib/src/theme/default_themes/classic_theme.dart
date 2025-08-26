@@ -57,16 +57,6 @@ class ClassicTheme extends TabbedViewThemeData {
     contentArea.border = BorderSide(width: 1, color: borderColor);
 
     final HiddenTabsMenuThemeData menu = theme.menu;
-    menu.color = backgroundColor;
-    menu.textStyle = TextStyle(fontSize: fontSize, color: fontColor);
-    menu.menuItemPadding =
-        const EdgeInsets.symmetric(horizontal: 12, vertical: 8);
-    menu.boxShadow = [
-      BoxShadow(
-          color: borderColor.withAlpha(100),
-          blurRadius: 4,
-          offset: const Offset(0, 2))
-    ];
     menu.borderRadius = BorderRadius.circular(4);
 
     return theme;

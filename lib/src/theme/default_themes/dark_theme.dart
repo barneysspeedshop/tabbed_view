@@ -56,16 +56,6 @@ class DarkTheme extends TabbedViewThemeData {
     contentArea.padding = EdgeInsets.all(8);
 
     final HiddenTabsMenuThemeData menu = theme.menu;
-    menu.color = Colors.red;
-    menu.textStyle = TextStyle(fontSize: fontSize, color: fontColor);
-    menu.menuItemPadding =
-        const EdgeInsets.symmetric(horizontal: 12, vertical: 8);
-    menu.boxShadow = [
-      BoxShadow(
-          color: Colors.black.withAlpha(100),
-          blurRadius: 4,
-          offset: const Offset(0, 2))
-    ];
     menu.borderRadius = BorderRadius.circular(4);
 
     return theme;

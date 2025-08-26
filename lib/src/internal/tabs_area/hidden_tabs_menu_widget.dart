@@ -26,15 +26,8 @@ class HiddenTabsMenuWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final TabbedViewThemeData theme = TabbedViewTheme.of(context);
     final menuTheme = theme.menu;
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-
-    final Color? color = isDark ? menuTheme.colorDark : menuTheme.color;
-    final Color? hoverColor =
-        isDark ? menuTheme.hoverColorDark : menuTheme.hoverColor;
-    final Color? highlightColor =
-        isDark ? menuTheme.highlightColorDark : menuTheme.highlightColor;
-    final TextStyle? textStyle =
-        isDark ? menuTheme.textStyleDark : menuTheme.textStyle;
+    final brightnessMenuTheme =
+        menuTheme.getBrightnessMenuTheme(Theme.of(context).brightness);
 
     final List<TabData> tabs = provider.controller.tabs;
     final HiddenTabsMenuItemBuilder? menuItemBuilder =
@@ -42,10 +35,12 @@ class HiddenTabsMenuWidget extends StatelessWidget {
 
     return Container(
       constraints: BoxConstraints(maxWidth: menuTheme.maxWidth),
+      margin: menuTheme.margin,
+      padding: menuTheme.padding,
       decoration: BoxDecoration(
-        color: color ?? theme.tabsArea.color,
+        color: brightnessMenuTheme.color,
         borderRadius: menuTheme.borderRadius,
-        boxShadow: menuTheme.boxShadow,
+        boxShadow: brightnessMenuTheme.boxShadow,
       ),
       // The clipBehavior is necessary to avoid having the InkWell effects
       // spill outside the rounded corners.
@@ -67,7 +62,7 @@ class HiddenTabsMenuWidget extends StatelessWidget {
                 padding: menuTheme.menuItemPadding,
                 child: Text(
                   tab.text,
-                  style: textStyle,
+                  style: brightnessMenuTheme.textStyle,
                   overflow: menuTheme.ellipsisOverflowText
                       ? TextOverflow.ellipsis
                       : null,
@@ -76,8 +71,8 @@ class HiddenTabsMenuWidget extends StatelessWidget {
             }
             return InkWell(
               onTap: () => onSelection(tabIndex),
-              hoverColor: hoverColor,
-              highlightColor: highlightColor,
+              hoverColor: brightnessMenuTheme.hoverColor,
+              highlightColor: brightnessMenuTheme.highlightColor,
               child: child,
             );
           },

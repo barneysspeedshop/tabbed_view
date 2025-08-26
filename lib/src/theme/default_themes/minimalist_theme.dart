@@ -45,16 +45,6 @@ class MinimalistTheme extends TabbedViewThemeData {
     contentArea.border = borderSide;
 
     final HiddenTabsMenuThemeData menu = theme.menu;
-    menu.textStyle = TextStyle(color: colorSet[900]!, fontSize: 13);
-    menu.color = colorSet[50]!;
-    menu.menuItemPadding =
-        const EdgeInsets.symmetric(horizontal: 12, vertical: 8);
-    menu.boxShadow = [
-      BoxShadow(
-          color: colorSet[900]!.withAlpha(100),
-          blurRadius: 4,
-          offset: const Offset(0, 2))
-    ];
     menu.borderRadius = BorderRadius.circular(4);
 
     return theme;
