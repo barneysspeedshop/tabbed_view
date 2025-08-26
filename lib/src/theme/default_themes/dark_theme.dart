@@ -7,8 +7,10 @@ import 'package:tabbed_view/src/theme/tabbed_view_theme_data.dart';
 import 'package:tabbed_view/src/theme/tabs_area_theme_data.dart';
 
 /// Predefined dark theme builder.
-class DarkTheme {
-  static TabbedViewThemeData build(
+class DarkTheme extends TabbedViewThemeData {
+  DarkTheme._();
+
+  factory DarkTheme(
       {required MaterialColor colorSet, required double fontSize}) {
     Color tabColor = colorSet[900]!;
     Color selectedTabColor = colorSet[800]!;
@@ -21,105 +23,51 @@ class DarkTheme {
     Color fontColor = colorSet[100]!;
     Color buttonsAreaColor = colorSet[800]!;
 
-    return TabbedViewThemeData(
-        tabsArea: tabsAreaTheme(
-          buttonsAreaColor: buttonsAreaColor,
-          fontSize: fontSize,
-          fontColor: fontColor,
-          tabColor: tabColor,
-          selectedTabColor: selectedTabColor,
-          highlightedColor: highlightedColor,
-          normalButtonColor: normalButtonColor,
-          hoverButtonColor: hoverButtonColor,
-          disabledButtonColor: disabledButtonColor,
-        ),
-        tab: tabTheme(
-          fontSize: fontSize,
-          fontColor: fontColor,
-          tabColor: tabColor,
-          selectedTabColor: selectedTabColor,
-          highlightedColor: highlightedColor,
-          normalButtonColor: normalButtonColor,
-          hoverButtonColor: hoverButtonColor,
-          disabledButtonColor: disabledButtonColor,
-        ),
-        contentArea: contentAreaTheme(selectedTabColor: selectedTabColor),
-        menu: menuTheme(
-            fontColor: fontColor,
-            fontSize: fontSize,
-            color: menuColor, // Use the defined menu color
-            borderColor: menuDividerColor));
-  }
+    final DarkTheme theme = DarkTheme._();
 
-  static TabsAreaThemeData tabsAreaTheme(
-      {required Color buttonsAreaColor,
-      required Color fontColor,
-      required double fontSize,
-      required Color tabColor,
-      required Color selectedTabColor,
-      required Color highlightedColor,
-      required Color normalButtonColor,
-      required Color hoverButtonColor,
-      required Color disabledButtonColor}) {
-    return TabsAreaThemeData(
-        crossAxisFit: TabsAreaCrossAxisFit.all,
-        middleGap: 4,
-        buttonsAreaPadding: EdgeInsets.all(2),
-        buttonsAreaDecoration: BoxDecoration(color: buttonsAreaColor),
-        buttonPadding: const EdgeInsets.all(2),
-        hoverButtonBackground: BoxDecoration(color: highlightedColor),
-        normalButtonColor: normalButtonColor,
-        hoverButtonColor: hoverButtonColor,
-        disabledButtonColor: disabledButtonColor,
-        dropColor: Color.fromARGB(150, 255, 255, 255));
-  }
+    final TabsAreaThemeData tabsArea = theme.tabsArea;
+    tabsArea.crossAxisFit = TabsAreaCrossAxisFit.all;
+    tabsArea.middleGap = 4;
+    tabsArea.buttonsAreaPadding = EdgeInsets.all(2);
+    tabsArea.buttonsAreaDecoration = BoxDecoration(color: buttonsAreaColor);
+    tabsArea.buttonPadding = const EdgeInsets.all(2);
+    tabsArea.hoverButtonBackground = BoxDecoration(color: highlightedColor);
+    tabsArea.normalButtonColor = normalButtonColor;
+    tabsArea.hoverButtonColor = hoverButtonColor;
+    tabsArea.disabledButtonColor = disabledButtonColor;
+    tabsArea.dropColor = Color.fromARGB(150, 255, 255, 255);
 
-  static TabThemeData tabTheme(
-      {required Color fontColor,
-      required double fontSize,
-      required Color tabColor,
-      required Color selectedTabColor,
-      required Color highlightedColor,
-      required Color normalButtonColor,
-      required Color hoverButtonColor,
-      required Color disabledButtonColor}) {
+    final TabThemeData tab = theme.tab;
     double bottomWidth = 3;
-    return TabThemeData(
-        buttonsOffset: 4,
-        textStyle: TextStyle(fontSize: fontSize, color: fontColor),
-        //decoration: BoxDecoration(color: tabColor),
-        draggingDecoration: BoxDecoration(color: tabColor),
-        padding: EdgeInsets.fromLTRB(6, 3, 3, 3),
-        paddingWithoutButton: EdgeInsets.fromLTRB(6, 3, 6, 3),
-        hoverButtonBackground: BoxDecoration(color: highlightedColor),
-        buttonPadding: const EdgeInsets.all(2),
-        normalButtonColor: normalButtonColor,
-        hoverButtonColor: hoverButtonColor,
-        disabledButtonColor: disabledButtonColor);
-  }
+    tab.buttonsOffset = 4;
+    tab.textStyle = TextStyle(fontSize: fontSize, color: fontColor);
+    //decoration: BoxDecoration(color: tabColor),
+    tab.draggingDecoration = BoxDecoration(color: tabColor);
+    tab.padding = EdgeInsets.fromLTRB(6, 3, 3, 3);
+    tab.paddingWithoutButton = EdgeInsets.fromLTRB(6, 3, 6, 3);
+    tab.hoverButtonBackground = BoxDecoration(color: highlightedColor);
+    tab.buttonPadding = const EdgeInsets.all(2);
+    tab.normalButtonColor = normalButtonColor;
+    tab.hoverButtonColor = hoverButtonColor;
+    tab.disabledButtonColor = disabledButtonColor;
 
-  static ContentAreaThemeData contentAreaTheme(
-      {required Color selectedTabColor}) {
-    return ContentAreaThemeData(
-        color: selectedTabColor, padding: EdgeInsets.all(8));
-  }
+    final ContentAreaThemeData contentArea = theme.contentArea;
+    contentArea.color = selectedTabColor;
+    contentArea.padding = EdgeInsets.all(8);
 
-  static HiddenTabsMenuThemeData menuTheme(
-      {required Color fontColor,
-      required double fontSize,
-      required Color color, // background color
-      required Color borderColor}) {
-    return HiddenTabsMenuThemeData(
-        color: color,
-        textStyle: TextStyle(fontSize: fontSize, color: fontColor),
-        menuItemPadding:
-            const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        boxShadow: [
-          BoxShadow(
-              color: borderColor.withAlpha(100),
-              blurRadius: 4,
-              offset: const Offset(0, 2))
-        ],
-        borderRadius: BorderRadius.circular(4));
+    final HiddenTabsMenuThemeData menu = theme.menu;
+    menu.color = Colors.red;
+    menu.textStyle = TextStyle(fontSize: fontSize, color: fontColor);
+    menu.menuItemPadding =
+        const EdgeInsets.symmetric(horizontal: 12, vertical: 8);
+    menu.boxShadow = [
+      BoxShadow(
+          color: Colors.black.withAlpha(100),
+          blurRadius: 4,
+          offset: const Offset(0, 2))
+    ];
+    menu.borderRadius = BorderRadius.circular(4);
+
+    return theme;
   }
 }

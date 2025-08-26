@@ -42,7 +42,7 @@ class TabbedViewThemeData {
   /// Builds the predefined dark theme.
   factory TabbedViewThemeData.dark(
       {MaterialColor colorSet = Colors.grey, double fontSize = 13}) {
-    return DarkTheme.build(colorSet: colorSet, fontSize: 13);
+    return DarkTheme(colorSet: colorSet, fontSize: 13);
   }
 
   /// Builds the predefined classic theme.
@@ -66,7 +66,7 @@ class TabbedViewThemeData {
   /// Builds the predefined minimalist theme.
   factory TabbedViewThemeData.minimalist(
       {MaterialColor colorSet = Colors.grey}) {
-    return MinimalistTheme.build(colorSet: colorSet);
+    return MinimalistTheme(colorSet: colorSet);
   }
 
   @override
