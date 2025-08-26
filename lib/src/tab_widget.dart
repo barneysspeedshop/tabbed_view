@@ -64,6 +64,10 @@ class TabWidget extends StatelessWidget {
       borderBuilder = tabBorder.wrapperBorderBuilder;
     }
 
+    if (tabTheme.background != null) {
+      widget = Container(color: tabTheme.background, child: widget);
+    }
+
     final maxWidth = tabTheme.maxWidth;
     if (maxWidth != null) {
       BoxConstraints constraints;

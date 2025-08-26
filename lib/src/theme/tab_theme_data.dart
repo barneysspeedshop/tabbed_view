@@ -10,6 +10,7 @@ class TabThemeData {
 
   TabThemeData(
       {IconProvider? closeIcon,
+      this.background,
       this.normalButtonColor = Colors.black,
       this.hoverButtonColor = Colors.black,
       this.disabledButtonColor = Colors.black12,
@@ -45,6 +46,8 @@ class TabThemeData {
         this.highlightedStatus =
             highlightedStatus ?? const TabStatusThemeData(),
         this.disabledStatus = disabledStatus ?? const TabStatusThemeData();
+
+  Color? background;
 
   TabBorderBuilder borderBuilder;
 
@@ -131,17 +134,25 @@ class TabThemeData {
       identical(this, other) ||
       other is TabThemeData &&
           runtimeType == other.runtimeType &&
+          background == other.background &&
+          borderBuilder == other.borderBuilder &&
+          maxTextWidth == other.maxTextWidth &&
+          maxWidth == other.maxWidth &&
+          rotateCaptionsInVerticalTabs == other.rotateCaptionsInVerticalTabs &&
+          showCloseIconWhenNotFocused == other.showCloseIconWhenNotFocused &&
+          verticalLayoutStyle == other.verticalLayoutStyle &&
+          selectedStatus == other.selectedStatus &&
+          highlightedStatus == other.highlightedStatus &&
+          disabledStatus == other.disabledStatus &&
           padding == other.padding &&
           paddingWithoutButton == other.paddingWithoutButton &&
           margin == other.margin &&
           verticalAlignment == other.verticalAlignment &&
+          buttonsOffset == other.buttonsOffset &&
           decoration == other.decoration &&
-          borderBuilder == other.borderBuilder &&
           draggingDecoration == other.draggingDecoration &&
           draggingOpacity == other.draggingOpacity &&
           textStyle == other.textStyle &&
-          maxTextWidth == other.maxTextWidth &&
-          maxWidth == other.maxWidth &&
           buttonIconSize == other.buttonIconSize &&
           normalButtonColor == other.normalButtonColor &&
           hoverButtonColor == other.hoverButtonColor &&
@@ -150,29 +161,30 @@ class TabThemeData {
           hoverButtonBackground == other.hoverButtonBackground &&
           disabledButtonBackground == other.disabledButtonBackground &&
           closeIcon == other.closeIcon &&
-          selectedStatus == other.selectedStatus &&
-          highlightedStatus == other.highlightedStatus &&
-          disabledStatus == other.disabledStatus &&
-          buttonsOffset == other.buttonsOffset &&
           buttonPadding == other.buttonPadding &&
-          buttonsGap == other.buttonsGap &&
-          showCloseIconWhenNotFocused == other.showCloseIconWhenNotFocused &&
-          rotateCaptionsInVerticalTabs == other.rotateCaptionsInVerticalTabs &&
-          verticalLayoutStyle == other.verticalLayoutStyle;
+          buttonsGap == other.buttonsGap;
 
   @override
   int get hashCode =>
+      background.hashCode ^
+      borderBuilder.hashCode ^
+      maxTextWidth.hashCode ^
+      maxWidth.hashCode ^
+      rotateCaptionsInVerticalTabs.hashCode ^
+      showCloseIconWhenNotFocused.hashCode ^
+      verticalLayoutStyle.hashCode ^
+      selectedStatus.hashCode ^
+      highlightedStatus.hashCode ^
+      disabledStatus.hashCode ^
       padding.hashCode ^
       paddingWithoutButton.hashCode ^
       margin.hashCode ^
       verticalAlignment.hashCode ^
+      buttonsOffset.hashCode ^
       decoration.hashCode ^
-      borderBuilder.hashCode ^
       draggingDecoration.hashCode ^
       draggingOpacity.hashCode ^
       textStyle.hashCode ^
-      maxTextWidth.hashCode ^
-      maxWidth.hashCode ^
       buttonIconSize.hashCode ^
       normalButtonColor.hashCode ^
       hoverButtonColor.hashCode ^
@@ -181,13 +193,6 @@ class TabThemeData {
       hoverButtonBackground.hashCode ^
       disabledButtonBackground.hashCode ^
       closeIcon.hashCode ^
-      selectedStatus.hashCode ^
-      highlightedStatus.hashCode ^
-      disabledStatus.hashCode ^
-      buttonsOffset.hashCode ^
       buttonPadding.hashCode ^
-      buttonsGap.hashCode ^
-      showCloseIconWhenNotFocused.hashCode ^
-      rotateCaptionsInVerticalTabs.hashCode ^
-      verticalLayoutStyle.hashCode;
+      buttonsGap.hashCode;
 }
