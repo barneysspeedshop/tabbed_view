@@ -88,7 +88,7 @@ class DarkTheme {
     return TabThemeData(
         buttonsOffset: 4,
         textStyle: TextStyle(fontSize: fontSize, color: fontColor),
-        decoration: BoxDecoration(color: tabColor),
+        //decoration: BoxDecoration(color: tabColor),
         draggingDecoration: BoxDecoration(color: tabColor),
         padding: EdgeInsets.fromLTRB(6, 3, 3, 3),
         paddingWithoutButton: EdgeInsets.fromLTRB(6, 3, 6, 3),

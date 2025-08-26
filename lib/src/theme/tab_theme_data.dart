@@ -21,7 +21,6 @@ class TabThemeData {
       double buttonsOffset = 0,
       this.buttonPadding,
       double buttonsGap = 0,
-      this.decoration,
       this.borderBuilder = TabThemeData.defaultBorderBuilder,
       this.draggingDecoration,
       this.draggingOpacity = 0.3,
