@@ -9,6 +9,7 @@ class HiddenTabs extends ChangeNotifier {
   List<int> _indexes = [];
 
   bool _hasHiddenTabs = false;
+
   bool get hasHiddenTabs => _hasHiddenTabs;
 
   List<int> get indexes {

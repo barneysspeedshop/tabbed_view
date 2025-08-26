@@ -6,9 +6,9 @@ import 'package:meta/meta.dart';
 import 'package:tabbed_view/src/internal/tabs_area/hidden_tabs.dart';
 import 'package:tabbed_view/src/internal/tabs_area/tabs_area_layout_parent_data.dart';
 import 'package:tabbed_view/src/tabbed_view.dart';
+import 'package:tabbed_view/src/theme/tabbed_view_theme_data.dart';
 import 'package:tabbed_view/src/theme/tabs_area_cross_axis_alignment.dart';
 import 'package:tabbed_view/src/theme/tabs_area_cross_axis_fit.dart';
-import 'package:tabbed_view/src/theme/tabbed_view_theme_data.dart';
 import 'package:tabbed_view/src/theme/tabs_area_theme_data.dart';
 
 /// Inner widget for [TabsArea] layout.
@@ -97,6 +97,7 @@ class _TabsAreaLayoutRenderBox extends RenderBox
   }
 
   BorderSide? _divider;
+
   set divider(BorderSide? value) {
     if (_divider != value) {
       _divider = value;
@@ -116,7 +117,9 @@ class _TabsAreaLayoutRenderBox extends RenderBox
   }
 
   TabBarPosition _tabBarPosition;
+
   TabBarPosition get tabBarPosition => _tabBarPosition;
+
   set tabBarPosition(TabBarPosition value) {
     if (_tabBarPosition != value) {
       _tabBarPosition = value;

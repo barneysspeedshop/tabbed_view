@@ -6,7 +6,7 @@ class ContentAreaThemeData {
       {this.color, this.padding, this.borderRadius = 0, this.border});
 
   /// The background color.
-   Color? color;
+  Color? color;
 
   /// The radius used to round the corners of a border.
   /// A value of zero represents a completely rectangular border,

@@ -40,6 +40,7 @@ class TabbedViewController extends ChangeNotifier {
   }
 
   final List<TabData> _tabs;
+
   UnmodifiableListView<TabData> get tabs => UnmodifiableListView(_tabs);
 
   final dynamic data;
@@ -55,7 +56,9 @@ class TabbedViewController extends ChangeNotifier {
   OnTabClose? onTabClose;
 
   bool _reorderEnable;
+
   bool get reorderEnable => _reorderEnable;
+
   set reorderEnable(bool value) {
     if (_reorderEnable != value) {
       _reorderEnable = value;

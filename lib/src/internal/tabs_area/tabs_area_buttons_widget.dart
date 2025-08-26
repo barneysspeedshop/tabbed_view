@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:tabbed_view/src/internal/tab_button_widget.dart';
+import 'package:tabbed_view/src/internal/tabbed_view_provider.dart';
 import 'package:tabbed_view/src/internal/tabs_area/hidden_tabs.dart';
 import 'package:tabbed_view/src/internal/tabs_area/hidden_tabs_menu_widget.dart';
-import 'package:tabbed_view/src/internal/tabbed_view_provider.dart';
 import 'package:tabbed_view/tabbed_view.dart';
-import 'package:tabbed_view/src/internal/tab_button_widget.dart';
 
 /// Area for buttons like the hidden tabs menu button.
 @internal

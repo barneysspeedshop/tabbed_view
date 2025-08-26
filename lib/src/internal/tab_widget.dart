@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:tabbed_view/src/internal/flow_layout.dart';
+import 'package:tabbed_view/src/internal/tab_button_widget.dart';
 import 'package:tabbed_view/src/internal/tabbed_view_provider.dart';
 import 'package:tabbed_view/src/internal/tabs_area/drop_tab_widget.dart';
 import 'package:tabbed_view/src/internal/tabs_area/tab_drag_feedback_widget.dart';
-import 'package:tabbed_view/src/internal/tab_button_widget.dart';
 import 'package:tabbed_view/tabbed_view.dart';
 
 /// Listener for the tabs with the mouse over.
