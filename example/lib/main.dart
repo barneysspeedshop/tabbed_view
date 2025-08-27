@@ -27,7 +27,7 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
   TabBarPosition _position = TabBarPosition.top;
   ThemeName _themeName = ThemeName.mobile;
   SideTabsLayout _sideTabsLayout = SideTabsLayout.rotated;
-  final bool _modifyTheme = true;
+  bool _modifyTheme = false;
 
   @override
   void initState() {
@@ -35,24 +35,18 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
     List<TabData> tabs = [];
 
     tabs.add(TabData(
-      text: 'Tab 1',
-      leading: (context, status) => Icon(Icons.star, size: 16),
-      content: Padding(padding: EdgeInsets.all(8), child: Text('Hello')),
-      // All TabData properties with default values or examples
-      buttons: [
-        TabButton(
-            icon: IconProvider.data(Icons.info),
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Info button clicked!')));
-            })
-      ],
-      closable: true,
-      keepAlive: false,
-      draggable: true,
-      value: null,
-      textSize: null,
-    ));
+        text: 'Tab 1',
+        leading: (context, status) => Icon(Icons.star, size: 16),
+        content: Padding(padding: EdgeInsets.all(8), child: Text('Hello')),
+        // All TabData properties with default values or examples
+        buttons: [
+          TabButton(
+              icon: IconProvider.data(Icons.info),
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Info button clicked!')));
+              })
+        ]));
     tabs.add(TabData(
         text: 'Tab 2',
         content:
@@ -76,19 +70,48 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
   }
 
   TabbedViewThemeData _getTheme() {
+    TabbedViewThemeData theme;
     switch (_themeName) {
       case ThemeName.classic:
-        return TabbedViewThemeData.classic(
-            colorSet: Colors.blueGrey, borderColor: Colors.black);
+        theme = _modifyTheme
+            ? TabbedViewThemeData.classic(
+                colorSet: Colors.blueGrey, borderColor: Colors.black)
+            : TabbedViewThemeData.classic();
+        break;
       case ThemeName.dark:
-        return TabbedViewThemeData.dark(colorSet: Colors.grey);
+        theme = _modifyTheme
+            ? TabbedViewThemeData.dark(colorSet: Colors.grey)
+            : TabbedViewThemeData.dark();
+        break;
       case ThemeName.minimalist:
-        return TabbedViewThemeData.minimalist(colorSet: Colors.blueGrey);
+        theme = _modifyTheme
+            ? TabbedViewThemeData.minimalist(colorSet: Colors.blueGrey)
+            : TabbedViewThemeData.minimalist();
+        break;
       case ThemeName.mobile:
-      default:
-        return TabbedViewThemeData.mobile(
-            colorSet: Colors.blueGrey, accentColor: Colors.blue);
+        theme = _modifyTheme
+            ? TabbedViewThemeData.mobile(
+                colorSet: Colors.blueGrey, accentColor: Colors.blue)
+            : TabbedViewThemeData.mobile();
+        break;
     }
+    if (_modifyTheme) {
+      // Customizing the theme.
+      theme.tab
+        ..sideTabsLayout = _sideTabsLayout
+        ..showCloseIconWhenNotFocused = true
+        ..maxWidth = 200
+        ..maxTextWidth = 100
+        // Making the close button visible on unfocused tabs by using the
+        // same colors as the selected tab's buttons.
+        // The button color is derived from the selected tab's font color,
+        // which acts as an accent. Use a default color if fontColor is null.
+        ..normalButtonColor = theme.tab.selectedStatus.fontColor ?? Colors.black
+        // Use a slightly modified color for the hover state for visual feedback.
+        ..hoverButtonColor =
+            (theme.tab.selectedStatus.fontColor ?? Colors.black).withAlpha(200);
+    }
+    return theme;
   }
 
   @override
@@ -173,25 +196,6 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
       dragScope: null,
     );
 
-    TabbedViewThemeData themeData = _getTheme();
-
-    // Customizing the theme.
-    themeData.tab
-      ..sideTabsLayout = _sideTabsLayout
-      ..showCloseIconWhenNotFocused = true
-      ..maxWidth = 200
-      ..maxTextWidth = 100
-      // Making the close button visible on unfocused tabs by using the
-      // same colors as the selected tab's buttons.
-      // The button color is derived from the selected tab's font color,
-      // which acts as an accent. Use a default color if fontColor is null.
-      ..normalButtonColor =
-          themeData.tab.selectedStatus.fontColor ?? Colors.black
-      // Use a slightly modified color for the hover state for visual feedback.
-      ..hoverButtonColor =
-          (themeData.tab.selectedStatus.fontColor ?? Colors.black)
-              .withAlpha(200);
-
     return Scaffold(
         appBar: AppBar(title: Text('TabbedView Example (All properties)')),
         backgroundColor: Colors.white,
@@ -200,7 +204,7 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
           Expanded(
               child: Padding(
                   padding: EdgeInsets.all(16),
-                  child: TabbedViewTheme(data: themeData, child: tabbedView)))
+                  child: TabbedViewTheme(data: _getTheme(), child: tabbedView)))
         ]));
   }
 
@@ -253,7 +257,11 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
 
   Widget _buildModifyThemeSelector() {
     return Row(children: [
-      Checkbox(value: _modifyTheme, onChanged: null),
+      Checkbox(
+          value: _modifyTheme,
+          onChanged: (v) => setState(() {
+                _modifyTheme = v!;
+              })),
       Text('Modify theme')
     ]);
   }
