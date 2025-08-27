@@ -17,7 +17,8 @@ class ClassicTheme extends TabbedViewThemeData {
   factory ClassicTheme(
       {required MaterialColor colorSet,
       required double fontSize,
-      required Color borderColor}) {
+      required Color borderColor,
+      double? tabBorderRadius}) {
     Color backgroundColor = colorSet[50]!;
     Color hoveredColor = colorSet[300]!;
     Color fontColor = colorSet[900]!;
@@ -30,6 +31,10 @@ class ClassicTheme extends TabbedViewThemeData {
 
     theme.divider = BorderSide(color: borderColor, width: 1);
     theme.isDividerWithinTabArea = true;
+
+    if (tabBorderRadius != null) {
+      theme.tabBorderRadius = Radius.circular(tabBorderRadius);
+    }
 
     final TabsAreaThemeData tabsArea = theme.tabsArea;
     tabsArea.normalButtonColor = normalButtonColor;
@@ -74,6 +79,7 @@ class ClassicTheme extends TabbedViewThemeData {
 
   Color backgroundColor;
   Color borderColor;
+  Radius? tabBorderRadius;
 
   TabBorder _tabBorderBuilder(
       {required TabBarPosition tabBarPosition, required TabStatus status}) {
@@ -103,23 +109,36 @@ class ClassicTheme extends TabbedViewThemeData {
   TabBorder _externalBorderBuilder(
       {required TabBarPosition tabBarPosition, required TabStatus status}) {
     final BorderSide borderSide = BorderSide(color: borderColor, width: 1);
+    final Radius? radius = tabBorderRadius;
     switch (tabBarPosition) {
       case TabBarPosition.top:
         return TabBorder(
             border:
-                Border(top: borderSide, left: borderSide, right: borderSide));
+                Border(top: borderSide, left: borderSide, right: borderSide),
+            borderRadius: radius != null
+                ? BorderRadius.only(topLeft: radius, topRight: radius)
+                : null);
       case TabBarPosition.bottom:
         return TabBorder(
-            border: Border(
-                bottom: borderSide, left: borderSide, right: borderSide));
+            border:
+                Border(bottom: borderSide, left: borderSide, right: borderSide),
+            borderRadius: radius != null
+                ? BorderRadius.only(bottomLeft: radius, bottomRight: radius)
+                : null);
       case TabBarPosition.left:
         return TabBorder(
             border:
-                Border(left: borderSide, top: borderSide, bottom: borderSide));
+                Border(left: borderSide, top: borderSide, bottom: borderSide),
+            borderRadius: radius != null
+                ? BorderRadius.only(topLeft: radius, bottomLeft: radius)
+                : null);
       case TabBarPosition.right:
         return TabBorder(
             border:
-                Border(right: borderSide, top: borderSide, bottom: borderSide));
+                Border(right: borderSide, top: borderSide, bottom: borderSide),
+            borderRadius: radius != null
+                ? BorderRadius.only(topRight: radius, bottomRight: radius)
+                : null);
     }
   }
 }

@@ -54,9 +54,13 @@ class TabbedViewThemeData {
   factory TabbedViewThemeData.classic(
       {MaterialColor colorSet = Colors.grey,
       double fontSize = 13,
-      Color borderColor = Colors.black}) {
+      Color borderColor = Colors.black,
+      double? tabBorderRadius}) {
     return ClassicTheme(
-        colorSet: colorSet, fontSize: fontSize, borderColor: borderColor);
+        colorSet: colorSet,
+        fontSize: fontSize,
+        borderColor: borderColor,
+        tabBorderRadius: tabBorderRadius);
   }
 
   /// Builds the predefined mobile theme.
