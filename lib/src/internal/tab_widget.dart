@@ -68,12 +68,10 @@ class TabWidget extends StatelessWidget {
       if (tabBorder.border != null) {
         final BorderRadius? borderRadius = tabBorder.borderRadius;
         if (borderRadius != null) {
-          widget = ClipRRect(
-              borderRadius: borderRadius,
-              child: Container(
-                  decoration: BoxDecoration(
-                      border: tabBorder.border, borderRadius: borderRadius),
-                  child: widget));
+          widget = Container(
+              decoration: BoxDecoration(
+                  border: tabBorder.border, borderRadius: borderRadius),
+              child: ClipRRect(borderRadius: borderRadius, child: widget));
         } else {
           widget = Container(
               decoration: BoxDecoration(border: tabBorder.border),
