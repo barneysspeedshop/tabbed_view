@@ -284,11 +284,9 @@ class _TabContentWidget extends StatelessWidget {
           right: tabTheme.buttonsOffset); // Use final buttonsOffset
     }
 
-    if (tab.leading != null) {
-      Widget? leading = tab.leading!(context, status);
-      if (leading != null) {
-        textAndButtons.add(leading);
-      }
+    Widget? leading = tab.leading?.call(context, status);
+    if (leading != null) {
+      textAndButtons.add(leading);
     }
     textAndButtons.add(Container(
         child: SizedBox(

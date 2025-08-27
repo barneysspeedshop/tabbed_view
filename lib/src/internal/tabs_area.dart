@@ -4,7 +4,6 @@ import 'package:meta/meta.dart';
 import '../tab_bar_position.dart';
 import '../tab_status.dart';
 import '../tabbed_view_controller.dart';
-import '../theme/tab_status_theme_data.dart';
 import '../theme/tabbed_view_theme_data.dart';
 import '../theme/tabs_area_theme_data.dart';
 import '../theme/theme_widget.dart';
@@ -52,8 +51,6 @@ class _TabsAreaState extends State<TabsArea> {
     List<Widget> children = [];
     for (int index = 0; index < controller.tabs.length; index++) {
       TabStatus status = _getStatusFor(index);
-      TabStatusThemeData? tabStatusTheme = theme.tab.getTabThemeFor(status);
-      //TODO use tabStatusTheme
       children.add(TabsAreaLayoutChild(
           child: TabWidget(
               key: controller.tabs[index].uniqueKey,
