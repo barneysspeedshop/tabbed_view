@@ -11,7 +11,6 @@ import '../typedefs/on_draggable_build.dart';
 import '../typedefs/on_tab_close.dart';
 import '../typedefs/on_tab_reorder.dart';
 import '../typedefs/on_tab_secondary_tap.dart';
-import '../typedefs/on_tab_selection.dart';
 import '../typedefs/tab_close_interceptor.dart';
 import '../typedefs/tab_select_interceptor.dart';
 import '../typedefs/tabs_area_buttons_builder.dart';
@@ -28,7 +27,6 @@ class TabbedViewProvider {
       this.onTabClose,
       this.tabCloseInterceptor,
       required this.contentClip,
-      this.onTabSelection,
       this.tabSelectInterceptor,
       required this.unselectedTabButtonsBehavior,
       this.closeButtonTooltip,
@@ -53,7 +51,6 @@ class TabbedViewProvider {
   final OnTabReorder? onTabReorder;
   final OnTabClose? onTabClose;
   final TabCloseInterceptor? tabCloseInterceptor;
-  final OnTabSelection? onTabSelection;
   final TabSelectInterceptor? tabSelectInterceptor;
   final OnTabSecondaryTap? onTabSecondaryTap;
   final UnselectedTabButtonsBehavior unselectedTabButtonsBehavior;

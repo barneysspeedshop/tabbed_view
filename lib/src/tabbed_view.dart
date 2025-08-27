@@ -128,7 +128,6 @@ class _TabbedViewState extends State<TabbedView> {
         onTabReorder: widget.onTabReorder,
         onTabClose: widget.onTabClose,
         tabCloseInterceptor: widget.tabCloseInterceptor,
-        onTabSelection: widget.onTabSelection,
         contentClip: widget.contentClip,
         tabSelectInterceptor: widget.tabSelectInterceptor,
         onTabSecondaryTap: widget.onTabSecondaryTap,
