@@ -222,7 +222,7 @@ void main() {
 
     group('Trailing Widget', () {
       testWidgets(
-          'is present and not rotated when TabBarPosition is left by default',
+          'is present and rotated when TabBarPosition is left by default',
           (WidgetTester tester) async {
         await tester.pumpWidget(MaterialApp(
           home: Scaffold(
@@ -239,7 +239,7 @@ void main() {
 
         final rotatedBoxFinder = find.ancestor(
             of: trailingFinder, matching: find.byType(RotatedBox));
-        expect(rotatedBoxFinder, findsNothing);
+        expect(rotatedBoxFinder, findsOneWidget);
       });
     });
   });
