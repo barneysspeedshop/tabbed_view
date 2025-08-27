@@ -27,7 +27,8 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
   TabBarPosition _position = TabBarPosition.top;
   ThemeName _themeName = ThemeName.mobile;
   SideTabsLayout _sideTabsLayout = SideTabsLayout.rotated;
-  bool _modifyTheme = false;
+  bool _modifyThemeColors = false;
+  bool _maxMainSizeEnabled = false;
 
   @override
   void initState() {
@@ -73,41 +74,31 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
     TabbedViewThemeData theme;
     switch (_themeName) {
       case ThemeName.classic:
-        theme = _modifyTheme
+        theme = _modifyThemeColors
             ? TabbedViewThemeData.classic(
                 colorSet: Colors.blueGrey, borderColor: Colors.black)
             : TabbedViewThemeData.classic();
         break;
       case ThemeName.dark:
-        theme = _modifyTheme
-            ? TabbedViewThemeData.dark(colorSet: Colors.grey)
+        theme = _modifyThemeColors
+            ? TabbedViewThemeData.dark(colorSet: Colors.brown)
             : TabbedViewThemeData.dark();
         break;
       case ThemeName.minimalist:
-        theme = _modifyTheme
+        theme = _modifyThemeColors
             ? TabbedViewThemeData.minimalist(colorSet: Colors.blueGrey)
             : TabbedViewThemeData.minimalist();
         break;
       case ThemeName.mobile:
-        theme = _modifyTheme
+        theme = _modifyThemeColors
             ? TabbedViewThemeData.mobile(
-                colorSet: Colors.blueGrey, accentColor: Colors.blue)
+                colorSet: Colors.brown, accentColor: Colors.brown)
             : TabbedViewThemeData.mobile();
         break;
     }
-    if (_modifyTheme) {
-      // Customizing the theme.
-      theme.tab
-        ..sideTabsLayout = _sideTabsLayout
-        ..maxMainSize = 200
-        // Making the close button visible on unfocused tabs by using the
-        // same colors as the selected tab's buttons.
-        // The button color is derived from the selected tab's font color,
-        // which acts as an accent. Use a default color if fontColor is null.
-        ..normalButtonColor = theme.tab.selectedStatus.fontColor ?? Colors.black
-        // Use a slightly modified color for the hover state for visual feedback.
-        ..hoverButtonColor =
-            (theme.tab.selectedStatus.fontColor ?? Colors.black).withAlpha(200);
+    theme.tab.sideTabsLayout = _sideTabsLayout;
+    if (_maxMainSizeEnabled) {
+      theme.tab.maxMainSize = 200;
     }
     return theme;
   }
@@ -249,18 +240,30 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
                       Text('Theme'),
                       ThemeChooser(
                           themeName: _themeName, onSelected: _onThemeSelected),
-                      _buildModifyThemeSelector()
+                      _buildModifyThemeColorsSelector(),
+                      _buildMaxMainSizeSelector()
                     ]))));
   }
 
-  Widget _buildModifyThemeSelector() {
+  Widget _buildModifyThemeColorsSelector() {
     return Row(children: [
       Checkbox(
-          value: _modifyTheme,
+          value: _modifyThemeColors,
           onChanged: (v) => setState(() {
-                _modifyTheme = v!;
+                _modifyThemeColors = v!;
               })),
-      Text('Modify theme')
+      Text('Modify theme colors')
+    ]);
+  }
+
+  Widget _buildMaxMainSizeSelector() {
+    return Row(children: [
+      Checkbox(
+          value: _maxMainSizeEnabled,
+          onChanged: (v) => setState(() {
+                _maxMainSizeEnabled = v!;
+              })),
+      Text('Max tab main size')
     ]);
   }
 }
