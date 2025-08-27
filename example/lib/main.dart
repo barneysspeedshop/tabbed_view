@@ -29,6 +29,7 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
   SideTabsLayout _sideTabsLayout = SideTabsLayout.rotated;
   bool _modifyThemeColors = false;
   bool _maxMainSizeEnabled = false;
+  bool _trailingWidgetEnabled = false;
 
   @override
   void initState() {
@@ -105,14 +106,14 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget trailingWidget = Padding(
-      padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-      child: Text('Trailing text'),
-    );
-
     // Configuring the [TabbedView] with all available properties.
     TabbedView tabbedView = TabbedView(
-      trailing: trailingWidget,
+      trailing: _trailingWidgetEnabled
+          ? Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+              child: Text('Trailing text'),
+            )
+          : null,
       controller: _controller,
       onTabSecondaryTap: (index, tabData, details) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -240,30 +241,49 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
                       Text('Theme'),
                       ThemeChooser(
                           themeName: _themeName, onSelected: _onThemeSelected),
+                      SizedBox(height: 16),
+                      _buildTrailingWidgetSelector(),
                       _buildModifyThemeColorsSelector(),
                       _buildMaxMainSizeSelector()
                     ]))));
   }
 
   Widget _buildModifyThemeColorsSelector() {
-    return Row(children: [
-      Checkbox(
-          value: _modifyThemeColors,
-          onChanged: (v) => setState(() {
-                _modifyThemeColors = v!;
-              })),
-      Text('Modify theme colors')
-    ]);
+    return _buildSelector(
+        value: _modifyThemeColors,
+        text: 'Modify theme colors',
+        setter: (v) => _modifyThemeColors = v);
+  }
+
+  Widget _buildTrailingWidgetSelector() {
+    return _buildSelector(
+        value: _trailingWidgetEnabled,
+        text: 'Trailing widget',
+        setter: (v) => _trailingWidgetEnabled = v);
   }
 
   Widget _buildMaxMainSizeSelector() {
+    return _buildSelector(
+        value: _maxMainSizeEnabled,
+        text: 'Max tab main size',
+        setter: (v) => _maxMainSizeEnabled = v);
+  }
+
+  Widget _buildSelector(
+      {required bool value,
+      required String text,
+      required Function(bool value) setter}) {
     return Row(children: [
       Checkbox(
-          value: _maxMainSizeEnabled,
-          onChanged: (v) => setState(() {
-                _maxMainSizeEnabled = v!;
-              })),
-      Text('Max tab main size')
+          value: value,
+          onChanged: (v) {
+            if (v != null) {
+              setState(() {
+                setter(v);
+              });
+            }
+          }),
+      Text(text)
     ]);
   }
 }
