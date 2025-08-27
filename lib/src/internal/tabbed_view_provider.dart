@@ -1,21 +1,20 @@
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
-import 'package:tabbed_view/src/tabbed_view.dart'
-    show
-        OnTabSelection,
-        TabBarPosition,
-        TabSelectInterceptor,
-        TabsAreaButtonsBuilder,
-        HiddenTabsMenuItemBuilder,
-        OnTabClose,
-        TabCloseInterceptor,
-        OnTabReorder;
-import 'package:tabbed_view/src/tabbed_view_controller.dart';
-import 'package:tabbed_view/src/tabbed_view_menu_item.dart';
-import 'package:tabbed_view/src/typedefs/on_before_drop_accept.dart';
-import 'package:tabbed_view/src/typedefs/on_draggable_build.dart';
-import 'package:tabbed_view/src/typedefs/can_drop.dart';
-import 'package:tabbed_view/src/typedefs/on_tab_secondary_tap.dart';
+
+import '../tab_bar_position.dart';
+import '../tabbed_view_controller.dart';
+import '../tabbed_view_menu_item.dart';
+import '../typedefs/can_drop.dart';
+import '../typedefs/hidden_tabs_menu_item_builder.dart';
+import '../typedefs/on_before_drop_accept.dart';
+import '../typedefs/on_draggable_build.dart';
+import '../typedefs/on_tab_close.dart';
+import '../typedefs/on_tab_reorder.dart';
+import '../typedefs/on_tab_secondary_tap.dart';
+import '../typedefs/on_tab_selection.dart';
+import '../typedefs/tab_close_interceptor.dart';
+import '../typedefs/tab_select_interceptor.dart';
+import '../typedefs/tabs_area_buttons_builder.dart';
 
 /// Propagates parameters to internal widgets.
 @internal

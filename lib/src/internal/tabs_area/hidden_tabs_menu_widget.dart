@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:tabbed_view/src/internal/tabbed_view_provider.dart';
-import 'package:tabbed_view/src/tab_data.dart';
-import 'package:tabbed_view/src/tabbed_view.dart';
-import 'package:tabbed_view/src/theme/tabbed_view_theme_data.dart';
-import 'package:tabbed_view/src/theme/theme_widget.dart';
+
+import '../../tab_data.dart';
+import '../../theme/tabbed_view_theme_data.dart';
+import '../../theme/theme_widget.dart';
+import '../../typedefs/hidden_tabs_menu_item_builder.dart';
+import '../tabbed_view_provider.dart';
 
 /// The menu widget for hidden tabs, displayed in an overlay.
 @internal

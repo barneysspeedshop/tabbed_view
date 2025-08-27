@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:tabbed_view/src/internal/tabbed_view_provider.dart';
-import 'package:tabbed_view/src/internal/tabs_area/drop_tab_widget.dart';
-import 'package:tabbed_view/src/internal/tabs_area/hidden_tabs.dart';
-import 'package:tabbed_view/src/internal/tabs_area/tabs_area_buttons_widget.dart';
-import 'package:tabbed_view/src/tabbed_view.dart';
-import 'package:tabbed_view/src/theme/tab_theme_data.dart';
-import 'package:tabbed_view/src/theme/theme_widget.dart';
+
+import '../../tab_bar_position.dart';
+import '../../theme/tab_theme_data.dart';
+import '../../theme/theme_widget.dart';
+import '../tabbed_view_provider.dart';
+import 'drop_tab_widget.dart';
+import 'hidden_tabs.dart';
+import 'tabs_area_buttons_widget.dart';
 
 @internal
 class TabsAreaCorner extends StatelessWidget {

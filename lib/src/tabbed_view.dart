@@ -1,68 +1,26 @@
-import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:tabbed_view/src/internal/content_area.dart';
-import 'package:tabbed_view/src/internal/tabbed_view_provider.dart';
-import 'package:tabbed_view/src/internal/tabs_area.dart';
-import 'package:tabbed_view/src/tab_button.dart';
-import 'package:tabbed_view/src/tab_data.dart';
-import 'package:tabbed_view/src/tabbed_view_controller.dart';
-import 'package:tabbed_view/src/tabbed_view_menu_item.dart';
-import 'package:tabbed_view/src/theme/tabbed_view_theme_data.dart';
-import 'package:tabbed_view/src/theme/theme_widget.dart';
-import 'package:tabbed_view/src/typedefs/can_drop.dart';
-import 'package:tabbed_view/src/typedefs/on_before_drop_accept.dart';
-import 'package:tabbed_view/src/typedefs/on_draggable_build.dart';
-import 'package:tabbed_view/src/typedefs/on_tab_secondary_tap.dart';
 
-/// Defines the position of the tab bar.
-enum TabBarPosition {
-  /// Positions the tab bar above the content.
-  top(true),
-
-  /// Positions the tab bar below the content.
-  bottom(true),
-
-  /// Positions the tab bar on the left of the content.
-  left(false),
-
-  /// Positions the tab bar on the right of the content.
-  right(false);
-
-  const TabBarPosition(this.isHorizontal);
-
-  final bool isHorizontal;
-
-  bool get isVertical => !isHorizontal;
-}
-
-/// Tabs area buttons builder
-typedef TabsAreaButtonsBuilder = List<TabButton> Function(
-    BuildContext context, int tabsCount);
-
-/// The event triggered when the user closes a tab through the UI.
-///
-/// This callback is **not** called when tabs are removed programmatically
-/// using [TabbedViewController.removeTab] or [TabbedViewController.removeTabs].
-typedef OnTabClose = void Function(int tabIndex, TabData tabData);
-
-/// Intercepts a close event to indicates whether the tab can be closed.
-typedef TabCloseInterceptor = FutureOr<bool> Function(
-    int tabIndex, TabData tabData);
-
-/// Intercepts a select event to indicate whether the tab can be selected.
-typedef TabSelectInterceptor = bool Function(int newTabIndex);
-
-/// Event that will be triggered when the tab selection is changed.
-typedef OnTabSelection = void Function(TabData? tabData);
-
-/// Builder for hidden tabs menu item.
-typedef HiddenTabsMenuItemBuilder = Widget Function(
-    BuildContext context, int tabIndex, TabData tabData);
-
-/// Event that will be triggered when the tab is reorder.
-typedef OnTabReorder = void Function(int oldIndex, int newIndex);
+import 'internal/content_area.dart';
+import 'internal/tabbed_view_provider.dart';
+import 'internal/tabs_area.dart';
+import 'tab_bar_position.dart';
+import 'tabbed_view_controller.dart';
+import 'tabbed_view_menu_item.dart';
+import 'theme/tabbed_view_theme_data.dart';
+import 'theme/theme_widget.dart';
+import 'typedefs/can_drop.dart';
+import 'typedefs/hidden_tabs_menu_item_builder.dart';
+import 'typedefs/on_before_drop_accept.dart';
+import 'typedefs/on_draggable_build.dart';
+import 'typedefs/on_tab_close.dart';
+import 'typedefs/on_tab_reorder.dart';
+import 'typedefs/on_tab_secondary_tap.dart';
+import 'typedefs/on_tab_selection.dart';
+import 'typedefs/tab_close_interceptor.dart';
+import 'typedefs/tab_select_interceptor.dart';
+import 'typedefs/tabs_area_buttons_builder.dart';
 
 /// Widget inspired by the classic Desktop-style tab component.
 ///

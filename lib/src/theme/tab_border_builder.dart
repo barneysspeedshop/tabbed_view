@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tabbed_view/tabbed_view.dart';
+
+import '../tab_bar_position.dart';
+import '../tab_status.dart';
 
 typedef TabBorderBuilder = TabBorder Function(
     {required TabBarPosition tabBarPosition, required TabStatus status});

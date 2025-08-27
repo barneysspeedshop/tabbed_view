@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tabbed_view/src/icon_provider.dart';
-import 'package:tabbed_view/src/tabbed_view_icons.dart';
-import 'package:tabbed_view/src/theme/tabbed_view_theme_constants.dart';
-import 'package:tabbed_view/src/theme/tabs_area_cross_axis_alignment.dart';
-import 'package:tabbed_view/src/theme/tabs_area_cross_axis_fit.dart';
+
+import '../icon_provider.dart';
+import '../tabbed_view_icons.dart';
+import 'tabbed_view_theme_constants.dart';
+import 'tabs_area_cross_axis_alignment.dart';
+import 'tabs_area_cross_axis_fit.dart';
 
 ///Theme for tabs and buttons area.
 class TabsAreaThemeData {

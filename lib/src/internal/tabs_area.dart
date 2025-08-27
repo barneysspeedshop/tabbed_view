@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:tabbed_view/src/internal/tab_widget.dart';
-import 'package:tabbed_view/src/internal/tabbed_view_provider.dart';
-import 'package:tabbed_view/src/internal/tabs_area/hidden_tabs.dart';
-import 'package:tabbed_view/src/internal/tabs_area/tabs_area_corner.dart';
-import 'package:tabbed_view/src/internal/tabs_area_layout.dart';
-import 'package:tabbed_view/tabbed_view.dart';
+
+import '../tab_bar_position.dart';
+import '../tab_status.dart';
+import '../tabbed_view_controller.dart';
+import '../theme/tab_status_theme_data.dart';
+import '../theme/tabbed_view_theme_data.dart';
+import '../theme/tabs_area_theme_data.dart';
+import '../theme/theme_widget.dart';
+import 'tab_widget.dart';
+import 'tabbed_view_provider.dart';
+import 'tabs_area/hidden_tabs.dart';
+import 'tabs_area/tabs_area_corner.dart';
+import 'tabs_area_layout.dart';
 
 /// Widget for the tabs and buttons.
 @internal

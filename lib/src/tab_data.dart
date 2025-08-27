@@ -1,7 +1,12 @@
 import 'dart:math' as math;
 
 import 'package:flutter/widgets.dart';
-import 'package:tabbed_view/tabbed_view.dart';
+import 'package:meta/meta.dart';
+
+import 'tab_button.dart';
+import 'tab_leading_builder.dart';
+import 'tab_status.dart';
+import 'theme/tab_status_theme_data.dart';
 
 /// The tab data.
 ///
@@ -37,7 +42,7 @@ import 'package:tabbed_view/tabbed_view.dart';
 /// See also:
 ///
 /// * [TabbedView.contentBuilder]
-class TabData extends ChangeNotifier with TabIndex {
+class TabData extends ChangeNotifier {
   TabData(
       {dynamic value,
       required String text,
@@ -65,6 +70,8 @@ class TabData extends ChangeNotifier with TabIndex {
   final bool keepAlive;
 
   final bool draggable;
+
+  int _index = -1;
 
   dynamic _value;
 
@@ -161,4 +168,11 @@ class TabData extends ChangeNotifier with TabIndex {
   }
 
   final UniqueKey uniqueKey = UniqueKey();
+}
+
+@internal
+class TabDataHelper {
+  static int indexFrom(TabData tab) => tab._index;
+
+  static void setIndex(TabData tab, int newIndex) => tab._index = newIndex;
 }

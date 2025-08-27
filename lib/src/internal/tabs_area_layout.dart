@@ -3,13 +3,14 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:meta/meta.dart';
-import 'package:tabbed_view/src/internal/tabs_area/hidden_tabs.dart';
-import 'package:tabbed_view/src/internal/tabs_area/tabs_area_layout_parent_data.dart';
-import 'package:tabbed_view/src/tabbed_view.dart';
-import 'package:tabbed_view/src/theme/tabbed_view_theme_data.dart';
-import 'package:tabbed_view/src/theme/tabs_area_cross_axis_alignment.dart';
-import 'package:tabbed_view/src/theme/tabs_area_cross_axis_fit.dart';
-import 'package:tabbed_view/src/theme/tabs_area_theme_data.dart';
+
+import '../tab_bar_position.dart';
+import '../theme/tabbed_view_theme_data.dart';
+import '../theme/tabs_area_cross_axis_alignment.dart';
+import '../theme/tabs_area_cross_axis_fit.dart';
+import '../theme/tabs_area_theme_data.dart';
+import 'tabs_area/hidden_tabs.dart';
+import 'tabs_area/tabs_area_layout_parent_data.dart';
 
 /// Inner widget for [TabsArea] layout.
 /// Displays the popup menu button for tabs hidden due to lack of space.

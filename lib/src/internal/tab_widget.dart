@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:tabbed_view/src/internal/flow_layout.dart';
-import 'package:tabbed_view/src/internal/tab_button_widget.dart';
-import 'package:tabbed_view/src/internal/tabbed_view_provider.dart';
-import 'package:tabbed_view/src/internal/tabs_area/drop_tab_widget.dart';
-import 'package:tabbed_view/src/internal/tabs_area/tab_drag_feedback_widget.dart';
-import 'package:tabbed_view/tabbed_view.dart';
+
+import '../draggable_config.dart';
+import '../draggable_data.dart';
+import '../tab_bar_position.dart';
+import '../tab_button.dart';
+import '../tab_data.dart';
+import '../tab_status.dart';
+import '../theme/tab_border_builder.dart';
+import '../theme/tab_status_theme_data.dart';
+import '../theme/tab_theme_data.dart';
+import '../theme/tabbed_view_theme_data.dart';
+import '../theme/theme_widget.dart';
+import '../theme/vertical_tab_layout_style.dart';
+import 'flow_layout.dart';
+import 'tab_button_widget.dart';
+import 'tabbed_view_provider.dart';
+import 'tabs_area/drop_tab_widget.dart';
+import 'tabs_area/tab_drag_feedback_widget.dart';
 
 /// Listener for the tabs with the mouse over.
 @internal
@@ -166,10 +178,11 @@ class TabWidget extends StatelessWidget {
       }
     }
 
-    if (provider.tabReorderEnabled && provider.draggingTabIndex != tab.index) {
+    if (provider.tabReorderEnabled &&
+        provider.draggingTabIndex != TabDataHelper.indexFrom(tab)) {
       return DropTabWidget(
           provider: provider,
-          newIndex: tab.index,
+          newIndex: TabDataHelper.indexFrom(tab),
           child: widget,
           halfWidthDrop: true);
     }

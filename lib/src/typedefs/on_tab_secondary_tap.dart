@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
-import 'package:tabbed_view/src/tab_data.dart';
+
+import '../tab_data.dart';
 
 /// The on tab secondary tap callback function.
 ///

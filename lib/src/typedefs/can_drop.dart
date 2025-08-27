@@ -1,5 +1,5 @@
-import 'package:tabbed_view/src/draggable_data.dart';
-import 'package:tabbed_view/src/tabbed_view_controller.dart';
+import '../draggable_data.dart';
+import '../tabbed_view_controller.dart';
 
 typedef CanDrop = bool Function(
     DraggableData source, TabbedViewController target);

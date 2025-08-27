@@ -1,7 +1,8 @@
 import 'dart:collection';
 
 import 'package:flutter/widgets.dart';
-import 'package:tabbed_view/src/tab_data.dart';
+
+import 'tab_data.dart';
 
 /// The [TabbedView] controller.
 ///
@@ -124,7 +125,7 @@ class TabbedViewController extends ChangeNotifier {
   void addTab(TabData tab) {
     _tabs.add(tab);
     tab.addListener(notifyListeners);
-    tab._setIndex(_tabs.length - 1);
+    TabDataHelper.setIndex(tab, _tabs.length - 1);
     _afterIncTabs();
   }
 
@@ -145,7 +146,7 @@ class TabbedViewController extends ChangeNotifier {
 
     TabData tabData = _tabs.removeAt(tabIndex);
     tabData.removeListener(notifyListeners);
-    tabData._setIndex(-1);
+    TabDataHelper.setIndex(tabData, -1);
     _updateIndexes(false);
     if (_tabs.isEmpty) {
       _selectedIndex = null;
@@ -181,7 +182,7 @@ class TabbedViewController extends ChangeNotifier {
 
   /// Selects a tab.
   void selectTab(TabData tab) {
-    selectedIndex = tab.index;
+    selectedIndex = TabDataHelper.indexFrom(tab);
   }
 
   /// Selects a tab by its value.
@@ -222,18 +223,7 @@ class TabbedViewController extends ChangeNotifier {
   void _updateIndexes(bool clear) {
     for (int i = 0; i < _tabs.length; i++) {
       TabData tab = _tabs[i];
-      tab._setIndex(clear ? -1 : i);
+      TabDataHelper.setIndex(tab, clear ? -1 : i);
     }
-  }
-}
-
-mixin TabIndex {
-  int _index = -1;
-
-  /// The current index in the controller.
-  int get index => _index;
-
-  void _setIndex(int newIndex) {
-    _index = newIndex;
   }
 }

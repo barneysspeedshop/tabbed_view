@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
-import 'package:tabbed_view/src/theme/vertical_alignment.dart';
+
+import '../theme/vertical_alignment.dart';
 
 @internal
 enum FlowDirection { horizontal, vertical }

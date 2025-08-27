@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tabbed_view/tabbed_view.dart';
+
+import '../../tab_bar_position.dart';
+import '../../tab_status.dart';
+import '../content_area_theme_data.dart';
+import '../hidden_tabs_menu_theme_data.dart';
+import '../tab_border_builder.dart';
+import '../tab_theme_data.dart';
+import '../tabbed_view_theme_data.dart';
+import '../tabs_area_cross_axis_fit.dart';
+import '../tabs_area_theme_data.dart';
 
 /// Predefined mobile theme builder.
 class MobileTheme extends TabbedViewThemeData {

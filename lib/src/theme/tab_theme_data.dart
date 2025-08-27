@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tabbed_view/tabbed_view.dart';
+
+import '../icon_provider.dart';
+import '../tab_bar_position.dart';
+import '../tab_status.dart';
+import '../tabbed_view_icons.dart';
+import 'tab_border_builder.dart';
+import 'tab_status_theme_data.dart';
+import 'tabbed_view_theme_constants.dart';
+import 'vertical_alignment.dart';
+import 'vertical_tab_layout_style.dart';
 
 /// Theme for tab.
 class TabThemeData {

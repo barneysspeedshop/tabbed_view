@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tabbed_view/src/theme/content_area_theme_data.dart';
-import 'package:tabbed_view/src/theme/default_themes/classic_theme.dart';
-import 'package:tabbed_view/src/theme/default_themes/dark_theme.dart';
-import 'package:tabbed_view/src/theme/default_themes/minimalist_theme.dart';
-import 'package:tabbed_view/src/theme/default_themes/mobile_theme.dart';
-import 'package:tabbed_view/src/theme/hidden_tabs_menu_theme_data.dart';
-import 'package:tabbed_view/src/theme/tab_status_theme_data.dart';
-import 'package:tabbed_view/src/theme/tab_theme_data.dart';
-import 'package:tabbed_view/src/theme/tabs_area_theme_data.dart';
+
+import 'content_area_theme_data.dart';
+import 'default_themes/classic_theme.dart';
+import 'default_themes/dark_theme.dart';
+import 'default_themes/minimalist_theme.dart';
+import 'default_themes/mobile_theme.dart';
+import 'hidden_tabs_menu_theme_data.dart';
+import 'tab_status_theme_data.dart';
+import 'tab_theme_data.dart';
+import 'tabs_area_theme_data.dart';
 
 /// The [TabbedView] theme.
 /// Defines the configuration of the overall visual [Theme] for a widget subtree within the app.

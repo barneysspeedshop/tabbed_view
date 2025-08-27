@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:tabbed_view/src/icon_provider.dart';
-import 'package:tabbed_view/src/tabbed_view_menu_builder.dart';
-import 'package:tabbed_view/src/theme/tabbed_view_theme_constants.dart';
+
+import 'icon_provider.dart';
+import 'tabbed_view_menu_builder.dart';
+import 'theme/tabbed_view_theme_constants.dart';
 
 /// Configures a tab button.
 class TabButton {

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:tabbed_view/src/draggable_data.dart';
-import 'package:tabbed_view/src/internal/tabbed_view_provider.dart';
-import 'package:tabbed_view/src/tabbed_view.dart';
-import 'package:tabbed_view/src/theme/tabbed_view_theme_data.dart';
-import 'package:tabbed_view/src/theme/theme_widget.dart';
+
+import '../../draggable_data.dart';
+import '../../tab_bar_position.dart';
+import '../../tab_data.dart';
+import '../../theme/tabbed_view_theme_data.dart';
+import '../../theme/theme_widget.dart';
+import '../tabbed_view_provider.dart';
 
 @internal
 class DropTabWidget extends StatefulWidget {
@@ -126,7 +128,7 @@ class DropTabWidgetState extends State<DropTabWidget> {
           onAcceptWithDetails: (details) {
             final DraggableData data = details.data;
             int finalNewIndex = widget.newIndex;
-            final int oldIndex = data.tabData.index;
+            final int oldIndex = TabDataHelper.indexFrom(data.tabData);
             if (widget.halfWidthDrop && _dropPosition == _DropPosition.after) {
               finalNewIndex++;
             }
@@ -150,7 +152,7 @@ class DropTabWidgetState extends State<DropTabWidget> {
                 widget.provider.onTabReorder?.call(oldIndex, finalNewIndex);
               }
             } else {
-              data.controller.removeTab(data.tabData.index);
+              data.controller.removeTab(TabDataHelper.indexFrom(data.tabData));
               widget.provider.controller.insertTab(finalNewIndex, data.tabData);
             }
           },
