@@ -12,7 +12,7 @@ import '../tabs_area_theme_data.dart';
 
 /// Predefined classic theme builder.
 class ClassicTheme extends TabbedViewThemeData {
-  ClassicTheme._({required this.borderColor});
+  ClassicTheme._({required this.borderColor, required this.backgroundColor});
 
   factory ClassicTheme(
       {required MaterialColor colorSet,
@@ -25,7 +25,8 @@ class ClassicTheme extends TabbedViewThemeData {
     Color disabledButtonColor = colorSet[400]!;
     Color hoverButtonColor = colorSet[900]!;
 
-    ClassicTheme theme = ClassicTheme._(borderColor: borderColor);
+    ClassicTheme theme = ClassicTheme._(
+        backgroundColor: backgroundColor, borderColor: borderColor);
 
     theme.divider = BorderSide(color: borderColor, width: 1);
     theme.isDividerWithinTabArea = true;
@@ -71,12 +72,13 @@ class ClassicTheme extends TabbedViewThemeData {
     return theme;
   }
 
+  Color backgroundColor;
   Color borderColor;
 
   TabBorder _tabBorderBuilder(
       {required TabBarPosition tabBarPosition, required TabStatus status}) {
     final BorderSide borderSide = status == TabStatus.selected
-        ? BorderSide(color: Colors.transparent, width: 8)
+        ? BorderSide(color: backgroundColor, width: 8)
         : divider ?? BorderSide.none;
     switch (tabBarPosition) {
       case TabBarPosition.top:
