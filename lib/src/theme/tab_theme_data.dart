@@ -4,11 +4,11 @@ import '../icon_provider.dart';
 import '../tab_bar_position.dart';
 import '../tab_status.dart';
 import '../tabbed_view_icons.dart';
+import 'side_tabs_layout.dart';
 import 'tab_border_builder.dart';
 import 'tab_status_theme_data.dart';
 import 'tabbed_view_theme_constants.dart';
 import 'vertical_alignment.dart';
-import 'side_tabs_layout.dart';
 
 /// Theme for tab.
 class TabThemeData {

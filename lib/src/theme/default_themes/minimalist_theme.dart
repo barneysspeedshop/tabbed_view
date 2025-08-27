@@ -42,7 +42,7 @@ class MinimalistTheme extends TabbedViewThemeData {
     tab.hoveredStatus.color = colorSet[100]!;
     tab.selectedStatus.color = colorSet[600]!;
     tab.selectedStatus.fontColor = colorSet[50]!;
-    tab.selectedStatus.normalButtonColor=colorSet[50]!;
+    tab.selectedStatus.normalButtonColor = colorSet[50]!;
 
     final ContentAreaThemeData contentArea = theme.contentArea;
     contentArea.color = colorSet[50]!;
