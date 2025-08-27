@@ -24,8 +24,7 @@ class DarkTheme extends TabbedViewThemeData {
     Color normalButtonColor = colorSet[100]!;
     Color disabledButtonColor = colorSet[600]!;
     Color hoverButtonColor = colorSet[100]!;
-    Color menuColor = colorSet[700]!; // This is the background for the menu
-    Color menuDividerColor = colorSet[500]!;
+
     Color fontColor = colorSet[100]!;
     Color buttonsAreaColor = colorSet[800]!;
 
@@ -47,10 +46,8 @@ class DarkTheme extends TabbedViewThemeData {
     final TabThemeData tab = theme.tab;
     tab.color = tabColor;
     tab.borderBuilder = theme._tabBorderBuilder;
-    double bottomWidth = 3;
     tab.buttonsOffset = 4;
     tab.textStyle = TextStyle(fontSize: fontSize, color: fontColor);
-    //decoration: BoxDecoration(color: tabColor),
     tab.draggingDecoration = BoxDecoration(color: tabColor);
     tab.padding = EdgeInsets.fromLTRB(6, 3, 3, 3);
     tab.paddingWithoutButton = EdgeInsets.fromLTRB(6, 3, 6, 3);
@@ -67,6 +64,7 @@ class DarkTheme extends TabbedViewThemeData {
     contentArea.padding = EdgeInsets.all(8);
 
     final HiddenTabsMenuThemeData menu = theme.menu;
+
     menu.borderRadius = BorderRadius.circular(4);
 
     return theme;

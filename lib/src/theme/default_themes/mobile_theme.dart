@@ -24,7 +24,6 @@ class MobileTheme extends TabbedViewThemeData {
     Color borderColor = colorSet[500]!;
     Color foregroundColor = colorSet[900]!;
     Color backgroundColor = colorSet[50]!;
-    Color menuColor = colorSet[100]!;
     Color normalButtonColor = colorSet[700]!;
     Color disabledButtonColor = colorSet[300]!;
     Color hoverButtonColor = colorSet[900]!;
