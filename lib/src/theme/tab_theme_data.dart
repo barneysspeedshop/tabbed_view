@@ -35,8 +35,7 @@ class TabThemeData {
       this.draggingDecoration,
       this.draggingOpacity = 0.3,
       this.textStyle = const TextStyle(fontSize: 13),
-      this.maxTextWidth,
-      this.maxWidth,
+      this.maxMainSize,
       this.padding,
       this.paddingWithoutButton,
       this.sideTabsLayout = SideTabsLayout.rotated,
@@ -53,13 +52,11 @@ class TabThemeData {
 
   TabBorderBuilder borderBuilder;
 
-  /// The maximum width for the tab text. If the text exceeds this width, it
-  /// will be truncated with an ellipsis.
-  double? maxTextWidth;
-
-  /// The maximum width for the tab. For vertical tabs, this will be the maximum
-  /// height.
-  double? maxWidth;
+  /// The maximum main size of the tab.
+  ///
+  /// This will be its width when the tab is displayed horizontally,
+  /// and its height when displayed vertically.
+  double? maxMainSize;
 
   bool showCloseIconWhenNotFocused;
 
@@ -121,8 +118,7 @@ class TabThemeData {
           runtimeType == other.runtimeType &&
           color == other.color &&
           borderBuilder == other.borderBuilder &&
-          maxTextWidth == other.maxTextWidth &&
-          maxWidth == other.maxWidth &&
+          maxMainSize == other.maxMainSize &&
           showCloseIconWhenNotFocused == other.showCloseIconWhenNotFocused &&
           sideTabsLayout == other.sideTabsLayout &&
           selectedStatus == other.selectedStatus &&
@@ -149,8 +145,7 @@ class TabThemeData {
   int get hashCode =>
       color.hashCode ^
       borderBuilder.hashCode ^
-      maxTextWidth.hashCode ^
-      maxWidth.hashCode ^
+      maxMainSize.hashCode ^
       showCloseIconWhenNotFocused.hashCode ^
       sideTabsLayout.hashCode ^
       selectedStatus.hashCode ^

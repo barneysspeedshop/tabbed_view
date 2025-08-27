@@ -82,7 +82,7 @@ class TabWidget extends StatelessWidget {
       borderBuilder = tabBorder.wrapperBorderBuilder;
     }
 
-    final maxWidth = tabTheme.maxWidth;
+    final maxWidth = tabTheme.maxMainSize;
     if (maxWidth != null) {
       BoxConstraints constraints;
       if (provider.tabBarPosition.isHorizontal) {
