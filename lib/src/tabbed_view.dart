@@ -21,14 +21,13 @@ import 'typedefs/on_tab_selection.dart';
 import 'typedefs/tab_close_interceptor.dart';
 import 'typedefs/tab_select_interceptor.dart';
 import 'typedefs/tabs_area_buttons_builder.dart';
+import 'unselected_tab_buttons_behavior.dart';
 
 /// Widget inspired by the classic Desktop-style tab component.
 ///
 /// Supports customizable themes.
 ///
 /// Parameters:
-/// * [selectToEnableButtons]: allows buttons to be clicked only if the tab is
-///   selected. The default value is [TRUE].
 /// * [closeButtonTooltip]: optional tooltip for the close button.
 class TabbedView extends StatefulWidget {
   TabbedView({
@@ -41,7 +40,8 @@ class TabbedView extends StatefulWidget {
     this.onTabSelection,
     this.tabSelectInterceptor,
     this.onTabSecondaryTap,
-    this.selectToEnableButtons = true,
+    this.unselectedTabButtonsBehavior =
+        UnselectedTabButtonsBehavior.allDisabled,
     this.contentClip = true,
     this.closeButtonTooltip,
     this.tabsAreaButtonsBuilder,
@@ -75,7 +75,7 @@ class TabbedView extends StatefulWidget {
   final OnTabSelection? onTabSelection;
   final TabSelectInterceptor? tabSelectInterceptor;
   final OnTabSecondaryTap? onTabSecondaryTap;
-  final bool selectToEnableButtons;
+  final UnselectedTabButtonsBehavior unselectedTabButtonsBehavior;
   final String? closeButtonTooltip;
   final TabsAreaButtonsBuilder? tabsAreaButtonsBuilder;
   final bool? tabsAreaVisible;
@@ -132,7 +132,7 @@ class _TabbedViewState extends State<TabbedView> {
         contentClip: widget.contentClip,
         tabSelectInterceptor: widget.tabSelectInterceptor,
         onTabSecondaryTap: widget.onTabSecondaryTap,
-        selectToEnableButtons: widget.selectToEnableButtons,
+        unselectedTabButtonsBehavior: widget.unselectedTabButtonsBehavior,
         closeButtonTooltip: widget.closeButtonTooltip,
         tabsAreaButtonsBuilder: widget.tabsAreaButtonsBuilder,
         onDraggableBuild: widget.onDraggableBuild,

@@ -15,6 +15,7 @@ import '../typedefs/on_tab_selection.dart';
 import '../typedefs/tab_close_interceptor.dart';
 import '../typedefs/tab_select_interceptor.dart';
 import '../typedefs/tabs_area_buttons_builder.dart';
+import '../unselected_tab_buttons_behavior.dart';
 
 /// Propagates parameters to internal widgets.
 @internal
@@ -29,7 +30,7 @@ class TabbedViewProvider {
       required this.contentClip,
       this.onTabSelection,
       this.tabSelectInterceptor,
-      required this.selectToEnableButtons,
+      required this.unselectedTabButtonsBehavior,
       this.closeButtonTooltip,
       this.tabsAreaButtonsBuilder,
       this.onTabSecondaryTap,
@@ -55,7 +56,7 @@ class TabbedViewProvider {
   final OnTabSelection? onTabSelection;
   final TabSelectInterceptor? tabSelectInterceptor;
   final OnTabSecondaryTap? onTabSecondaryTap;
-  final bool selectToEnableButtons;
+  final UnselectedTabButtonsBehavior unselectedTabButtonsBehavior;
   final String? closeButtonTooltip;
   final TabsAreaButtonsBuilder? tabsAreaButtonsBuilder;
   final List<TabbedViewMenuItem> menuItems;

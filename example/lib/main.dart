@@ -99,7 +99,6 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
       // Customizing the theme.
       theme.tab
         ..sideTabsLayout = _sideTabsLayout
-        ..showCloseIconWhenNotFocused = true
         ..maxMainSize = 200
         // Making the close button visible on unfocused tabs by using the
         // same colors as the selected tab's buttons.

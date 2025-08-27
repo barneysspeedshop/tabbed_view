@@ -1,5 +1,6 @@
 library tabbed_view;
 
+export 'src/unselected_tab_buttons_behavior.dart';
 export 'src/tab_status.dart';
 export 'src/tab_bar_position.dart';
 export 'src/tabbed_view_icons.dart';

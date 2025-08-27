@@ -7,12 +7,13 @@ import '../tab_bar_position.dart';
 import '../tab_button.dart';
 import '../tab_data.dart';
 import '../tab_status.dart';
+import '../theme/side_tabs_layout.dart';
 import '../theme/tab_border_builder.dart';
 import '../theme/tab_status_theme_data.dart';
 import '../theme/tab_theme_data.dart';
 import '../theme/tabbed_view_theme_data.dart';
 import '../theme/theme_widget.dart';
-import '../theme/side_tabs_layout.dart';
+import '../unselected_tab_buttons_behavior.dart';
 import 'flow_layout.dart';
 import 'tab_button_widget.dart';
 import 'tabbed_view_provider.dart';
@@ -276,9 +277,6 @@ class _TabContentWidget extends StatelessWidget {
       }
     }
 
-    final bool buttonsEnabled = provider.draggingTabIndex == null &&
-        (provider.selectToEnableButtons == false ||
-            (provider.selectToEnableButtons && status == TabStatus.selected));
     bool hasButtons = tab.buttons != null && tab.buttons!.isNotEmpty;
     EdgeInsets? padding;
     if (tab.closable || hasButtons && tabTheme.buttonsOffset > 0) {
@@ -300,6 +298,11 @@ class _TabContentWidget extends StatelessWidget {
         padding: padding));
 
     if (hasButtons) {
+      final bool enabled = provider.draggingTabIndex == null &&
+          (status == TabStatus.selected ||
+              provider.unselectedTabButtonsBehavior ==
+                  UnselectedTabButtonsBehavior.allEnabled);
+
       for (int i = 0; i < tab.buttons!.length; i++) {
         EdgeInsets? padding;
         if (i > 0 && i < tab.buttons!.length && tabTheme.buttonsGap > 0) {
@@ -311,7 +314,7 @@ class _TabContentWidget extends StatelessWidget {
             child: TabButtonWidget(
                 provider: provider,
                 button: button,
-                enabled: buttonsEnabled,
+                enabled: enabled,
                 normalColor: normalColor,
                 hoverColor: hoverColor,
                 disabledColor: disabledColor,
@@ -326,6 +329,11 @@ class _TabContentWidget extends StatelessWidget {
       }
     }
     if (tab.closable) {
+      final bool enabled = provider.draggingTabIndex == null &&
+          (status == TabStatus.selected ||
+              provider.unselectedTabButtonsBehavior !=
+                  UnselectedTabButtonsBehavior.allDisabled);
+
       EdgeInsets? padding;
       if (hasButtons && tabTheme.buttonsGap > 0) {
         padding = EdgeInsets.only(left: tabTheme.buttonsGap);
@@ -334,12 +342,6 @@ class _TabContentWidget extends StatelessWidget {
           icon: tabTheme.closeIcon,
           onPressed: () async => await _onClose(context, index),
           toolTip: provider.closeButtonTooltip);
-
-      bool enabled = buttonsEnabled;
-      if (tabTheme.showCloseIconWhenNotFocused) {
-        enabled = provider.draggingTabIndex == null;
-      }
-
       textAndButtons.add(Container(
           child: TabButtonWidget(
               provider: provider,

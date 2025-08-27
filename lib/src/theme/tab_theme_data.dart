@@ -39,7 +39,6 @@ class TabThemeData {
       this.padding,
       this.paddingWithoutButton,
       this.sideTabsLayout = SideTabsLayout.rotated,
-      this.showCloseIconWhenNotFocused = false,
       required this.selectedStatus,
       required this.hoveredStatus})
       : this.buttonsOffset = buttonsOffset >= 0 ? buttonsOffset : 0,
@@ -57,8 +56,6 @@ class TabThemeData {
   /// This will be its width when the tab is displayed horizontally,
   /// and its height when displayed vertically.
   double? maxMainSize;
-
-  bool showCloseIconWhenNotFocused;
 
   /// Defines how side-positioned tabs (left or right) are laid out.
   SideTabsLayout sideTabsLayout;
@@ -119,7 +116,6 @@ class TabThemeData {
           color == other.color &&
           borderBuilder == other.borderBuilder &&
           maxMainSize == other.maxMainSize &&
-          showCloseIconWhenNotFocused == other.showCloseIconWhenNotFocused &&
           sideTabsLayout == other.sideTabsLayout &&
           selectedStatus == other.selectedStatus &&
           hoveredStatus == other.hoveredStatus &&
@@ -146,7 +142,6 @@ class TabThemeData {
       color.hashCode ^
       borderBuilder.hashCode ^
       maxMainSize.hashCode ^
-      showCloseIconWhenNotFocused.hashCode ^
       sideTabsLayout.hashCode ^
       selectedStatus.hashCode ^
       hoveredStatus.hashCode ^
