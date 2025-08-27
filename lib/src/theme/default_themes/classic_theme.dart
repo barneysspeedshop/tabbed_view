@@ -71,7 +71,7 @@ class ClassicTheme extends TabbedViewThemeData {
     return theme;
   }
 
-  final Color borderColor;
+  Color borderColor;
 
   TabBorder _tabBorderBuilder(
       {required TabBarPosition tabBarPosition, required TabStatus status}) {

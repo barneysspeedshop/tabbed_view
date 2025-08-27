@@ -58,6 +58,11 @@ class TabWidget extends StatelessWidget {
         status: status,
         tabTheme: tabTheme);
 
+    Color? color = statusTabTheme?.color ?? tabTheme.color;
+    if (color != null) {
+      widget = Container(color: color, child: widget);
+    }
+
     TabBorderBuilder? borderBuilder = tabTheme.borderBuilder;
     while (borderBuilder != null) {
       TabBorder tabBorder = borderBuilder(
@@ -78,11 +83,6 @@ class TabWidget extends StatelessWidget {
         }
       }
       borderBuilder = tabBorder.wrapperBorderBuilder;
-    }
-
-    Color? color = statusTabTheme?.color ?? tabTheme.color;
-    if (color != null) {
-      widget = Container(color: color, child: widget);
     }
 
     final maxWidth = tabTheme.maxWidth;

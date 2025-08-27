@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../tab_bar_position.dart';
+import '../../tab_status.dart';
 import '../content_area_theme_data.dart';
 import '../hidden_tabs_menu_theme_data.dart';
+import '../tab_border_builder.dart';
 import '../tab_theme_data.dart';
 import '../tabbed_view_theme_data.dart';
 import '../tabs_area_cross_axis_fit.dart';
@@ -9,10 +12,12 @@ import '../tabs_area_theme_data.dart';
 
 /// Predefined dark theme builder.
 class DarkTheme extends TabbedViewThemeData {
-  DarkTheme._();
+  DarkTheme._({required this.selectedColor, required this.gap});
 
   factory DarkTheme(
-      {required MaterialColor colorSet, required double fontSize}) {
+      {required MaterialColor colorSet,
+      required double fontSize,
+      double gap = 4}) {
     Color tabColor = colorSet[900]!;
     Color selectedTabColor = colorSet[800]!;
     Color hoveredColor = colorSet[700]!;
@@ -24,11 +29,12 @@ class DarkTheme extends TabbedViewThemeData {
     Color fontColor = colorSet[100]!;
     Color buttonsAreaColor = colorSet[800]!;
 
-    final DarkTheme theme = DarkTheme._();
+    final DarkTheme theme =
+        DarkTheme._(selectedColor: selectedTabColor, gap: gap);
 
     final TabsAreaThemeData tabsArea = theme.tabsArea;
     tabsArea.crossAxisFit = TabsAreaCrossAxisFit.all;
-    tabsArea.middleGap = 4;
+    tabsArea.middleGap = gap;
     tabsArea.buttonsAreaPadding = EdgeInsets.all(2);
     tabsArea.buttonsAreaDecoration = BoxDecoration(color: buttonsAreaColor);
     tabsArea.buttonPadding = const EdgeInsets.all(2);
@@ -39,6 +45,8 @@ class DarkTheme extends TabbedViewThemeData {
     tabsArea.dropColor = Color.fromARGB(150, 255, 255, 255);
 
     final TabThemeData tab = theme.tab;
+    tab.color = tabColor;
+    tab.borderBuilder = theme._tabBorderBuilder;
     double bottomWidth = 3;
     tab.buttonsOffset = 4;
     tab.textStyle = TextStyle(fontSize: fontSize, color: fontColor);
@@ -51,6 +59,8 @@ class DarkTheme extends TabbedViewThemeData {
     tab.normalButtonColor = normalButtonColor;
     tab.hoverButtonColor = hoverButtonColor;
     tab.disabledButtonColor = disabledButtonColor;
+    tab.selectedStatus.color = selectedTabColor;
+    tab.hoveredStatus.color = hoveredColor;
 
     final ContentAreaThemeData contentArea = theme.contentArea;
     contentArea.color = selectedTabColor;
@@ -60,5 +70,25 @@ class DarkTheme extends TabbedViewThemeData {
     menu.borderRadius = BorderRadius.circular(4);
 
     return theme;
+  }
+
+  Color selectedColor;
+  double gap;
+
+  TabBorder _tabBorderBuilder(
+      {required TabBarPosition tabBarPosition, required TabStatus status}) {
+    final BorderSide borderSide = status == TabStatus.selected
+        ? BorderSide(color: selectedColor, width: gap)
+        : BorderSide(color: Colors.transparent, width: gap);
+    switch (tabBarPosition) {
+      case TabBarPosition.top:
+        return TabBorder(border: Border(bottom: borderSide));
+      case TabBarPosition.bottom:
+        return TabBorder(border: Border(top: borderSide));
+      case TabBarPosition.left:
+        return TabBorder(border: Border(right: borderSide));
+      case TabBarPosition.right:
+        return TabBorder(border: Border(left: borderSide));
+    }
   }
 }
