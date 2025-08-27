@@ -5,24 +5,14 @@ void main() {
   runApp(TabbedViewExample());
 }
 
-class TabbedViewExample extends StatelessWidget {
+class TabbedViewExample extends StatefulWidget {
   const TabbedViewExample({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false, home: TabbedViewExamplePage());
-  }
+  TabbedViewExampleState createState() => TabbedViewExampleState();
 }
 
-class TabbedViewExamplePage extends StatefulWidget {
-  const TabbedViewExamplePage({super.key});
-
-  @override
-  TabbedViewExamplePageState createState() => TabbedViewExamplePageState();
-}
-
-class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
+class TabbedViewExampleState extends State<TabbedViewExample> {
   late TabbedViewController _controller;
   TabBarPosition _position = TabBarPosition.top;
   ThemeName _themeName = ThemeName.mobile;
@@ -30,6 +20,7 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
   bool _modifyThemeColors = false;
   bool _maxMainSizeEnabled = false;
   bool _trailingWidgetEnabled = false;
+  Brightness _brightness = Brightness.light;
 
   @override
   void initState() {
@@ -40,7 +31,6 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
         text: 'Tab 1',
         leading: (context, status) => Icon(Icons.star, size: 16),
         content: Padding(padding: EdgeInsets.all(8), child: Text('Hello')),
-        // All TabData properties with default values or examples
         buttons: [
           TabButton(
               icon: IconProvider.data(Icons.info),
@@ -180,22 +170,33 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
           ),
         );
       },
+      onTabReorder: (int oldIndex, int newIndex) {},
       closeButtonTooltip: 'Close this tab',
       tabsAreaVisible: true,
       contentClip: true,
       dragScope: null,
     );
 
-    return Scaffold(
-        appBar: AppBar(title: Text('TabbedView Example (All properties)')),
-        backgroundColor: Colors.white,
-        body: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-          _buildSettings(),
-          Expanded(
-              child: Padding(
-                  padding: EdgeInsets.all(16),
-                  child: TabbedViewTheme(data: _getTheme(), child: tabbedView)))
-        ]));
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(brightness: _brightness),
+        home: Scaffold(
+            appBar: AppBar(title: Text('TabbedView Example (All properties)')),
+            body:
+                Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+              _buildSettings(),
+              Expanded(
+                  child: Padding(
+                      padding: EdgeInsets.all(16),
+                      child: TabbedViewTheme(
+                          data: _getTheme(), child: tabbedView)))
+            ])));
+  }
+
+  void _onBrightnessSelected(Brightness brightness) {
+    setState(() {
+      _brightness = brightness;
+    });
   }
 
   void _onPositionSelected(TabBarPosition newPosition) {
@@ -228,13 +229,18 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Text('Flutter Brightness'),
+                      BrightnessChooser(
+                          currentBrightness: _brightness,
+                          onSelected: _onBrightnessSelected),
+                      SizedBox(height: 16),
                       Text('TabBarPosition'),
                       PositionsChooser(
                           position: _position, onSelected: _onPositionSelected),
                       SizedBox(height: 16),
                       Text('SideTabsLayout'),
                       SideTabsLayoutChooser(
-                          layout: _sideTabsLayout,
+                          currentLayout: _sideTabsLayout,
                           onSelected: _onSideTabsLayoutSelected,
                           enabled: _position.isVertical),
                       SizedBox(height: 16),
@@ -311,11 +317,11 @@ class PositionsChooser extends StatelessWidget {
 class SideTabsLayoutChooser extends StatelessWidget {
   const SideTabsLayoutChooser(
       {super.key,
-      required this.layout,
+      required this.currentLayout,
       required this.onSelected,
       required this.enabled});
 
-  final SideTabsLayout layout;
+  final SideTabsLayout currentLayout;
   final bool enabled;
   final Function(SideTabsLayout newLayout) onSelected;
 
@@ -324,7 +330,7 @@ class SideTabsLayoutChooser extends StatelessWidget {
     List<Widget> children = SideTabsLayout.values.map<Widget>((value) {
       return ChoiceChip(
           label: Text(value.name),
-          selected: layout == value,
+          selected: currentLayout == value,
           onSelected: enabled ? (selected) => onSelected(value) : null);
     }).toList();
 
@@ -350,5 +356,25 @@ class ThemeChooser extends StatelessWidget {
     }).toList();
     return DropdownButton<ThemeName>(
         value: themeName, isDense: true, items: items, onChanged: onSelected);
+  }
+}
+
+class BrightnessChooser extends StatelessWidget {
+  const BrightnessChooser(
+      {super.key, required this.currentBrightness, required this.onSelected});
+
+  final Brightness currentBrightness;
+  final Function(Brightness brightness) onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> children = Brightness.values.map<Widget>((value) {
+      return ChoiceChip(
+          label: Text(value.name),
+          selected: currentBrightness == value,
+          onSelected: (selected) => onSelected(value));
+    }).toList();
+
+    return Wrap(spacing: 8, runSpacing: 4, children: children);
   }
 }
