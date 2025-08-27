@@ -388,14 +388,26 @@ class _TabsAreaLayoutRenderBox extends RenderBox
       children.add(child as RenderBox);
     });
 
+    RenderBox? selectedTab;
     for (RenderBox child in children.reversed) {
       // Painting in reverse order to ensure the drop area is visible
       // when the middle gap is negative
-      final TabsAreaLayoutParentData childParentData =
+      final TabsAreaLayoutParentData parentData =
           child.tabsAreaLayoutParentData();
-      context.paintChild(child, childParentData.offset + offset);
-      //TODO Evaluate whether it is necessary to paint the selected tab last,
-      // otherwise remove the bool selected from the parentData
+      if (parentData.selected) {
+        // Paint the selected tab last.
+        // Ensure it is completely visible at the top.
+        // Although there is a very negative middle gap, otherwise,
+        // despite being selected, it could be behind another tab.
+        selectedTab = child;
+      } else {
+        context.paintChild(child, parentData.offset + offset);
+      }
+    }
+    if (selectedTab != null) {
+      final TabsAreaLayoutParentData parentData =
+          selectedTab.tabsAreaLayoutParentData();
+      context.paintChild(selectedTab, parentData.offset + offset);
     }
 
     final BorderSide? divider = _divider;
@@ -486,21 +498,4 @@ class _TabsAreaLayoutRenderBox extends RenderBox
     }
     return false;
   }
-}
-
-//TODO remove?
-class TabsAreaLayoutChild extends ParentDataWidget<TabsAreaLayoutParentData> {
-  const TabsAreaLayoutChild({
-    super.key,
-    required Widget child,
-  }) : super(child: child);
-
-  @override
-  void applyParentData(RenderObject renderObject) {
-    final TabsAreaLayoutParentData parentData =
-        renderObject.parentData as TabsAreaLayoutParentData;
-  }
-
-  @override
-  Type get debugTypicalAncestorWidgetClass => TabsAreaLayout;
 }

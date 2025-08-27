@@ -51,14 +51,13 @@ class _TabsAreaState extends State<TabsArea> {
     List<Widget> children = [];
     for (int index = 0; index < controller.tabs.length; index++) {
       TabStatus status = _getStatusFor(index);
-      children.add(TabsAreaLayoutChild(
-          child: TabWidget(
-              key: controller.tabs[index].uniqueKey,
-              index: index,
-              status: status,
-              provider: widget.provider,
-              updateHoveredIndex: _updateHoveredIndex,
-              onClose: _onTabClose)));
+      children.add(TabWidget(
+          key: controller.tabs[index].uniqueKey,
+          index: index,
+          status: status,
+          provider: widget.provider,
+          updateHoveredIndex: _updateHoveredIndex,
+          onClose: _onTabClose));
     }
 
     children.add(
