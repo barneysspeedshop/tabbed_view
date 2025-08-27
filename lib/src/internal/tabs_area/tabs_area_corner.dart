@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 import '../../tab_bar_position.dart';
+import '../../theme/side_tabs_layout.dart';
 import '../../theme/tab_theme_data.dart';
 import '../../theme/theme_widget.dart';
 import '../tabbed_view_provider.dart';
@@ -27,7 +28,7 @@ class TabsAreaCorner extends StatelessWidget {
       Widget trailing = provider.trailing!;
       if (provider.tabBarPosition.isVertical) {
         final TabThemeData tabTheme = TabbedViewTheme.of(context).tab;
-        if (tabTheme.rotateCaptionsInVerticalTabs) {
+        if (tabTheme.sideTabsLayout == SideTabsLayout.rotated) {
           final int quarterTurns =
               provider.tabBarPosition == TabBarPosition.left ? -1 : 1;
           trailing = RotatedBox(quarterTurns: quarterTurns, child: trailing);

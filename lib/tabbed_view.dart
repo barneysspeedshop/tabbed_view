@@ -29,7 +29,7 @@ export 'src/typedefs/tabs_area_buttons_builder.dart';
 export 'src/theme/tabbed_view_theme_constants.dart';
 export 'src/theme/vertical_alignment.dart';
 export 'src/theme/tabs_area_cross_axis_fit.dart';
-export 'src/theme/vertical_tab_layout_style.dart';
+export 'src/theme/side_tabs_layout.dart';
 export 'src/theme/content_area_theme_data.dart';
 export 'src/theme/hidden_tabs_menu_theme_data.dart';
 export 'src/theme/tab_status_theme_data.dart';

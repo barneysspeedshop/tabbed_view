@@ -12,7 +12,7 @@ import '../theme/tab_status_theme_data.dart';
 import '../theme/tab_theme_data.dart';
 import '../theme/tabbed_view_theme_data.dart';
 import '../theme/theme_widget.dart';
-import '../theme/vertical_tab_layout_style.dart';
+import '../theme/side_tabs_layout.dart';
 import 'flow_layout.dart';
 import 'tab_button_widget.dart';
 import 'tabbed_view_provider.dart';
@@ -47,13 +47,10 @@ class TabWidget extends StatelessWidget {
     final TabbedViewThemeData theme = TabbedViewTheme.of(context);
     final TabThemeData tabTheme = theme.tab;
     final TabStatusThemeData? statusTabTheme = theme.tab.getTabThemeFor(status);
-    final bool isStacked = provider.tabBarPosition.isVertical &&
-        tabTheme.verticalLayoutStyle == VerticalTabLayoutStyle.stacked;
 
     Widget widget = _TabContentWidget(
         provider: provider,
         index: index,
-        isStacked: isStacked,
         onClose: onClose,
         status: status,
         tabTheme: tabTheme);
@@ -203,36 +200,22 @@ class _TabContentWidget extends StatelessWidget {
       required this.status,
       required this.provider,
       required this.onClose,
-      required this.tabTheme,
-      required this.isStacked});
+      required this.tabTheme});
 
   final int index;
   final TabStatus status;
   final TabbedViewProvider provider;
   final Function onClose;
   final TabThemeData tabTheme;
-  final bool isStacked;
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> textAndButtons = _textAndButtons(context, tabTheme, isStacked);
-
-    FlowDirection flowDirection;
-    if (provider.tabBarPosition.isHorizontal) {
-      flowDirection = FlowDirection.horizontal;
-    } else {
-      // For vertical tabs, the layout is counter-intuitive due to RotatedBox.
-      // 'stacked' uses a horizontal flow and 'inline' uses a vertical
-      // flow to achieve the desired column/row effect after rotation.
-      flowDirection =
-          isStacked ? FlowDirection.horizontal : FlowDirection.vertical;
-    }
+    List<Widget> textAndButtons = _textAndButtons(context, tabTheme);
 
     Widget textAndButtonsContainer = ClipRect(
         child: FlowLayout(
             children: textAndButtons,
             firstChildFlex: true,
-            direction: flowDirection,
             verticalAlignment: tabTheme.verticalAlignment));
 
     final TabStatusThemeData? statusTheme = tabTheme.getTabThemeFor(status);
@@ -250,19 +233,21 @@ class _TabContentWidget extends StatelessWidget {
       child: Container(child: textAndButtonsContainer, padding: padding),
     );
 
-    // Rotate the tab content if tab bar is vertical
-    if (provider.tabBarPosition == TabBarPosition.left) {
-      widget = RotatedBox(quarterTurns: -1, child: widget);
-    } else if (provider.tabBarPosition == TabBarPosition.right) {
-      widget = RotatedBox(quarterTurns: 1, child: widget);
+    if (provider.tabBarPosition.isVertical &&
+        tabTheme.sideTabsLayout == SideTabsLayout.rotated) {
+      // Rotate the tab content
+      if (provider.tabBarPosition == TabBarPosition.left) {
+        widget = RotatedBox(quarterTurns: -1, child: widget);
+      } else if (provider.tabBarPosition == TabBarPosition.right) {
+        widget = RotatedBox(quarterTurns: 1, child: widget);
+      }
     }
 
     return widget;
   }
 
   /// Builds a list with title text and buttons.
-  List<Widget> _textAndButtons(
-      BuildContext context, TabThemeData tabTheme, bool isStacked) {
+  List<Widget> _textAndButtons(BuildContext context, TabThemeData tabTheme) {
     List<Widget> textAndButtons = [];
 
     TabData tab = provider.controller.tabs[index];
@@ -307,32 +292,11 @@ class _TabContentWidget extends StatelessWidget {
         textAndButtons.add(leading);
       }
     }
-
-    final bool isVertical = provider.tabBarPosition == TabBarPosition.left ||
-        provider.tabBarPosition == TabBarPosition.right;
-
-    Widget textWidget;
-    if (isVertical && !isStacked) {
-      if (tabTheme.rotateCaptionsInVerticalTabs) {
-        textWidget =
-            Text(tab.text, style: textStyle, overflow: TextOverflow.ellipsis);
-      } else {
-        String verticalText = tab.text.split('').join('');
-        textWidget =
-            Text(verticalText, style: textStyle, textAlign: TextAlign.center);
-        // Counter-rotate the text to keep it upright within the rotated tab.
-        int quarterTurns =
-            provider.tabBarPosition == TabBarPosition.left ? 1 : -1;
-        textWidget = RotatedBox(quarterTurns: quarterTurns, child: textWidget);
-      }
-    } else {
-      // For horizontal tabs or stacked vertical tabs, display text normally.
-      textWidget =
-          Text(tab.text, style: textStyle, overflow: TextOverflow.ellipsis);
-    }
-
     textAndButtons.add(Container(
-        child: SizedBox(width: tab.textSize, child: textWidget),
+        child: SizedBox(
+            width: tab.textSize,
+            child: Text(tab.text,
+                style: textStyle, overflow: TextOverflow.ellipsis)),
         padding: padding));
 
     if (hasButtons) {

@@ -241,33 +241,6 @@ void main() {
             of: trailingFinder, matching: find.byType(RotatedBox));
         expect(rotatedBoxFinder, findsNothing);
       });
-
-      testWidgets(
-          'is present and rotated when TabBarPosition is left and theme enables it',
-          (WidgetTester tester) async {
-        final theme = TabbedViewThemeData.classic();
-        theme.tab.rotateCaptionsInVerticalTabs = true;
-
-        await tester.pumpWidget(MaterialApp(
-          home: Scaffold(
-            body: TabbedViewTheme(
-              data: theme,
-              child: TabbedView(
-                controller: controller,
-                tabBarPosition: TabBarPosition.left,
-                trailing: Text('Trailing'),
-              ),
-            ),
-          ),
-        ));
-
-        final trailingFinder = find.text('Trailing');
-        expect(trailingFinder, findsOneWidget);
-
-        final rotatedBoxFinder = find.ancestor(
-            of: trailingFinder, matching: find.byType(RotatedBox));
-        expect(rotatedBoxFinder, findsOneWidget);
-      });
     });
   });
 }

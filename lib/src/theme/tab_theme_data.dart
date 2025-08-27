@@ -8,7 +8,7 @@ import 'tab_border_builder.dart';
 import 'tab_status_theme_data.dart';
 import 'tabbed_view_theme_constants.dart';
 import 'vertical_alignment.dart';
-import 'vertical_tab_layout_style.dart';
+import 'side_tabs_layout.dart';
 
 /// Theme for tab.
 class TabThemeData {
@@ -39,8 +39,7 @@ class TabThemeData {
       this.maxWidth,
       this.padding,
       this.paddingWithoutButton,
-      this.verticalLayoutStyle = VerticalTabLayoutStyle.inline,
-      this.rotateCaptionsInVerticalTabs = false,
+      this.sideTabsLayout = SideTabsLayout.rotated,
       this.showCloseIconWhenNotFocused = false,
       required this.selectedStatus,
       required this.hoveredStatus})
@@ -62,24 +61,11 @@ class TabThemeData {
   /// height.
   double? maxWidth;
 
-  /// If `true`, characters within vertical tab text will also be rotated
-  /// along with the tab. If `false` (default), characters will remain upright
-  /// while the text flows vertically.
-  ///
-  /// This property is only effective when [verticalLayoutStyle] is
-  /// [VerticalTabLayoutStyle.inline].
-  bool rotateCaptionsInVerticalTabs;
-
   bool showCloseIconWhenNotFocused;
 
-  /// Defines the layout style for a tab in a vertical [TabBar].
-  ///
-  /// [VerticalTabLayoutStyle.inline] will arrange the tab's internal components
-  /// (leading, text, and buttons) in a row.
-  ///
-  /// [VerticalTabLayoutStyle.stacked] will arrange the tab's internal components
-  /// in a column.
-  VerticalTabLayoutStyle verticalLayoutStyle;
+  /// Defines how side-positioned tabs (left or right) are laid out.
+  SideTabsLayout sideTabsLayout;
+
   TabStatusThemeData selectedStatus;
   TabStatusThemeData hoveredStatus;
 
@@ -137,9 +123,8 @@ class TabThemeData {
           borderBuilder == other.borderBuilder &&
           maxTextWidth == other.maxTextWidth &&
           maxWidth == other.maxWidth &&
-          rotateCaptionsInVerticalTabs == other.rotateCaptionsInVerticalTabs &&
           showCloseIconWhenNotFocused == other.showCloseIconWhenNotFocused &&
-          verticalLayoutStyle == other.verticalLayoutStyle &&
+          sideTabsLayout == other.sideTabsLayout &&
           selectedStatus == other.selectedStatus &&
           hoveredStatus == other.hoveredStatus &&
           padding == other.padding &&
@@ -166,9 +151,8 @@ class TabThemeData {
       borderBuilder.hashCode ^
       maxTextWidth.hashCode ^
       maxWidth.hashCode ^
-      rotateCaptionsInVerticalTabs.hashCode ^
       showCloseIconWhenNotFocused.hashCode ^
-      verticalLayoutStyle.hashCode ^
+      sideTabsLayout.hashCode ^
       selectedStatus.hashCode ^
       hoveredStatus.hashCode ^
       padding.hashCode ^

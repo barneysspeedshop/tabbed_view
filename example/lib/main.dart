@@ -6,7 +6,7 @@ void main() {
 }
 
 class TabbedViewExample extends StatelessWidget {
-  const TabbedViewExample({Key? key}) : super(key: key);
+  const TabbedViewExample({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class TabbedViewExample extends StatelessWidget {
 }
 
 class TabbedViewExamplePage extends StatefulWidget {
-  const TabbedViewExamplePage({Key? key}) : super(key: key);
+  const TabbedViewExamplePage({super.key});
 
   @override
   TabbedViewExamplePageState createState() => TabbedViewExamplePageState();
@@ -25,8 +25,9 @@ class TabbedViewExamplePage extends StatefulWidget {
 class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
   late TabbedViewController _controller;
   TabBarPosition _position = TabBarPosition.top;
-  String _themeName = 'mobile';
-  bool _useStackedLayout = true;
+  ThemeName _themeName = ThemeName.mobile;
+  SideTabsLayout _sideTabsLayout = SideTabsLayout.rotated;
+  final bool _modifyTheme = true;
 
   @override
   void initState() {
@@ -76,14 +77,14 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
 
   TabbedViewThemeData _getTheme() {
     switch (_themeName) {
-      case 'classic':
+      case ThemeName.classic:
         return TabbedViewThemeData.classic(
             colorSet: Colors.blueGrey, borderColor: Colors.black);
-      case 'dark':
-        return TabbedViewThemeData.dark(colorSet: Colors.grey, fontSize: 13);
-      case 'minimalist':
+      case ThemeName.dark:
+        return TabbedViewThemeData.dark(colorSet: Colors.grey);
+      case ThemeName.minimalist:
         return TabbedViewThemeData.minimalist(colorSet: Colors.blueGrey);
-      case 'mobile':
+      case ThemeName.mobile:
       default:
         return TabbedViewThemeData.mobile(
             colorSet: Colors.blueGrey, accentColor: Colors.blue);
@@ -173,12 +174,10 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
     );
 
     TabbedViewThemeData themeData = _getTheme();
+
     // Customizing the theme.
     themeData.tab
-      ..verticalLayoutStyle = _useStackedLayout
-          ? VerticalTabLayoutStyle.stacked
-          : VerticalTabLayoutStyle.inline
-      ..rotateCaptionsInVerticalTabs = _useStackedLayout
+      ..sideTabsLayout = _sideTabsLayout
       ..showCloseIconWhenNotFocused = true
       ..maxWidth = 200
       ..maxTextWidth = 100
@@ -193,74 +192,134 @@ class TabbedViewExamplePageState extends State<TabbedViewExamplePage> {
           (themeData.tab.selectedStatus.fontColor ?? Colors.black)
               .withAlpha(200);
 
-    Widget example = Column(children: [
-      _buildButtons(),
-      SizedBox(height: 10),
-      Expanded(child: TabbedViewTheme(data: themeData, child: tabbedView))
-    ]);
-
     return Scaffold(
         appBar: AppBar(title: Text('TabbedView Example (All properties)')),
         backgroundColor: Colors.white,
-        body: Container(padding: EdgeInsets.all(10), child: example));
+        body: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          _buildSettings(),
+          Expanded(
+              child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: TabbedViewTheme(data: themeData, child: tabbedView)))
+        ]));
   }
 
-  Widget _buildButtons() {
-    return Column(children: [
-      Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [_buildPositionButtons(), _buildThemeButtons()]),
-      _buildOptionCheckboxes()
-    ]);
+  void _onPositionSelected(TabBarPosition newPosition) {
+    setState(() {
+      _position = newPosition;
+    });
   }
 
-  Widget _buildOptionCheckboxes() {
+  void _onSideTabsLayoutSelected(SideTabsLayout newLayout) {
+    setState(() {
+      _sideTabsLayout = newLayout;
+    });
+  }
+
+  void _onThemeSelected(ThemeName? themeName) {
+    if (themeName != null) {
+      setState(() {
+        _themeName = themeName;
+      });
+    }
+  }
+
+  Widget _buildSettings() {
+    return Container(
+        decoration: BoxDecoration(
+            border: Border(right: BorderSide(color: Colors.grey))),
+        child: SingleChildScrollView(
+            child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('TabBarPosition'),
+                      PositionsChooser(
+                          position: _position, onSelected: _onPositionSelected),
+                      SizedBox(height: 16),
+                      Text('SideTabsLayout'),
+                      SideTabsLayoutChooser(
+                          layout: _sideTabsLayout,
+                          onSelected: _onSideTabsLayoutSelected,
+                          enabled: _position.isVertical),
+                      SizedBox(height: 16),
+                      Text('Theme'),
+                      ThemeChooser(
+                          themeName: _themeName, onSelected: _onThemeSelected),
+                      _buildModifyThemeSelector()
+                    ]))));
+  }
+
+  Widget _buildModifyThemeSelector() {
     return Row(children: [
-      Checkbox(
-          value: _useStackedLayout,
-          onChanged: (value) => setState(() => _useStackedLayout = value!)),
-      Text('Use stacked layout for vertical tabs')
+      Checkbox(value: _modifyTheme, onChanged: null),
+      Text('Modify theme')
     ]);
   }
+}
 
-  Widget _buildPositionButtons() {
-    return Wrap(spacing: 8, runSpacing: 4, children: [
-      ChoiceChip(
-        label: Text('Top'),
-        selected: _position == TabBarPosition.top,
-        onSelected: (selected) =>
-            setState(() => _position = TabBarPosition.top),
-      ),
-      ChoiceChip(
-        label: Text('Bottom'),
-        selected: _position == TabBarPosition.bottom,
-        onSelected: (selected) =>
-            setState(() => _position = TabBarPosition.bottom),
-      ),
-      ChoiceChip(
-        label: Text('Left'),
-        selected: _position == TabBarPosition.left,
-        onSelected: (selected) =>
-            setState(() => _position = TabBarPosition.left),
-      ),
-      ChoiceChip(
-        label: Text('Right'),
-        selected: _position == TabBarPosition.right,
-        onSelected: (selected) =>
-            setState(() => _position = TabBarPosition.right),
-      )
-    ]);
+class PositionsChooser extends StatelessWidget {
+  const PositionsChooser(
+      {super.key, required this.position, required this.onSelected});
+
+  final TabBarPosition position;
+  final Function(TabBarPosition newPosition) onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> children = TabBarPosition.values.map<Widget>((value) {
+      return ChoiceChip(
+          label: Text(value.name),
+          selected: position == value,
+          onSelected: (selected) => onSelected(value));
+    }).toList();
+
+    return Wrap(spacing: 8, runSpacing: 4, children: children);
   }
+}
 
-  Widget _buildThemeButtons() {
-    return DropdownButton<String>(
-        value: _themeName,
-        items: [
-          DropdownMenuItem(value: 'mobile', child: Text('Mobile')),
-          DropdownMenuItem(value: 'classic', child: Text('Classic')),
-          DropdownMenuItem(value: 'dark', child: Text('Dark')),
-          DropdownMenuItem(value: 'minimalist', child: Text('Minimalist'))
-        ],
-        onChanged: (value) => setState(() => _themeName = value!));
+class SideTabsLayoutChooser extends StatelessWidget {
+  const SideTabsLayoutChooser(
+      {super.key,
+      required this.layout,
+      required this.onSelected,
+      required this.enabled});
+
+  final SideTabsLayout layout;
+  final bool enabled;
+  final Function(SideTabsLayout newLayout) onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> children = SideTabsLayout.values.map<Widget>((value) {
+      return ChoiceChip(
+          label: Text(value.name),
+          selected: layout == value,
+          onSelected: enabled ? (selected) => onSelected(value) : null);
+    }).toList();
+
+    return Wrap(spacing: 8, runSpacing: 4, children: children);
+  }
+}
+
+enum ThemeName { mobile, classic, dark, minimalist }
+
+class ThemeChooser extends StatelessWidget {
+  const ThemeChooser(
+      {super.key, required this.themeName, required this.onSelected});
+
+  final ThemeName themeName;
+  final Function(ThemeName? themeName) onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    List<DropdownMenuItem<ThemeName>> items =
+        ThemeName.values.map<DropdownMenuItem<ThemeName>>((themeName) {
+      return DropdownMenuItem<ThemeName>(
+          value: themeName, child: Text(themeName.name));
+    }).toList();
+    return DropdownButton<ThemeName>(
+        value: themeName, isDense: true, items: items, onChanged: onSelected);
   }
 }
