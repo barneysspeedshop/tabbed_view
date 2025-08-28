@@ -194,7 +194,8 @@ class _TabsAreaButtonsWidgetState extends State<TabsAreaButtonsWidget> {
           padding: padding));
     }
 
-    Widget buttonsArea = Row(children: children);
+    Widget buttonsArea =
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: children);
 
     EdgeInsetsGeometry? margin;
     if (tabsAreaTheme.buttonsOffset > 0) {
