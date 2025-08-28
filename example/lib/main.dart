@@ -15,7 +15,7 @@ class TabbedViewExample extends StatefulWidget {
 class TabbedViewExampleState extends State<TabbedViewExample> {
   late TabbedViewController _controller;
   TabBarPosition _position = TabBarPosition.top;
-  ThemeName _themeName = ThemeName.mobile;
+  ThemeName _themeName = ThemeName.underline;
   SideTabsLayout _sideTabsLayout = SideTabsLayout.rotated;
   bool _modifyThemeColors = false;
   bool _maxMainSizeEnabled = false;
@@ -80,11 +80,11 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
             ? TabbedViewThemeData.minimalist(colorSet: Colors.blueGrey)
             : TabbedViewThemeData.minimalist();
         break;
-      case ThemeName.mobile:
+      case ThemeName.underline:
         theme = _modifyThemeColors
-            ? TabbedViewThemeData.mobile(
+            ? TabbedViewThemeData.underline(
                 colorSet: Colors.brown, accentColor: Colors.brown)
-            : TabbedViewThemeData.mobile();
+            : TabbedViewThemeData.underline();
         break;
     }
     theme.tab.sideTabsLayout = _sideTabsLayout;
@@ -338,7 +338,7 @@ class SideTabsLayoutChooser extends StatelessWidget {
   }
 }
 
-enum ThemeName { mobile, classic, dark, minimalist }
+enum ThemeName { classic, underline, dark, minimalist }
 
 class ThemeChooser extends StatelessWidget {
   const ThemeChooser(

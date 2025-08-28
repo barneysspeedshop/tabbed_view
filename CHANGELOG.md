@@ -19,6 +19,7 @@
 * Attribute `TabStatus.highlighted` renamed to `TabStatus.hovered`.
 * Attribute `TabbedViewController.reorderEnable` moved to `TabbedView.reorderEnabled`
 * Attribute `TabbedViewController.onReorder` moved to `TabbedView.onTabReorder`
+* `Mobile` theme renamed to `Underline`
 
 ## 1.22.1
 

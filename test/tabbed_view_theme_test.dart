@@ -162,7 +162,7 @@ void main() {
     });
 
     group('Mobile Theme', () {
-      final theme = TabbedViewThemeData.mobile(
+      final theme = TabbedViewThemeData.underline(
           colorSet: Colors.blueGrey, accentColor: Colors.blue);
 
       testWidgets(

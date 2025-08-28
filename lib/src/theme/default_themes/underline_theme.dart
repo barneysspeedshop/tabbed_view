@@ -10,14 +10,14 @@ import '../tabbed_view_theme_data.dart';
 import '../tabs_area_cross_axis_fit.dart';
 import '../tabs_area_theme_data.dart';
 
-/// Predefined mobile theme builder.
-class MobileTheme extends TabbedViewThemeData {
-  MobileTheme._(
+/// Predefined underline theme builder.
+class UnderlineTheme extends TabbedViewThemeData {
+  UnderlineTheme._(
       {required this.borderColor,
       required this.hoveredColor,
       required this.selectedColor});
 
-  factory MobileTheme(
+  factory UnderlineTheme(
       {required MaterialColor colorSet,
       required Color accentColor,
       required double fontSize}) {
@@ -29,7 +29,7 @@ class MobileTheme extends TabbedViewThemeData {
     Color hoverButtonColor = colorSet[900]!;
     Color hoveredColor = colorSet[300]!;
 
-    MobileTheme theme = MobileTheme._(
+    UnderlineTheme theme = UnderlineTheme._(
         borderColor: borderColor,
         hoveredColor: hoveredColor,
         selectedColor: accentColor);

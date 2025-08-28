@@ -4,7 +4,7 @@ import 'content_area_theme_data.dart';
 import 'default_themes/classic_theme.dart';
 import 'default_themes/dark_theme.dart';
 import 'default_themes/minimalist_theme.dart';
-import 'default_themes/mobile_theme.dart';
+import 'default_themes/underline_theme.dart';
 import 'hidden_tabs_menu_theme_data.dart';
 import 'tab_status_theme_data.dart';
 import 'tab_theme_data.dart';
@@ -63,12 +63,12 @@ class TabbedViewThemeData {
         tabBorderRadius: tabBorderRadius);
   }
 
-  /// Builds the predefined mobile theme.
-  factory TabbedViewThemeData.mobile(
+  /// Builds the predefined underline theme.
+  factory TabbedViewThemeData.underline(
       {MaterialColor colorSet = Colors.grey,
       Color accentColor = Colors.blue,
       double fontSize = 13}) {
-    return MobileTheme(
+    return UnderlineTheme(
         colorSet: colorSet, accentColor: accentColor, fontSize: fontSize);
   }
 
