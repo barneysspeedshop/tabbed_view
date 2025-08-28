@@ -4,6 +4,9 @@ import 'package:meta/meta.dart';
 import '../../tab_bar_position.dart';
 import '../../theme/side_tabs_layout.dart';
 import '../../theme/tab_theme_data.dart';
+import '../../theme/tabbed_view_theme_data.dart';
+import '../../theme/tabs_area_cross_axis_fit.dart';
+import '../../theme/tabs_area_theme_data.dart';
 import '../../theme/theme_widget.dart';
 import '../tabbed_view_provider.dart';
 import 'drop_tab_widget.dart';
@@ -37,9 +40,19 @@ class TabsAreaCorner extends StatelessWidget {
       children.add(trailing);
     }
 
+    TabbedViewThemeData theme = TabbedViewTheme.of(context);
+    TabsAreaThemeData tabsAreaTheme = theme.tabsArea;
     Widget cornerContent;
     if (provider.tabBarPosition.isHorizontal) {
-      cornerContent = Row(mainAxisSize: MainAxisSize.min, children: children);
+      if (tabsAreaTheme.crossAxisFit == TabsAreaCrossAxisFit.all) {
+        cornerContent = IntrinsicHeight(
+            child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: children));
+      } else {
+        cornerContent = Row(mainAxisSize: MainAxisSize.min, children: children);
+      }
     } else {
       cornerContent =
           Column(mainAxisSize: MainAxisSize.min, children: children);
