@@ -161,7 +161,7 @@ void main() {
       });
     });
 
-    group('Mobile Theme', () {
+    group('Underline Theme', () {
       final theme = TabbedViewThemeData.underline(
           colorSet: Colors.blueGrey, accentColor: Colors.blue);
 
