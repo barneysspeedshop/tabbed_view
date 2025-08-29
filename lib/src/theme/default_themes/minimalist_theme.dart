@@ -24,9 +24,9 @@ class MinimalistTheme extends TabbedViewThemeData {
       double gap = 4}) {
     final bool isLight = brightness == Brightness.light;
 
-    final Color normalColor = isLight ? colorSet[400]! : colorSet[900]!;
-    final Color selectedColor = isLight ? colorSet[500]! : colorSet[800]!;
-    final Color hoveredColor = isLight ? colorSet[300]! : colorSet[700]!;
+    final Color normalColor = isLight ? colorSet[200]! : colorSet[900]!;
+    final Color selectedColor = isLight ? colorSet[600]! : colorSet[600]!;
+    final Color hoveredColor = isLight ? colorSet[300]! : colorSet[800]!;
     final Color normalButtonColor = isLight ? colorSet[800]! : colorSet[100]!;
     final Color disabledButtonColor = isLight ? colorSet[400]! : colorSet[600]!;
     final Color hoverButtonColor = isLight ? colorSet[800]! : colorSet[100]!;
@@ -39,7 +39,7 @@ class MinimalistTheme extends TabbedViewThemeData {
         tabRadius: Radius.circular(11));
 
     theme.divider =
-        BorderSide(color: isLight ? colorSet[700]! : colorSet[700]!, width: 4);
+        BorderSide(color: isLight ? colorSet[600]! : colorSet[600]!, width: 4);
 
     final TabsAreaThemeData tabsArea = theme.tabsArea;
     tabsArea.tabCrossAxisSizeBehavior =
