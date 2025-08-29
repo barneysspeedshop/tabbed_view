@@ -58,8 +58,8 @@ class UnderlineTheme extends TabbedViewThemeData {
     tab.disabledButtonColor = disabledButtonColor;
     tab.textStyle = TextStyle(fontSize: fontSize, color: foregroundColor);
     tab.buttonsOffset = 4;
-    tab.padding = EdgeInsets.fromLTRB(8, 4, 4, 4);
-    tab.paddingWithoutButton = EdgeInsets.fromLTRB(8, 4, 8, 4);
+    tab.padding = const EdgeInsets.fromLTRB(8, 4, 4, 0);
+    tab.paddingWithoutButton = const EdgeInsets.fromLTRB(8, 7, 8, 3);
     tab.hoverButtonBackground = BoxDecoration(color: hoveredColor);
     tab.buttonPadding = const EdgeInsets.all(4);
     tab.draggingDecoration =
@@ -99,7 +99,7 @@ class UnderlineTheme extends TabbedViewThemeData {
         color = Colors.transparent;
         break;
     }
-    final BorderSide borderSide = BorderSide(color: color, width: 5);
+    final BorderSide borderSide = BorderSide(color: color, width: 4);
     switch (tabBarPosition) {
       case TabBarPosition.top:
         return TabDecoration(
