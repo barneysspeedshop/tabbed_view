@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 
+import '../../tab_bar_position.dart';
+import '../../tab_status.dart';
 import '../hidden_tabs_menu_theme_data.dart';
+import '../tab_decoration_builder.dart';
 import '../tab_theme_data.dart';
 import '../tabbed_view_theme_data.dart';
 import '../tabs_area_theme_data.dart';
 
 /// Predefined minimalist theme builder.
 class MinimalistTheme extends TabbedViewThemeData {
-  MinimalistTheme._();
+  MinimalistTheme._(
+      {required this.normalColor,
+        required this.selectedColor,
+      required this.hoveredColor,
+      required this.tabRadius});
 
   factory MinimalistTheme(
       {required Brightness brightness,
@@ -16,14 +23,19 @@ class MinimalistTheme extends TabbedViewThemeData {
       double gap = 4}) {
     final bool isLight = brightness == Brightness.light;
 
-    final Color background = isLight ? colorSet[400]! : colorSet[800]!;
-    final Color hoveredColor = isLight ? colorSet[200]! : colorSet[700]!;
+    final Color normalColor = isLight ? colorSet[400]! : colorSet[900]!;
+    final Color selectedColor = isLight ? colorSet[500]! : colorSet[800]!;
+    final Color hoveredColor = isLight ? colorSet[300]! : colorSet[700]!;
     final Color normalButtonColor = isLight ? colorSet[800]! : colorSet[100]!;
     final Color disabledButtonColor = isLight ? colorSet[400]! : colorSet[600]!;
     final Color hoverButtonColor = isLight ? colorSet[800]! : colorSet[100]!;
     final Color fontColor = isLight ? colorSet[800]! : colorSet[100]!;
 
-    final MinimalistTheme theme = MinimalistTheme._();
+    final MinimalistTheme theme = MinimalistTheme._(
+        normalColor: normalColor,
+        selectedColor: selectedColor,
+        hoveredColor: hoveredColor,
+        tabRadius: Radius.circular(11));
 
     theme.divider =
         BorderSide(color: isLight ? colorSet[700]! : colorSet[700]!, width: 4);
@@ -40,7 +52,7 @@ class MinimalistTheme extends TabbedViewThemeData {
     final TabThemeData tab = theme.tab;
     tab.buttonsOffset = 4;
     tab.textStyle = TextStyle(fontSize: fontSize, color: fontColor);
-    tab.draggingDecoration = BoxDecoration(color: background);
+    tab.draggingDecoration = BoxDecoration(color: normalColor);
     tab.padding = EdgeInsets.fromLTRB(8, 4, 4, 4);
     tab.paddingWithoutButton = EdgeInsets.fromLTRB(8, 4, 8, 4);
     tab.hoverButtonBackground = BoxDecoration(color: hoveredColor);
@@ -48,8 +60,7 @@ class MinimalistTheme extends TabbedViewThemeData {
     tab.normalButtonColor = normalButtonColor;
     tab.hoverButtonColor = hoverButtonColor;
     tab.disabledButtonColor = disabledButtonColor;
-    tab.selectedStatus.color = background;
-    tab.hoveredStatus.color = hoveredColor;
+    tab.decorationBuilder = theme._tabDecorationBuilder;
 
     final HiddenTabsMenuThemeData menu =
         HiddenTabsMenuThemeData(brightness: brightness);
@@ -57,5 +68,53 @@ class MinimalistTheme extends TabbedViewThemeData {
     menu.borderRadius = BorderRadius.circular(4);
 
     return theme;
+  }
+
+  final Radius? tabRadius;
+  final Color normalColor;
+  final Color selectedColor;
+  final Color hoveredColor;
+
+  TabDecoration _tabDecorationBuilder(
+      {required TabBarPosition tabBarPosition, required TabStatus status}) {
+    Color? color;
+    switch (status) {
+      case TabStatus.selected:
+        color = selectedColor;
+        break;
+      case TabStatus.hovered:
+        color = hoveredColor;
+        break;
+      case TabStatus.normal:
+        color = normalColor;
+        break;
+    }
+    final Radius? radius = this.tabRadius;
+    switch (tabBarPosition) {
+      case TabBarPosition.top:
+        return TabDecoration(
+            color: color,
+            borderRadius: radius != null
+                ? BorderRadius.only(topLeft: radius, topRight: radius)
+                : null);
+      case TabBarPosition.bottom:
+        return TabDecoration(
+            color: color,
+            borderRadius: radius != null
+                ? BorderRadius.only(bottomLeft: radius, bottomRight: radius)
+                : null);
+      case TabBarPosition.left:
+        return TabDecoration(
+            color: color,
+            borderRadius: radius != null
+                ? BorderRadius.only(topLeft: radius, bottomLeft: radius)
+                : null);
+      case TabBarPosition.right:
+        return TabDecoration(
+            color: color,
+            borderRadius: radius != null
+                ? BorderRadius.only(topRight: radius, bottomRight: radius)
+                : null);
+    }
   }
 }

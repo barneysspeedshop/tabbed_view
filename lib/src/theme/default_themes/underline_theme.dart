@@ -4,7 +4,7 @@ import '../../tab_bar_position.dart';
 import '../../tab_status.dart';
 import '../content_area_theme_data.dart';
 import '../hidden_tabs_menu_theme_data.dart';
-import '../tab_border_builder.dart';
+import '../tab_decoration_builder.dart';
 import '../tab_theme_data.dart';
 import '../tabbed_view_theme_data.dart';
 import '../tabs_area_cross_axis_fit.dart';
@@ -64,7 +64,7 @@ class UnderlineTheme extends TabbedViewThemeData {
     tab.buttonPadding = const EdgeInsets.all(4);
     tab.draggingDecoration =
         BoxDecoration(border: Border.all(color: borderColor, width: 1));
-    tab.borderBuilder = theme._tabBorderBuilder;
+    tab.decorationBuilder = theme._tabDecorationBuilder;
 
     final ContentAreaThemeData contentArea = theme.contentArea;
     // For the mobile theme, the content area is a distinct, bordered box
@@ -85,7 +85,7 @@ class UnderlineTheme extends TabbedViewThemeData {
   Color hoveredColor;
   Color selectedColor;
 
-  TabBorder _tabBorderBuilder(
+  TabDecoration _tabDecorationBuilder(
       {required TabBarPosition tabBarPosition, required TabStatus status}) {
     Color? color;
     switch (status) {
@@ -102,30 +102,30 @@ class UnderlineTheme extends TabbedViewThemeData {
     final BorderSide borderSide = BorderSide(color: color, width: 5);
     switch (tabBarPosition) {
       case TabBarPosition.top:
-        return TabBorder(
+        return TabDecoration(
             border: Border(bottom: borderSide),
-            wrapperBorderBuilder: _externalBorderBuilder);
+            wrapperBorderBuilder: _externalDecorationBuilder);
       case TabBarPosition.bottom:
-        return TabBorder(
+        return TabDecoration(
             border: Border(top: borderSide),
-            wrapperBorderBuilder: _externalBorderBuilder);
+            wrapperBorderBuilder: _externalDecorationBuilder);
       case TabBarPosition.left:
-        return TabBorder(
+        return TabDecoration(
             border: Border(right: borderSide),
-            wrapperBorderBuilder: _externalBorderBuilder);
+            wrapperBorderBuilder: _externalDecorationBuilder);
       case TabBarPosition.right:
-        return TabBorder(
+        return TabDecoration(
             border: Border(left: borderSide),
-            wrapperBorderBuilder: _externalBorderBuilder);
+            wrapperBorderBuilder: _externalDecorationBuilder);
     }
   }
 
-  TabBorder _externalBorderBuilder(
+  TabDecoration _externalDecorationBuilder(
       {required TabBarPosition tabBarPosition, required TabStatus status}) {
     final BorderSide borderSide = BorderSide(color: borderColor, width: 1);
     if (tabBarPosition.isHorizontal) {
-      return TabBorder(border: Border(left: borderSide, right: borderSide));
+      return TabDecoration(border: Border(left: borderSide, right: borderSide));
     }
-    return TabBorder(border: Border(top: borderSide, bottom: borderSide));
+    return TabDecoration(border: Border(top: borderSide, bottom: borderSide));
   }
 }

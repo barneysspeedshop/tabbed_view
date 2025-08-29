@@ -5,21 +5,20 @@ import '../tab_bar_position.dart';
 import '../tab_status.dart';
 import '../tabbed_view_icons.dart';
 import 'side_tabs_layout.dart';
-import 'tab_border_builder.dart';
+import 'tab_decoration_builder.dart';
 import 'tab_status_theme_data.dart';
 import 'tabbed_view_theme_constants.dart';
 import 'vertical_alignment.dart';
 
 /// Theme for tab.
 class TabThemeData {
-  static TabBorder defaultBorderBuilder(
+  static TabDecoration defaultBorderBuilder(
       {required TabBarPosition tabBarPosition, required TabStatus status}) {
-    return TabBorder();
+    return TabDecoration();
   }
 
   TabThemeData(
       {IconProvider? closeIcon,
-      this.color,
       this.normalButtonColor = Colors.black,
       this.hoverButtonColor = Colors.black,
       this.disabledButtonColor = Colors.black12,
@@ -31,7 +30,7 @@ class TabThemeData {
       double buttonsOffset = 0,
       this.buttonPadding,
       double buttonsGap = 0,
-      this.borderBuilder = TabThemeData.defaultBorderBuilder,
+      this.decorationBuilder = TabThemeData.defaultBorderBuilder,
       this.draggingDecoration,
       this.draggingOpacity = 0.3,
       this.textStyle = const TextStyle(fontSize: 13),
@@ -47,11 +46,8 @@ class TabThemeData {
             TabbedViewThemeConstants.normalize(buttonIconSize),
         this.closeIcon = closeIcon ?? IconProvider.path(TabbedViewIcons.close);
 
-  /// The tab background color.
-  Color? color;
-
   /// A builder for creating complex and composable tab borders.
-  TabBorderBuilder borderBuilder;
+  TabDecorationBuilder decorationBuilder;
 
   /// The maximum main size of the tab.
   ///
@@ -115,8 +111,7 @@ class TabThemeData {
       identical(this, other) ||
       other is TabThemeData &&
           runtimeType == other.runtimeType &&
-          color == other.color &&
-          borderBuilder == other.borderBuilder &&
+          decorationBuilder == other.decorationBuilder &&
           maxMainSize == other.maxMainSize &&
           sideTabsLayout == other.sideTabsLayout &&
           selectedStatus == other.selectedStatus &&
@@ -141,8 +136,7 @@ class TabThemeData {
 
   @override
   int get hashCode =>
-      color.hashCode ^
-      borderBuilder.hashCode ^
+      decorationBuilder.hashCode ^
       maxMainSize.hashCode ^
       sideTabsLayout.hashCode ^
       selectedStatus.hashCode ^

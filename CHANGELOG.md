@@ -1,4 +1,4 @@
-## 2.0.0-rc.1
+## 2.0.0-rc.2
 
 * Theme
   * Refactored theming system to fully support all tab bar positions (`top`, `bottom`, `left`, `right`).
@@ -12,21 +12,21 @@
       * `divider`: The border that separates the content area from the tab bar. 
   * `TabThemeData`
     * Renamed `highlightedStatus` attribute to `hoveredStatus`. 
+  * `TabThemeData` and `TabStatusThemeData`
     * Removed attributes:
       * `innerBottomBorder`
       * `innerTopBorder`
       * `decoration`
       * `margin`
     * New attributes:
-      * `color`: The tab background color.
-      * `borderBuilder`: A builder for creating complex and composable tab borders.
+      * `decorationBuilder`: A builder for creating complex and composable tab decorators.
       * `maxMainSize`: The maximum main size of the tab.
       * `sideTabsLayout`: Define how side-positioned tabs (left or right) are laid out.
-    * The tab border is now built using a `TabBorderBuilder`, which allows for flexible and composable borders.
+    * The tab border and color are now built using a `TabDecorationBuilder`, which allows for flexible and composable decorators.
   * `ContentAreaThemeData`
     * New attributes:
       * `border`: The border around the outer side of the tab content area, excluding the side adjacent to the tabs.
-      * `borderRadius`: The radius used to round the corners of a border.
+      * `borderRadius`: The radius used to round the corners.
 * Added `SideTabsLayout` enum to define how side-positioned tabs (left or right) are laid out.
 * `TabbedViewController`
   * Moved `reorderEnable` attribute to `TabbedView`.

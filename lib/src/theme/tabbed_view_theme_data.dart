@@ -55,7 +55,7 @@ class TabbedViewThemeData {
         colorSet: colorSet,
         fontSize: fontSize,
         borderColor: borderColor,
-        tabBorderRadius: tabBorderRadius);
+        tabRadius: tabBorderRadius);
   }
 
   /// Builds the predefined underline theme.

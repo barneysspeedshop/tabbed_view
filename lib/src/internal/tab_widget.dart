@@ -8,7 +8,7 @@ import '../tab_button.dart';
 import '../tab_data.dart';
 import '../tab_status.dart';
 import '../theme/side_tabs_layout.dart';
-import '../theme/tab_border_builder.dart';
+import '../theme/tab_decoration_builder.dart';
 import '../theme/tab_status_theme_data.dart';
 import '../theme/tab_theme_data.dart';
 import '../theme/tabbed_view_theme_data.dart';
@@ -47,7 +47,6 @@ class TabWidget extends StatelessWidget {
     final TabData tab = provider.controller.tabs[index];
     final TabbedViewThemeData theme = TabbedViewTheme.of(context);
     final TabThemeData tabTheme = theme.tab;
-    final TabStatusThemeData? statusTabTheme = theme.tab.getTabThemeFor(status);
 
     Widget widget = _TabContentWidget(
         provider: provider,
@@ -56,29 +55,27 @@ class TabWidget extends StatelessWidget {
         status: status,
         tabTheme: tabTheme);
 
-    Color? color = statusTabTheme?.color ?? tabTheme.color;
-    if (color != null) {
-      widget = Container(color: color, child: widget);
-    }
-
-    TabBorderBuilder? borderBuilder = tabTheme.borderBuilder;
-    while (borderBuilder != null) {
-      TabBorder tabBorder = borderBuilder(
+    TabDecorationBuilder? decorationBuilder = tabTheme.decorationBuilder;
+    while (decorationBuilder != null) {
+      TabDecoration tabDecoration = decorationBuilder(
           status: status, tabBarPosition: provider.tabBarPosition);
-      if (tabBorder.border != null) {
-        final BorderRadius? borderRadius = tabBorder.borderRadius;
+      if (tabDecoration.border != null || tabDecoration.color != null) {
+        final BorderRadius? borderRadius = tabDecoration.borderRadius;
         if (borderRadius != null) {
           widget = Container(
               decoration: BoxDecoration(
-                  border: tabBorder.border, borderRadius: borderRadius),
+                  color: tabDecoration.color,
+                  border: tabDecoration.border,
+                  borderRadius: borderRadius),
               child: ClipRRect(borderRadius: borderRadius, child: widget));
         } else {
           widget = Container(
-              decoration: BoxDecoration(border: tabBorder.border),
+              decoration: BoxDecoration(
+                  color: tabDecoration.color, border: tabDecoration.border),
               child: widget);
         }
       }
-      borderBuilder = tabBorder.wrapperBorderBuilder;
+      decorationBuilder = tabDecoration.wrapperBorderBuilder;
     }
 
     final maxWidth = tabTheme.maxMainSize;

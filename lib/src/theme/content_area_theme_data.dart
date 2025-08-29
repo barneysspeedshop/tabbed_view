@@ -8,8 +8,8 @@ class ContentAreaThemeData {
   /// The background color.
   Color? color;
 
-  /// The radius used to round the corners of a border.
-  /// A value of zero represents a completely rectangular border,
+  /// The radius used to round the corners.
+  /// A value of zero represents a completely rectangular shape,
   /// while a larger value creates more rounded corners.
   final double borderRadius;
 

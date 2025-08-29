@@ -16,7 +16,7 @@ export 'src/tabbed_view_menu_item.dart';
 export 'src/theme/content_area_theme_data.dart';
 export 'src/theme/hidden_tabs_menu_theme_data.dart';
 export 'src/theme/side_tabs_layout.dart';
-export 'src/theme/tab_border_builder.dart';
+export 'src/theme/tab_decoration_builder.dart';
 export 'src/theme/tab_status_theme_data.dart';
 export 'src/theme/tab_theme_data.dart';
 export 'src/theme/tabbed_view_theme_constants.dart';

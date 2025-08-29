@@ -4,7 +4,7 @@ import '../../tab_bar_position.dart';
 import '../../tab_status.dart';
 import '../content_area_theme_data.dart';
 import '../hidden_tabs_menu_theme_data.dart';
-import '../tab_border_builder.dart';
+import '../tab_decoration_builder.dart';
 import '../tab_theme_data.dart';
 import '../tabbed_view_theme_data.dart';
 import '../tabs_area_cross_axis_fit.dart';
@@ -12,14 +12,17 @@ import '../tabs_area_theme_data.dart';
 
 /// Predefined classic theme builder.
 class ClassicTheme extends TabbedViewThemeData {
-  ClassicTheme._({required this.borderColor, required this.backgroundColor});
+  ClassicTheme._(
+      {required this.borderColor,
+      required this.backgroundColor,
+      required this.tabRadius});
 
   factory ClassicTheme(
       {required Brightness brightness,
       required MaterialColor colorSet,
       required double fontSize,
       required Color? borderColor,
-      double? tabBorderRadius}) {
+      double? tabRadius}) {
     final bool isLight = brightness == Brightness.light;
 
     final Color backgroundColor = isLight ? colorSet[50]! : colorSet[900]!;
@@ -31,14 +34,12 @@ class ClassicTheme extends TabbedViewThemeData {
     borderColor = borderColor ?? (isLight ? colorSet[900]! : colorSet[800]!);
 
     final ClassicTheme theme = ClassicTheme._(
-        backgroundColor: backgroundColor, borderColor: borderColor);
+        backgroundColor: backgroundColor,
+        borderColor: borderColor,
+        tabRadius: tabRadius != null ? Radius.circular(tabRadius) : null);
 
     theme.divider = BorderSide(color: borderColor, width: 1);
     theme.isDividerWithinTabArea = true;
-
-    if (tabBorderRadius != null) {
-      theme.tabBorderRadius = Radius.circular(tabBorderRadius);
-    }
 
     final TabsAreaThemeData tabsArea = theme.tabsArea;
     tabsArea.normalButtonColor = normalButtonColor;
@@ -56,7 +57,6 @@ class ClassicTheme extends TabbedViewThemeData {
     tabsArea.gapSideBorder = BorderSide(color: borderColor, width: 1);
 
     final TabThemeData tab = theme.tab;
-    tab.color = backgroundColor;
     tab.textStyle = TextStyle(fontSize: fontSize, color: fontColor);
     tab.normalButtonColor = normalButtonColor;
     tab.hoverButtonColor = hoverButtonColor;
@@ -69,7 +69,7 @@ class ClassicTheme extends TabbedViewThemeData {
     tab.draggingDecoration = BoxDecoration(
         color: backgroundColor,
         border: Border.all(color: borderColor, width: 1));
-    tab.borderBuilder = theme._tabBorderBuilder;
+    tab.decorationBuilder = theme._tabDecorationBuilder;
 
     final ContentAreaThemeData contentArea = theme.contentArea;
     contentArea.color = backgroundColor;
@@ -83,63 +83,67 @@ class ClassicTheme extends TabbedViewThemeData {
     return theme;
   }
 
-  Color backgroundColor;
-  Color borderColor;
-  Radius? tabBorderRadius;
+  final Color backgroundColor;
+  final Color borderColor;
+  final Radius? tabRadius;
 
-  TabBorder _tabBorderBuilder(
+  TabDecoration _tabDecorationBuilder(
       {required TabBarPosition tabBarPosition, required TabStatus status}) {
     final BorderSide borderSide = status == TabStatus.selected
         ? BorderSide(color: backgroundColor, width: 10)
         : divider ?? BorderSide.none;
     switch (tabBarPosition) {
       case TabBarPosition.top:
-        return TabBorder(
+        return TabDecoration(
+            color: backgroundColor,
             border: Border(bottom: borderSide),
-            wrapperBorderBuilder: _externalBorderBuilder);
+            wrapperBorderBuilder: _externalDecorationBuilder);
       case TabBarPosition.bottom:
-        return TabBorder(
+        return TabDecoration(
+            color: backgroundColor,
             border: Border(top: borderSide),
-            wrapperBorderBuilder: _externalBorderBuilder);
+            wrapperBorderBuilder: _externalDecorationBuilder);
       case TabBarPosition.left:
-        return TabBorder(
+        return TabDecoration(
+            color: backgroundColor,
             border: Border(right: borderSide),
-            wrapperBorderBuilder: _externalBorderBuilder);
+            wrapperBorderBuilder: _externalDecorationBuilder);
       case TabBarPosition.right:
-        return TabBorder(
+        return TabDecoration(
+            color: backgroundColor,
             border: Border(left: borderSide),
-            wrapperBorderBuilder: _externalBorderBuilder);
+            wrapperBorderBuilder: _externalDecorationBuilder);
     }
   }
 
-  TabBorder _externalBorderBuilder(
+  TabDecoration _externalDecorationBuilder(
       {required TabBarPosition tabBarPosition, required TabStatus status}) {
     final BorderSide borderSide = BorderSide(color: borderColor, width: 1);
-    final Radius? radius = tabBorderRadius;
+    final Radius? radius = this.tabRadius;
     switch (tabBarPosition) {
       case TabBarPosition.top:
-        return TabBorder(
+        return TabDecoration(
             border:
                 Border(top: borderSide, left: borderSide, right: borderSide),
             borderRadius: radius != null
                 ? BorderRadius.only(topLeft: radius, topRight: radius)
                 : null);
       case TabBarPosition.bottom:
-        return TabBorder(
+        return TabDecoration(
             border:
                 Border(bottom: borderSide, left: borderSide, right: borderSide),
             borderRadius: radius != null
                 ? BorderRadius.only(bottomLeft: radius, bottomRight: radius)
                 : null);
       case TabBarPosition.left:
-        return TabBorder(
+        return TabDecoration(
             border:
                 Border(left: borderSide, top: borderSide, bottom: borderSide),
             borderRadius: radius != null
                 ? BorderRadius.only(topLeft: radius, bottomLeft: radius)
                 : null);
       case TabBarPosition.right:
-        return TabBorder(
+        return TabDecoration(
             border:
                 Border(right: borderSide, top: borderSide, bottom: borderSide),
             borderRadius: radius != null
