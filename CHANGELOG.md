@@ -22,7 +22,6 @@
       * `decorationBuilder`: A builder for creating complex and composable tab decorators.
       * `maxMainSize`: The maximum main size of the tab.
       * `sideTabsLayout`: Define how side-positioned tabs (left or right) are laid out.
-    * The tab border and color are now built using a `TabDecorationBuilder`, which allows for flexible and composable decorators.
   * `ContentAreaThemeData`
     * New attributes:
       * `border`: The border around the outer side of the tab content area, excluding the side adjacent to the tabs.
