@@ -24,13 +24,13 @@ class UnderlineTheme extends TabbedViewThemeData {
       required double fontSize}) {
     final bool isLight = brightness == Brightness.light;
 
-    final Color borderColor = isLight?colorSet[500]!:colorSet[800]!;
-    final Color foregroundColor = isLight?colorSet[900]!:colorSet[100]!;
-    final Color backgroundColor = isLight?colorSet[50]!:colorSet[900]!;
-    final Color normalButtonColor = isLight?colorSet[700]!:colorSet[200]!;
-    final Color disabledButtonColor = isLight?colorSet[300]!:colorSet[400]!;
-    final Color hoverButtonColor = isLight?colorSet[900]!:colorSet[300]!;
-    final Color hoveredColor = isLight?colorSet[300]!:colorSet[700]!;
+    final Color borderColor = isLight ? colorSet[500]! : colorSet[800]!;
+    final Color foregroundColor = isLight ? colorSet[900]! : colorSet[100]!;
+    final Color backgroundColor = isLight ? colorSet[50]! : colorSet[900]!;
+    final Color normalButtonColor = isLight ? colorSet[700]! : colorSet[200]!;
+    final Color disabledButtonColor = isLight ? colorSet[300]! : colorSet[400]!;
+    final Color hoverButtonColor = isLight ? colorSet[900]! : colorSet[300]!;
+    final Color hoveredColor = isLight ? colorSet[300]! : colorSet[700]!;
 
     final UnderlineTheme theme = UnderlineTheme._(
         borderColor: borderColor,
@@ -73,7 +73,8 @@ class UnderlineTheme extends TabbedViewThemeData {
     contentArea.color = backgroundColor;
     contentArea.border = BorderSide(width: 1, color: borderColor);
 
-    final HiddenTabsMenuThemeData menu = HiddenTabsMenuThemeData(brightness: brightness);
+    final HiddenTabsMenuThemeData menu =
+        HiddenTabsMenuThemeData(brightness: brightness);
     theme.menu = menu;
     menu.borderRadius = BorderRadius.circular(4);
 
