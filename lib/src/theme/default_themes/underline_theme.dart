@@ -18,21 +18,24 @@ class UnderlineTheme extends TabbedViewThemeData {
       required this.selectedColor});
 
   factory UnderlineTheme(
-      {required MaterialColor colorSet,
-      required Color accentColor,
+      {required Brightness brightness,
+      required MaterialColor colorSet,
+      required MaterialColor underlineColorSet,
       required double fontSize}) {
-    Color borderColor = colorSet[500]!;
-    Color foregroundColor = colorSet[900]!;
-    Color backgroundColor = colorSet[50]!;
-    Color normalButtonColor = colorSet[700]!;
-    Color disabledButtonColor = colorSet[300]!;
-    Color hoverButtonColor = colorSet[900]!;
-    Color hoveredColor = colorSet[300]!;
+    final bool isLight = brightness == Brightness.light;
 
-    UnderlineTheme theme = UnderlineTheme._(
+    final Color borderColor = isLight?colorSet[500]!:colorSet[800]!;
+    final Color foregroundColor = isLight?colorSet[900]!:colorSet[100]!;
+    final Color backgroundColor = isLight?colorSet[50]!:colorSet[900]!;
+    final Color normalButtonColor = isLight?colorSet[700]!:colorSet[200]!;
+    final Color disabledButtonColor = isLight?colorSet[300]!:colorSet[400]!;
+    final Color hoverButtonColor = isLight?colorSet[900]!:colorSet[300]!;
+    final Color hoveredColor = isLight?colorSet[300]!:colorSet[700]!;
+
+    final UnderlineTheme theme = UnderlineTheme._(
         borderColor: borderColor,
         hoveredColor: hoveredColor,
-        selectedColor: accentColor);
+        selectedColor: underlineColorSet);
 
     theme.divider = BorderSide(color: borderColor, width: 1);
 
@@ -55,10 +58,10 @@ class UnderlineTheme extends TabbedViewThemeData {
     tab.disabledButtonColor = disabledButtonColor;
     tab.textStyle = TextStyle(fontSize: fontSize, color: foregroundColor);
     tab.buttonsOffset = 4;
-    tab.padding = EdgeInsets.fromLTRB(6, 3, 3, 3);
-    tab.paddingWithoutButton = EdgeInsets.fromLTRB(6, 3, 6, 3);
+    tab.padding = EdgeInsets.fromLTRB(8, 4, 4, 4);
+    tab.paddingWithoutButton = EdgeInsets.fromLTRB(8, 4, 8, 4);
     tab.hoverButtonBackground = BoxDecoration(color: hoveredColor);
-    tab.buttonPadding = const EdgeInsets.all(2);
+    tab.buttonPadding = const EdgeInsets.all(4);
     tab.draggingDecoration =
         BoxDecoration(border: Border.all(color: borderColor, width: 1));
     tab.borderBuilder = theme._tabBorderBuilder;
@@ -70,7 +73,8 @@ class UnderlineTheme extends TabbedViewThemeData {
     contentArea.color = backgroundColor;
     contentArea.border = BorderSide(width: 1, color: borderColor);
 
-    final HiddenTabsMenuThemeData menu = theme.menu;
+    final HiddenTabsMenuThemeData menu = HiddenTabsMenuThemeData(brightness: brightness);
+    theme.menu = menu;
     menu.borderRadius = BorderRadius.circular(4);
 
     return theme;

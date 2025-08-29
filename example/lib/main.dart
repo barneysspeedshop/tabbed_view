@@ -67,24 +67,24 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
       case ThemeName.classic:
         theme = _modifyThemeColors
             ? TabbedViewThemeData.classic(
-                colorSet: Colors.blueGrey, borderColor: Colors.black)
-            : TabbedViewThemeData.classic();
-        break;
-      case ThemeName.dark:
-        theme = _modifyThemeColors
-            ? TabbedViewThemeData.dark(colorSet: Colors.brown)
-            : TabbedViewThemeData.dark();
+                brightness: _brightness,
+                colorSet: Colors.blueGrey,
+                borderColor: Colors.black)
+            : TabbedViewThemeData.classic(brightness: _brightness);
         break;
       case ThemeName.minimalist:
         theme = _modifyThemeColors
-            ? TabbedViewThemeData.minimalist(colorSet: Colors.blueGrey)
-            : TabbedViewThemeData.minimalist();
+            ? TabbedViewThemeData.minimalist(
+                brightness: _brightness, colorSet: Colors.blueGrey)
+            : TabbedViewThemeData.minimalist(brightness: _brightness);
         break;
       case ThemeName.underline:
         theme = _modifyThemeColors
             ? TabbedViewThemeData.underline(
-                colorSet: Colors.brown, accentColor: Colors.brown)
-            : TabbedViewThemeData.underline();
+                brightness: _brightness,
+                colorSet: Colors.brown,
+                underlineColorSet: Colors.brown)
+            : TabbedViewThemeData.underline(brightness: _brightness);
         break;
     }
     theme.tab.sideTabsLayout = _sideTabsLayout;
@@ -96,8 +96,25 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
 
   @override
   Widget build(BuildContext context) {
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(brightness: _brightness),
+        home: Scaffold(
+            appBar: AppBar(title: Text('TabbedView Example (All properties)')),
+            body:
+                Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+              _buildSettings(),
+              Expanded(
+                  child: Padding(
+                      padding: EdgeInsets.all(16),
+                      child: TabbedViewTheme(
+                          data: _getTheme(), child: _buildTabbedView())))
+            ])));
+  }
+
+  TabbedView _buildTabbedView() {
     // Configuring the [TabbedView] with all available properties.
-    TabbedView tabbedView = TabbedView(
+    return TabbedView(
       trailing: _trailingWidgetEnabled
           ? Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
@@ -150,20 +167,16 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
         // Example of a custom menu item.
         // The default menu item is in:
         // lib/src/internal/tabs_area/hidden_tabs_menu_widget.dart
-        final brightness = Theme.of(context).brightness;
         final theme = TabbedViewTheme.of(context);
-        final brightnessMenuTheme =
-            theme.menu.getBrightnessMenuTheme(brightness);
         return Padding(
           padding: theme.menu.menuItemPadding,
           child: Row(
             children: [
-              Icon(Icons.tab,
-                  size: 16, color: brightnessMenuTheme.textStyle?.color),
+              Icon(Icons.tab, size: 16, color: theme.menu.textStyle?.color),
               SizedBox(width: 8),
               Expanded(
                 child: Text('${tabData.text} (index $tabIndex)',
-                    style: brightnessMenuTheme.textStyle,
+                    style: theme.menu.textStyle,
                     overflow: TextOverflow.ellipsis),
               ),
             ],
@@ -176,21 +189,6 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
       contentClip: true,
       dragScope: null,
     );
-
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(brightness: _brightness),
-        home: Scaffold(
-            appBar: AppBar(title: Text('TabbedView Example (All properties)')),
-            body:
-                Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-              _buildSettings(),
-              Expanded(
-                  child: Padding(
-                      padding: EdgeInsets.all(16),
-                      child: TabbedViewTheme(
-                          data: _getTheme(), child: tabbedView)))
-            ])));
   }
 
   void _onBrightnessSelected(Brightness brightness) {
@@ -236,7 +234,8 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
                       SizedBox(height: 16),
                       Text('TabBarPosition'),
                       PositionsChooser(
-                          position: _position, onSelected: _onPositionSelected),
+                          currentPosition: _position,
+                          onSelected: _onPositionSelected),
                       SizedBox(height: 16),
                       Text('SideTabsLayout'),
                       SideTabsLayoutChooser(
@@ -246,7 +245,8 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
                       SizedBox(height: 16),
                       Text('Theme'),
                       ThemeChooser(
-                          themeName: _themeName, onSelected: _onThemeSelected),
+                          currentTheme: _themeName,
+                          onSelected: _onThemeSelected),
                       SizedBox(height: 16),
                       _buildTrailingWidgetSelector(),
                       _buildModifyThemeColorsSelector(),
@@ -296,9 +296,9 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
 
 class PositionsChooser extends StatelessWidget {
   const PositionsChooser(
-      {super.key, required this.position, required this.onSelected});
+      {super.key, required this.currentPosition, required this.onSelected});
 
-  final TabBarPosition position;
+  final TabBarPosition currentPosition;
   final Function(TabBarPosition newPosition) onSelected;
 
   @override
@@ -306,7 +306,7 @@ class PositionsChooser extends StatelessWidget {
     List<Widget> children = TabBarPosition.values.map<Widget>((value) {
       return ChoiceChip(
           label: Text(value.name),
-          selected: position == value,
+          selected: currentPosition == value,
           onSelected: (selected) => onSelected(value));
     }).toList();
 
@@ -338,24 +338,25 @@ class SideTabsLayoutChooser extends StatelessWidget {
   }
 }
 
-enum ThemeName { classic, underline, dark, minimalist }
+enum ThemeName { classic, underline, minimalist }
 
 class ThemeChooser extends StatelessWidget {
   const ThemeChooser(
-      {super.key, required this.themeName, required this.onSelected});
+      {super.key, required this.currentTheme, required this.onSelected});
 
-  final ThemeName themeName;
-  final Function(ThemeName? themeName) onSelected;
+  final ThemeName currentTheme;
+  final Function(ThemeName themeName) onSelected;
 
   @override
   Widget build(BuildContext context) {
-    List<DropdownMenuItem<ThemeName>> items =
-        ThemeName.values.map<DropdownMenuItem<ThemeName>>((themeName) {
-      return DropdownMenuItem<ThemeName>(
-          value: themeName, child: Text(themeName.name));
+    List<Widget> children = ThemeName.values.map<Widget>((value) {
+      return ChoiceChip(
+          label: Text(value.name),
+          selected: currentTheme == value,
+          onSelected: (selected) => onSelected(value));
     }).toList();
-    return DropdownButton<ThemeName>(
-        value: themeName, isDense: true, items: items, onChanged: onSelected);
+
+    return Wrap(spacing: 8, runSpacing: 4, children: children);
   }
 }
 

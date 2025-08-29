@@ -26,9 +26,8 @@ class HiddenTabsMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TabbedViewThemeData theme = TabbedViewTheme.of(context);
+
     final menuTheme = theme.menu;
-    final brightnessMenuTheme =
-        menuTheme.getBrightnessMenuTheme(Theme.of(context).brightness);
 
     final List<TabData> tabs = provider.controller.tabs;
     final HiddenTabsMenuItemBuilder? menuItemBuilder =
@@ -39,9 +38,9 @@ class HiddenTabsMenuWidget extends StatelessWidget {
       margin: menuTheme.margin,
       padding: menuTheme.padding,
       decoration: BoxDecoration(
-        color: brightnessMenuTheme.color,
+        color: menuTheme.color,
         borderRadius: menuTheme.borderRadius,
-        boxShadow: brightnessMenuTheme.boxShadow,
+        boxShadow: menuTheme.boxShadow,
       ),
       // The clipBehavior is necessary to avoid having the InkWell effects
       // spill outside the rounded corners.
@@ -63,7 +62,7 @@ class HiddenTabsMenuWidget extends StatelessWidget {
                 padding: menuTheme.menuItemPadding,
                 child: Text(
                   tab.text,
-                  style: brightnessMenuTheme.textStyle,
+                  style: menuTheme.textStyle,
                   overflow: menuTheme.ellipsisOverflowText
                       ? TextOverflow.ellipsis
                       : null,
@@ -72,8 +71,8 @@ class HiddenTabsMenuWidget extends StatelessWidget {
             }
             return InkWell(
               onTap: () => onSelection(tabIndex),
-              hoverColor: brightnessMenuTheme.hoverColor,
-              highlightColor: brightnessMenuTheme.highlightColor,
+              hoverColor: menuTheme.hoverColor,
+              highlightColor: menuTheme.highlightColor,
               child: child,
             );
           },

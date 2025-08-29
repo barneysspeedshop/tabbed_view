@@ -1,54 +1,59 @@
 import 'package:flutter/material.dart';
 
-import '../content_area_theme_data.dart';
 import '../hidden_tabs_menu_theme_data.dart';
 import '../tab_theme_data.dart';
 import '../tabbed_view_theme_data.dart';
-import '../tabs_area_cross_axis_fit.dart';
 import '../tabs_area_theme_data.dart';
 
 /// Predefined minimalist theme builder.
 class MinimalistTheme extends TabbedViewThemeData {
   MinimalistTheme._();
 
-  factory MinimalistTheme({required MaterialColor colorSet}) {
+  factory MinimalistTheme(
+      {required Brightness brightness,
+      required MaterialColor colorSet,
+      required double fontSize,
+      double gap = 4}) {
+    final bool isLight = brightness == Brightness.light;
+
+    final Color background = isLight ? colorSet[400]! : colorSet[800]!;
+    final Color hoveredColor = isLight ? colorSet[200]! : colorSet[700]!;
+    final Color normalButtonColor = isLight ? colorSet[800]! : colorSet[100]!;
+    final Color disabledButtonColor = isLight ? colorSet[400]! : colorSet[600]!;
+    final Color hoverButtonColor = isLight ? colorSet[800]! : colorSet[100]!;
+    final Color fontColor = isLight ? colorSet[800]! : colorSet[100]!;
+
     final MinimalistTheme theme = MinimalistTheme._();
 
-    final BorderSide borderSide = BorderSide(width: 1, color: colorSet[900]!);
-    theme.divider = borderSide;
+    theme.divider =
+        BorderSide(color: isLight ? colorSet[700]! : colorSet[700]!, width: 4);
 
     final TabsAreaThemeData tabsArea = theme.tabsArea;
-    tabsArea.buttonsAreaDecoration = BoxDecoration(color: colorSet[50]!);
-    tabsArea.normalButtonColor = colorSet[700]!;
-    tabsArea.hoverButtonColor = colorSet[700]!;
-    tabsArea.disabledButtonColor = colorSet[300]!;
-    tabsArea.buttonsAreaPadding = EdgeInsets.all(2);
-    tabsArea.buttonPadding = const EdgeInsets.all(2);
-    tabsArea.hoverButtonBackground = BoxDecoration(color: colorSet[300]!);
-    tabsArea.crossAxisFit = TabsAreaCrossAxisFit.all;
-
+    tabsArea.middleGap = gap;
+    tabsArea.buttonsAreaPadding = EdgeInsets.all(4);
+    tabsArea.buttonPadding = const EdgeInsets.all(4);
+    tabsArea.hoverButtonBackground = BoxDecoration(color: hoveredColor);
+    tabsArea.normalButtonColor = normalButtonColor;
+    tabsArea.hoverButtonColor = hoverButtonColor;
+    tabsArea.disabledButtonColor = disabledButtonColor;
+    tabsArea.dropColor = Color.fromARGB(150, 255, 255, 255);
     final TabThemeData tab = theme.tab;
-    tab.color = colorSet[50]!;
     tab.buttonsOffset = 4;
-    tab.textStyle = TextStyle(color: colorSet[900]!, fontSize: 13);
-    tab.padding = EdgeInsets.fromLTRB(6, 3, 3, 3);
-    tab.paddingWithoutButton = EdgeInsets.fromLTRB(6, 3, 6, 3);
-    tab.draggingDecoration = BoxDecoration(color: colorSet[50]!);
-    tab.normalButtonColor = colorSet[900]!;
-    tab.hoverButtonColor = colorSet[900]!;
-    tab.disabledButtonColor = colorSet[400]!;
-    tab.buttonPadding = const EdgeInsets.all(2);
-    tab.hoverButtonBackground = BoxDecoration(color: colorSet[300]!);
-    tab.hoveredStatus.color = colorSet[100]!;
-    tab.selectedStatus.color = colorSet[600]!;
-    tab.selectedStatus.fontColor = colorSet[50]!;
-    tab.selectedStatus.normalButtonColor = colorSet[50]!;
+    tab.textStyle = TextStyle(fontSize: fontSize, color: fontColor);
+    tab.draggingDecoration = BoxDecoration(color: background);
+    tab.padding = EdgeInsets.fromLTRB(8, 4, 4, 4);
+    tab.paddingWithoutButton = EdgeInsets.fromLTRB(8, 4, 8, 4);
+    tab.hoverButtonBackground = BoxDecoration(color: hoveredColor);
+    tab.buttonPadding = const EdgeInsets.all(4);
+    tab.normalButtonColor = normalButtonColor;
+    tab.hoverButtonColor = hoverButtonColor;
+    tab.disabledButtonColor = disabledButtonColor;
+    tab.selectedStatus.color = background;
+    tab.hoveredStatus.color = hoveredColor;
 
-    final ContentAreaThemeData contentArea = theme.contentArea;
-    contentArea.color = colorSet[50]!;
-    contentArea.border = borderSide;
-
-    final HiddenTabsMenuThemeData menu = theme.menu;
+    final HiddenTabsMenuThemeData menu =
+        HiddenTabsMenuThemeData(brightness: brightness);
+    theme.menu = menu;
     menu.borderRadius = BorderRadius.circular(4);
 
     return theme;

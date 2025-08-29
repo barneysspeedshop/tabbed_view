@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'content_area_theme_data.dart';
 import 'default_themes/classic_theme.dart';
-import 'default_themes/dark_theme.dart';
 import 'default_themes/minimalist_theme.dart';
 import 'default_themes/underline_theme.dart';
 import 'hidden_tabs_menu_theme_data.dart';
@@ -44,19 +43,15 @@ class TabbedViewThemeData {
   /// If `false`, the divider will act as a standard border, drawn outside the tab area.
   bool isDividerWithinTabArea = false;
 
-  /// Builds the predefined dark theme.
-  factory TabbedViewThemeData.dark(
-      {MaterialColor colorSet = Colors.grey, double fontSize = 13}) {
-    return DarkTheme(colorSet: colorSet, fontSize: 13);
-  }
-
   /// Builds the predefined classic theme.
   factory TabbedViewThemeData.classic(
-      {MaterialColor colorSet = Colors.grey,
+      {Brightness brightness = Brightness.light,
+      MaterialColor colorSet = Colors.grey,
       double fontSize = 13,
-      Color borderColor = Colors.black,
+      Color? borderColor,
       double? tabBorderRadius}) {
     return ClassicTheme(
+        brightness: brightness,
         colorSet: colorSet,
         fontSize: fontSize,
         borderColor: borderColor,
@@ -65,17 +60,24 @@ class TabbedViewThemeData {
 
   /// Builds the predefined underline theme.
   factory TabbedViewThemeData.underline(
-      {MaterialColor colorSet = Colors.grey,
-      Color accentColor = Colors.blue,
+      {Brightness brightness = Brightness.light,
+      MaterialColor colorSet = Colors.grey,
+      MaterialColor underlineColorSet = Colors.blue,
       double fontSize = 13}) {
     return UnderlineTheme(
-        colorSet: colorSet, accentColor: accentColor, fontSize: fontSize);
+        brightness: brightness,
+        colorSet: colorSet,
+        underlineColorSet: underlineColorSet,
+        fontSize: fontSize);
   }
 
   /// Builds the predefined minimalist theme.
   factory TabbedViewThemeData.minimalist(
-      {MaterialColor colorSet = Colors.grey}) {
-    return MinimalistTheme(colorSet: colorSet);
+      {Brightness brightness = Brightness.light,
+      MaterialColor colorSet = Colors.grey,
+      double fontSize = 13}) {
+    return MinimalistTheme(
+        brightness: brightness, colorSet: colorSet, fontSize: fontSize);
   }
 
   @override

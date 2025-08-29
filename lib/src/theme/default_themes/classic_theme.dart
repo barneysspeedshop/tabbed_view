@@ -15,18 +15,22 @@ class ClassicTheme extends TabbedViewThemeData {
   ClassicTheme._({required this.borderColor, required this.backgroundColor});
 
   factory ClassicTheme(
-      {required MaterialColor colorSet,
+      {required Brightness brightness,
+      required MaterialColor colorSet,
       required double fontSize,
-      required Color borderColor,
+      required Color? borderColor,
       double? tabBorderRadius}) {
-    Color backgroundColor = colorSet[50]!;
-    Color hoveredColor = colorSet[300]!;
-    Color fontColor = colorSet[900]!;
-    Color normalButtonColor = colorSet[900]!;
-    Color disabledButtonColor = colorSet[400]!;
-    Color hoverButtonColor = colorSet[900]!;
+    final bool isLight = brightness == Brightness.light;
 
-    ClassicTheme theme = ClassicTheme._(
+    final Color backgroundColor = isLight ? colorSet[50]! : colorSet[900]!;
+    final Color hoveredColor = isLight ? colorSet[300]! : colorSet[600]!;
+    final Color fontColor = isLight ? colorSet[900]! : colorSet[50]!;
+    final Color normalButtonColor = isLight ? colorSet[900]! : colorSet[50]!;
+    final Color disabledButtonColor = isLight ? colorSet[400]! : colorSet[500]!;
+    final Color hoverButtonColor = isLight ? colorSet[900]! : colorSet[50]!;
+    borderColor = borderColor ?? (isLight ? colorSet[900]! : colorSet[800]!);
+
+    final ClassicTheme theme = ClassicTheme._(
         backgroundColor: backgroundColor, borderColor: borderColor);
 
     theme.divider = BorderSide(color: borderColor, width: 1);
@@ -59,9 +63,9 @@ class ClassicTheme extends TabbedViewThemeData {
     tab.disabledButtonColor = disabledButtonColor;
     tab.hoverButtonBackground = BoxDecoration(color: hoveredColor);
     tab.buttonsOffset = 4;
-    tab.buttonPadding = const EdgeInsets.all(2);
-    tab.padding = EdgeInsets.fromLTRB(6, 3, 3, 3);
-    tab.paddingWithoutButton = EdgeInsets.fromLTRB(6, 3, 6, 3);
+    tab.buttonPadding = const EdgeInsets.all(4);
+    tab.padding = EdgeInsets.fromLTRB(8, 4, 4, 4);
+    tab.paddingWithoutButton = EdgeInsets.fromLTRB(8, 4, 8, 4);
     tab.draggingDecoration = BoxDecoration(
         color: backgroundColor,
         border: Border.all(color: borderColor, width: 1));
@@ -71,7 +75,9 @@ class ClassicTheme extends TabbedViewThemeData {
     contentArea.color = backgroundColor;
     contentArea.border = BorderSide(width: 1, color: borderColor);
 
-    final HiddenTabsMenuThemeData menu = theme.menu;
+    final HiddenTabsMenuThemeData menu =
+        HiddenTabsMenuThemeData(brightness: brightness);
+    theme.menu = menu;
     menu.borderRadius = BorderRadius.circular(4);
 
     return theme;
@@ -84,7 +90,7 @@ class ClassicTheme extends TabbedViewThemeData {
   TabBorder _tabBorderBuilder(
       {required TabBarPosition tabBarPosition, required TabStatus status}) {
     final BorderSide borderSide = status == TabStatus.selected
-        ? BorderSide(color: backgroundColor, width: 8)
+        ? BorderSide(color: backgroundColor, width: 10)
         : divider ?? BorderSide.none;
     switch (tabBarPosition) {
       case TabBarPosition.top:

@@ -48,7 +48,10 @@ class _TabsAreaButtonsWidgetState extends State<TabsAreaButtonsWidget> {
     final size = renderBox.size;
     final screenSize = MediaQuery.of(context).size;
 
-    _overlayEntry = OverlayEntry(builder: (BuildContext context) {
+    // Do not use the overlayContext
+    final TabbedViewThemeData theme = TabbedViewTheme.of(context);
+
+    _overlayEntry = OverlayEntry(builder: (BuildContext overlayContext) {
       Alignment followerAnchor;
       Alignment targetAnchor;
       bool reverseMenu = false;
@@ -84,30 +87,34 @@ class _TabsAreaButtonsWidgetState extends State<TabsAreaButtonsWidget> {
           break;
       }
 
-      final theme = TabbedViewTheme.of(context);
       final effectiveMaxHeight =
           math.min(theme.menu.maxHeight, math.max(0.0, availableHeight - 8));
 
-      return Stack(children: [
-        // Invisible gesture detector to dismiss the menu on outside tap
-        GestureDetector(
-            onTap: _hideMenu, child: Container(color: Colors.transparent)),
-        CompositedTransformFollower(
-            link: _layerLink,
-            showWhenUnlinked: false,
-            followerAnchor: followerAnchor,
-            targetAnchor: targetAnchor,
-            child: ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: effectiveMaxHeight),
-                child: HiddenTabsMenuWidget(
-                    provider: widget.provider,
-                    reverse: reverseMenu,
-                    hiddenTabs: widget.hiddenTabs.indexes.toList(),
-                    onSelection: (tabIndex) {
-                      widget.provider.controller.selectedIndex = tabIndex;
-                      _hideMenu();
-                    })))
-      ]);
+      // This TabbedViewTheme is needed because the overlay's context would
+      // otherwise search for a TabbedViewTheme higher up the widget tree,
+      // instantiating a default theme instead of using our custom one.
+      return TabbedViewTheme(
+          data: theme,
+          child: Stack(children: [
+            // Invisible gesture detector to dismiss the menu on outside tap
+            GestureDetector(
+                onTap: _hideMenu, child: Container(color: Colors.transparent)),
+            CompositedTransformFollower(
+                link: _layerLink,
+                showWhenUnlinked: false,
+                followerAnchor: followerAnchor,
+                targetAnchor: targetAnchor,
+                child: ConstrainedBox(
+                    constraints: BoxConstraints(maxHeight: effectiveMaxHeight),
+                    child: HiddenTabsMenuWidget(
+                        provider: widget.provider,
+                        reverse: reverseMenu,
+                        hiddenTabs: widget.hiddenTabs.indexes.toList(),
+                        onSelection: (tabIndex) {
+                          widget.provider.controller.selectedIndex = tabIndex;
+                          _hideMenu();
+                        })))
+          ]));
     });
     Overlay.of(context).insert(_overlayEntry!);
     setState(() {});

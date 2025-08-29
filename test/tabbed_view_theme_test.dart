@@ -163,7 +163,7 @@ void main() {
 
     group('Underline Theme', () {
       final theme = TabbedViewThemeData.underline(
-          colorSet: Colors.blueGrey, accentColor: Colors.blue);
+          colorSet: Colors.blueGrey, underlineColorSet: Colors.blue);
 
       testWidgets(
           'Selected TabWidget has correct indicator for TabBarPosition.left',
