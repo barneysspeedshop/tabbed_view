@@ -13,13 +13,13 @@
     * `selectTab(TabData tab)`
     * `getTabByValue(dynamic value)`
     * `selectTabByValue(dynamic value)`
-    * `closeOtherTabs(int tabIndex)`
-    * `closeTabsToTheRight(int tabIndex)`
-  * Refactored `closeAllClosableTabs` to be more robust and reusable.
 * Attribute `TabStatus.highlighted` renamed to `TabStatus.hovered`.
 * Attribute `TabbedViewController.reorderEnable` moved to `TabbedView.reorderEnabled`
 * Attribute `TabbedViewController.onReorder` moved to `TabbedView.onTabReorder`
-* `Mobile` theme renamed to `Underline`
+* Theme
+  * `Mobile` theme renamed to `Underline`
+  * `Dark` theme removed.
+  * Brightness support.
 
 ## 1.22.1
 
