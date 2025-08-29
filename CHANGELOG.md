@@ -1,25 +1,46 @@
-## 2.0.0
+## 2.0.0-rc.1
 
-* **Breaking change**: Theming system refactored to fully support all tab bar positions (`top`, `bottom`, `left`, `right`).
-  * **Why?** The old system used hardcoded `Border` objects and position-specific properties (like `innerBottomBorder`) that only worked for a top-positioned tab bar.
-  * **What changed?** `TabStatusThemeData` and `ContentAreaThemeData` now have a `border` property of type `BorderSide`. The widgets use this single `BorderSide` to dynamically construct the correct border based on the `TabBarPosition`.
-  * **Action required**: If you have a custom theme, you **must** update it. See the "Migrating to 2.0.0" guide in the documentation for instructions.
-* **Breaking change**: `OnTabSelection` callback now provides the `TabData` object instead of the tab index.
-  * From: `void Function(int? tabIndex)`
-  * To: `void Function(TabData? tabData)`
-* **New feature**: Added full support for `left`, `right`, and `bottom` `TabBarPosition`.
+* Theme
+  * Refactored theming system to fully support all tab bar positions (`top`, `bottom`, `left`, `right`).
+    * Added `TabBarPosition` enum to represent the bar positions.
+  * Renamed `Mobile` theme to `Underline`
+  * Removed `Dark` theme.
+  * Added brightness support.
+  * The theme data classes are now mutable.
+  * `TabbedViewThemeData`
+    * New attributes:
+      * `divider`: The border that separates the content area from the tab bar. 
+  * `TabThemeData`
+    * Renamed `highlightedStatus` attribute to `hoveredStatus`. 
+    * Removed attributes:
+      * `innerBottomBorder`
+      * `innerTopBorder`
+      * `decoration`
+      * `margin`
+    * New attributes:
+      * `color`: The tab background color.
+      * `borderBuilder`: A builder for creating complex and composable tab borders.
+      * `maxMainSize`: The maximum main size of the tab.
+      * `sideTabsLayout`: Define how side-positioned tabs (left or right) are laid out.
+    * The tab border is now built using a `TabBorderBuilder`, which allows for flexible and composable borders.
+  * `ContentAreaThemeData`
+    * New attributes:
+      * `border`: The border around the outer side of the tab content area, excluding the side adjacent to the tabs.
+      * `borderRadius`: The radius used to round the corners of a border.
+* Added `SideTabsLayout` enum to define how side-positioned tabs (left or right) are laid out.
 * `TabbedViewController`
+  * Moved `reorderEnable` attribute to `TabbedView`.
+  * Moved `onReorder` attribute to `TabbedView`.
   * New methods:
     * `selectTab(TabData tab)`
     * `getTabByValue(dynamic value)`
     * `selectTabByValue(dynamic value)`
-* Attribute `TabStatus.highlighted` renamed to `TabStatus.hovered`.
-* Attribute `TabbedViewController.reorderEnable` moved to `TabbedView.reorderEnabled`
-* Attribute `TabbedViewController.onReorder` moved to `TabbedView.onTabReorder`
-* Theme
-  * `Mobile` theme renamed to `Underline`
-  * `Dark` theme removed.
-  * Brightness support.
+* `TabStatus`
+  * Renamed `highlighted` value to `hovered`.  
+* The `OnTabSelection` callback was changed to provide the `TabData` object instead of the tab index.
+  * From: `void Function(int? tabIndex)`
+  * To: `void Function(TabData? tabData)`
+* Special thanks to Patrick Legacy for his great contributions to this release.
 
 ## 1.22.1
 

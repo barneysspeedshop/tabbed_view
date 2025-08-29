@@ -47,8 +47,10 @@ class TabThemeData {
             TabbedViewThemeConstants.normalize(buttonIconSize),
         this.closeIcon = closeIcon ?? IconProvider.path(TabbedViewIcons.close);
 
+  /// The tab background color.
   Color? color;
 
+  /// A builder for creating complex and composable tab borders.
   TabBorderBuilder borderBuilder;
 
   /// The maximum main size of the tab.
