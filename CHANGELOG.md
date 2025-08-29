@@ -1,4 +1,4 @@
-## 2.0.0-rc.2
+## 2.0.0-rc.3
 
 * Theme
   * Refactored theming system to fully support all tab bar positions (`top`, `bottom`, `left`, `right`).
@@ -9,7 +9,12 @@
   * The theme data classes are now mutable.
   * `TabbedViewThemeData`
     * New attributes:
-      * `divider`: The border that separates the content area from the tab bar. 
+      * `divider`: The border that separates the content area from the tab bar.
+  * `TabsAreaThemeData`
+    * New attributes:
+      * `crossAxisFit`: Defines how the cross axis will fit within the tabs area.
+      * `crossAxisAlignment`: Defines the alignment of tabs in relation to the main content.
+      * `tabCrossAxisSizeBehavior`: Defines how tabs are sized relative to each other in the cross axis.
   * `TabThemeData`
     * Renamed `highlightedStatus` attribute to `hoveredStatus`. 
   * `TabThemeData` and `TabStatusThemeData`

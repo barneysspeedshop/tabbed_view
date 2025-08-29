@@ -14,6 +14,7 @@ export 'src/tabbed_view_icons.dart';
 export 'src/tabbed_view_menu_builder.dart';
 export 'src/tabbed_view_menu_item.dart';
 export 'src/theme/content_area_theme_data.dart';
+export 'src/theme/tab_cross_axis_size_behavior.dart';
 export 'src/theme/hidden_tabs_menu_theme_data.dart';
 export 'src/theme/side_tabs_layout.dart';
 export 'src/theme/tab_decoration_builder.dart';

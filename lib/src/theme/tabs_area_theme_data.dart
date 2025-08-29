@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../icon_provider.dart';
 import '../tabbed_view_icons.dart';
+import 'tab_cross_axis_size_behavior.dart';
 import 'tabbed_view_theme_constants.dart';
 import 'tabs_area_cross_axis_alignment.dart';
 import 'tabs_area_cross_axis_fit.dart';
@@ -20,6 +21,7 @@ class TabsAreaThemeData {
       this.gapSideBorder = BorderSide.none,
       this.crossAxisFit = TabsAreaCrossAxisFit.none,
       this.crossAxisAlignment = TabsAreaCrossAxisAlignment.inner,
+      this.tabCrossAxisSizeBehavior = TabCrossAxisSizeBehavior.individual,
       this.buttonsAreaDecoration,
       this.buttonsAreaPadding,
       this.buttonPadding,
@@ -68,8 +70,15 @@ class TabsAreaThemeData {
   double middleGap;
   BorderSide gapBottomBorder;
   BorderSide gapSideBorder;
+
+  /// Defines how the cross axis will fit within the tabs area.
   TabsAreaCrossAxisFit crossAxisFit;
+
+  /// Defines the alignment of tabs in relation to the main content.
   TabsAreaCrossAxisAlignment crossAxisAlignment;
+
+  /// Defines how tabs are sized relative to each other in the cross axis.
+  TabCrossAxisSizeBehavior tabCrossAxisSizeBehavior;
 
   /// Icon for the hidden tabs menu when it is open.
   final IconProvider menuIconOpen;
@@ -120,6 +129,14 @@ class TabsAreaThemeData {
 
   double _buttonsOffset;
 
+  double get buttonsOffset => _buttonsOffset;
+
+  set buttonsOffset(double value) {
+    _buttonsOffset = value >= 0 ? value : 0;
+  }
+
+  EdgeInsetsGeometry? buttonPadding;
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -127,13 +144,18 @@ class TabsAreaThemeData {
           runtimeType == other.runtimeType &&
           visible == other.visible &&
           color == other.color &&
-          border == other.border &&
           borderRadius == other.borderRadius &&
+          border == other.border &&
           initialGap == other.initialGap &&
           middleGap == other.middleGap &&
           gapBottomBorder == other.gapBottomBorder &&
           gapSideBorder == other.gapSideBorder &&
           crossAxisFit == other.crossAxisFit &&
+          crossAxisAlignment == other.crossAxisAlignment &&
+          tabCrossAxisSizeBehavior == other.tabCrossAxisSizeBehavior &&
+          menuIconOpen == other.menuIconOpen &&
+          menuIconLeft == other.menuIconLeft &&
+          menuIconRight == other.menuIconRight &&
           dropColor == other.dropColor &&
           _minimalFinalGap == other._minimalFinalGap &&
           buttonsAreaDecoration == other.buttonsAreaDecoration &&
@@ -146,48 +168,40 @@ class TabsAreaThemeData {
           hoverButtonBackground == other.hoverButtonBackground &&
           disabledButtonBackground == other.disabledButtonBackground &&
           menuIcon == other.menuIcon &&
-          menuIconOpen == other.menuIconOpen &&
-          menuIconLeft == other.menuIconLeft &&
-          menuIconRight == other.menuIconRight &&
           _buttonsGap == other._buttonsGap &&
           _buttonsOffset == other._buttonsOffset &&
           buttonPadding == other.buttonPadding;
 
   @override
-  int get hashCode =>
-      visible.hashCode ^
-      color.hashCode ^
-      border.hashCode ^
-      borderRadius.hashCode ^
-      initialGap.hashCode ^
-      middleGap.hashCode ^
-      gapBottomBorder.hashCode ^
-      gapSideBorder.hashCode ^
-      crossAxisFit.hashCode ^
-      dropColor.hashCode ^
-      _minimalFinalGap.hashCode ^
-      buttonsAreaDecoration.hashCode ^
-      buttonsAreaPadding.hashCode ^
-      buttonIconSize.hashCode ^
-      normalButtonColor.hashCode ^
-      hoverButtonColor.hashCode ^
-      disabledButtonColor.hashCode ^
-      normalButtonBackground.hashCode ^
-      hoverButtonBackground.hashCode ^
-      disabledButtonBackground.hashCode ^
-      menuIcon.hashCode ^
-      menuIconOpen.hashCode ^
-      menuIconLeft.hashCode ^
-      menuIconRight.hashCode ^
-      _buttonsGap.hashCode ^
-      _buttonsOffset.hashCode ^
-      buttonPadding.hashCode;
-
-  double get buttonsOffset => _buttonsOffset;
-
-  set buttonsOffset(double value) {
-    _buttonsOffset = value >= 0 ? value : 0;
-  }
-
-  EdgeInsetsGeometry? buttonPadding;
+  int get hashCode => Object.hashAll([
+        visible,
+        color,
+        borderRadius,
+        border,
+        initialGap,
+        middleGap,
+        gapBottomBorder,
+        gapSideBorder,
+        crossAxisFit,
+        crossAxisAlignment,
+        tabCrossAxisSizeBehavior,
+        menuIconOpen,
+        menuIconLeft,
+        menuIconRight,
+        dropColor,
+        _minimalFinalGap,
+        buttonsAreaDecoration,
+        buttonsAreaPadding,
+        buttonIconSize,
+        normalButtonColor,
+        hoverButtonColor,
+        disabledButtonColor,
+        normalButtonBackground,
+        hoverButtonBackground,
+        disabledButtonBackground,
+        menuIcon,
+        _buttonsGap,
+        _buttonsOffset,
+        buttonPadding
+      ]);
 }
