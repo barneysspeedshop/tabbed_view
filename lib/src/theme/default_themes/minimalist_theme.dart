@@ -42,8 +42,7 @@ class MinimalistTheme extends TabbedViewThemeData {
         BorderSide(color: isLight ? colorSet[600]! : colorSet[600]!, width: 4);
 
     final TabsAreaThemeData tabsArea = theme.tabsArea;
-    tabsArea.tabCrossAxisSizeBehavior =
-        TabCrossAxisSizeBehavior.nonSelectedUniform;
+    tabsArea.tabCrossAxisSizeBehavior = TabCrossAxisSizeBehavior.uniform;
     tabsArea.middleGap = gap;
     tabsArea.buttonsAreaPadding = EdgeInsets.all(4);
     tabsArea.buttonPadding = const EdgeInsets.all(4);
@@ -56,8 +55,8 @@ class MinimalistTheme extends TabbedViewThemeData {
     tab.buttonsOffset = 4;
     tab.textStyle = TextStyle(fontSize: fontSize, color: fontColor);
     tab.draggingDecoration = BoxDecoration(color: normalColor);
-    tab.padding = EdgeInsets.fromLTRB(8, 4, 4, 4);
-    tab.paddingWithoutButton = EdgeInsets.fromLTRB(8, 4, 8, 4);
+    tab.padding = const EdgeInsets.fromLTRB(8, 4, 4, 4);
+    tab.paddingWithoutButton = const EdgeInsets.fromLTRB(8, 6, 8, 2);
     tab.hoverButtonBackground = BoxDecoration(color: hoveredColor);
     tab.buttonPadding = const EdgeInsets.all(4);
     tab.normalButtonColor = normalButtonColor;
