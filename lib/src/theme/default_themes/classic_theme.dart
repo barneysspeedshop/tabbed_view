@@ -68,7 +68,7 @@ class ClassicTheme extends TabbedViewThemeData {
     tab.buttonsOffset = 4;
     tab.buttonPadding = const EdgeInsets.all(4);
     tab.padding = EdgeInsets.fromLTRB(8, 4, 4, 4);
-    tab.paddingWithoutButton = EdgeInsets.fromLTRB(8, 4, 8, 4);
+    tab.paddingWithoutButton = EdgeInsets.fromLTRB(8, 6, 8, 6);
     tab.draggingDecoration = BoxDecoration(
         color: backgroundColor,
         border: Border.all(color: borderColor, width: 1));
