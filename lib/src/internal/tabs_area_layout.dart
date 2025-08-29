@@ -185,7 +185,7 @@ class _TabsAreaLayoutRenderBox extends RenderBox
 
     final List<int> hiddenIndexes = [];
 
-    while (tabs.length > 0 &&
+    while (tabs.isNotEmpty &&
         _requiredTabsMainAxisSize(tabs: tabs) > availableSpaceForTabs) {
       int? removedIndex;
       if (tabs.length == 1) {
