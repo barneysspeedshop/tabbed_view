@@ -87,8 +87,14 @@ class TabWidget extends StatelessWidget {
       if (provider.tabBarPosition.isHorizontal) {
         constraints = BoxConstraints(maxWidth: maxWidth);
       } else {
-        // left or right
-        constraints = BoxConstraints(maxHeight: maxWidth);
+        // For vertical tab bars, the constraint depends on the layout.
+        if (tabTheme.sideTabsLayout == SideTabsLayout.stacked) {
+          // Stacked tabs are not rotated, so their main axis is width.
+          constraints = BoxConstraints(maxWidth: maxWidth);
+        } else {
+          // Rotated tabs have their logical width as physical height.
+          constraints = BoxConstraints(maxHeight: maxWidth);
+        }
       }
       widget = ConstrainedBox(
         constraints: constraints,
