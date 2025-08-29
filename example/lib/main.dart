@@ -13,6 +13,8 @@ class TabbedViewExample extends StatefulWidget {
 }
 
 class TabbedViewExampleState extends State<TabbedViewExample> {
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
   late TabbedViewController _controller;
   TabBarPosition _position = TabBarPosition.top;
   ThemeName _themeName = ThemeName.underline;
@@ -35,7 +37,7 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
           TabButton(
               icon: IconProvider.data(Icons.info),
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
+                _scaffoldMessengerKey.currentState?.showSnackBar(
                     const SnackBar(content: Text('Info button clicked!')));
               })
         ]));
@@ -98,6 +100,7 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
+        scaffoldMessengerKey: _scaffoldMessengerKey,
         theme: ThemeData(brightness: _brightness),
         home: Scaffold(
             appBar: AppBar(title: Text('TabbedView Example (All properties)')),
@@ -123,7 +126,7 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
           : null,
       controller: _controller,
       onTabSecondaryTap: (index, tabData, details) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        _scaffoldMessengerKey.currentState?.showSnackBar(SnackBar(
             content: Text('Right-clicked on tab #$index: "${tabData.text}"')));
       },
       tabBarPosition: _position,
