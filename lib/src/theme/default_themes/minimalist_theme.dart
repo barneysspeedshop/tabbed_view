@@ -46,7 +46,7 @@ class MinimalistTheme extends TabbedViewThemeData {
     tabsArea.middleGap = gap;
     tabsArea.buttonsAreaPadding = EdgeInsets.all(4);
     tabsArea.buttonPadding = const EdgeInsets.all(4);
-    tabsArea.hoverButtonBackground = BoxDecoration(color: hoveredColor);
+    tabsArea.hoveredButtonBackground = BoxDecoration(color: hoveredColor);
     tabsArea.normalButtonColor = normalButtonColor;
     tabsArea.hoveredButtonColor = hoveredButtonColor;
     tabsArea.disabledButtonColor = disabledButtonColor;
@@ -57,7 +57,7 @@ class MinimalistTheme extends TabbedViewThemeData {
     tab.draggingDecoration = BoxDecoration(color: normalColor);
     tab.padding = const EdgeInsets.fromLTRB(8, 4, 4, 4);
     tab.paddingWithoutButton = const EdgeInsets.fromLTRB(8, 6, 8, 2);
-    tab.hoverButtonBackground = BoxDecoration(color: hoveredColor);
+    tab.hoveredButtonBackground = BoxDecoration(color: hoveredColor);
     tab.buttonPadding = const EdgeInsets.all(4);
     tab.normalButtonColor = normalButtonColor;
     tab.hoveredButtonColor = hoveredButtonColor;

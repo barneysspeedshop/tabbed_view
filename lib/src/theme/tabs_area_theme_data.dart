@@ -32,7 +32,7 @@ class TabsAreaThemeData {
       this.hoveredButtonColor = Colors.black,
       this.disabledButtonColor = Colors.black12,
       this.normalButtonBackground,
-      this.hoverButtonBackground,
+      this.hoveredButtonBackground,
       this.disabledButtonBackground,
       IconProvider? menuIcon,
       IconProvider? menuIconOpen,
@@ -113,7 +113,7 @@ class TabsAreaThemeData {
   Color hoveredButtonColor;
   Color disabledButtonColor;
   BoxDecoration? normalButtonBackground;
-  BoxDecoration? hoverButtonBackground;
+  BoxDecoration? hoveredButtonBackground;
   BoxDecoration? disabledButtonBackground;
 
   /// Icon for the hidden tabs menu.
@@ -165,7 +165,7 @@ class TabsAreaThemeData {
           hoveredButtonColor == other.hoveredButtonColor &&
           disabledButtonColor == other.disabledButtonColor &&
           normalButtonBackground == other.normalButtonBackground &&
-          hoverButtonBackground == other.hoverButtonBackground &&
+          hoveredButtonBackground == other.hoveredButtonBackground &&
           disabledButtonBackground == other.disabledButtonBackground &&
           menuIcon == other.menuIcon &&
           _buttonsGap == other._buttonsGap &&
@@ -197,7 +197,7 @@ class TabsAreaThemeData {
         hoveredButtonColor,
         disabledButtonColor,
         normalButtonBackground,
-        hoverButtonBackground,
+        hoveredButtonBackground,
         disabledButtonBackground,
         menuIcon,
         _buttonsGap,

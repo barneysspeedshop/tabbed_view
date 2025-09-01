@@ -49,7 +49,7 @@ class ClassicTheme extends TabbedViewThemeData {
     tabsArea.hoveredButtonColor = hoveredButtonColor;
     tabsArea.disabledButtonColor = disabledButtonColor;
     tabsArea.buttonPadding = const EdgeInsets.all(2);
-    tabsArea.hoverButtonBackground = BoxDecoration(color: hoveredColor);
+    tabsArea.hoveredButtonBackground = BoxDecoration(color: hoveredColor);
     tabsArea.buttonsAreaDecoration = BoxDecoration(
         color: backgroundColor,
         border: Border.all(color: borderColor, width: 1));
@@ -64,7 +64,7 @@ class ClassicTheme extends TabbedViewThemeData {
     tab.normalButtonColor = normalButtonColor;
     tab.hoveredButtonColor = hoveredButtonColor;
     tab.disabledButtonColor = disabledButtonColor;
-    tab.hoverButtonBackground = BoxDecoration(color: hoveredColor);
+    tab.hoveredButtonBackground = BoxDecoration(color: hoveredColor);
     tab.buttonsOffset = 4;
     tab.buttonPadding = const EdgeInsets.all(4);
     tab.padding = EdgeInsets.fromLTRB(8, 4, 4, 4);

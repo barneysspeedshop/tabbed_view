@@ -47,7 +47,7 @@ class UnderlineTheme extends TabbedViewThemeData {
     tabsArea.hoveredButtonColor = hoveredButtonColor;
     tabsArea.disabledButtonColor = disabledButtonColor;
     tabsArea.buttonsAreaPadding = EdgeInsets.all(2);
-    tabsArea.hoverButtonBackground = BoxDecoration(color: hoveredColor);
+    tabsArea.hoveredButtonBackground = BoxDecoration(color: hoveredColor);
     tabsArea.buttonPadding = const EdgeInsets.all(2);
     tabsArea.border = BorderSide(color: borderColor, width: 1);
     tabsArea.color = backgroundColor;
@@ -60,7 +60,7 @@ class UnderlineTheme extends TabbedViewThemeData {
     tab.buttonsOffset = 4;
     tab.padding = const EdgeInsets.fromLTRB(8, 4, 4, 0);
     tab.paddingWithoutButton = const EdgeInsets.fromLTRB(8, 7, 8, 3);
-    tab.hoverButtonBackground = BoxDecoration(color: hoveredColor);
+    tab.hoveredButtonBackground = BoxDecoration(color: hoveredColor);
     tab.buttonPadding = const EdgeInsets.all(4);
     tab.draggingDecoration =
         BoxDecoration(border: Border.all(color: borderColor, width: 1));

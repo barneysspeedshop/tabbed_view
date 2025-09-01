@@ -12,6 +12,7 @@
       * `divider`: The border that separates the content area from the tab bar.
   * `TabsAreaThemeData`
     * Renamed `hoverButtonColor` attribute to `hoveredButtonColor`.
+    * Renamed `hoverButtonBackground` attribute to `hoveredButtonBackground`.
     * New attributes:
       * `crossAxisFit`: Defines how the cross axis will fit within the tabs area.
       * `crossAxisAlignment`: Defines the alignment of tabs in relation to the main content.
@@ -19,6 +20,7 @@
   * `TabThemeData`
     * Renamed `highlightedStatus` attribute to `hoveredStatus`. 
     * Renamed `hoverButtonColor` attribute to `hoveredButtonColor`.
+    * Renamed `hoverButtonBackground` attribute to `hoveredButtonBackground`.
   * `TabThemeData` and `TabStatusThemeData`
     * Removed attributes:
       * `innerBottomBorder`

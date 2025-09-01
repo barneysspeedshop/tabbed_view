@@ -265,7 +265,7 @@ class _TabContentWidget extends StatelessWidget {
     BoxDecoration? normalBackground =
         statusTheme?.normalButtonBackground ?? tabTheme.normalButtonBackground;
     BoxDecoration? hoverBackground =
-        statusTheme?.hoverButtonBackground ?? tabTheme.hoverButtonBackground;
+        statusTheme?.hoverButtonBackground ?? tabTheme.hoveredButtonBackground;
     BoxDecoration? disabledBackground = statusTheme?.disabledButtonBackground ??
         tabTheme.disabledButtonBackground;
 
