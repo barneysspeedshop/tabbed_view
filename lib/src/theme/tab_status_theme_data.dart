@@ -11,7 +11,7 @@ class TabStatusThemeData {
       this.hoverButtonColor,
       this.disabledButtonColor,
       this.normalButtonBackground,
-      this.hoverButtonBackground,
+      this.hoveredButtonBackground,
       this.disabledButtonBackground});
 
   /// Padding for tab content
@@ -25,7 +25,7 @@ class TabStatusThemeData {
   Color? hoverButtonColor;
   Color? disabledButtonColor;
   BoxDecoration? normalButtonBackground;
-  BoxDecoration? hoverButtonBackground;
+  BoxDecoration? hoveredButtonBackground;
   BoxDecoration? disabledButtonBackground;
 
   @override
@@ -40,7 +40,7 @@ class TabStatusThemeData {
           hoverButtonColor == other.hoverButtonColor &&
           disabledButtonColor == other.disabledButtonColor &&
           normalButtonBackground == other.normalButtonBackground &&
-          hoverButtonBackground == other.hoverButtonBackground &&
+          hoveredButtonBackground == other.hoveredButtonBackground &&
           disabledButtonBackground == other.disabledButtonBackground;
 
   @override
@@ -52,6 +52,6 @@ class TabStatusThemeData {
       hoverButtonColor.hashCode ^
       disabledButtonColor.hashCode ^
       normalButtonBackground.hashCode ^
-      hoverButtonBackground.hashCode ^
+      hoveredButtonBackground.hashCode ^
       disabledButtonBackground.hashCode;
 }

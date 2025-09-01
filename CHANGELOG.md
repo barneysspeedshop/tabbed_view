@@ -17,6 +17,8 @@
       * `crossAxisFit`: Defines how the cross axis will fit within the tabs area.
       * `crossAxisAlignment`: Defines the alignment of tabs in relation to the main content.
       * `tabCrossAxisSizeBehavior`: Defines how tabs are sized relative to each other in the cross axis.
+  * `TabStatusThemeData`
+    * Renamed `hoverButtonBackground` attribute to `hoveredButtonBackground`.
   * `TabThemeData`
     * Renamed `highlightedStatus` attribute to `hoveredStatus`. 
     * Renamed `hoverButtonColor` attribute to `hoveredButtonColor`.
