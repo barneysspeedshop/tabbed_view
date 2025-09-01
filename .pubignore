@@ -1,5 +1,14 @@
 docs/
 
+example/android/
+example/ios/
+example/linux/
+example/macos/
+example/windows/
+example/web/
+
+# From here on, same as .gitignore
+
 # Miscellaneous
 *.class
 *.log
