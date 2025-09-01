@@ -21,28 +21,31 @@ class MinimalistTheme extends TabbedViewThemeData {
       {required Brightness brightness,
       required MaterialColor colorSet,
       required double fontSize,
-      double gap = 4}) {
+      required double initialGap,
+      required double gap,
+      required double? tabRadius}) {
     final bool isLight = brightness == Brightness.light;
 
-    final Color color = isLight ? colorSet[200]! : colorSet[900]!;
-    final Color selectedColor = isLight ? colorSet[600]! : colorSet[600]!;
-    final Color hoveredColor = isLight ? colorSet[300]! : colorSet[800]!;
+    final Color color = isLight ? colorSet[300]! : colorSet[900]!;
+    final Color selectedColor = isLight ? colorSet[800]! : colorSet[300]!;
+    final Color hoveredColor = isLight ? colorSet[400]! : colorSet[800]!;
     final Color buttonColor = isLight ? colorSet[800]! : colorSet[100]!;
     final Color disabledButtonColor = isLight ? colorSet[400]! : colorSet[600]!;
     final Color hoveredButtonColor = isLight ? colorSet[800]! : colorSet[100]!;
-    final Color fontColor = isLight ? colorSet[800]! : colorSet[100]!;
+    final Color fontColor = isLight ? colorSet[900]! : colorSet[100]!;
+    final Color selectedFontColor = isLight ? colorSet[100]! : colorSet[100]!;
 
     final MinimalistTheme theme = MinimalistTheme._(
         color: color,
         selectedColor: selectedColor,
         hoveredColor: hoveredColor,
-        tabRadius: Radius.circular(11));
+        tabRadius: tabRadius != null ? Radius.circular(tabRadius) : null);
 
-    theme.divider =
-        BorderSide(color: isLight ? colorSet[600]! : colorSet[600]!, width: 4);
+    theme.divider = BorderSide(color: selectedColor, width: 4);
 
     final TabsAreaThemeData tabsArea = theme.tabsArea;
     tabsArea.tabCrossAxisSizeBehavior = TabCrossAxisSizeBehavior.uniform;
+    tabsArea.initialGap = initialGap;
     tabsArea.middleGap = gap;
     tabsArea.buttonsAreaPadding = EdgeInsets.all(4);
     tabsArea.buttonPadding = const EdgeInsets.all(4);
@@ -63,6 +66,8 @@ class MinimalistTheme extends TabbedViewThemeData {
     tab.hoveredButtonColor = hoveredButtonColor;
     tab.disabledButtonColor = disabledButtonColor;
     tab.decorationBuilder = theme._tabDecorationBuilder;
+    tab.selectedStatus.fontColor = selectedFontColor;
+    tab.selectedStatus.buttonColor = selectedFontColor;
 
     final HiddenTabsMenuThemeData menu =
         HiddenTabsMenuThemeData(brightness: brightness);

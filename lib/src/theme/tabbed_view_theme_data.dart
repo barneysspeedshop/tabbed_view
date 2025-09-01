@@ -75,9 +75,17 @@ class TabbedViewThemeData {
   factory TabbedViewThemeData.minimalist(
       {Brightness brightness = Brightness.light,
       MaterialColor colorSet = Colors.grey,
-      double fontSize = 13}) {
+      double fontSize = 13,
+      double initialGap = 16,
+      double gap = 4,
+      double? tabRadius = 10}) {
     return MinimalistTheme(
-        brightness: brightness, colorSet: colorSet, fontSize: fontSize);
+        brightness: brightness,
+        colorSet: colorSet,
+        fontSize: fontSize,
+        initialGap: initialGap,
+        gap: gap,
+        tabRadius: tabRadius);
   }
 
   @override

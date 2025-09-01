@@ -118,80 +118,81 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
   TabbedView _buildTabbedView() {
     // Configuring the [TabbedView] with all available properties.
     return TabbedView(
-      trailing: _trailingWidgetEnabled
-          ? Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-              child: Text('Trailing text'),
-            )
-          : null,
-      controller: _controller,
-      onTabSecondaryTap: (index, tabData, details) {
-        _scaffoldMessengerKey.currentState?.showSnackBar(SnackBar(
-            content: Text('Right-clicked on tab #$index: "${tabData.text}"')));
-      },
-      tabBarPosition: _position,
-      contentBuilder: null,
-      onTabSelection: (tabData) {},
-      onTabClose: (index, tabData) {},
-      tabCloseInterceptor: (index, tabData) {
-        if (tabData.text == 'Tab 1') {
-          return false;
-        }
-        return true;
-      },
-      tabSelectInterceptor: (newIndex) {
-        return true;
-      },
-      tabsAreaButtonsBuilder: (context, tabsCount) {
-        return [
-          TabButton(
-              icon: IconProvider.data(Icons.add),
-              onPressed: () {
-                _controller.addTab(TabData(
-                    text: 'New Tab',
-                    content: Center(child: Text('Content of New Tab'))));
-              })
-        ];
-      },
-      onDraggableBuild: (controller, tabIndex, tab) {
-        return DraggableConfig(
-          canDrag: true,
-          feedback: null,
-          feedbackOffset: Offset.zero,
-          dragAnchorStrategy: childDragAnchorStrategy,
-          onDragStarted: null,
-          onDragUpdate: null,
-          onDraggableCanceled: null,
-          onDragEnd: null,
-          onDragCompleted: null,
-        );
-      },
-      hiddenTabsMenuItemBuilder: (context, tabIndex, tabData) {
-        // Example of a custom menu item.
-        // The default menu item is in:
-        // lib/src/internal/tabs_area/hidden_tabs_menu_widget.dart
-        final theme = TabbedViewTheme.of(context);
-        return Padding(
-          padding: theme.menu.menuItemPadding,
-          child: Row(
-            children: [
-              Icon(Icons.tab, size: 16, color: theme.menu.textStyle?.color),
-              SizedBox(width: 8),
-              Expanded(
-                child: Text('${tabData.text} (index $tabIndex)',
-                    style: theme.menu.textStyle,
-                    overflow: TextOverflow.ellipsis),
-              ),
-            ],
-          ),
-        );
-      },
-      onTabReorder: (int oldIndex, int newIndex) {},
-      closeButtonTooltip: 'Close this tab',
-      tabsAreaVisible: true,
-      contentClip: true,
-      dragScope: null,
-    );
+        trailing: _trailingWidgetEnabled
+            ? Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                child: Text('Trailing text'),
+              )
+            : null,
+        controller: _controller,
+        onTabSecondaryTap: (index, tabData, details) {
+          _scaffoldMessengerKey.currentState?.showSnackBar(SnackBar(
+              content:
+                  Text('Right-clicked on tab #$index: "${tabData.text}"')));
+        },
+        tabBarPosition: _position,
+        contentBuilder: null,
+        onTabSelection: (tabData) {},
+        onTabClose: (index, tabData) {},
+        tabCloseInterceptor: (index, tabData) {
+          if (tabData.text == 'Tab 1') {
+            return false;
+          }
+          return true;
+        },
+        tabSelectInterceptor: (newIndex) {
+          return true;
+        },
+        tabsAreaButtonsBuilder: (context, tabsCount) {
+          return [
+            TabButton(
+                icon: IconProvider.data(Icons.add),
+                onPressed: () {
+                  _controller.addTab(TabData(
+                      text: 'New Tab',
+                      content: Center(child: Text('Content of New Tab'))));
+                })
+          ];
+        },
+        onDraggableBuild: (controller, tabIndex, tab) {
+          return DraggableConfig(
+            canDrag: true,
+            feedback: null,
+            feedbackOffset: Offset.zero,
+            dragAnchorStrategy: childDragAnchorStrategy,
+            onDragStarted: null,
+            onDragUpdate: null,
+            onDraggableCanceled: null,
+            onDragEnd: null,
+            onDragCompleted: null,
+          );
+        },
+        hiddenTabsMenuItemBuilder: (context, tabIndex, tabData) {
+          // Example of a custom menu item.
+          // The default menu item is in:
+          // lib/src/internal/tabs_area/hidden_tabs_menu_widget.dart
+          final theme = TabbedViewTheme.of(context);
+          return Padding(
+            padding: theme.menu.menuItemPadding,
+            child: Row(
+              children: [
+                Icon(Icons.tab, size: 16, color: theme.menu.textStyle?.color),
+                SizedBox(width: 8),
+                Expanded(
+                  child: Text('${tabData.text} (index $tabIndex)',
+                      style: theme.menu.textStyle,
+                      overflow: TextOverflow.ellipsis),
+                ),
+              ],
+            ),
+          );
+        },
+        onTabReorder: (int oldIndex, int newIndex) {},
+        closeButtonTooltip: 'Close this tab',
+        tabsAreaVisible: true,
+        contentClip: true,
+        dragScope: null,
+        unselectedTabButtonsBehavior: UnselectedTabButtonsBehavior.allDisabled);
   }
 
   void _onBrightnessSelected(Brightness brightness) {
