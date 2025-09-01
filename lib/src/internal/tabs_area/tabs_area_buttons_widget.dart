@@ -191,7 +191,7 @@ class _TabsAreaButtonsWidgetState extends State<TabsAreaButtonsWidget> {
               normalColor: tabsAreaTheme.buttonColor,
               hoverColor: tabsAreaTheme.hoveredButtonColor,
               disabledColor: tabsAreaTheme.disabledButtonColor,
-              normalBackground: tabsAreaTheme.normalButtonBackground,
+              normalBackground: tabsAreaTheme.buttonBackground,
               hoverBackground: tabsAreaTheme.hoveredButtonBackground,
               disabledBackground: tabsAreaTheme.disabledButtonBackground,
               iconSize: tabButton.iconSize != null

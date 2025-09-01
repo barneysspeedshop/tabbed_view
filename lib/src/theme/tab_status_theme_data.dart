@@ -10,7 +10,7 @@ class TabStatusThemeData {
       this.buttonColor,
       this.hoveredButtonColor,
       this.disabledButtonColor,
-      this.normalButtonBackground,
+      this.buttonBackground,
       this.hoveredButtonBackground,
       this.disabledButtonBackground});
 
@@ -24,7 +24,7 @@ class TabStatusThemeData {
   Color? buttonColor;
   Color? hoveredButtonColor;
   Color? disabledButtonColor;
-  BoxDecoration? normalButtonBackground;
+  BoxDecoration? buttonBackground;
   BoxDecoration? hoveredButtonBackground;
   BoxDecoration? disabledButtonBackground;
 
@@ -39,7 +39,7 @@ class TabStatusThemeData {
           buttonColor == other.buttonColor &&
           hoveredButtonColor == other.hoveredButtonColor &&
           disabledButtonColor == other.disabledButtonColor &&
-          normalButtonBackground == other.normalButtonBackground &&
+          buttonBackground == other.buttonBackground &&
           hoveredButtonBackground == other.hoveredButtonBackground &&
           disabledButtonBackground == other.disabledButtonBackground;
 
@@ -51,7 +51,7 @@ class TabStatusThemeData {
       buttonColor.hashCode ^
       hoveredButtonColor.hashCode ^
       disabledButtonColor.hashCode ^
-      normalButtonBackground.hashCode ^
+      buttonBackground.hashCode ^
       hoveredButtonBackground.hashCode ^
       disabledButtonBackground.hashCode;
 }

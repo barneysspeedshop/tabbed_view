@@ -22,7 +22,7 @@ class TabThemeData {
       this.buttonColor = Colors.black,
       this.hoveredButtonColor = Colors.black,
       this.disabledButtonColor = Colors.black12,
-      this.normalButtonBackground,
+      this.buttonBackground,
       this.hoveredButtonBackground,
       this.disabledButtonBackground,
       double buttonIconSize = TabbedViewThemeConstants.defaultIconSize,
@@ -79,7 +79,7 @@ class TabThemeData {
   Color buttonColor;
   Color hoveredButtonColor;
   Color disabledButtonColor;
-  BoxDecoration? normalButtonBackground;
+  BoxDecoration? buttonBackground;
   BoxDecoration? hoveredButtonBackground;
   BoxDecoration? disabledButtonBackground;
 
@@ -127,7 +127,7 @@ class TabThemeData {
           buttonColor == other.buttonColor &&
           hoveredButtonColor == other.hoveredButtonColor &&
           disabledButtonColor == other.disabledButtonColor &&
-          normalButtonBackground == other.normalButtonBackground &&
+          buttonBackground == other.buttonBackground &&
           hoveredButtonBackground == other.hoveredButtonBackground &&
           disabledButtonBackground == other.disabledButtonBackground &&
           closeIcon == other.closeIcon &&
@@ -152,7 +152,7 @@ class TabThemeData {
       buttonColor.hashCode ^
       hoveredButtonColor.hashCode ^
       disabledButtonColor.hashCode ^
-      normalButtonBackground.hashCode ^
+      buttonBackground.hashCode ^
       hoveredButtonBackground.hashCode ^
       disabledButtonBackground.hashCode ^
       closeIcon.hashCode ^
