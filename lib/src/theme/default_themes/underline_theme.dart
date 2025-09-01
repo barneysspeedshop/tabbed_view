@@ -28,9 +28,9 @@ class UnderlineTheme extends TabbedViewThemeData {
     final Color foregroundColor = isLight ? colorSet[900]! : colorSet[100]!;
     final Color backgroundColor = isLight ? colorSet[50]! : colorSet[900]!;
     final Color buttonColor = isLight ? colorSet[700]! : colorSet[200]!;
-    final Color disabledButtonColor = isLight ? colorSet[300]! : colorSet[400]!;
+    final Color disabledButtonColor = isLight ? colorSet[400]! : colorSet[600]!;
     final Color hoveredButtonColor = isLight ? colorSet[900]! : colorSet[300]!;
-    final Color hoveredColor = isLight ? colorSet[300]! : colorSet[700]!;
+    final Color hoveredColor = isLight ? colorSet[400]! : colorSet[600]!;
 
     final UnderlineTheme theme = UnderlineTheme._(
         borderColor: borderColor,
@@ -67,9 +67,6 @@ class UnderlineTheme extends TabbedViewThemeData {
     tab.decorationBuilder = theme._tabDecorationBuilder;
 
     final ContentAreaThemeData contentArea = theme.contentArea;
-    // For the mobile theme, the content area is a distinct, bordered box
-    // that does not try to connect its border with the tabs area. A full
-    // border works for any TabBarPosition.
     contentArea.color = backgroundColor;
     contentArea.border = BorderSide(width: 1, color: borderColor);
 
