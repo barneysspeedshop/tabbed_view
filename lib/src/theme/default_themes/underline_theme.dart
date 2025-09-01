@@ -27,7 +27,7 @@ class UnderlineTheme extends TabbedViewThemeData {
     final Color borderColor = isLight ? colorSet[500]! : colorSet[800]!;
     final Color foregroundColor = isLight ? colorSet[900]! : colorSet[100]!;
     final Color backgroundColor = isLight ? colorSet[50]! : colorSet[900]!;
-    final Color normalButtonColor = isLight ? colorSet[700]! : colorSet[200]!;
+    final Color buttonColor = isLight ? colorSet[700]! : colorSet[200]!;
     final Color disabledButtonColor = isLight ? colorSet[300]! : colorSet[400]!;
     final Color hoveredButtonColor = isLight ? colorSet[900]! : colorSet[300]!;
     final Color hoveredColor = isLight ? colorSet[300]! : colorSet[700]!;
@@ -43,7 +43,7 @@ class UnderlineTheme extends TabbedViewThemeData {
     tabsArea.crossAxisFit = TabsAreaCrossAxisFit.all;
     tabsArea.initialGap = -1;
     tabsArea.middleGap = -1;
-    tabsArea.normalButtonColor = normalButtonColor;
+    tabsArea.buttonColor = buttonColor;
     tabsArea.hoveredButtonColor = hoveredButtonColor;
     tabsArea.disabledButtonColor = disabledButtonColor;
     tabsArea.buttonsAreaPadding = EdgeInsets.all(2);
@@ -53,7 +53,7 @@ class UnderlineTheme extends TabbedViewThemeData {
     tabsArea.color = backgroundColor;
 
     final TabThemeData tab = theme.tab;
-    tab.normalButtonColor = normalButtonColor;
+    tab.buttonColor = buttonColor;
     tab.hoveredButtonColor = hoveredButtonColor;
     tab.disabledButtonColor = disabledButtonColor;
     tab.textStyle = TextStyle(fontSize: fontSize, color: foregroundColor);

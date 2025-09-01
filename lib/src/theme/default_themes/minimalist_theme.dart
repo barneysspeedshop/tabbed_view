@@ -27,7 +27,7 @@ class MinimalistTheme extends TabbedViewThemeData {
     final Color normalColor = isLight ? colorSet[200]! : colorSet[900]!;
     final Color selectedColor = isLight ? colorSet[600]! : colorSet[600]!;
     final Color hoveredColor = isLight ? colorSet[300]! : colorSet[800]!;
-    final Color normalButtonColor = isLight ? colorSet[800]! : colorSet[100]!;
+    final Color buttonColor = isLight ? colorSet[800]! : colorSet[100]!;
     final Color disabledButtonColor = isLight ? colorSet[400]! : colorSet[600]!;
     final Color hoveredButtonColor = isLight ? colorSet[800]! : colorSet[100]!;
     final Color fontColor = isLight ? colorSet[800]! : colorSet[100]!;
@@ -47,7 +47,7 @@ class MinimalistTheme extends TabbedViewThemeData {
     tabsArea.buttonsAreaPadding = EdgeInsets.all(4);
     tabsArea.buttonPadding = const EdgeInsets.all(4);
     tabsArea.hoveredButtonBackground = BoxDecoration(color: hoveredColor);
-    tabsArea.normalButtonColor = normalButtonColor;
+    tabsArea.buttonColor = buttonColor;
     tabsArea.hoveredButtonColor = hoveredButtonColor;
     tabsArea.disabledButtonColor = disabledButtonColor;
     tabsArea.dropColor = Color.fromARGB(150, 255, 255, 255);
@@ -59,7 +59,7 @@ class MinimalistTheme extends TabbedViewThemeData {
     tab.paddingWithoutButton = const EdgeInsets.fromLTRB(8, 6, 8, 2);
     tab.hoveredButtonBackground = BoxDecoration(color: hoveredColor);
     tab.buttonPadding = const EdgeInsets.all(4);
-    tab.normalButtonColor = normalButtonColor;
+    tab.buttonColor = buttonColor;
     tab.hoveredButtonColor = hoveredButtonColor;
     tab.disabledButtonColor = disabledButtonColor;
     tab.decorationBuilder = theme._tabDecorationBuilder;

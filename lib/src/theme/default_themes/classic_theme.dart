@@ -29,7 +29,7 @@ class ClassicTheme extends TabbedViewThemeData {
     final Color backgroundColor = isLight ? colorSet[50]! : colorSet[900]!;
     final Color hoveredColor = isLight ? colorSet[300]! : colorSet[600]!;
     final Color fontColor = isLight ? colorSet[900]! : colorSet[200]!;
-    final Color normalButtonColor = isLight ? colorSet[900]! : colorSet[900]!;
+    final Color buttonColor = isLight ? colorSet[900]! : colorSet[900]!;
     final Color disabledButtonColor = isLight ? colorSet[400]! : colorSet[500]!;
     final Color hoveredButtonColor = isLight ? colorSet[900]! : colorSet[50]!;
     borderColor = borderColor ?? (isLight ? colorSet[900]! : colorSet[800]!);
@@ -45,7 +45,7 @@ class ClassicTheme extends TabbedViewThemeData {
     final TabsAreaThemeData tabsArea = theme.tabsArea;
     tabsArea.tabCrossAxisSizeBehavior =
         TabCrossAxisSizeBehavior.nonSelectedUniform;
-    tabsArea.normalButtonColor = normalButtonColor;
+    tabsArea.buttonColor = buttonColor;
     tabsArea.hoveredButtonColor = hoveredButtonColor;
     tabsArea.disabledButtonColor = disabledButtonColor;
     tabsArea.buttonPadding = const EdgeInsets.all(2);
@@ -61,7 +61,7 @@ class ClassicTheme extends TabbedViewThemeData {
 
     final TabThemeData tab = theme.tab;
     tab.textStyle = TextStyle(fontSize: fontSize, color: fontColor);
-    tab.normalButtonColor = normalButtonColor;
+    tab.buttonColor = buttonColor;
     tab.hoveredButtonColor = hoveredButtonColor;
     tab.disabledButtonColor = disabledButtonColor;
     tab.hoveredButtonBackground = BoxDecoration(color: hoveredColor);

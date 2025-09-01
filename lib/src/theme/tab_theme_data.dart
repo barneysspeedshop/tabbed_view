@@ -19,7 +19,7 @@ class TabThemeData {
 
   TabThemeData(
       {IconProvider? closeIcon,
-      this.normalButtonColor = Colors.black,
+      this.buttonColor = Colors.black,
       this.hoveredButtonColor = Colors.black,
       this.disabledButtonColor = Colors.black12,
       this.normalButtonBackground,
@@ -76,7 +76,7 @@ class TabThemeData {
   TextStyle? textStyle;
 
   double buttonIconSize;
-  Color normalButtonColor;
+  Color buttonColor;
   Color hoveredButtonColor;
   Color disabledButtonColor;
   BoxDecoration? normalButtonBackground;
@@ -124,7 +124,7 @@ class TabThemeData {
           draggingOpacity == other.draggingOpacity &&
           textStyle == other.textStyle &&
           buttonIconSize == other.buttonIconSize &&
-          normalButtonColor == other.normalButtonColor &&
+          buttonColor == other.buttonColor &&
           hoveredButtonColor == other.hoveredButtonColor &&
           disabledButtonColor == other.disabledButtonColor &&
           normalButtonBackground == other.normalButtonBackground &&
@@ -149,7 +149,7 @@ class TabThemeData {
       draggingOpacity.hashCode ^
       textStyle.hashCode ^
       buttonIconSize.hashCode ^
-      normalButtonColor.hashCode ^
+      buttonColor.hashCode ^
       hoveredButtonColor.hashCode ^
       disabledButtonColor.hashCode ^
       normalButtonBackground.hashCode ^

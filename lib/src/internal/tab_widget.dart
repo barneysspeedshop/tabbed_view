@@ -255,8 +255,7 @@ class _TabContentWidget extends StatelessWidget {
     TabData tab = provider.controller.tabs[index];
     TabStatusThemeData? statusTheme = tabTheme.getTabThemeFor(status);
 
-    Color normalColor =
-        statusTheme?.normalButtonColor ?? tabTheme.normalButtonColor;
+    Color normalColor = statusTheme?.buttonColor ?? tabTheme.buttonColor;
     Color hoverColor =
         statusTheme?.hoveredButtonColor ?? tabTheme.hoveredButtonColor;
     Color disabledColor =
