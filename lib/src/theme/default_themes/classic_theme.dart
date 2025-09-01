@@ -29,7 +29,7 @@ class ClassicTheme extends TabbedViewThemeData {
     final Color backgroundColor = isLight ? colorSet[50]! : colorSet[900]!;
     final Color hoveredColor = isLight ? colorSet[300]! : colorSet[600]!;
     final Color fontColor = isLight ? colorSet[900]! : colorSet[200]!;
-    final Color buttonColor = isLight ? colorSet[900]! : colorSet[900]!;
+    final Color buttonColor = isLight ? colorSet[900]! : colorSet[200]!;
     final Color disabledButtonColor = isLight ? colorSet[400]! : colorSet[500]!;
     final Color hoveredButtonColor = isLight ? colorSet[900]! : colorSet[50]!;
     borderColor = borderColor ?? (isLight ? colorSet[900]! : colorSet[800]!);
