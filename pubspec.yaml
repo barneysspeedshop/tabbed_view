@@ -9,6 +9,24 @@ topics:
   - layout
   - tab
 
+screenshots:
+  - description: Classic top light
+    path: screenshots/classic_top_light.png
+  - description: Classic bottom dark
+    path: screenshots/classic_bottom_dark.png
+  - description: Classic left light
+    path: screenshots/classic_left_light.png
+  - description: Classic left stacked light
+    path: screenshots/classic_left_stacked_light.png
+  - description: Minimalist top light
+    path: screenshots/minimalist_top_light.png
+  - description: Minimalist bottom dark
+    path: screenshots/minimalist_bottom_dark.png
+  - description: Underline top light
+    path: screenshots/underline_top_light.png
+  - description: Underline bottom dark
+    path: screenshots/underline_bottom_dark.png
+
 environment:
   sdk: ">=2.19.0 <4.0.0"
   flutter: ">=2.17.0"
