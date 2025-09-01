@@ -7,6 +7,8 @@
 
 Flutter widget inspired by the classic Desktop-style tab component. Supports customizable themes.
 
+![](screenshots/classic_bottom_dark.png)
+
 ![](https://caduandrade.github.io/tabbed_view/main_classic_v2.png)
 
 ![](https://caduandrade.github.io/tabbed_view/main_dark_v2.png)
@@ -17,4 +19,4 @@ Flutter widget inspired by the classic Desktop-style tab component. Supports cus
 
 ---
 
-See full documentation at [https://caduandrade.github.io/tabbed_view/](https://caduandrade.github.io/tabbed_view/)
+Get started quickly with the interactive demo and documentation [here](https://caduandrade.github.io/tabbed_view/).
