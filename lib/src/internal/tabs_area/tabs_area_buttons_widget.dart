@@ -189,7 +189,7 @@ class _TabsAreaButtonsWidgetState extends State<TabsAreaButtonsWidget> {
               button: tabButton,
               enabled: widget.provider.draggingTabIndex == null,
               normalColor: tabsAreaTheme.normalButtonColor,
-              hoverColor: tabsAreaTheme.hoverButtonColor,
+              hoverColor: tabsAreaTheme.hoveredButtonColor,
               disabledColor: tabsAreaTheme.disabledButtonColor,
               normalBackground: tabsAreaTheme.normalButtonBackground,
               hoverBackground: tabsAreaTheme.hoverButtonBackground,

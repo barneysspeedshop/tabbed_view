@@ -28,10 +28,10 @@ class ClassicTheme extends TabbedViewThemeData {
 
     final Color backgroundColor = isLight ? colorSet[50]! : colorSet[900]!;
     final Color hoveredColor = isLight ? colorSet[300]! : colorSet[600]!;
-    final Color fontColor = isLight ? colorSet[900]! : colorSet[50]!;
-    final Color normalButtonColor = isLight ? colorSet[900]! : colorSet[50]!;
+    final Color fontColor = isLight ? colorSet[900]! : colorSet[200]!;
+    final Color normalButtonColor = isLight ? colorSet[900]! : colorSet[900]!;
     final Color disabledButtonColor = isLight ? colorSet[400]! : colorSet[500]!;
-    final Color hoverButtonColor = isLight ? colorSet[900]! : colorSet[50]!;
+    final Color hoveredButtonColor = isLight ? colorSet[900]! : colorSet[50]!;
     borderColor = borderColor ?? (isLight ? colorSet[900]! : colorSet[800]!);
 
     final ClassicTheme theme = ClassicTheme._(
@@ -46,7 +46,7 @@ class ClassicTheme extends TabbedViewThemeData {
     tabsArea.tabCrossAxisSizeBehavior =
         TabCrossAxisSizeBehavior.nonSelectedUniform;
     tabsArea.normalButtonColor = normalButtonColor;
-    tabsArea.hoverButtonColor = hoverButtonColor;
+    tabsArea.hoveredButtonColor = hoveredButtonColor;
     tabsArea.disabledButtonColor = disabledButtonColor;
     tabsArea.buttonPadding = const EdgeInsets.all(2);
     tabsArea.hoverButtonBackground = BoxDecoration(color: hoveredColor);
@@ -62,13 +62,13 @@ class ClassicTheme extends TabbedViewThemeData {
     final TabThemeData tab = theme.tab;
     tab.textStyle = TextStyle(fontSize: fontSize, color: fontColor);
     tab.normalButtonColor = normalButtonColor;
-    tab.hoverButtonColor = hoverButtonColor;
+    tab.hoveredButtonColor = hoveredButtonColor;
     tab.disabledButtonColor = disabledButtonColor;
     tab.hoverButtonBackground = BoxDecoration(color: hoveredColor);
     tab.buttonsOffset = 4;
     tab.buttonPadding = const EdgeInsets.all(4);
     tab.padding = EdgeInsets.fromLTRB(8, 4, 4, 4);
-    tab.paddingWithoutButton = EdgeInsets.fromLTRB(8, 6, 8, 6);
+    tab.paddingWithoutButton = EdgeInsets.fromLTRB(8, 6, 8, 5);
     tab.draggingDecoration = BoxDecoration(
         color: backgroundColor,
         border: Border.all(color: borderColor, width: 1));

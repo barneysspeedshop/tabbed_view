@@ -258,7 +258,7 @@ class _TabContentWidget extends StatelessWidget {
     Color normalColor =
         statusTheme?.normalButtonColor ?? tabTheme.normalButtonColor;
     Color hoverColor =
-        statusTheme?.hoverButtonColor ?? tabTheme.hoverButtonColor;
+        statusTheme?.hoverButtonColor ?? tabTheme.hoveredButtonColor;
     Color disabledColor =
         statusTheme?.disabledButtonColor ?? tabTheme.disabledButtonColor;
 

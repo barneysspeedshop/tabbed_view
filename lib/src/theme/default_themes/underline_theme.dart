@@ -29,7 +29,7 @@ class UnderlineTheme extends TabbedViewThemeData {
     final Color backgroundColor = isLight ? colorSet[50]! : colorSet[900]!;
     final Color normalButtonColor = isLight ? colorSet[700]! : colorSet[200]!;
     final Color disabledButtonColor = isLight ? colorSet[300]! : colorSet[400]!;
-    final Color hoverButtonColor = isLight ? colorSet[900]! : colorSet[300]!;
+    final Color hoveredButtonColor = isLight ? colorSet[900]! : colorSet[300]!;
     final Color hoveredColor = isLight ? colorSet[300]! : colorSet[700]!;
 
     final UnderlineTheme theme = UnderlineTheme._(
@@ -44,7 +44,7 @@ class UnderlineTheme extends TabbedViewThemeData {
     tabsArea.initialGap = -1;
     tabsArea.middleGap = -1;
     tabsArea.normalButtonColor = normalButtonColor;
-    tabsArea.hoverButtonColor = hoverButtonColor;
+    tabsArea.hoveredButtonColor = hoveredButtonColor;
     tabsArea.disabledButtonColor = disabledButtonColor;
     tabsArea.buttonsAreaPadding = EdgeInsets.all(2);
     tabsArea.hoverButtonBackground = BoxDecoration(color: hoveredColor);
@@ -54,7 +54,7 @@ class UnderlineTheme extends TabbedViewThemeData {
 
     final TabThemeData tab = theme.tab;
     tab.normalButtonColor = normalButtonColor;
-    tab.hoverButtonColor = hoverButtonColor;
+    tab.hoveredButtonColor = hoveredButtonColor;
     tab.disabledButtonColor = disabledButtonColor;
     tab.textStyle = TextStyle(fontSize: fontSize, color: foregroundColor);
     tab.buttonsOffset = 4;
