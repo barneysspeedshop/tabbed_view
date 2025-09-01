@@ -8,7 +8,7 @@ class TabStatusThemeData {
       this.padding,
       this.paddingWithoutButton,
       this.normalButtonColor,
-      this.hoverButtonColor,
+      this.hoveredButtonColor,
       this.disabledButtonColor,
       this.normalButtonBackground,
       this.hoveredButtonBackground,
@@ -22,7 +22,7 @@ class TabStatusThemeData {
 
   Color? fontColor;
   Color? normalButtonColor;
-  Color? hoverButtonColor;
+  Color? hoveredButtonColor;
   Color? disabledButtonColor;
   BoxDecoration? normalButtonBackground;
   BoxDecoration? hoveredButtonBackground;
@@ -37,7 +37,7 @@ class TabStatusThemeData {
           paddingWithoutButton == other.paddingWithoutButton &&
           fontColor == other.fontColor &&
           normalButtonColor == other.normalButtonColor &&
-          hoverButtonColor == other.hoverButtonColor &&
+          hoveredButtonColor == other.hoveredButtonColor &&
           disabledButtonColor == other.disabledButtonColor &&
           normalButtonBackground == other.normalButtonBackground &&
           hoveredButtonBackground == other.hoveredButtonBackground &&
@@ -49,7 +49,7 @@ class TabStatusThemeData {
       paddingWithoutButton.hashCode ^
       fontColor.hashCode ^
       normalButtonColor.hashCode ^
-      hoverButtonColor.hashCode ^
+      hoveredButtonColor.hashCode ^
       disabledButtonColor.hashCode ^
       normalButtonBackground.hashCode ^
       hoveredButtonBackground.hashCode ^
