@@ -12,7 +12,7 @@ import '../tabs_area_theme_data.dart';
 /// Predefined minimalist theme builder.
 class MinimalistTheme extends TabbedViewThemeData {
   MinimalistTheme._(
-      {required this.normalColor,
+      {required this.color,
       required this.selectedColor,
       required this.hoveredColor,
       required this.tabRadius});
@@ -24,7 +24,7 @@ class MinimalistTheme extends TabbedViewThemeData {
       double gap = 4}) {
     final bool isLight = brightness == Brightness.light;
 
-    final Color normalColor = isLight ? colorSet[200]! : colorSet[900]!;
+    final Color color = isLight ? colorSet[200]! : colorSet[900]!;
     final Color selectedColor = isLight ? colorSet[600]! : colorSet[600]!;
     final Color hoveredColor = isLight ? colorSet[300]! : colorSet[800]!;
     final Color buttonColor = isLight ? colorSet[800]! : colorSet[100]!;
@@ -33,7 +33,7 @@ class MinimalistTheme extends TabbedViewThemeData {
     final Color fontColor = isLight ? colorSet[800]! : colorSet[100]!;
 
     final MinimalistTheme theme = MinimalistTheme._(
-        normalColor: normalColor,
+        color: color,
         selectedColor: selectedColor,
         hoveredColor: hoveredColor,
         tabRadius: Radius.circular(11));
@@ -54,7 +54,7 @@ class MinimalistTheme extends TabbedViewThemeData {
     final TabThemeData tab = theme.tab;
     tab.buttonsOffset = 4;
     tab.textStyle = TextStyle(fontSize: fontSize, color: fontColor);
-    tab.draggingDecoration = BoxDecoration(color: normalColor);
+    tab.draggingDecoration = BoxDecoration(color: color);
     tab.padding = const EdgeInsets.fromLTRB(8, 4, 4, 4);
     tab.paddingWithoutButton = const EdgeInsets.fromLTRB(8, 6, 8, 2);
     tab.hoveredButtonBackground = BoxDecoration(color: hoveredColor);
@@ -73,7 +73,7 @@ class MinimalistTheme extends TabbedViewThemeData {
   }
 
   final Radius? tabRadius;
-  final Color normalColor;
+  final Color color;
   final Color selectedColor;
   final Color hoveredColor;
 
@@ -88,7 +88,7 @@ class MinimalistTheme extends TabbedViewThemeData {
         color = hoveredColor;
         break;
       case TabStatus.normal:
-        color = normalColor;
+        color = this.color;
         break;
     }
     final Radius? radius = this.tabRadius;
