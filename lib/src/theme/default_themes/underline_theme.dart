@@ -2,44 +2,31 @@ import 'package:flutter/material.dart';
 
 import '../../tab_bar_position.dart';
 import '../../tab_status.dart';
-import '../content_area_theme_data.dart';
 import '../hidden_tabs_menu_theme_data.dart';
 import '../tab_decoration_builder.dart';
-import '../tab_theme_data.dart';
 import '../tabbed_view_theme_data.dart';
 import '../tabs_area_cross_axis_fit.dart';
-import '../tabs_area_theme_data.dart';
 
 /// Predefined underline theme builder.
 class UnderlineTheme extends TabbedViewThemeData {
-  UnderlineTheme._(
-      {required this.borderColor,
-      required this.hoveredColor,
-      required this.selectedColor});
-
-  factory UnderlineTheme(
+  UnderlineTheme(
       {required Brightness brightness,
       required MaterialColor colorSet,
       required MaterialColor underlineColorSet,
       required double fontSize}) {
     final bool isLight = brightness == Brightness.light;
 
-    final Color borderColor = isLight ? colorSet[500]! : colorSet[800]!;
+    _borderColor = isLight ? colorSet[500]! : colorSet[800]!;
     final Color foregroundColor = isLight ? colorSet[900]! : colorSet[100]!;
     final Color backgroundColor = isLight ? colorSet[50]! : colorSet[900]!;
     final Color buttonColor = isLight ? colorSet[700]! : colorSet[200]!;
     final Color disabledButtonColor = isLight ? colorSet[400]! : colorSet[600]!;
     final Color hoveredButtonColor = isLight ? colorSet[900]! : colorSet[300]!;
-    final Color hoveredColor = isLight ? colorSet[400]! : colorSet[600]!;
+    _hoveredColor = isLight ? colorSet[400]! : colorSet[600]!;
+    _selectedColor = underlineColorSet;
 
-    final UnderlineTheme theme = UnderlineTheme._(
-        borderColor: borderColor,
-        hoveredColor: hoveredColor,
-        selectedColor: underlineColorSet);
+    divider = BorderSide(color: _borderColor, width: 1);
 
-    theme.divider = BorderSide(color: borderColor, width: 1);
-
-    final TabsAreaThemeData tabsArea = theme.tabsArea;
     tabsArea.crossAxisFit = TabsAreaCrossAxisFit.all;
     tabsArea.initialGap = -1;
     tabsArea.middleGap = -1;
@@ -47,12 +34,11 @@ class UnderlineTheme extends TabbedViewThemeData {
     tabsArea.hoveredButtonColor = hoveredButtonColor;
     tabsArea.disabledButtonColor = disabledButtonColor;
     tabsArea.buttonsAreaPadding = EdgeInsets.all(2);
-    tabsArea.hoveredButtonBackground = BoxDecoration(color: hoveredColor);
+    tabsArea.hoveredButtonBackground = BoxDecoration(color: _hoveredColor);
     tabsArea.buttonPadding = const EdgeInsets.all(2);
-    tabsArea.border = BorderSide(color: borderColor, width: 1);
+    tabsArea.border = BorderSide(color: _borderColor, width: 1);
     tabsArea.color = backgroundColor;
 
-    final TabThemeData tab = theme.tab;
     tab.buttonColor = buttonColor;
     tab.hoveredButtonColor = hoveredButtonColor;
     tab.disabledButtonColor = disabledButtonColor;
@@ -60,37 +46,32 @@ class UnderlineTheme extends TabbedViewThemeData {
     tab.buttonsOffset = 4;
     tab.padding = const EdgeInsets.fromLTRB(8, 4, 4, 0);
     tab.paddingWithoutButton = const EdgeInsets.fromLTRB(8, 7, 8, 3);
-    tab.hoveredButtonBackground = BoxDecoration(color: hoveredColor);
+    tab.hoveredButtonBackground = BoxDecoration(color: _hoveredColor);
     tab.buttonPadding = const EdgeInsets.all(4);
     tab.draggingDecoration =
-        BoxDecoration(border: Border.all(color: borderColor, width: 1));
-    tab.decorationBuilder = theme._tabDecorationBuilder;
+        BoxDecoration(border: Border.all(color: _borderColor, width: 1));
+    tab.decorationBuilder = _tabDecorationBuilder;
 
-    final ContentAreaThemeData contentArea = theme.contentArea;
     contentArea.color = backgroundColor;
-    contentArea.border = BorderSide(width: 1, color: borderColor);
+    contentArea.border = BorderSide(width: 1, color: _borderColor);
 
-    final HiddenTabsMenuThemeData menu =
-        HiddenTabsMenuThemeData(brightness: brightness);
-    theme.menu = menu;
+    menu = HiddenTabsMenuThemeData(brightness: brightness);
     menu.borderRadius = BorderRadius.circular(4);
-
-    return theme;
   }
 
-  Color borderColor;
-  Color hoveredColor;
-  Color selectedColor;
+  late final Color _borderColor;
+  late final Color _hoveredColor;
+  late final Color _selectedColor;
 
   TabDecoration _tabDecorationBuilder(
       {required TabBarPosition tabBarPosition, required TabStatus status}) {
     Color? color;
     switch (status) {
       case TabStatus.selected:
-        color = selectedColor;
+        color = _selectedColor;
         break;
       case TabStatus.hovered:
-        color = hoveredColor;
+        color = _hoveredColor;
         break;
       case TabStatus.normal:
         color = Colors.transparent;
@@ -119,7 +100,7 @@ class UnderlineTheme extends TabbedViewThemeData {
 
   TabDecoration _externalDecorationBuilder(
       {required TabBarPosition tabBarPosition, required TabStatus status}) {
-    final BorderSide borderSide = BorderSide(color: borderColor, width: 1);
+    final BorderSide borderSide = BorderSide(color: _borderColor, width: 1);
     if (tabBarPosition.isHorizontal) {
       return TabDecoration(border: Border(left: borderSide, right: borderSide));
     }
