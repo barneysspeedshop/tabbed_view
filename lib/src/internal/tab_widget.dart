@@ -255,9 +255,9 @@ class _TabContentWidget extends StatelessWidget {
     TabData tab = provider.controller.tabs[index];
     TabStatusThemeData? statusTheme = tabTheme.getTabThemeFor(status);
 
-    Color normalColor = statusTheme?.buttonColor ?? tabTheme.buttonColor;
+    Color color = statusTheme?.buttonColor ?? tabTheme.buttonColor;
     Color hoverColor =
-        statusTheme?.hoveredButtonColor ?? tabTheme.hoveredButtonColor;
+        statusTheme?.hoveredButtonColor ?? tabTheme.hoveredButtonColor ?? color;
     Color disabledColor =
         statusTheme?.disabledButtonColor ?? tabTheme.disabledButtonColor;
 
@@ -313,7 +313,7 @@ class _TabContentWidget extends StatelessWidget {
                 provider: provider,
                 button: button,
                 enabled: enabled,
-                normalColor: normalColor,
+                normalColor: color,
                 hoverColor: hoverColor,
                 disabledColor: disabledColor,
                 normalBackground: normalBackground,
@@ -345,7 +345,7 @@ class _TabContentWidget extends StatelessWidget {
               provider: provider,
               button: closeButton,
               enabled: enabled,
-              normalColor: normalColor,
+              normalColor: color,
               hoverColor: hoverColor,
               disabledColor: disabledColor,
               normalBackground: normalBackground,

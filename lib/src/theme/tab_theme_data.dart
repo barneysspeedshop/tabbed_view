@@ -20,7 +20,7 @@ class TabThemeData {
   TabThemeData(
       {IconProvider? closeIcon,
       this.buttonColor = Colors.black,
-      this.hoveredButtonColor = Colors.black,
+      this.hoveredButtonColor,
       this.disabledButtonColor = Colors.black12,
       this.buttonBackground,
       this.hoveredButtonBackground,
@@ -77,7 +77,7 @@ class TabThemeData {
 
   double buttonIconSize;
   Color buttonColor;
-  Color hoveredButtonColor;
+  Color? hoveredButtonColor;
   Color disabledButtonColor;
   BoxDecoration? buttonBackground;
   BoxDecoration? hoveredButtonBackground;

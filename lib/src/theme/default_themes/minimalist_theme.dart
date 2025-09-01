@@ -31,7 +31,6 @@ class MinimalistTheme extends TabbedViewThemeData {
     final Color hoveredColor = isLight ? colorSet[400]! : colorSet[800]!;
     final Color buttonColor = isLight ? colorSet[800]! : colorSet[100]!;
     final Color disabledButtonColor = isLight ? colorSet[400]! : colorSet[600]!;
-    final Color hoveredButtonColor = isLight ? colorSet[800]! : colorSet[100]!;
     final Color fontColor = isLight ? colorSet[900]! : colorSet[100]!;
     final Color selectedFontColor = isLight ? colorSet[100]! : colorSet[100]!;
 
@@ -51,7 +50,6 @@ class MinimalistTheme extends TabbedViewThemeData {
     tabsArea.buttonPadding = const EdgeInsets.all(4);
     tabsArea.hoveredButtonBackground = BoxDecoration(color: hoveredColor);
     tabsArea.buttonColor = buttonColor;
-    tabsArea.hoveredButtonColor = hoveredButtonColor;
     tabsArea.disabledButtonColor = disabledButtonColor;
     tabsArea.dropColor = Color.fromARGB(150, 255, 255, 255);
     final TabThemeData tab = theme.tab;
@@ -63,7 +61,6 @@ class MinimalistTheme extends TabbedViewThemeData {
     tab.hoveredButtonBackground = BoxDecoration(color: hoveredColor);
     tab.buttonPadding = const EdgeInsets.all(4);
     tab.buttonColor = buttonColor;
-    tab.hoveredButtonColor = hoveredButtonColor;
     tab.disabledButtonColor = disabledButtonColor;
     tab.decorationBuilder = theme._tabDecorationBuilder;
     tab.selectedStatus.fontColor = selectedFontColor;

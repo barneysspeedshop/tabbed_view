@@ -26,6 +26,7 @@
     * Renamed `normalButtonColor` attribute to `buttonColor`.
     * Renamed `hoverButtonColor` attribute to `hoveredButtonColor`.
     * Renamed `hoverButtonBackground` attribute to `hoveredButtonBackground`.
+    * Allowed null `hoveredButtonColor` to inherit default color.
   * `TabThemeData` and `TabStatusThemeData`
     * Removed attributes:
       * `innerBottomBorder`
