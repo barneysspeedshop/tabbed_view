@@ -14,6 +14,7 @@
     * Renamed `normalButtonColor` attribute to `buttonColor`.
     * Renamed `hoverButtonColor` attribute to `hoveredButtonColor`.
     * Renamed `hoverButtonBackground` attribute to `hoveredButtonBackground`.
+    * Allowed null `hoveredButtonColor` to inherit default color.
     * New attributes:
       * `crossAxisFit`: Defines how the cross axis will fit within the tabs area.
       * `crossAxisAlignment`: Defines the alignment of tabs in relation to the main content.

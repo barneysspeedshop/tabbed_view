@@ -29,7 +29,7 @@ class TabsAreaThemeData {
       double buttonsOffset = 0,
       double buttonIconSize = TabbedViewThemeConstants.defaultIconSize,
       this.buttonColor = Colors.black,
-      this.hoveredButtonColor = Colors.black,
+      this.hoveredButtonColor,
       this.disabledButtonColor = Colors.black12,
       this.buttonBackground,
       this.hoveredButtonBackground,
@@ -110,7 +110,7 @@ class TabsAreaThemeData {
   EdgeInsetsGeometry? buttonsAreaPadding;
   double buttonIconSize;
   Color buttonColor;
-  Color hoveredButtonColor;
+  Color? hoveredButtonColor;
   Color disabledButtonColor;
   BoxDecoration? buttonBackground;
   BoxDecoration? hoveredButtonBackground;
