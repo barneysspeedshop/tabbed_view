@@ -289,10 +289,11 @@ class _TabContentWidget extends StatelessWidget {
       textAndButtons.add(leading);
     }
     textAndButtons.add(Container(
-        child: SizedBox(
-            width: tab.textSize,
-            child: Text(tab.text,
-                style: textStyle, overflow: TextOverflow.ellipsis)),
+        child: Center(
+            child: SizedBox(
+                width: tab.textSize,
+                child: Text(tab.text,
+                    style: textStyle, overflow: TextOverflow.ellipsis))),
         padding: padding));
 
     if (hasButtons) {
