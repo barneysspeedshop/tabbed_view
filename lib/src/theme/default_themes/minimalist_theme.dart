@@ -5,19 +5,11 @@ import '../../tab_status.dart';
 import '../hidden_tabs_menu_theme_data.dart';
 import '../tab_cross_axis_size_behavior.dart';
 import '../tab_decoration_builder.dart';
-import '../tab_theme_data.dart';
 import '../tabbed_view_theme_data.dart';
-import '../tabs_area_theme_data.dart';
 
 /// Predefined minimalist theme builder.
 class MinimalistTheme extends TabbedViewThemeData {
-  MinimalistTheme._(
-      {required this.color,
-      required this.selectedColor,
-      required this.hoveredColor,
-      required this.tabRadius});
-
-  factory MinimalistTheme(
+  MinimalistTheme(
       {required Brightness brightness,
       required MaterialColor colorSet,
       required double fontSize,
@@ -26,74 +18,70 @@ class MinimalistTheme extends TabbedViewThemeData {
       required double? tabRadius}) {
     final bool isLight = brightness == Brightness.light;
 
-    final Color color = isLight ? colorSet[300]! : colorSet[900]!;
-    final Color selectedColor = isLight ? colorSet[800]! : colorSet[300]!;
-    final Color hoveredColor = isLight ? colorSet[400]! : colorSet[800]!;
+    _color = isLight ? colorSet[300]! : colorSet[900]!;
+    _selectedColor = isLight ? colorSet[800]! : colorSet[400]!;
+    _hoveredColor = isLight ? colorSet[400]! : colorSet[800]!;
     final Color buttonColor = isLight ? colorSet[800]! : colorSet[100]!;
     final Color disabledButtonColor = isLight ? colorSet[400]! : colorSet[600]!;
     final Color fontColor = isLight ? colorSet[900]! : colorSet[100]!;
-    final Color selectedFontColor = isLight ? colorSet[100]! : colorSet[100]!;
+    final Color selectedFontColor = isLight ? colorSet[100]! : colorSet[900]!;
+    _tabRadius = tabRadius != null ? Radius.circular(tabRadius) : null;
 
-    final MinimalistTheme theme = MinimalistTheme._(
-        color: color,
-        selectedColor: selectedColor,
-        hoveredColor: hoveredColor,
-        tabRadius: tabRadius != null ? Radius.circular(tabRadius) : null);
+    divider = BorderSide(color: _selectedColor, width: 4);
 
-    theme.divider = BorderSide(color: selectedColor, width: 4);
-
-    final TabsAreaThemeData tabsArea = theme.tabsArea;
     tabsArea.tabCrossAxisSizeBehavior = TabCrossAxisSizeBehavior.uniform;
     tabsArea.initialGap = initialGap;
     tabsArea.middleGap = gap;
     tabsArea.buttonsAreaPadding = EdgeInsets.all(4);
     tabsArea.buttonPadding = const EdgeInsets.all(4);
-    tabsArea.hoveredButtonBackground = BoxDecoration(color: hoveredColor);
+    tabsArea.hoveredButtonBackground =
+        BoxDecoration(color: isLight ? colorSet[300]! : colorSet[800]!);
     tabsArea.buttonColor = buttonColor;
     tabsArea.disabledButtonColor = disabledButtonColor;
     tabsArea.dropColor = Color.fromARGB(150, 255, 255, 255);
-    final TabThemeData tab = theme.tab;
+
     tab.buttonsOffset = 4;
     tab.textStyle = TextStyle(fontSize: fontSize, color: fontColor);
-    tab.draggingDecoration = BoxDecoration(color: color);
+    tab.draggingDecoration = BoxDecoration(color: _color);
     tab.padding = const EdgeInsets.fromLTRB(8, 4, 4, 4);
     tab.paddingWithoutButton = const EdgeInsets.fromLTRB(8, 6, 8, 2);
-    tab.hoveredButtonBackground = BoxDecoration(color: hoveredColor);
+    tab.hoveredButtonBackground =
+        BoxDecoration(color: isLight ? colorSet[500]! : colorSet[700]!);
     tab.buttonPadding = const EdgeInsets.all(4);
     tab.buttonColor = buttonColor;
     tab.disabledButtonColor = disabledButtonColor;
-    tab.decorationBuilder = theme._tabDecorationBuilder;
+    tab.decorationBuilder = _tabDecorationBuilder;
     tab.selectedStatus.fontColor = selectedFontColor;
     tab.selectedStatus.buttonColor = selectedFontColor;
+    tab.selectedStatus.hoveredButtonBackground =
+        BoxDecoration(color: isLight ? colorSet[700]! : colorSet[500]!);
+    tab.hoveredStatus.disabledButtonColor =
+        isLight ? colorSet[500]! : colorSet[600]!;
 
-    final HiddenTabsMenuThemeData menu =
-        HiddenTabsMenuThemeData(brightness: brightness);
-    theme.menu = menu;
+    menu = HiddenTabsMenuThemeData(brightness: brightness);
     menu.borderRadius = BorderRadius.circular(4);
-
-    return theme;
   }
 
-  final Radius? tabRadius;
-  final Color color;
-  final Color selectedColor;
-  final Color hoveredColor;
+  late final Radius? _tabRadius;
+  late final Color _color;
+  late final Color _selectedColor;
+  late final Color _hoveredColor;
 
   TabDecoration _tabDecorationBuilder(
       {required TabBarPosition tabBarPosition, required TabStatus status}) {
     Color? color;
     switch (status) {
       case TabStatus.selected:
-        color = selectedColor;
+        color = _selectedColor;
         break;
       case TabStatus.hovered:
-        color = hoveredColor;
+        color = _hoveredColor;
         break;
       case TabStatus.normal:
-        color = this.color;
+        color = _color;
         break;
     }
-    final Radius? radius = this.tabRadius;
+    final Radius? radius = _tabRadius;
     switch (tabBarPosition) {
       case TabBarPosition.top:
         return TabDecoration(
