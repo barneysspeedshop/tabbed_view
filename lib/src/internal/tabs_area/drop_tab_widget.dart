@@ -79,6 +79,7 @@ class DropTabWidgetState extends State<DropTabWidget> {
 
               // Dynamically adjust the drop zone based on drag direction.
               double ratio = 0.5;
+
               int? fromIndex = widget.provider.draggingTabIndex;
               // Checking if the drag is happening inside the same tabbed_view.
               if (fromIndex != null) {
@@ -92,9 +93,11 @@ class DropTabWidgetState extends State<DropTabWidget> {
                 }
               }
 
+              final localPosition = renderBox.globalToLocal(details.offset);
+
               final newDropPosition =
                   widget.provider.tabBarPosition.isHorizontal
-                      ? (details.offset.dx < renderBox.size.width * ratio
+                      ? (localPosition.dx < renderBox.size.width * ratio
                           ? _DropPosition.before
                           : _DropPosition.after)
                       : (details.offset.dy < renderBox.size.height * ratio
