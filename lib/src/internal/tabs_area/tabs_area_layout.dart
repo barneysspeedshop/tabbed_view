@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:meta/meta.dart';
 
-import '../tab_bar_position.dart';
-import '../theme/tab_cross_axis_size_behavior.dart';
-import '../theme/tabbed_view_theme_data.dart';
-import '../theme/tabs_area_cross_axis_alignment.dart';
-import '../theme/tabs_area_cross_axis_fit.dart';
-import '../theme/tabs_area_theme_data.dart';
-import 'tabs_area/hidden_tabs.dart';
-import 'tabs_area/tabs_area_layout_parent_data.dart';
+import '../../tab_bar_position.dart';
+import '../../theme/tab_cross_axis_size_behavior.dart';
+import '../../theme/tabbed_view_theme_data.dart';
+import '../../theme/tabs_area_cross_axis_alignment.dart';
+import '../../theme/tabs_area_cross_axis_fit.dart';
+import '../../theme/tabs_area_theme_data.dart';
+import 'hidden_tabs.dart';
+import 'tabs_area_layout_parent_data.dart';
 
 /// Inner widget for [TabsArea] layout.
 /// Displays the popup menu button for tabs hidden due to lack of space.

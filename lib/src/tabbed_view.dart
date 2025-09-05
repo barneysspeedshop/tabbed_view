@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'internal/content_area.dart';
 import 'internal/tabbed_view_provider.dart';
-import 'internal/tabs_area.dart';
+import 'internal/tabs_area/tabs_area.dart';
 import 'tab_bar_position.dart';
 import 'tabbed_view_controller.dart';
 import 'tabbed_view_menu_item.dart';
