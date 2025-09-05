@@ -7,11 +7,13 @@ import '../../tabbed_view_controller.dart';
 import '../../theme/tabbed_view_theme_data.dart';
 import '../../theme/tabs_area_theme_data.dart';
 import '../../theme/theme_widget.dart';
+import '../size_holder.dart';
 import '../tab/tab_widget.dart';
 import '../tabbed_view_provider.dart';
 import 'hidden_tabs.dart';
 import 'tabs_area_corner.dart';
 import 'tabs_area_layout.dart';
+import 'tabs_area_layout_child.dart';
 
 /// Widget for the tabs and buttons.
 @internal
@@ -51,13 +53,17 @@ class _TabsAreaState extends State<TabsArea> {
     List<Widget> children = [];
     for (int index = 0; index < controller.tabs.length; index++) {
       TabStatus status = _getStatusFor(index);
-      children.add(TabWidget(
-          key: controller.tabs[index].uniqueKey,
-          index: index,
-          status: status,
-          provider: widget.provider,
-          updateHoveredIndex: _updateHoveredIndex,
-          onClose: _onTabClose));
+      SizeHolder sizeHolder = SizeHolder();
+      children.add(TabsAreaLayoutChild(
+          sizeHolder: sizeHolder,
+          child: TabWidget(
+              key: controller.tabs[index].uniqueKey,
+              index: index,
+              status: status,
+              provider: widget.provider,
+              sizeHolder: sizeHolder,
+              updateHoveredIndex: _updateHoveredIndex,
+              onClose: _onTabClose)));
     }
 
     children.add(

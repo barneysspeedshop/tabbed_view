@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../tab_bar_position.dart';
 import '../../tab_status.dart';
 import '../hidden_tabs_menu_theme_data.dart';
-import '../tab_cross_axis_size_behavior.dart';
+import '../tab_header_extent_behavior.dart';
 import '../tab_decoration_builder.dart';
 import '../tabbed_view_theme_data.dart';
 
@@ -29,7 +29,7 @@ class MinimalistTheme extends TabbedViewThemeData {
 
     divider = BorderSide(color: _selectedColor, width: 4);
 
-    tabsArea.tabCrossAxisSizeBehavior = TabCrossAxisSizeBehavior.uniform;
+    tabsArea.tabHeaderExtentBehavior = TabHeaderExtentBehavior.uniform;
     tabsArea.initialGap = initialGap;
     tabsArea.middleGap = gap;
     tabsArea.buttonsAreaPadding = EdgeInsets.all(4);
@@ -44,7 +44,7 @@ class MinimalistTheme extends TabbedViewThemeData {
     tab.textStyle = TextStyle(fontSize: fontSize, color: fontColor);
     tab.draggingDecoration = BoxDecoration(color: _color);
     tab.padding = const EdgeInsets.fromLTRB(8, 4, 4, 4);
-    tab.paddingWithoutButton = const EdgeInsets.fromLTRB(8, 6, 8, 2);
+    tab.paddingWithoutButton = const EdgeInsets.fromLTRB(8, 6, 8, 4);
     tab.hoveredButtonBackground =
         BoxDecoration(color: isLight ? colorSet[500]! : colorSet[700]!);
     tab.buttonPadding = const EdgeInsets.all(4);

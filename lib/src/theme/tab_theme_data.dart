@@ -4,7 +4,6 @@ import '../icon_provider.dart';
 import '../tab_bar_position.dart';
 import '../tab_status.dart';
 import '../tabbed_view_icons.dart';
-import 'side_tabs_layout.dart';
 import 'tab_decoration_builder.dart';
 import 'tab_status_theme_data.dart';
 import 'tabbed_view_theme_constants.dart';
@@ -37,7 +36,6 @@ class TabThemeData {
       this.maxMainSize,
       this.padding,
       this.paddingWithoutButton,
-      this.sideTabsLayout = SideTabsLayout.rotated,
       required this.selectedStatus,
       required this.hoveredStatus})
       : this.buttonsOffset = buttonsOffset >= 0 ? buttonsOffset : 0,
@@ -54,9 +52,6 @@ class TabThemeData {
   /// This will be its width when the tab is displayed horizontally,
   /// and its height when displayed vertically.
   double? maxMainSize;
-
-  /// Defines how side-positioned tabs (left or right) are laid out.
-  SideTabsLayout sideTabsLayout;
 
   TabStatusThemeData selectedStatus;
   TabStatusThemeData hoveredStatus;
@@ -113,7 +108,6 @@ class TabThemeData {
           runtimeType == other.runtimeType &&
           decorationBuilder == other.decorationBuilder &&
           maxMainSize == other.maxMainSize &&
-          sideTabsLayout == other.sideTabsLayout &&
           selectedStatus == other.selectedStatus &&
           hoveredStatus == other.hoveredStatus &&
           padding == other.padding &&
@@ -138,7 +132,6 @@ class TabThemeData {
   int get hashCode =>
       decorationBuilder.hashCode ^
       maxMainSize.hashCode ^
-      sideTabsLayout.hashCode ^
       selectedStatus.hashCode ^
       hoveredStatus.hashCode ^
       padding.hashCode ^

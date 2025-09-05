@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:meta/meta.dart';
 
 import '../../tab_bar_position.dart';
-import '../../theme/tab_cross_axis_size_behavior.dart';
+import '../../theme/tab_header_extent_behavior.dart';
 import '../../theme/tabbed_view_theme_data.dart';
 import '../../theme/tabs_area_cross_axis_alignment.dart';
 import '../../theme/tabs_area_cross_axis_fit.dart';
@@ -246,41 +246,43 @@ class _TabsAreaLayoutRenderBox extends RenderBox
     return totalSize;
   }
 
-  bool _hasMaxTabCrossAxisSize(RenderBox child) {
-    return tabsAreaTheme.tabCrossAxisSizeBehavior ==
-            TabCrossAxisSizeBehavior.uniform ||
-        (tabsAreaTheme.tabCrossAxisSizeBehavior ==
-                TabCrossAxisSizeBehavior.nonSelectedUniform &&
-            !child.tabsAreaLayoutParentData().selected);
-  }
-
   double _layoutChildren({required List<RenderBox> children}) {
     final BoxConstraints childLooseConstraints =
         BoxConstraints.loose(Size(double.infinity, double.infinity));
-
     double maxCrossAxisSize = 0;
-    double maxTabCrossAxisSize = 0;
+    double maxTabHeaderExtentSize = 0;
     for (RenderBox child in children) {
-      final isTab = child != lastChild;
       child.layout(childLooseConstraints, parentUsesSize: true);
+
+      final isTab = child != lastChild;
+      final needTabHeaderCrossAxisSize = isTab &&
+          tabsAreaTheme.tabHeaderExtentBehavior ==
+              TabHeaderExtentBehavior.uniform;
+
+      final Size? tabHeaderCrossAxisSize = needTabHeaderCrossAxisSize
+          ? child.tabsAreaLayoutParentData().sizeHolder?.size
+          : null;
       if (tabBarPosition.isHorizontal) {
         maxCrossAxisSize = math.max(maxCrossAxisSize, child.size.height);
-        if (isTab && _hasMaxTabCrossAxisSize(child)) {
-          maxTabCrossAxisSize =
-              math.max(maxTabCrossAxisSize, child.size.height);
+        if (tabHeaderCrossAxisSize != null) {
+          maxTabHeaderExtentSize =
+              math.max(maxTabHeaderExtentSize, tabHeaderCrossAxisSize.height);
         }
       } else {
         maxCrossAxisSize = math.max(maxCrossAxisSize, child.size.width);
-        if (isTab && _hasMaxTabCrossAxisSize(child)) {
-          maxTabCrossAxisSize = math.max(maxTabCrossAxisSize, child.size.width);
+        if (tabHeaderCrossAxisSize != null) {
+          // if(tabsAreaTheme.sideTabsLayout==SideTabsLayout.stacked) {
+          //  maxTabHeaderExtentSize = math.max(maxTabHeaderExtentSize, tabHeaderCrossAxisSize.height);
+          //} else {
+          maxTabHeaderExtentSize =
+              math.max(maxTabHeaderExtentSize, tabHeaderCrossAxisSize.width);
+          //  }
         }
       }
     }
 
-    // Updating the children cross-axis size
-    if (tabsAreaTheme.crossAxisFit != TabsAreaCrossAxisFit.none ||
-        tabsAreaTheme.tabCrossAxisSizeBehavior !=
-            TabCrossAxisSizeBehavior.individual) {
+    if (tabsAreaTheme.crossAxisFit != TabsAreaCrossAxisFit.none) {
+      // Cross axis fit
       for (RenderBox child in children) {
         final isTab = child != lastChild;
         if (tabsAreaTheme.crossAxisFit == TabsAreaCrossAxisFit.all ||
@@ -295,16 +297,43 @@ class _TabsAreaLayoutRenderBox extends RenderBox
                       ? maxCrossAxisSize
                       : child.size.height),
               parentUsesSize: true);
-        } else if (isTab && _hasMaxTabCrossAxisSize(child)) {
-          child.layout(
-              BoxConstraints.tightFor(
-                  width: tabBarPosition.isHorizontal
-                      ? child.size.width
-                      : maxTabCrossAxisSize,
-                  height: tabBarPosition.isHorizontal
-                      ? maxTabCrossAxisSize
-                      : child.size.height),
-              parentUsesSize: true);
+        }
+      }
+    } else if (tabsAreaTheme.tabHeaderExtentBehavior ==
+        TabHeaderExtentBehavior.uniform) {
+      // Tab header resize
+      for (RenderBox child in children) {
+        final isTab = child != lastChild;
+        if (isTab) {
+          final Size? tabHeaderExtentSize =
+              child.tabsAreaLayoutParentData().sizeHolder?.size;
+
+          if (tabHeaderExtentSize != null) {
+            if (tabBarPosition.isHorizontal) {
+              final double delta =
+                  maxTabHeaderExtentSize - tabHeaderExtentSize.height;
+              if (delta > 0) {
+                child.layout(
+                    BoxConstraints.tightFor(
+                        width: child.size.width,
+                        height: child.size.height + delta),
+                    parentUsesSize: true);
+                maxCrossAxisSize =
+                    math.max(maxCrossAxisSize, child.size.height);
+              }
+            } else {
+              final double delta =
+                  maxTabHeaderExtentSize - tabHeaderExtentSize.width;
+              if (delta > 0) {
+                child.layout(
+                    BoxConstraints.tightFor(
+                        width: child.size.width + delta,
+                        height: child.size.height),
+                    parentUsesSize: true);
+                maxCrossAxisSize = math.max(maxCrossAxisSize, child.size.width);
+              }
+            }
+          }
         }
       }
     }

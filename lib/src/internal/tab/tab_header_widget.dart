@@ -20,13 +20,15 @@ class TabHeaderWidget extends StatelessWidget {
       required this.status,
       required this.provider,
       required this.onClose,
-      required this.tabTheme});
+      required this.tabTheme,
+      required this.sideTabsLayout});
 
   final int index;
   final TabStatus status;
   final TabbedViewProvider provider;
   final Function onClose;
   final TabThemeData tabTheme;
+  final SideTabsLayout sideTabsLayout;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,7 @@ class TabHeaderWidget extends StatelessWidget {
     );
 
     if (provider.tabBarPosition.isVertical &&
-        tabTheme.sideTabsLayout == SideTabsLayout.rotated) {
+        sideTabsLayout == SideTabsLayout.rotated) {
       // Rotate the tab content
       if (provider.tabBarPosition == TabBarPosition.left) {
         widget = RotatedBox(quarterTurns: -1, child: widget);

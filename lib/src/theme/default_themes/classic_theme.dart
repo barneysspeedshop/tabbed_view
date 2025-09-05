@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../tab_bar_position.dart';
 import '../../tab_status.dart';
 import '../hidden_tabs_menu_theme_data.dart';
-import '../tab_cross_axis_size_behavior.dart';
+import '../tab_header_extent_behavior.dart';
 import '../tab_decoration_builder.dart';
 import '../tabbed_view_theme_data.dart';
 import '../tabs_area_cross_axis_fit.dart';
@@ -30,8 +30,8 @@ class ClassicTheme extends TabbedViewThemeData {
     divider = BorderSide(color: _borderColor, width: 1);
     isDividerWithinTabArea = true;
 
-    tabsArea.tabCrossAxisSizeBehavior =
-        TabCrossAxisSizeBehavior.nonSelectedUniform;
+    tabsArea.crossAxisFit = TabsAreaCrossAxisFit.none;
+    tabsArea.tabHeaderExtentBehavior = TabHeaderExtentBehavior.uniform;
     tabsArea.buttonColor = buttonColor;
     tabsArea.hoveredButtonColor = hoveredButtonColor;
     tabsArea.disabledButtonColor = disabledButtonColor;
@@ -42,7 +42,6 @@ class ClassicTheme extends TabbedViewThemeData {
         border: Border.all(color: _borderColor, width: 1));
     tabsArea.buttonsAreaPadding = EdgeInsets.all(2);
     tabsArea.middleGap = -1;
-    tabsArea.crossAxisFit = TabsAreaCrossAxisFit.none;
     tabsArea.gapBottomBorder = BorderSide(color: _borderColor, width: 1);
     tabsArea.gapSideBorder = BorderSide(color: _borderColor, width: 1);
 

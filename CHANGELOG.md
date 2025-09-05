@@ -18,7 +18,7 @@
     * New attributes:
       * `crossAxisFit`: Defines how the cross axis will fit within the tabs area.
       * `crossAxisAlignment`: Defines the alignment of tabs in relation to the main content.
-      * `tabCrossAxisSizeBehavior`: Defines how tabs are sized relative to each other in the cross axis.
+      * `tabHeaderExtentSize`: Defines how tab headers are sized relative to each other along their extent.
   * `TabStatusThemeData`
     * Renamed `normalButtonColor` attribute to `buttonColor`.
     * Renamed `hoverButtonBackground` attribute to `hoveredButtonBackground`.

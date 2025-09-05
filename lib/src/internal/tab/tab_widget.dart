@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:meta/meta.dart';
 
 import '../../draggable_config.dart';
@@ -10,6 +11,7 @@ import '../../theme/tab_decoration_builder.dart';
 import '../../theme/tab_theme_data.dart';
 import '../../theme/tabbed_view_theme_data.dart';
 import '../../theme/theme_widget.dart';
+import '../size_holder.dart';
 import '../tabbed_view_provider.dart';
 import '../tabs_area/drop_tab_widget.dart';
 import '../tabs_area/tab_drag_feedback_widget.dart';
@@ -28,7 +30,8 @@ class TabWidget extends StatelessWidget {
       required this.status,
       required this.provider,
       required this.updateHoveredIndex,
-      required this.onClose})
+      required this.onClose,
+      required this.sizeHolder})
       : super(key: key);
 
   final int index;
@@ -36,6 +39,7 @@ class TabWidget extends StatelessWidget {
   final TabbedViewProvider provider;
   final UpdateHoveredIndex updateHoveredIndex;
   final Function onClose;
+  final SizeHolder sizeHolder;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +52,9 @@ class TabWidget extends StatelessWidget {
         index: index,
         onClose: onClose,
         status: status,
-        tabTheme: tabTheme);
+        tabTheme: tabTheme,
+        sideTabsLayout: theme.tabsArea.sideTabsLayout);
+    widget = _TabHeaderProxy(sizeHolder: sizeHolder, child: widget);
 
     TabDecorationBuilder? decorationBuilder = tabTheme.decorationBuilder;
     while (decorationBuilder != null) {
@@ -80,7 +86,7 @@ class TabWidget extends StatelessWidget {
         constraints = BoxConstraints(maxWidth: maxWidth);
       } else {
         // For vertical tab bars, the constraint depends on the layout.
-        if (tabTheme.sideTabsLayout == SideTabsLayout.stacked) {
+        if (theme.tabsArea.sideTabsLayout == SideTabsLayout.stacked) {
           // Stacked tabs are not rotated, so their main axis is width.
           constraints = BoxConstraints(maxWidth: maxWidth);
         } else {
@@ -188,5 +194,52 @@ class TabWidget extends StatelessWidget {
         provider.tabSelectInterceptor!(newTabIndex)) {
       provider.controller.selectedIndex = newTabIndex;
     }
+  }
+}
+
+class _TabHeaderProxy extends SingleChildRenderObjectWidget {
+  const _TabHeaderProxy({
+    required Widget super.child,
+    required this.sizeHolder,
+  });
+
+  final SizeHolder sizeHolder;
+
+  @override
+  RenderObject createRenderObject(BuildContext context) {
+    return _RenderTabContentProxy(sizeHolder: sizeHolder);
+  }
+
+  @override
+  void updateRenderObject(
+      BuildContext context, _RenderTabContentProxy renderObject) {
+    renderObject.sizeHolder = sizeHolder;
+  }
+}
+
+class _RenderTabContentProxy extends RenderProxyBox {
+  _RenderTabContentProxy({
+    required SizeHolder sizeHolder,
+  }) : _sizeHolder = sizeHolder;
+
+  SizeHolder _sizeHolder;
+
+  SizeHolder get sizeHolder => _sizeHolder;
+  set sizeHolder(SizeHolder value) {
+    if (_sizeHolder != value) {
+      _sizeHolder = value;
+      markNeedsLayout();
+    }
+  }
+
+  @override
+  void performLayout() {
+    if (child != null) {
+      child!.layout(constraints, parentUsesSize: true);
+      size = child!.size;
+    } else {
+      size = constraints.biggest;
+    }
+    sizeHolder.size = size;
   }
 }

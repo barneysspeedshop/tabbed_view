@@ -3,7 +3,6 @@ import 'package:meta/meta.dart';
 
 import '../../tab_bar_position.dart';
 import '../../theme/side_tabs_layout.dart';
-import '../../theme/tab_theme_data.dart';
 import '../../theme/tabbed_view_theme_data.dart';
 import '../../theme/tabs_area_cross_axis_fit.dart';
 import '../../theme/tabs_area_theme_data.dart';
@@ -30,8 +29,9 @@ class TabsAreaCorner extends StatelessWidget {
     if (provider.trailing != null) {
       Widget trailing = provider.trailing!;
       if (provider.tabBarPosition.isVertical) {
-        final TabThemeData tabTheme = TabbedViewTheme.of(context).tab;
-        if (tabTheme.sideTabsLayout == SideTabsLayout.rotated) {
+        final TabsAreaThemeData tabsAreaTheme =
+            TabbedViewTheme.of(context).tabsArea;
+        if (tabsAreaTheme.sideTabsLayout == SideTabsLayout.rotated) {
           final int quarterTurns =
               provider.tabBarPosition == TabBarPosition.left ? -1 : 1;
           trailing = RotatedBox(quarterTurns: quarterTurns, child: trailing);

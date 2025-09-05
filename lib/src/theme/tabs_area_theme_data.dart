@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../icon_provider.dart';
 import '../tabbed_view_icons.dart';
-import 'tab_cross_axis_size_behavior.dart';
+import 'side_tabs_layout.dart';
+import 'tab_header_extent_behavior.dart';
 import 'tabbed_view_theme_constants.dart';
 import 'tabs_area_cross_axis_alignment.dart';
 import 'tabs_area_cross_axis_fit.dart';
@@ -21,7 +22,8 @@ class TabsAreaThemeData {
       this.gapSideBorder = BorderSide.none,
       this.crossAxisFit = TabsAreaCrossAxisFit.none,
       this.crossAxisAlignment = TabsAreaCrossAxisAlignment.inner,
-      this.tabCrossAxisSizeBehavior = TabCrossAxisSizeBehavior.individual,
+      this.tabHeaderExtentBehavior = TabHeaderExtentBehavior.individual,
+      this.sideTabsLayout = SideTabsLayout.rotated,
       this.buttonsAreaDecoration,
       this.buttonsAreaPadding,
       this.buttonPadding,
@@ -77,8 +79,11 @@ class TabsAreaThemeData {
   /// Defines the alignment of tabs in relation to the main content.
   TabsAreaCrossAxisAlignment crossAxisAlignment;
 
-  /// Defines how tabs are sized relative to each other in the cross axis.
-  TabCrossAxisSizeBehavior tabCrossAxisSizeBehavior;
+  /// Defines how side-positioned tabs (left or right) are laid out.
+  SideTabsLayout sideTabsLayout;
+
+  /// Defines how tab headers are sized relative to each other in the cross axis.
+  TabHeaderExtentBehavior tabHeaderExtentBehavior;
 
   /// Icon for the hidden tabs menu when it is open.
   final IconProvider menuIconOpen;
@@ -152,7 +157,8 @@ class TabsAreaThemeData {
           gapSideBorder == other.gapSideBorder &&
           crossAxisFit == other.crossAxisFit &&
           crossAxisAlignment == other.crossAxisAlignment &&
-          tabCrossAxisSizeBehavior == other.tabCrossAxisSizeBehavior &&
+          sideTabsLayout == other.sideTabsLayout &&
+          tabHeaderExtentBehavior == other.tabHeaderExtentBehavior &&
           menuIconOpen == other.menuIconOpen &&
           menuIconLeft == other.menuIconLeft &&
           menuIconRight == other.menuIconRight &&
@@ -184,7 +190,8 @@ class TabsAreaThemeData {
         gapSideBorder,
         crossAxisFit,
         crossAxisAlignment,
-        tabCrossAxisSizeBehavior,
+        sideTabsLayout,
+        tabHeaderExtentBehavior,
         menuIconOpen,
         menuIconLeft,
         menuIconRight,

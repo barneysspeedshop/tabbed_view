@@ -89,7 +89,7 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
             : TabbedViewThemeData.underline(brightness: _brightness);
         break;
     }
-    theme.tab.sideTabsLayout = _sideTabsLayout;
+    theme.tabsArea.sideTabsLayout = _sideTabsLayout;
     if (_maxMainSizeEnabled) {
       theme.tab.maxMainSize = 200;
     }
