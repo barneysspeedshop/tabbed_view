@@ -9,7 +9,7 @@ import '../../tab_button.dart';
 import '../../theme/tabbed_view_theme_data.dart';
 import '../../theme/tabs_area_theme_data.dart';
 import '../../theme/theme_widget.dart';
-import '../tab_button_widget.dart';
+import '../tab/tab_button_widget.dart';
 import '../tabbed_view_provider.dart';
 import 'hidden_tabs.dart';
 import 'hidden_tabs_menu_widget.dart';

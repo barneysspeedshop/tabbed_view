@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tabbed_view/src/internal/content_area.dart';
 import 'package:tabbed_view/tabbed_view.dart';
-import 'package:tabbed_view/src/internal/tab_widget.dart';
+import 'package:tabbed_view/src/internal/tab/tab_widget.dart';
 
 void main() {
   group('TabbedView Theming for different TabBarPosition', () {

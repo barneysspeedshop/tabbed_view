@@ -2,9 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
-import '../tab_button.dart';
-import '../tabbed_view_menu_item.dart';
-import 'tabbed_view_provider.dart';
+import '../../tab_button.dart';
+import '../../tabbed_view_menu_item.dart';
+import '../tabbed_view_provider.dart';
 
 /// Widget for tab buttons. Used for any tab button such as the close button.
 @internal

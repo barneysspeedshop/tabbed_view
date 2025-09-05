@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
-import '../draggable_config.dart';
-import '../draggable_data.dart';
-import '../tab_bar_position.dart';
-import '../tab_button.dart';
-import '../tab_data.dart';
-import '../tab_status.dart';
-import '../theme/side_tabs_layout.dart';
-import '../theme/tab_decoration_builder.dart';
-import '../theme/tab_status_theme_data.dart';
-import '../theme/tab_theme_data.dart';
-import '../theme/tabbed_view_theme_data.dart';
-import '../theme/theme_widget.dart';
-import '../unselected_tab_buttons_behavior.dart';
-import 'flow_layout.dart';
+import '../../draggable_config.dart';
+import '../../draggable_data.dart';
+import '../../tab_bar_position.dart';
+import '../../tab_button.dart';
+import '../../tab_data.dart';
+import '../../tab_status.dart';
+import '../../theme/side_tabs_layout.dart';
+import '../../theme/tab_decoration_builder.dart';
+import '../../theme/tab_status_theme_data.dart';
+import '../../theme/tab_theme_data.dart';
+import '../../theme/tabbed_view_theme_data.dart';
+import '../../theme/theme_widget.dart';
+import '../../unselected_tab_buttons_behavior.dart';
+import '../flow_layout.dart';
 import 'tab_button_widget.dart';
-import 'tabbed_view_provider.dart';
-import 'tabs_area/drop_tab_widget.dart';
-import 'tabs_area/tab_drag_feedback_widget.dart';
+import '../tabbed_view_provider.dart';
+import '../tabs_area/drop_tab_widget.dart';
+import '../tabs_area/tab_drag_feedback_widget.dart';
 
 /// Listener for the tabs with the mouse over.
 @internal
