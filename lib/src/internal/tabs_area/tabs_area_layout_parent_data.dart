@@ -13,7 +13,6 @@ class TabsAreaLayoutParentData extends ContainerBoxParentData<RenderBox> {
   void reset() {
     visible = true;
     selected = false;
-    sizeHolder?.size = null;
   }
 }
 
