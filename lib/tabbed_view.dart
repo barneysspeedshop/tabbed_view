@@ -34,6 +34,7 @@ export 'src/typedefs/on_tab_close.dart';
 export 'src/typedefs/on_tab_reorder.dart';
 export 'src/typedefs/on_tab_secondary_tap.dart';
 export 'src/typedefs/on_tab_selection.dart';
+export 'src/typedefs/tab_buttons_builder.dart';
 export 'src/typedefs/tab_close_interceptor.dart';
 export 'src/typedefs/tab_select_interceptor.dart';
 export 'src/typedefs/tabs_area_buttons_builder.dart';

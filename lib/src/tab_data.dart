@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
-import 'tab_button.dart';
+import 'typedefs/tab_buttons_builder.dart';
 import 'tab_leading_builder.dart';
 import 'tab_status.dart';
 import 'theme/tab_status_theme_data.dart';
@@ -18,7 +18,7 @@ import 'theme/tab_status_theme_data.dart';
 ///
 /// The [closable] parameter defines whether the Close button is visible.
 ///
-/// The [buttons] parameter allows you to define extra buttons in addition
+/// The [buttonsBuilder] parameter allows you to define extra buttons in addition
 /// to the Close button.
 ///
 /// The [keepAlive] parameter indicates whether to keep the tab content widget
@@ -46,7 +46,7 @@ class TabData extends ChangeNotifier {
   TabData(
       {dynamic value,
       required String text,
-      List<TabButton>? buttons,
+      TabButtonsBuilder? buttonsBuilder,
       Widget? content,
       TabLeadingBuilder? leading,
       bool closable = true,
@@ -61,7 +61,7 @@ class TabData extends ChangeNotifier {
         _leading = leading,
         _closable = closable,
         _content = content,
-        _buttons = buttons,
+        _buttonsBuilder = buttonsBuilder,
         _textSize = textSize != null ? math.max(0, textSize) : null,
         key = keepAlive ? GlobalKey() : UniqueKey();
 
@@ -84,12 +84,12 @@ class TabData extends ChangeNotifier {
     }
   }
 
-  List<TabButton>? _buttons;
+  TabButtonsBuilder? _buttonsBuilder;
 
-  List<TabButton>? get buttons => _buttons;
+  TabButtonsBuilder? get buttonsBuilder => _buttonsBuilder;
 
-  set buttons(List<TabButton>? buttons) {
-    _buttons = buttons;
+  set buttonsBuilder(TabButtonsBuilder? value) {
+    _buttonsBuilder = value;
     notifyListeners();
   }
 

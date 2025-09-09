@@ -97,9 +97,11 @@ class TabHeaderWidget extends StatelessWidget {
       }
     }
 
-    bool hasButtons = tab.buttons != null && tab.buttons!.isNotEmpty;
+    final List<TabButton>? buttons = tab.buttonsBuilder?.call(context);
+
     EdgeInsets? padding;
-    if (tab.closable || hasButtons && tabTheme.buttonsOffset > 0) {
+    if (tab.closable ||
+        buttons != null && buttons.isNotEmpty && tabTheme.buttonsOffset > 0) {
       padding = EdgeInsets.only(
           right: tabTheme.buttonsOffset); // Use final buttonsOffset
     }
@@ -116,19 +118,19 @@ class TabHeaderWidget extends StatelessWidget {
                     style: textStyle, overflow: TextOverflow.ellipsis))),
         padding: padding));
 
-    if (hasButtons) {
+    if (buttons != null) {
       final bool enabled = provider.draggingTabIndex == null &&
           (status == TabStatus.selected ||
               provider.unselectedTabButtonsBehavior ==
                   UnselectedTabButtonsBehavior.allEnabled);
 
-      for (int i = 0; i < tab.buttons!.length; i++) {
+      for (int i = 0; i < buttons.length; i++) {
         EdgeInsets? padding;
-        if (i > 0 && i < tab.buttons!.length && tabTheme.buttonsGap > 0) {
+        if (i > 0 && i < buttons.length && tabTheme.buttonsGap > 0) {
           // Use final buttonsGap
           padding = EdgeInsets.only(left: tabTheme.buttonsGap);
         }
-        TabButton button = tab.buttons![i];
+        TabButton button = buttons[i];
         textAndButtons.add(Container(
             child: TabButtonWidget(
                 provider: provider,
@@ -154,7 +156,7 @@ class TabHeaderWidget extends StatelessWidget {
                   UnselectedTabButtonsBehavior.allDisabled);
 
       EdgeInsets? padding;
-      if (hasButtons && tabTheme.buttonsGap > 0) {
+      if (buttons != null && buttons.isNotEmpty && tabTheme.buttonsGap > 0) {
         padding = EdgeInsets.only(left: tabTheme.buttonsGap);
       }
       TabButton closeButton = TabButton(

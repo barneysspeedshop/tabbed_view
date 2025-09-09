@@ -34,14 +34,14 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
         text: 'Tab 1',
         leading: (context, status) => Icon(Icons.star, size: 16),
         content: Padding(padding: EdgeInsets.all(8), child: Text('Hello')),
-        buttons: [
-          TabButton(
-              icon: IconProvider.data(Icons.info),
-              onPressed: () {
-                _scaffoldMessengerKey.currentState?.showSnackBar(
-                    const SnackBar(content: Text('Info button clicked!')));
-              })
-        ]));
+        buttonsBuilder: (context) => [
+              TabButton(
+                  icon: IconProvider.data(Icons.info),
+                  onPressed: () {
+                    _scaffoldMessengerKey.currentState?.showSnackBar(
+                        const SnackBar(content: Text('Info button clicked!')));
+                  })
+            ]));
     tabs.add(TabData(
         text: 'Tab 2',
         content:

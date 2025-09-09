@@ -55,6 +55,8 @@
 * The `OnTabSelection` callback was changed to provide the `TabData` object instead of the tab index.
   * From: `void Function(int? tabIndex)`
   * To: `void Function(TabData? tabData)`
+* `TabData`
+  * Renamed and refactored `buttons` attribute to `buttonsBuilder` to use the builder pattern.
 * Special thanks to Patrick Legacy for his great contributions to this release.
 
 ## 1.22.1
