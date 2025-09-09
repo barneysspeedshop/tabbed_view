@@ -22,6 +22,7 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
   bool _modifyThemeColors = false;
   bool _maxMainSizeEnabled = false;
   bool _trailingWidgetEnabled = false;
+  bool _addButtonEnabled = true;
   Brightness _brightness = Brightness.light;
 
   @override
@@ -143,17 +144,20 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
         tabSelectInterceptor: (newIndex) {
           return true;
         },
-        tabsAreaButtonsBuilder: (context, tabsCount) {
-          return [
-            TabButton(
-                icon: IconProvider.data(Icons.add),
-                onPressed: () {
-                  _controller.addTab(TabData(
-                      text: 'New Tab',
-                      content: Center(child: Text('Content of New Tab'))));
-                })
-          ];
-        },
+        tabsAreaButtonsBuilder: _addButtonEnabled
+            ? (context, tabsCount) {
+                return [
+                  TabButton(
+                      icon: IconProvider.data(Icons.add),
+                      onPressed: () {
+                        _controller.addTab(TabData(
+                            text: 'New Tab',
+                            content:
+                                Center(child: Text('Content of New Tab'))));
+                      })
+                ];
+              }
+            : null,
         onDraggableBuild: (controller, tabIndex, tab) {
           return DraggableConfig(
             canDrag: true,
@@ -254,7 +258,11 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
                       SizedBox(height: 16),
                       _buildTrailingWidgetSelector(),
                       _buildModifyThemeColorsSelector(),
-                      _buildMaxMainSizeSelector()
+                      _buildMaxMainSizeSelector(),
+                      _buildAddButtonSelector(),
+                      ElevatedButton(
+                          onPressed: () => _controller.removeTabs(),
+                          child: Text('Remove tabs'))
                     ]))));
   }
 
@@ -277,6 +285,13 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
         value: _maxMainSizeEnabled,
         text: 'Max tab main size',
         setter: (v) => _maxMainSizeEnabled = v);
+  }
+
+  Widget _buildAddButtonSelector() {
+    return _buildSelector(
+        value: _addButtonEnabled,
+        text: 'Add button',
+        setter: (v) => _addButtonEnabled = v);
   }
 
   Widget _buildSelector(

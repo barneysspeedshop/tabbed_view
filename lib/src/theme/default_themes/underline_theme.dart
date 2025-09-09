@@ -26,6 +26,8 @@ class UnderlineTheme extends TabbedViewThemeData {
     _selectedColor = underlineColorSet;
 
     divider = BorderSide(color: _borderColor, width: 1);
+    alwaysShowDivider = false;
+    isDividerWithinTabArea = false;
 
     tabsArea.crossAxisFit = TabsAreaCrossAxisFit.all;
     tabsArea.initialGap = -1;

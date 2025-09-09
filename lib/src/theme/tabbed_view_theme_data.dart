@@ -39,6 +39,13 @@ class TabbedViewThemeData {
   /// standard border, extending fully across the width of the pane.
   BorderSide? divider;
 
+  /// Whether the [divider] should remain visible even when there are no tabs.
+  ///
+  /// If set to `true`, the divider is always displayed regardless of the
+  /// presence of tabs. If `false`, the divider is only shown when at least
+  /// one tab is present.
+  bool alwaysShowDivider = true;
+
   /// If `true`, the [divider] will be drawn within the bounds of the tab area.
   /// If `false`, the divider will act as a standard border, drawn outside the tab area.
   bool isDividerWithinTabArea = false;
@@ -96,9 +103,12 @@ class TabbedViewThemeData {
           tabsArea == other.tabsArea &&
           tab == other.tab &&
           contentArea == other.contentArea &&
-          menu == other.menu;
+          menu == other.menu &&
+          divider == other.divider &&
+          alwaysShowDivider == other.alwaysShowDivider &&
+          isDividerWithinTabArea == other.isDividerWithinTabArea;
 
   @override
-  int get hashCode =>
-      tabsArea.hashCode ^ tab.hashCode ^ contentArea.hashCode ^ menu.hashCode;
+  int get hashCode => Object.hash(tabsArea, tab, contentArea, menu, divider,
+      alwaysShowDivider, isDividerWithinTabArea);
 }

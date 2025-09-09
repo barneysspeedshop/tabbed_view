@@ -46,7 +46,7 @@ class TabsAreaLayout extends MultiChildRenderObjectWidget {
   @override
   void updateRenderObject(
       BuildContext context, _TabsAreaLayoutRenderBox renderObject) {
-    renderObject..tabsAreaTheme = theme.tabsArea;
+    renderObject..theme = theme;
     renderObject..divider = theme.isDividerWithinTabArea ? theme.divider : null;
     renderObject..hiddenTabs = hiddenTabs;
     renderObject..selectedTabIndex = selectedTabIndex;
@@ -81,7 +81,7 @@ class _TabsAreaLayoutRenderBox extends RenderBox
         RenderBoxContainerDefaultsMixin<RenderBox, TabsAreaLayoutParentData> {
   _TabsAreaLayoutRenderBox(TabbedViewThemeData theme, HiddenTabs hiddenTabs,
       int? selectedTabIndex, TabBarPosition tabBarPosition)
-      : this._tabsAreaTheme = theme.tabsArea,
+      : this._theme = theme,
         this._divider = theme.isDividerWithinTabArea ? theme.divider : null,
         this._hiddenTabs = hiddenTabs,
         this._selectedTabIndex = selectedTabIndex,
@@ -107,16 +107,18 @@ class _TabsAreaLayoutRenderBox extends RenderBox
     }
   }
 
-  TabsAreaThemeData _tabsAreaTheme;
+  TabbedViewThemeData _theme;
 
-  TabsAreaThemeData get tabsAreaTheme => _tabsAreaTheme;
+  TabbedViewThemeData get theme => _theme;
 
-  set tabsAreaTheme(TabsAreaThemeData value) {
-    if (_tabsAreaTheme != value) {
-      _tabsAreaTheme = value;
+  set theme(TabbedViewThemeData value) {
+    if (_theme != value) {
+      _theme = value;
       markNeedsLayout();
     }
   }
+
+  TabsAreaThemeData get tabsAreaTheme => theme.tabsArea;
 
   TabBarPosition _tabBarPosition;
 
@@ -170,7 +172,13 @@ class _TabsAreaLayoutRenderBox extends RenderBox
       }
       index++;
     });
-    final double maxCrossAxisSize = _layoutChildren(children: tabs);
+
+    final BorderSide? divider = theme.divider;
+    final double minimalCrossAxisSize = theme.isDividerWithinTabArea
+        ? (divider != null ? divider.width : 0)
+        : 0;
+    final double maxCrossAxisSize =
+        math.max(_layoutChildren(children: tabs), minimalCrossAxisSize);
     final RenderBox corner = tabs.removeLast();
 
     final double reservedForCorner =
