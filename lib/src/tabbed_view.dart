@@ -10,7 +10,6 @@ import 'tabbed_view_controller.dart';
 import 'theme/tabbed_view_theme_data.dart';
 import 'theme/theme_widget.dart';
 import 'typedefs/can_drop.dart';
-import 'typedefs/hidden_tabs_menu_item_builder.dart';
 import 'typedefs/on_before_drop_accept.dart';
 import 'typedefs/on_draggable_build.dart';
 import 'typedefs/on_tab_close.dart';
@@ -50,7 +49,6 @@ class TabbedView extends StatefulWidget {
     this.onBeforeDropAccept,
     this.dragScope,
     this.tabBarPosition = TabBarPosition.top,
-    this.hiddenTabsMenuItemBuilder,
     this.trailing,
   });
 
@@ -82,8 +80,6 @@ class TabbedView extends StatefulWidget {
   final CanDrop? canDrop;
   final OnBeforeDropAccept? onBeforeDropAccept;
   final String? dragScope;
-
-  final HiddenTabsMenuItemBuilder? hiddenTabsMenuItemBuilder;
   final Widget? trailing;
 
   /// Defines the position of the tab bar. Defaults to [TabBarPosition.top].
@@ -139,7 +135,6 @@ class _TabbedViewState extends State<TabbedView> {
         onBeforeDropAccept: widget.onBeforeDropAccept,
         dragScope: widget.dragScope,
         tabBarPosition: widget.tabBarPosition,
-        hiddenTabsMenuItemBuilder: widget.hiddenTabsMenuItemBuilder,
         trailing: widget.trailing);
     final bool tabsAreaVisible =
         widget.tabsAreaVisible ?? theme.tabsArea.visible;

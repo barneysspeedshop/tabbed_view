@@ -189,26 +189,6 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
             onDragCompleted: null,
           );
         },
-        hiddenTabsMenuItemBuilder: (context, tabIndex, tabData) {
-          // Example of a custom menu item.
-          // The default menu item is in:
-          // lib/src/internal/tabs_area/hidden_tabs_menu_widget.dart
-          final theme = TabbedViewTheme.of(context);
-          return Padding(
-            padding: theme.menu.menuItemPadding,
-            child: Row(
-              children: [
-                Icon(Icons.tab, size: 16, color: theme.menu.textStyle?.color),
-                SizedBox(width: 8),
-                Expanded(
-                  child: Text('${tabData.text} (index $tabIndex)',
-                      style: theme.menu.textStyle,
-                      overflow: TextOverflow.ellipsis),
-                ),
-              ],
-            ),
-          );
-        },
         onTabReorder: (int oldIndex, int newIndex) {},
         closeButtonTooltip: 'Close this tab',
         tabsAreaVisible: true,

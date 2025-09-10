@@ -57,6 +57,8 @@
   * To: `void Function(TabData? tabData)`
 * `TabData`
   * Renamed and refactored `buttons` attribute to `buttonsBuilder` to use the builder pattern.
+* `TabbedView`
+  * Removed the `hiddenTabsMenuItemBuilder` attribute.
 * Special thanks to Patrick Legacy for his great contributions to this release.
 
 ## 1.22.1

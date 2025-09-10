@@ -4,7 +4,6 @@ import 'package:meta/meta.dart';
 import '../tab_bar_position.dart';
 import '../tabbed_view_controller.dart';
 import '../typedefs/can_drop.dart';
-import '../typedefs/hidden_tabs_menu_item_builder.dart';
 import '../typedefs/on_before_drop_accept.dart';
 import '../typedefs/on_draggable_build.dart';
 import '../typedefs/on_tab_close.dart';
@@ -38,7 +37,6 @@ class TabbedViewProvider {
       required this.onBeforeDropAccept,
       required this.dragScope,
       required this.tabBarPosition,
-      this.hiddenTabsMenuItemBuilder,
       this.trailing});
 
   final TabbedViewController controller;
@@ -60,7 +58,6 @@ class TabbedViewProvider {
   final OnBeforeDropAccept? onBeforeDropAccept;
   final String? dragScope;
   final TabBarPosition tabBarPosition;
-  final HiddenTabsMenuItemBuilder? hiddenTabsMenuItemBuilder;
   final Widget? trailing;
 }
 

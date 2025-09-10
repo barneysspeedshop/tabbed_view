@@ -27,7 +27,6 @@ export 'src/theme/tabs_area_theme_data.dart';
 export 'src/theme/theme_widget.dart';
 export 'src/theme/vertical_alignment.dart';
 export 'src/typedefs/can_drop.dart';
-export 'src/typedefs/hidden_tabs_menu_item_builder.dart';
 export 'src/typedefs/on_before_drop_accept.dart';
 export 'src/typedefs/on_draggable_build.dart';
 export 'src/typedefs/on_tab_close.dart';

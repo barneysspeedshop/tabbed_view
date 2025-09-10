@@ -4,7 +4,6 @@ import 'package:meta/meta.dart';
 import '../../tab_data.dart';
 import '../../theme/tabbed_view_theme_data.dart';
 import '../../theme/theme_widget.dart';
-import '../../typedefs/hidden_tabs_menu_item_builder.dart';
 import '../tabbed_view_provider.dart';
 
 /// The menu widget for hidden tabs, displayed in an overlay.
@@ -30,8 +29,6 @@ class HiddenTabsMenuWidget extends StatelessWidget {
     final menuTheme = theme.menu;
 
     final List<TabData> tabs = provider.controller.tabs;
-    final HiddenTabsMenuItemBuilder? menuItemBuilder =
-        provider.hiddenTabsMenuItemBuilder;
 
     return Container(
       constraints: BoxConstraints(maxWidth: menuTheme.maxWidth),
@@ -54,21 +51,16 @@ class HiddenTabsMenuWidget extends StatelessWidget {
           itemBuilder: (context, i) {
             final int tabIndex = hiddenTabs[i];
             final TabData tab = tabs[tabIndex];
-            final Widget child;
-            if (menuItemBuilder != null) {
-              child = menuItemBuilder(context, tabIndex, tab);
-            } else {
-              child = Padding(
-                padding: menuTheme.menuItemPadding,
-                child: Text(
-                  tab.text,
-                  style: menuTheme.textStyle,
-                  overflow: menuTheme.ellipsisOverflowText
-                      ? TextOverflow.ellipsis
-                      : null,
-                ),
-              );
-            }
+            final Widget child = Padding(
+              padding: menuTheme.menuItemPadding,
+              child: Text(
+                tab.text,
+                style: menuTheme.textStyle,
+                overflow: menuTheme.ellipsisOverflowText
+                    ? TextOverflow.ellipsis
+                    : null,
+              ),
+            );
             return InkWell(
               onTap: () => onSelection(tabIndex),
               hoverColor: menuTheme.hoverColor,
