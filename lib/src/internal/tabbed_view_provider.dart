@@ -3,7 +3,6 @@ import 'package:meta/meta.dart';
 
 import '../tab_bar_position.dart';
 import '../tabbed_view_controller.dart';
-import '../tabbed_view_menu_item.dart';
 import '../typedefs/can_drop.dart';
 import '../typedefs/hidden_tabs_menu_item_builder.dart';
 import '../typedefs/on_before_drop_accept.dart';
@@ -32,8 +31,6 @@ class TabbedViewProvider {
       this.closeButtonTooltip,
       this.tabsAreaButtonsBuilder,
       this.onTabSecondaryTap,
-      required this.menuItems,
-      required this.menuItemsUpdater,
       required this.onTabDrag,
       required this.draggingTabIndex,
       required this.onDraggableBuild,
@@ -56,8 +53,6 @@ class TabbedViewProvider {
   final UnselectedTabButtonsBehavior unselectedTabButtonsBehavior;
   final String? closeButtonTooltip;
   final TabsAreaButtonsBuilder? tabsAreaButtonsBuilder;
-  final List<TabbedViewMenuItem> menuItems;
-  final MenuItemsUpdater menuItemsUpdater;
   final OnTabDrag onTabDrag;
   final int? draggingTabIndex;
   final OnDraggableBuild? onDraggableBuild;
@@ -68,9 +63,6 @@ class TabbedViewProvider {
   final HiddenTabsMenuItemBuilder? hiddenTabsMenuItemBuilder;
   final Widget? trailing;
 }
-
-/// Updater for menu items
-typedef MenuItemsUpdater = void Function(List<TabbedViewMenuItem>);
 
 /// Event that will be triggered when the tab drag start or end.
 typedef OnTabDrag = Function(int? tabIndex);

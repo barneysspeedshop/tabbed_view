@@ -7,7 +7,6 @@ import 'internal/tabbed_view_provider.dart';
 import 'internal/tabs_area/tabs_area.dart';
 import 'tab_bar_position.dart';
 import 'tabbed_view_controller.dart';
-import 'tabbed_view_menu_item.dart';
 import 'theme/tabbed_view_theme_data.dart';
 import 'theme/theme_widget.dart';
 import 'typedefs/can_drop.dart';
@@ -97,7 +96,6 @@ class TabbedView extends StatefulWidget {
 /// The [TabbedView] state.
 class _TabbedViewState extends State<TabbedView> {
   int? _lastSelectedIndex;
-  List<TabbedViewMenuItem> _menuItems = [];
   int? _draggingTabIndex;
 
   @override
@@ -135,8 +133,6 @@ class _TabbedViewState extends State<TabbedView> {
         closeButtonTooltip: widget.closeButtonTooltip,
         tabsAreaButtonsBuilder: widget.tabsAreaButtonsBuilder,
         onDraggableBuild: widget.onDraggableBuild,
-        menuItemsUpdater: _setMenuItems,
-        menuItems: _menuItems,
         onTabDrag: _onTabDrag,
         draggingTabIndex: _draggingTabIndex,
         canDrop: widget.canDrop,
@@ -168,13 +164,6 @@ class _TabbedViewState extends State<TabbedView> {
     }
   }
 
-  /// Set a new menu items.
-  void _setMenuItems(List<TabbedViewMenuItem> menuItems) {
-    setState(() {
-      _menuItems = menuItems;
-    });
-  }
-
   /// Rebuilds after any change in tabs or selection.
   void _rebuildByTabOrSelection() {
     int? newTabIndex = widget.controller.selectedIndex;
@@ -186,10 +175,7 @@ class _TabbedViewState extends State<TabbedView> {
     }
 
     // rebuild
-    setState(() {
-      // any change must remove menus
-      _menuItems.clear();
-    });
+    setState(() {});
   }
 
   @override

@@ -47,9 +47,9 @@ class TabButtonWidgetState extends State<TabButtonWidget> {
     Color color;
     BoxDecoration? background;
 
-    bool hasEvent =
+    final bool hasEvent =
         widget.button.onPressed != null || widget.button.menuBuilder != null;
-    bool isDisabled = hasEvent == false || widget.enabled == false;
+    final bool isDisabled = hasEvent == false || widget.enabled == false;
     if (isDisabled) {
       color = widget.button.disabledColor != null
           ? widget.button.disabledColor!
@@ -86,24 +86,38 @@ class TabButtonWidgetState extends State<TabButtonWidget> {
       return icon;
     }
 
-    VoidCallback? onPressed = widget.button.onPressed;
-    if (widget.button.menuBuilder != null) {
-      onPressed = () {
-        if (widget.provider.menuItems.isEmpty) {
-          List<TabbedViewMenuItem> menuItems =
-              widget.button.menuBuilder!(context);
-          if (menuItems.isNotEmpty) {
-            widget.provider.menuItemsUpdater(menuItems);
-          }
-        } else {
-          widget.provider.menuItemsUpdater([]);
-        }
-      };
+    final List<TabbedViewMenuItem>? menuItems =
+        widget.button.menuBuilder?.call(context);
+    if (menuItems != null) {
+      icon = MenuAnchor(
+        child: icon,
+        builder:
+            (BuildContext context, MenuController controller, Widget? child) {
+          return GestureDetector(
+              child: child,
+              onTap: () {
+                if (controller.isOpen) {
+                  controller.close();
+                } else {
+                  controller.open();
+                }
+              });
+        },
+        menuChildren: List<MenuItemButton>.generate(
+          menuItems.length,
+          (int index) => MenuItemButton(
+            onPressed: menuItems[index].onSelection,
+            child: Text(menuItems[index].text),
+          ),
+        ),
+      );
+    } else {
+      icon = GestureDetector(child: icon, onTap: widget.button.onPressed);
     }
 
     if (widget.button.toolTip != null) {
       icon = Tooltip(
-          message: widget.button.toolTip!,
+          message: widget.button.toolTip,
           child: icon,
           waitDuration: Duration(milliseconds: 500));
     }
@@ -112,7 +126,7 @@ class TabButtonWidgetState extends State<TabButtonWidget> {
         cursor: SystemMouseCursors.click,
         onEnter: _onEnter,
         onExit: _onExit,
-        child: GestureDetector(child: icon, onTap: onPressed));
+        child: icon);
   }
 
   void _onEnter(PointerEnterEvent event) {
