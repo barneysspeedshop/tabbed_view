@@ -7,7 +7,6 @@ class HiddenTabsMenuThemeData {
       required this.boxShadow,
       required this.border,
       required this.textStyle,
-      required this.blur,
       required this.dividerThickness,
       required this.dividerColor,
       required this.hoverColor,
@@ -26,7 +25,6 @@ class HiddenTabsMenuThemeData {
     List<BoxShadow>? boxShadow,
     Border? border,
     TextStyle? textStyle,
-    bool blur = true,
     double dividerThickness = 0,
     Color? dividerColor,
     Color? hoverColor,
@@ -58,7 +56,6 @@ class HiddenTabsMenuThemeData {
         boxShadow: boxShadow,
         border: border,
         textStyle: textStyle,
-        blur: blur,
         dividerThickness: dividerThickness,
         dividerColor: dividerColor,
         highlightColor: highlightColor,
@@ -83,9 +80,6 @@ class HiddenTabsMenuThemeData {
 
   /// The [TextStyle] of the menu item.
   TextStyle? textStyle;
-
-  /// The blur effect.
-  bool blur;
 
   /// The thickness of the divider.
   double dividerThickness;
@@ -129,7 +123,6 @@ class HiddenTabsMenuThemeData {
           boxShadow == other.boxShadow &&
           border == other.border &&
           textStyle == other.textStyle &&
-          blur == other.blur &&
           dividerThickness == other.dividerThickness &&
           dividerColor == other.dividerColor &&
           hoverColor == other.hoverColor &&
@@ -148,7 +141,6 @@ class HiddenTabsMenuThemeData {
       boxShadow,
       border,
       textStyle,
-      blur,
       dividerThickness,
       dividerColor,
       hoverColor,
