@@ -58,8 +58,8 @@ class MinimalistTheme extends TabbedViewThemeData {
     tab.hoveredStatus.disabledButtonColor =
         isLight ? colorSet[500]! : colorSet[600]!;
 
-    menu = HiddenTabsMenuThemeData(brightness: brightness);
-    menu.borderRadius = BorderRadius.circular(4);
+    hiddenTabsMenu = HiddenTabsMenuThemeData(brightness: brightness);
+    hiddenTabsMenu.borderRadius = BorderRadius.circular(4);
   }
 
   late final Radius? _tabRadius;

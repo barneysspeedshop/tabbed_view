@@ -87,8 +87,8 @@ class _TabsAreaButtonsWidgetState extends State<TabsAreaButtonsWidget> {
           break;
       }
 
-      final effectiveMaxHeight =
-          math.min(theme.menu.maxHeight, math.max(0.0, availableHeight - 8));
+      final effectiveMaxHeight = math.min(
+          theme.hiddenTabsMenu.maxHeight, math.max(0.0, availableHeight - 8));
 
       // This TabbedViewTheme is needed because the overlay's context would
       // otherwise search for a TabbedViewTheme higher up the widget tree,
@@ -185,7 +185,6 @@ class _TabsAreaButtonsWidgetState extends State<TabsAreaButtonsWidget> {
       final TabButton tabButton = buttons[i];
       children.add(Container(
           child: TabButtonWidget(
-              provider: widget.provider,
               button: tabButton,
               enabled: widget.provider.draggingTabIndex == null,
               normalColor: tabsAreaTheme.buttonColor,

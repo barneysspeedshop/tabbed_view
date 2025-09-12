@@ -22,6 +22,7 @@ export 'src/theme/tab_status_theme_data.dart';
 export 'src/theme/tab_theme_data.dart';
 export 'src/theme/tabbed_view_theme_constants.dart';
 export 'src/theme/tabbed_view_theme_data.dart';
+export 'src/theme/tabbed_view_menu_theme_data.dart';
 export 'src/theme/tabs_area_cross_axis_fit.dart';
 export 'src/theme/tabs_area_theme_data.dart';
 export 'src/theme/theme_widget.dart';

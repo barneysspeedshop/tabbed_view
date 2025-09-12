@@ -62,8 +62,8 @@ class ClassicTheme extends TabbedViewThemeData {
     contentArea.color = _backgroundColor;
     contentArea.border = BorderSide(width: 1, color: _borderColor);
 
-    menu = HiddenTabsMenuThemeData(brightness: brightness);
-    menu.borderRadius = BorderRadius.circular(4);
+    hiddenTabsMenu = HiddenTabsMenuThemeData(brightness: brightness);
+    hiddenTabsMenu.borderRadius = BorderRadius.circular(4);
   }
 
   late final Color _backgroundColor;

@@ -133,7 +133,6 @@ class TabHeaderWidget extends StatelessWidget {
         TabButton button = buttons[i];
         textAndButtons.add(Container(
             child: TabButtonWidget(
-                provider: provider,
                 button: button,
                 enabled: enabled,
                 normalColor: color,
@@ -165,7 +164,6 @@ class TabHeaderWidget extends StatelessWidget {
           toolTip: provider.closeButtonTooltip);
       textAndButtons.add(Container(
           child: TabButtonWidget(
-              provider: provider,
               button: closeButton,
               enabled: enabled,
               normalColor: color,

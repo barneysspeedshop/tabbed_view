@@ -26,7 +26,7 @@ class HiddenTabsMenuWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final TabbedViewThemeData theme = TabbedViewTheme.of(context);
 
-    final menuTheme = theme.menu;
+    final menuTheme = theme.hiddenTabsMenu;
 
     final List<TabData> tabs = provider.controller.tabs;
 
@@ -43,7 +43,7 @@ class HiddenTabsMenuWidget extends StatelessWidget {
       // spill outside the rounded corners.
       clipBehavior: Clip.antiAlias,
       child: Material(
-        type: MaterialType.transparency,
+        //type: MaterialType.transparency,
         child: ListView.builder(
           shrinkWrap: true,
           reverse: reverse,
@@ -63,8 +63,8 @@ class HiddenTabsMenuWidget extends StatelessWidget {
             );
             return InkWell(
               onTap: () => onSelection(tabIndex),
-              hoverColor: menuTheme.hoverColor,
-              highlightColor: menuTheme.highlightColor,
+              // hoverColor: menuTheme.hoverColor,
+              // highlightColor: menuTheme.highlightColor,
               child: child,
             );
           },

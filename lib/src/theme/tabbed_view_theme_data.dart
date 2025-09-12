@@ -7,6 +7,7 @@ import 'default_themes/underline_theme.dart';
 import 'hidden_tabs_menu_theme_data.dart';
 import 'tab_status_theme_data.dart';
 import 'tab_theme_data.dart';
+import 'tabbed_view_menu_theme_data.dart';
 import 'tabs_area_theme_data.dart';
 
 /// The [TabbedView] theme.
@@ -16,19 +17,22 @@ class TabbedViewThemeData {
       {TabsAreaThemeData? tabsArea,
       TabThemeData? tab,
       ContentAreaThemeData? contentArea,
-      HiddenTabsMenuThemeData? menu})
+      HiddenTabsMenuThemeData? hiddenTabsMenu,
+      TabbedViewMenuThemeData? menu})
       : tab = tab ??
             TabThemeData(
                 selectedStatus: TabStatusThemeData(),
                 hoveredStatus: TabStatusThemeData()),
         tabsArea = tabsArea ?? TabsAreaThemeData(),
         contentArea = contentArea ?? ContentAreaThemeData(),
-        menu = menu ?? HiddenTabsMenuThemeData();
+        menu = menu ?? TabbedViewMenuThemeData(),
+        hiddenTabsMenu = hiddenTabsMenu ?? HiddenTabsMenuThemeData();
 
   TabsAreaThemeData tabsArea;
   TabThemeData tab;
   ContentAreaThemeData contentArea;
-  HiddenTabsMenuThemeData menu;
+  HiddenTabsMenuThemeData hiddenTabsMenu;
+  TabbedViewMenuThemeData menu;
 
   /// The border that separates the content area from the tab bar.
   ///
@@ -103,12 +107,13 @@ class TabbedViewThemeData {
           tabsArea == other.tabsArea &&
           tab == other.tab &&
           contentArea == other.contentArea &&
+          hiddenTabsMenu == other.hiddenTabsMenu &&
           menu == other.menu &&
           divider == other.divider &&
           alwaysShowDivider == other.alwaysShowDivider &&
           isDividerWithinTabArea == other.isDividerWithinTabArea;
 
   @override
-  int get hashCode => Object.hash(tabsArea, tab, contentArea, menu, divider,
-      alwaysShowDivider, isDividerWithinTabArea);
+  int get hashCode => Object.hash(tabsArea, tab, contentArea, hiddenTabsMenu,
+      menu, divider, alwaysShowDivider, isDividerWithinTabArea);
 }

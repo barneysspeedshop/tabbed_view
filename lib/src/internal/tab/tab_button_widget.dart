@@ -4,14 +4,13 @@ import 'package:meta/meta.dart';
 
 import '../../tab_button.dart';
 import '../../tabbed_view_menu_item.dart';
-import '../tabbed_view_provider.dart';
+import '../menu_widget.dart';
 
 /// Widget for tab buttons. Used for any tab button such as the close button.
 @internal
 class TabButtonWidget extends StatefulWidget {
   TabButtonWidget(
-      {required this.provider,
-      required this.button,
+      {required this.button,
       required this.enabled,
       required this.iconSize,
       required this.normalColor,
@@ -22,7 +21,6 @@ class TabButtonWidget extends StatefulWidget {
       this.hoverBackground,
       this.disabledBackground});
 
-  final TabbedViewProvider provider;
   final TabButton button;
   final double iconSize;
   final Color normalColor;
@@ -89,28 +87,11 @@ class TabButtonWidgetState extends State<TabButtonWidget> {
     final List<TabbedViewMenuItem>? menuItems =
         widget.button.menuBuilder?.call(context);
     if (menuItems != null) {
-      icon = MenuAnchor(
-        child: icon,
-        builder:
-            (BuildContext context, MenuController controller, Widget? child) {
-          return GestureDetector(
-              child: child,
-              onTap: () {
-                if (controller.isOpen) {
-                  controller.close();
-                } else {
-                  controller.open();
-                }
-              });
-        },
-        menuChildren: List<MenuItemButton>.generate(
-          menuItems.length,
-          (int index) => MenuItemButton(
-            onPressed: menuItems[index].onSelection,
-            child: Text(menuItems[index].text),
-          ),
-        ),
-      );
+      icon = MenuWidget(
+          child: icon,
+          itemCount: menuItems.length,
+          textProvider: (index) => menuItems[index].text,
+          callbackBuilder: (context, index) => menuItems[index].onSelection);
     } else {
       icon = GestureDetector(child: icon, onTap: widget.button.onPressed);
     }
