@@ -1,22 +1,20 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 import '../../icon_provider.dart';
 import '../../tab_bar_position.dart';
 import '../../tab_button.dart';
+import '../../tabbed_view_menu_item.dart';
 import '../../theme/tabbed_view_theme_data.dart';
 import '../../theme/tabs_area_theme_data.dart';
 import '../../theme/theme_widget.dart';
 import '../tab/tab_button_widget.dart';
 import '../tabbed_view_provider.dart';
 import 'hidden_tabs.dart';
-import 'hidden_tabs_menu_widget.dart';
 
 /// Area for buttons like the hidden tabs menu button.
 @internal
-class TabsAreaButtonsWidget extends StatefulWidget {
+class TabsAreaButtonsWidget extends StatelessWidget {
   final TabbedViewProvider provider;
   final HiddenTabs hiddenTabs;
 
@@ -24,150 +22,46 @@ class TabsAreaButtonsWidget extends StatefulWidget {
       {super.key, required this.provider, required this.hiddenTabs});
 
   @override
-  State<StatefulWidget> createState() => _TabsAreaButtonsWidgetState();
-}
-
-class _TabsAreaButtonsWidgetState extends State<TabsAreaButtonsWidget> {
-  final LayerLink _layerLink = LayerLink();
-  OverlayEntry? _overlayEntry;
-
-  @override
-  void dispose() {
-    _overlayEntry?.remove();
-    _overlayEntry = null;
-    super.dispose();
-  }
-
-  void _showMenu(BuildContext context) {
-    if (_overlayEntry != null) {
-      return;
-    }
-
-    final RenderBox renderBox = context.findRenderObject() as RenderBox;
-    final position = renderBox.localToGlobal(Offset.zero);
-    final size = renderBox.size;
-    final screenSize = MediaQuery.of(context).size;
-
-    // Do not use the overlayContext
-    final TabbedViewThemeData theme = TabbedViewTheme.of(context);
-
-    _overlayEntry = OverlayEntry(builder: (BuildContext overlayContext) {
-      Alignment followerAnchor;
-      Alignment targetAnchor;
-      bool reverseMenu = false;
-      double availableHeight;
-
-      switch (widget.provider.tabBarPosition) {
-        case TabBarPosition.top:
-          // Menu opens below the button, aligned to the right.
-          followerAnchor = Alignment.topRight;
-          targetAnchor = Alignment.bottomRight;
-          availableHeight = screenSize.height - position.dy - size.height;
-          break;
-        case TabBarPosition.bottom:
-          // Menu opens above the button, aligned to the right.
-          followerAnchor = Alignment.bottomRight;
-          targetAnchor = Alignment.topRight;
-          reverseMenu = true;
-          availableHeight = position.dy;
-          break;
-        case TabBarPosition.left:
-          // Menu opens to the right of the button, aligned to the bottom.
-          followerAnchor = Alignment.bottomLeft;
-          targetAnchor = Alignment.bottomRight;
-          reverseMenu = true;
-          availableHeight = position.dy + size.height;
-          break;
-        case TabBarPosition.right:
-          // Menu opens to the left of the button, aligned to the bottom.
-          followerAnchor = Alignment.bottomRight;
-          targetAnchor = Alignment.bottomLeft;
-          reverseMenu = true;
-          availableHeight = position.dy + size.height;
-          break;
-      }
-
-      final effectiveMaxHeight = math.min(
-          theme.hiddenTabsMenu.maxHeight, math.max(0.0, availableHeight - 8));
-
-      // This TabbedViewTheme is needed because the overlay's context would
-      // otherwise search for a TabbedViewTheme higher up the widget tree,
-      // instantiating a default theme instead of using our custom one.
-      return TabbedViewTheme(
-          data: theme,
-          child: Stack(children: [
-            // Invisible gesture detector to dismiss the menu on outside tap
-            GestureDetector(
-                onTap: _hideMenu, child: Container(color: Colors.transparent)),
-            CompositedTransformFollower(
-                link: _layerLink,
-                showWhenUnlinked: false,
-                followerAnchor: followerAnchor,
-                targetAnchor: targetAnchor,
-                child: ConstrainedBox(
-                    constraints: BoxConstraints(maxHeight: effectiveMaxHeight),
-                    child: HiddenTabsMenuWidget(
-                        provider: widget.provider,
-                        reverse: reverseMenu,
-                        hiddenTabs: widget.hiddenTabs.indexes.toList(),
-                        onSelection: (tabIndex) {
-                          widget.provider.controller.selectedIndex = tabIndex;
-                          _hideMenu();
-                        })))
-          ]));
-    });
-    Overlay.of(context).insert(_overlayEntry!);
-    setState(() {});
-  }
-
-  void _hideMenu() {
-    if (_overlayEntry != null) {
-      _overlayEntry!.remove();
-      _overlayEntry = null;
-      if (mounted) setState(() {});
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     final TabbedViewThemeData theme = TabbedViewTheme.of(context);
     final TabsAreaThemeData tabsAreaTheme = theme.tabsArea;
 
     List<TabButton> buttons = [];
-    if (widget.provider.tabsAreaButtonsBuilder != null) {
-      buttons = widget.provider.tabsAreaButtonsBuilder!(
-          context, widget.provider.controller.tabs.length);
+    if (provider.tabsAreaButtonsBuilder != null) {
+      buttons = provider.tabsAreaButtonsBuilder!(
+          context, provider.controller.tabs.length);
     }
-    if (widget.hiddenTabs.hasHiddenTabs) {
+    if (hiddenTabs.hasHiddenTabs) {
       IconProvider icon;
-      final bool isOpen = _overlayEntry != null;
-      switch (widget.provider.tabBarPosition) {
+      switch (provider.tabBarPosition) {
         case TabBarPosition.top:
-          icon = isOpen ? tabsAreaTheme.menuIconOpen : tabsAreaTheme.menuIcon;
+          icon = tabsAreaTheme.menuIcon;
           break;
         case TabBarPosition.bottom:
-          icon = isOpen ? tabsAreaTheme.menuIcon : tabsAreaTheme.menuIconOpen;
+          icon = tabsAreaTheme.menuIconOpen;
           break;
         case TabBarPosition.left:
-          icon =
-              isOpen ? tabsAreaTheme.menuIconLeft : tabsAreaTheme.menuIconRight;
+          icon = tabsAreaTheme.menuIconRight;
           break;
         case TabBarPosition.right:
-          icon =
-              isOpen ? tabsAreaTheme.menuIconRight : tabsAreaTheme.menuIconLeft;
+          icon = tabsAreaTheme.menuIconLeft;
           break;
       }
 
       final menuButton = TabButton(
           icon: icon,
-          onPressed: () {
-            if (_overlayEntry == null) {
-              _showMenu(context);
-            } else {
-              _hideMenu();
+          menuBuilder: (context) {
+            List<TabbedViewMenuItem> menus = [];
+            for (int tabIndex in hiddenTabs.indexes) {
+              final String text = provider.controller.tabs[tabIndex].text;
+              menus.add(TabbedViewMenuItem(
+                  text: text,
+                  onSelection: () =>
+                      provider.controller.selectedIndex = tabIndex));
             }
+            return menus;
           });
-      if (widget.provider.tabBarPosition == TabBarPosition.left) {
+      if (provider.tabBarPosition == TabBarPosition.left) {
         // For a left tab bar, the overflow button should be last.
         buttons.add(menuButton);
       } else {
@@ -186,18 +80,21 @@ class _TabsAreaButtonsWidgetState extends State<TabsAreaButtonsWidget> {
       children.add(Container(
           child: TabButtonWidget(
               button: tabButton,
-              enabled: widget.provider.draggingTabIndex == null,
-              normalColor: tabsAreaTheme.buttonColor,
-              hoverColor:
-                  tabsAreaTheme.hoveredButtonColor ?? tabsAreaTheme.buttonColor,
-              disabledColor: tabsAreaTheme.disabledButtonColor,
-              normalBackground: tabsAreaTheme.buttonBackground,
-              hoverBackground: tabsAreaTheme.hoveredButtonBackground,
-              disabledBackground: tabsAreaTheme.disabledButtonBackground,
-              iconSize: tabButton.iconSize != null
-                  ? tabButton.iconSize!
-                  : tabsAreaTheme.buttonIconSize,
-              themePadding: tabsAreaTheme.buttonPadding),
+              enabled: provider.draggingTabIndex == null,
+              normalColor: tabButton.color ?? tabsAreaTheme.buttonColor,
+              hoverColor: tabButton.hoverColor ??
+                  tabsAreaTheme.hoveredButtonColor ??
+                  tabsAreaTheme.buttonColor,
+              disabledColor:
+                  tabButton.disabledColor ?? tabsAreaTheme.disabledButtonColor,
+              normalBackground:
+                  tabButton.background ?? tabsAreaTheme.buttonBackground,
+              hoverBackground: tabButton.hoverBackground ??
+                  tabsAreaTheme.hoveredButtonBackground,
+              disabledBackground: tabButton.disabledBackground ??
+                  tabsAreaTheme.disabledButtonBackground,
+              iconSize: tabButton.iconSize ?? tabsAreaTheme.buttonIconSize,
+              themePadding: tabButton.padding ?? tabsAreaTheme.buttonPadding),
           padding: padding));
     }
 
@@ -220,9 +117,6 @@ class _TabsAreaButtonsWidgetState extends State<TabsAreaButtonsWidget> {
           margin: margin);
     }
 
-    return CompositedTransformTarget(
-      link: _layerLink,
-      child: buttonsArea,
-    );
+    return buttonsArea;
   }
 }

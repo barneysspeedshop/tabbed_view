@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../tab_bar_position.dart';
 import '../../tab_status.dart';
-import '../hidden_tabs_menu_theme_data.dart';
 import '../tab_header_extent_behavior.dart';
 import '../tab_decoration_builder.dart';
 import '../tabbed_view_theme_data.dart';
@@ -57,9 +56,6 @@ class MinimalistTheme extends TabbedViewThemeData {
         BoxDecoration(color: isLight ? colorSet[700]! : colorSet[500]!);
     tab.hoveredStatus.disabledButtonColor =
         isLight ? colorSet[500]! : colorSet[600]!;
-
-    hiddenTabsMenu = HiddenTabsMenuThemeData(brightness: brightness);
-    hiddenTabsMenu.borderRadius = BorderRadius.circular(4);
   }
 
   late final Radius? _tabRadius;

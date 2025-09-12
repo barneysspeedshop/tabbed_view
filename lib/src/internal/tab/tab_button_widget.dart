@@ -90,6 +90,7 @@ class TabButtonWidgetState extends State<TabButtonWidget> {
       icon = MenuWidget(
           child: icon,
           itemCount: menuItems.length,
+          tabIndexProvider: (index) => index,
           textProvider: (index) => menuItems[index].text,
           callbackBuilder: (context, index) => menuItems[index].onSelection);
     } else {

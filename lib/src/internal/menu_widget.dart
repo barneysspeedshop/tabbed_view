@@ -6,6 +6,7 @@ import '../theme/tabbed_view_theme_data.dart';
 import '../theme/theme_widget.dart';
 
 typedef IndexedTextProvider = String Function(int index);
+typedef IndexedTabIndexProvider = int Function(int index);
 typedef NullableIndexedCallbackBuilder = VoidCallback? Function(
     BuildContext context, int index);
 
@@ -14,11 +15,13 @@ class MenuWidget extends StatelessWidget {
   const MenuWidget(
       {super.key,
       required this.itemCount,
+      required this.tabIndexProvider,
       required this.textProvider,
       required this.callbackBuilder,
       required this.child});
 
   final int itemCount;
+  final IndexedTabIndexProvider tabIndexProvider;
   final IndexedTextProvider textProvider;
   final NullableIndexedCallbackBuilder callbackBuilder;
   final Widget child;
@@ -28,7 +31,6 @@ class MenuWidget extends StatelessWidget {
     final TabbedViewThemeData theme = TabbedViewTheme.of(context);
     final TabbedViewMenuThemeData menuTheme = theme.menu;
 
-    print(menuTheme.style);
     return MenuAnchor(
         child: child,
         style: menuTheme.style,
@@ -61,7 +63,10 @@ class MenuWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: List.generate(
             itemCount,
-            (i) => _menuItem(context: context, menuTheme: menuTheme, index: i),
+            (i) => _menuItem(
+                context: context,
+                menuTheme: menuTheme,
+                index: tabIndexProvider(i)),
           ),
         ),
       ),

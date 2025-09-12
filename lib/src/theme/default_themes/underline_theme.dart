@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../tab_bar_position.dart';
 import '../../tab_status.dart';
-import '../hidden_tabs_menu_theme_data.dart';
 import '../tab_decoration_builder.dart';
 import '../tabbed_view_theme_data.dart';
 import '../tabs_area_cross_axis_fit.dart';
@@ -56,9 +55,6 @@ class UnderlineTheme extends TabbedViewThemeData {
 
     contentArea.color = backgroundColor;
     contentArea.border = BorderSide(width: 1, color: _borderColor);
-
-    hiddenTabsMenu = HiddenTabsMenuThemeData(brightness: brightness);
-    hiddenTabsMenu.borderRadius = BorderRadius.circular(4);
   }
 
   late final Color _borderColor;
