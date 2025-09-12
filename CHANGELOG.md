@@ -1,4 +1,4 @@
-## 2.0.0-rc.7
+## 2.0.0-rc.8
 
 * Theme
   * Refactored theming system to fully support all tab bar positions (`top`, `bottom`, `left`, `right`).
@@ -59,6 +59,7 @@
   * Renamed and refactored `buttons` attribute to `buttonsBuilder` to use the builder pattern.
 * `TabbedView`
   * Removed the `hiddenTabsMenuItemBuilder` attribute.
+* Replaced `HiddenTabsMenuThemeData` with `TabbedViewMenuThemeData`.
 * Special thanks to Patrick Legacy for his great contributions to this release.
 
 ## 1.22.1
