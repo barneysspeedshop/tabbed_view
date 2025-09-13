@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../icon_provider.dart';
-import '../tabbed_view_icons.dart';
 import 'side_tabs_layout.dart';
 import 'tab_header_extent_behavior.dart';
 import 'tabbed_view_theme_constants.dart';
@@ -36,23 +34,12 @@ class TabsAreaThemeData {
       this.buttonBackground,
       this.hoveredButtonBackground,
       this.disabledButtonBackground,
-      IconProvider? menuIcon,
-      IconProvider? menuIconOpen,
-      IconProvider? menuIconLeft,
-      IconProvider? menuIconRight,
       this.dropColor = const Color.fromARGB(150, 0, 0, 0)})
       : this._minimalFinalGap = minimalFinalGap >= 0 ? minimalFinalGap : 0,
         this._buttonsOffset = buttonsOffset >= 0 ? buttonsOffset : 0,
         this._buttonsGap = buttonsGap >= 0 ? buttonsGap : 0,
         this.buttonIconSize =
-            TabbedViewThemeConstants.normalize(buttonIconSize),
-        this.menuIcon = menuIcon ?? IconProvider.path(TabbedViewIcons.menu),
-        this.menuIconOpen =
-            menuIconOpen ?? IconProvider.path(TabbedViewIcons.menuUp),
-        this.menuIconLeft =
-            menuIconLeft ?? IconProvider.path(TabbedViewIcons.menuLeft),
-        this.menuIconRight =
-            menuIconRight ?? IconProvider.path(TabbedViewIcons.menuRight);
+            TabbedViewThemeConstants.normalize(buttonIconSize);
 
   bool visible;
 
@@ -85,15 +72,6 @@ class TabsAreaThemeData {
   /// Defines how tab headers are sized relative to each other in the cross axis.
   TabHeaderExtentBehavior tabHeaderExtentBehavior;
 
-  /// Icon for the hidden tabs menu when it is open.
-  final IconProvider menuIconOpen;
-
-  /// Icon for the hidden tabs menu for a left tab bar.
-  final IconProvider menuIconLeft;
-
-  /// Icon for the hidden tabs menu for a right tab bar.
-  final IconProvider menuIconRight;
-
   Color dropColor;
 
   double _minimalFinalGap;
@@ -120,9 +98,6 @@ class TabsAreaThemeData {
   BoxDecoration? buttonBackground;
   BoxDecoration? hoveredButtonBackground;
   BoxDecoration? disabledButtonBackground;
-
-  /// Icon for the hidden tabs menu.
-  IconProvider menuIcon;
 
   double _buttonsGap;
 
@@ -159,9 +134,6 @@ class TabsAreaThemeData {
           crossAxisAlignment == other.crossAxisAlignment &&
           sideTabsLayout == other.sideTabsLayout &&
           tabHeaderExtentBehavior == other.tabHeaderExtentBehavior &&
-          menuIconOpen == other.menuIconOpen &&
-          menuIconLeft == other.menuIconLeft &&
-          menuIconRight == other.menuIconRight &&
           dropColor == other.dropColor &&
           _minimalFinalGap == other._minimalFinalGap &&
           buttonsAreaDecoration == other.buttonsAreaDecoration &&
@@ -173,7 +145,6 @@ class TabsAreaThemeData {
           buttonBackground == other.buttonBackground &&
           hoveredButtonBackground == other.hoveredButtonBackground &&
           disabledButtonBackground == other.disabledButtonBackground &&
-          menuIcon == other.menuIcon &&
           _buttonsGap == other._buttonsGap &&
           _buttonsOffset == other._buttonsOffset &&
           buttonPadding == other.buttonPadding;
@@ -192,9 +163,6 @@ class TabsAreaThemeData {
         crossAxisAlignment,
         sideTabsLayout,
         tabHeaderExtentBehavior,
-        menuIconOpen,
-        menuIconLeft,
-        menuIconRight,
         dropColor,
         _minimalFinalGap,
         buttonsAreaDecoration,
@@ -206,7 +174,6 @@ class TabsAreaThemeData {
         buttonBackground,
         hoveredButtonBackground,
         disabledButtonBackground,
-        menuIcon,
         _buttonsGap,
         _buttonsOffset,
         buttonPadding

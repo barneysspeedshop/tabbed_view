@@ -4,6 +4,8 @@ import 'package:meta/meta.dart';
 
 import '../../tab_button.dart';
 import '../../tabbed_view_menu_item.dart';
+import '../../theme/tabbed_view_theme_data.dart';
+import '../../theme/theme_widget.dart';
 import '../menu_widget.dart';
 
 /// Widget for tab buttons. Used for any tab button such as the close button.
@@ -42,6 +44,8 @@ class TabButtonWidgetState extends State<TabButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final TabbedViewThemeData theme = TabbedViewTheme.of(context);
+
     Color color;
     BoxDecoration? background;
 
@@ -71,7 +75,14 @@ class TabButtonWidgetState extends State<TabButtonWidget> {
           : widget.normalBackground;
     }
 
-    Widget icon = widget.button.icon.buildIcon(color, widget.iconSize);
+    final List<TabbedViewMenuItem>? menuItems =
+        widget.button.menuBuilder?.call(context);
+    Widget icon;
+    if (menuItems != null) {
+      icon = theme.menu.menuIcon.buildIcon(color, widget.iconSize);
+    } else {
+      icon = widget.button.icon!.buildIcon(color, widget.iconSize);
+    }
 
     EdgeInsetsGeometry? padding = widget.button.padding != null
         ? widget.button.padding
@@ -84,8 +95,6 @@ class TabButtonWidgetState extends State<TabButtonWidget> {
       return icon;
     }
 
-    final List<TabbedViewMenuItem>? menuItems =
-        widget.button.menuBuilder?.call(context);
     if (menuItems != null) {
       icon = MenuWidget(
           child: icon,

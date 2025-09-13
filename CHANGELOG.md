@@ -59,6 +59,8 @@
   * Renamed and refactored `buttons` attribute to `buttonsBuilder` to use the builder pattern.
 * `TabbedView`
   * Removed the `hiddenTabsMenuItemBuilder` attribute.
+* `TabButton`
+  * The constructor was replaced by two separate constructors: `TabButton.icon` and `TabButton.menu`.
 * Replaced `HiddenTabsMenuThemeData` with `TabbedViewMenuThemeData`.
 * Special thanks to Patrick Legacy for his great contributions to this release.
 

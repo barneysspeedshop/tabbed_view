@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../icon_provider.dart';
+import '../tabbed_view_icons.dart';
+
 /// Defines the visual properties for the menus used in [TabbedView].
 ///
 /// This theme is applied both to:
@@ -13,15 +16,16 @@ class TabbedViewMenuThemeData {
   ///
   /// All parameters are optional. If a property is `null`, the default
   /// value defined by the system or widget will be used.
-  TabbedViewMenuThemeData({
-    this.style,
-    this.menuItemStyle,
-    this.textStyle,
-    this.padding,
-    this.maxWidth,
-    this.maxHeight,
-    this.ellipsisOverflowText = false,
-  });
+  TabbedViewMenuThemeData(
+      {this.style,
+      this.menuItemStyle,
+      this.textStyle,
+      this.padding,
+      this.maxWidth,
+      this.maxHeight,
+      this.ellipsisOverflowText = false,
+      IconProvider? menuIcon})
+      : menuIcon = menuIcon ?? IconProvider.path(TabbedViewIcons.menu);
 
   /// The overall [MenuStyle] for the menu container.
   ///
@@ -60,6 +64,9 @@ class TabbedViewMenuThemeData {
   /// with an ellipsis.
   bool ellipsisOverflowText;
 
+  /// Icon for the hidden tabs menu.
+  IconProvider menuIcon;
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -71,9 +78,10 @@ class TabbedViewMenuThemeData {
           padding == other.padding &&
           maxWidth == other.maxWidth &&
           maxHeight == other.maxHeight &&
-          ellipsisOverflowText == other.ellipsisOverflowText;
+          ellipsisOverflowText == other.ellipsisOverflowText &&
+          menuIcon == other.menuIcon;
 
   @override
   int get hashCode => Object.hash(style, menuItemStyle, textStyle, padding,
-      maxWidth, maxHeight, ellipsisOverflowText);
+      maxWidth, maxHeight, ellipsisOverflowText, menuIcon);
 }

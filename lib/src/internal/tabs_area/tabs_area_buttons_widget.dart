@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
-import '../../icon_provider.dart';
 import '../../tab_bar_position.dart';
 import '../../tab_button.dart';
 import '../../tabbed_view_menu_item.dart';
@@ -32,35 +31,16 @@ class TabsAreaButtonsWidget extends StatelessWidget {
           context, provider.controller.tabs.length);
     }
     if (hiddenTabs.hasHiddenTabs) {
-      IconProvider icon;
-      switch (provider.tabBarPosition) {
-        case TabBarPosition.top:
-          icon = tabsAreaTheme.menuIcon;
-          break;
-        case TabBarPosition.bottom:
-          icon = tabsAreaTheme.menuIconOpen;
-          break;
-        case TabBarPosition.left:
-          icon = tabsAreaTheme.menuIconRight;
-          break;
-        case TabBarPosition.right:
-          icon = tabsAreaTheme.menuIconLeft;
-          break;
-      }
-
-      final menuButton = TabButton(
-          icon: icon,
-          menuBuilder: (context) {
-            List<TabbedViewMenuItem> menus = [];
-            for (int tabIndex in hiddenTabs.indexes) {
-              final String text = provider.controller.tabs[tabIndex].text;
-              menus.add(TabbedViewMenuItem(
-                  text: text,
-                  onSelection: () =>
-                      provider.controller.selectedIndex = tabIndex));
-            }
-            return menus;
-          });
+      final menuButton = TabButton.menu((context) {
+        List<TabbedViewMenuItem> menus = [];
+        for (int tabIndex in hiddenTabs.indexes) {
+          final String text = provider.controller.tabs[tabIndex].text;
+          menus.add(TabbedViewMenuItem(
+              text: text,
+              onSelection: () => provider.controller.selectedIndex = tabIndex));
+        }
+        return menus;
+      });
       if (provider.tabBarPosition == TabBarPosition.left) {
         // For a left tab bar, the overflow button should be last.
         buttons.add(menuButton);

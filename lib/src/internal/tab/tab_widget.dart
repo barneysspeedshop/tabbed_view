@@ -52,7 +52,6 @@ class TabWidget extends StatelessWidget {
         index: index,
         onClose: onClose,
         status: status,
-        tabTheme: tabTheme,
         sideTabsLayout: theme.tabsArea.sideTabsLayout);
     widget = _TabHeaderProxy(sizeHolder: sizeHolder, child: widget);
 

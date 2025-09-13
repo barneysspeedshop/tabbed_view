@@ -35,32 +35,28 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
         leading: (context, status) => Icon(Icons.star, size: 16),
         content: Padding(padding: EdgeInsets.all(8), child: Text('Hello')),
         buttonsBuilder: (context) => [
-              TabButton(
-                  icon: IconProvider.data(Icons.info),
-                  onPressed: () {
-                    _scaffoldMessengerKey.currentState?.showSnackBar(
-                        const SnackBar(content: Text('Info button clicked!')));
-                  })
+              TabButton.icon(IconProvider.data(Icons.info), onPressed: () {
+                _scaffoldMessengerKey.currentState?.showSnackBar(
+                    const SnackBar(content: Text('Info button clicked!')));
+              })
             ]));
     tabs.add(TabData(
         text: 'Tab 2',
         buttonsBuilder: (context) => [
-              TabButton(
-                  icon: IconProvider.path(TabbedViewIcons.menu),
-                  menuBuilder: (context) {
-                    return [
-                      TabbedViewMenuItem(
-                          text: 'Menu item 1',
-                          onSelection: () => _scaffoldMessengerKey.currentState
-                              ?.showSnackBar(const SnackBar(
-                                  content: Text('Menu item 1')))),
-                      TabbedViewMenuItem(
-                          text: 'Menu item 2',
-                          onSelection: () => _scaffoldMessengerKey.currentState
-                              ?.showSnackBar(
-                                  const SnackBar(content: Text('Menu item 2'))))
-                    ];
-                  })
+              TabButton.menu((context) {
+                return [
+                  TabbedViewMenuItem(
+                      text: 'Menu item 1',
+                      onSelection: () => _scaffoldMessengerKey.currentState
+                          ?.showSnackBar(
+                              const SnackBar(content: Text('Menu item 1')))),
+                  TabbedViewMenuItem(
+                      text: 'Menu item 2',
+                      onSelection: () => _scaffoldMessengerKey.currentState
+                          ?.showSnackBar(
+                              const SnackBar(content: Text('Menu item 2'))))
+                ];
+              })
             ],
         content:
             Padding(padding: EdgeInsets.all(8), child: Text('Hello again'))));
@@ -165,14 +161,11 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
         tabsAreaButtonsBuilder: _addButtonEnabled
             ? (context, tabsCount) {
                 return [
-                  TabButton(
-                      icon: IconProvider.data(Icons.add),
-                      onPressed: () {
-                        _controller.addTab(TabData(
-                            text: 'New Tab',
-                            content:
-                                Center(child: Text('Content of New Tab'))));
-                      })
+                  TabButton.icon(IconProvider.data(Icons.add), onPressed: () {
+                    _controller.addTab(TabData(
+                        text: 'New Tab',
+                        content: Center(child: Text('Content of New Tab'))));
+                  })
                 ];
               }
             : null,

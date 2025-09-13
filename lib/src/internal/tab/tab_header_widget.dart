@@ -8,6 +8,8 @@ import '../../tab_status.dart';
 import '../../theme/side_tabs_layout.dart';
 import '../../theme/tab_status_theme_data.dart';
 import '../../theme/tab_theme_data.dart';
+import '../../theme/tabbed_view_theme_data.dart';
+import '../../theme/theme_widget.dart';
 import '../../unselected_tab_buttons_behavior.dart';
 import '../flow_layout.dart';
 import 'tab_button_widget.dart';
@@ -20,19 +22,19 @@ class TabHeaderWidget extends StatelessWidget {
       required this.status,
       required this.provider,
       required this.onClose,
-      required this.tabTheme,
       required this.sideTabsLayout});
 
   final int index;
   final TabStatus status;
   final TabbedViewProvider provider;
   final Function onClose;
-  final TabThemeData tabTheme;
   final SideTabsLayout sideTabsLayout;
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> textAndButtons = _textAndButtons(context, tabTheme);
+    final TabbedViewThemeData theme = TabbedViewTheme.of(context);
+    final TabThemeData tabTheme = theme.tab;
+    List<Widget> textAndButtons = _textAndButtons(context);
 
     Widget textAndButtonsContainer = ClipRect(
         child: FlowLayout(
@@ -69,7 +71,9 @@ class TabHeaderWidget extends StatelessWidget {
   }
 
   /// Builds a list with title text and buttons.
-  List<Widget> _textAndButtons(BuildContext context, TabThemeData tabTheme) {
+  List<Widget> _textAndButtons(BuildContext context) {
+    final TabbedViewThemeData theme = TabbedViewTheme.of(context);
+    final TabThemeData tabTheme = theme.tab;
     List<Widget> textAndButtons = [];
 
     TabData tab = provider.controller.tabs[index];
@@ -158,8 +162,7 @@ class TabHeaderWidget extends StatelessWidget {
       if (buttons != null && buttons.isNotEmpty && tabTheme.buttonsGap > 0) {
         padding = EdgeInsets.only(left: tabTheme.buttonsGap);
       }
-      TabButton closeButton = TabButton(
-          icon: tabTheme.closeIcon,
+      TabButton closeButton = TabButton.icon(tabTheme.closeIcon,
           onPressed: () async => await _onClose(context, index),
           toolTip: provider.closeButtonTooltip);
       textAndButtons.add(Container(
