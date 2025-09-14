@@ -11,17 +11,21 @@ void main() {
     TabData? onSelectionTabData;
     TabData? onSecondaryTapTabData;
     TabData? onTabCloseTabData;
-    bool closeInterceptorCalled = false;
+    bool removeInterceptorCalled = false;
 
     setUp(() {
-      controller = TabbedViewController([
-        TabData(text: 'Tab 1'),
-        TabData(text: 'Tab 2'),
-      ]);
+      controller = TabbedViewController(
+        [
+          TabData(text: 'Tab 1'),
+          TabData(text: 'Tab 2'),
+        ],
+        onTabRemove: (tabData) => onTabCloseTabData = tabData,
+        onTabSelection: (index, tabData) => onSelectionTabData = tabData,
+      );
       onSelectionTabData = null;
       onSecondaryTapTabData = null;
       onTabCloseTabData = null;
-      closeInterceptorCalled = false;
+      removeInterceptorCalled = false;
     });
 
     Widget _buildTestApp() {
@@ -29,15 +33,13 @@ void main() {
         home: Scaffold(
           body: TabbedView(
             controller: controller,
-            onTabSelection: (index, tabData) => onSelectionTabData = tabData,
-            onTabSecondaryTap: (index, tabData, details) =>
-                onSecondaryTapTabData = tabData,
-            onTabClose: (index, tabData) => onTabCloseTabData = tabData,
-            tabCloseInterceptor: (context, index, tabData) {
-              closeInterceptorCalled = true;
+            tabRemoveInterceptor: (context, index, tabData) {
+              removeInterceptorCalled = true;
               // Prevent closing the first tab
               return index != 0;
             },
+            onTabSecondaryTap: (index, tabData, details) =>
+                onSecondaryTapTabData = tabData,
           ),
         ),
       );
@@ -68,7 +70,7 @@ void main() {
       expect(onSecondaryTapTabData?.text, 'Tab 1');
     });
 
-    testWidgets('tabCloseInterceptor prevents tab from closing',
+    testWidgets('tabRemoveInterceptor prevents tab from closing',
         (WidgetTester tester) async {
       await tester.pumpWidget(_buildTestApp());
 
@@ -81,7 +83,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Verify the interceptor was called and the tab was not closed
-      expect(closeInterceptorCalled, isTrue);
+      expect(removeInterceptorCalled, isTrue);
       expect(controller.length, 2);
       expect(onTabCloseTabData, isNull);
     });

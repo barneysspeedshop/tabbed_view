@@ -75,7 +75,12 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
             padding: EdgeInsets.all(8),
             child: Text('Content for the long tab'))));
 
-    _controller = TabbedViewController(tabs);
+    _controller = TabbedViewController(
+      tabs,
+      onTabReorder: (int oldIndex, int newIndex) {},
+      onTabSelection: (index, tabData) {},
+      onTabRemove: (tabData) {},
+    );
   }
 
   TabbedViewThemeData _getTheme() {
@@ -147,17 +152,6 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
         },
         tabBarPosition: _position,
         contentBuilder: null,
-        onTabSelection: (index, tabData) {},
-        onTabClose: (index, tabData) {},
-        tabCloseInterceptor: (context, index, tabData) {
-          if (tabData.text == 'Tab 1') {
-            return false;
-          }
-          return true;
-        },
-        tabSelectInterceptor: (newIndex) {
-          return true;
-        },
         tabsAreaButtonsBuilder: _addButtonEnabled
             ? (context, tabsCount) {
                 return [
@@ -182,7 +176,15 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
             onDragCompleted: null,
           );
         },
-        onTabReorder: (int oldIndex, int newIndex) {},
+        tabRemoveInterceptor: (context, index, tabData) {
+          if (tabData.text == 'Tab 1') {
+            return false;
+          }
+          return true;
+        },
+        tabSelectInterceptor: (newIndex) {
+          return true;
+        },
         closeButtonTooltip: 'Close this tab',
         tabsAreaVisible: true,
         contentClip: true,

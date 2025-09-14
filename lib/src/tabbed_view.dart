@@ -12,11 +12,8 @@ import 'theme/theme_widget.dart';
 import 'typedefs/can_drop.dart';
 import 'typedefs/on_before_drop_accept.dart';
 import 'typedefs/on_draggable_build.dart';
-import 'typedefs/on_tab_close.dart';
-import 'typedefs/on_tab_reorder.dart';
 import 'typedefs/on_tab_secondary_tap.dart';
-import 'typedefs/on_tab_selection.dart';
-import 'typedefs/tab_close_interceptor.dart';
+import 'typedefs/tab_remove_interceptor.dart';
 import 'typedefs/tab_select_interceptor.dart';
 import 'typedefs/tabs_area_buttons_builder.dart';
 import 'unselected_tab_buttons_behavior.dart';
@@ -31,12 +28,7 @@ class TabbedView extends StatefulWidget {
   TabbedView({
     required this.controller,
     this.contentBuilder,
-    this.onTabClose,
-    this.onTabReorder,
     this.tabReorderEnabled = true,
-    this.tabCloseInterceptor,
-    this.onTabSelection,
-    this.tabSelectInterceptor,
     this.onTabSecondaryTap,
     this.unselectedTabButtonsBehavior =
         UnselectedTabButtonsBehavior.allDisabled,
@@ -48,6 +40,8 @@ class TabbedView extends StatefulWidget {
     this.canDrop,
     this.onBeforeDropAccept,
     this.dragScope,
+    this.tabSelectInterceptor,
+    this.tabRemoveInterceptor,
     this.tabBarPosition = TabBarPosition.top,
     this.trailing,
   });
@@ -56,20 +50,13 @@ class TabbedView extends StatefulWidget {
   final bool contentClip;
   final IndexedWidgetBuilder? contentBuilder;
 
-  /// Callback triggered when a tab is closed by the user via the UI.
-  final OnTabClose? onTabClose;
-
-  /// Callback triggered when a tab is reordered by the user via the UI.
-  final OnTabReorder? onTabReorder;
-
   /// Whether tab reordering via drag-and-drop is enabled in the UI.
   ///
   /// This flag controls **user interactions only**. It does **not** affect
   /// programmatic reordering through [TabbedViewController.reorderTab].
   final bool tabReorderEnabled;
 
-  final TabCloseInterceptor? tabCloseInterceptor;
-  final OnTabSelection? onTabSelection;
+  final TabRemoveInterceptor? tabRemoveInterceptor;
   final TabSelectInterceptor? tabSelectInterceptor;
   final OnTabSecondaryTap? onTabSecondaryTap;
   final UnselectedTabButtonsBehavior unselectedTabButtonsBehavior;
@@ -91,14 +78,12 @@ class TabbedView extends StatefulWidget {
 
 /// The [TabbedView] state.
 class _TabbedViewState extends State<TabbedView> {
-  int? _lastSelectedIndex;
   int? _draggingTabIndex;
 
   @override
   void initState() {
     super.initState();
     widget.controller.addListener(_rebuildByTabOrSelection);
-    _lastSelectedIndex = widget.controller.selectedIndex;
   }
 
   @override
@@ -107,7 +92,6 @@ class _TabbedViewState extends State<TabbedView> {
     if (widget.controller != oldWidget.controller) {
       oldWidget.controller.removeListener(_rebuildByTabOrSelection);
       widget.controller.addListener(_rebuildByTabOrSelection);
-      _lastSelectedIndex = widget.controller.selectedIndex;
     }
   }
 
@@ -119,11 +103,9 @@ class _TabbedViewState extends State<TabbedView> {
         controller: widget.controller,
         contentBuilder: widget.contentBuilder,
         tabReorderEnabled: widget.tabReorderEnabled,
-        onTabReorder: widget.onTabReorder,
-        onTabClose: widget.onTabClose,
-        tabCloseInterceptor: widget.tabCloseInterceptor,
-        contentClip: widget.contentClip,
+        tabRemoveInterceptor: widget.tabRemoveInterceptor,
         tabSelectInterceptor: widget.tabSelectInterceptor,
+        contentClip: widget.contentClip,
         onTabSecondaryTap: widget.onTabSecondaryTap,
         unselectedTabButtonsBehavior: widget.unselectedTabButtonsBehavior,
         closeButtonTooltip: widget.closeButtonTooltip,
@@ -161,12 +143,6 @@ class _TabbedViewState extends State<TabbedView> {
 
   /// Rebuilds after any change in tabs or selection.
   void _rebuildByTabOrSelection() {
-    int? newTabIndex = widget.controller.selectedIndex;
-    if (_lastSelectedIndex != newTabIndex) {
-      _lastSelectedIndex = newTabIndex;
-      widget.onTabSelection?.call(newTabIndex, widget.controller.selectedTab);
-    }
-
     // rebuild
     setState(() {});
   }

@@ -6,10 +6,8 @@ import '../tabbed_view_controller.dart';
 import '../typedefs/can_drop.dart';
 import '../typedefs/on_before_drop_accept.dart';
 import '../typedefs/on_draggable_build.dart';
-import '../typedefs/on_tab_close.dart';
-import '../typedefs/on_tab_reorder.dart';
 import '../typedefs/on_tab_secondary_tap.dart';
-import '../typedefs/tab_close_interceptor.dart';
+import '../typedefs/tab_remove_interceptor.dart';
 import '../typedefs/tab_select_interceptor.dart';
 import '../typedefs/tabs_area_buttons_builder.dart';
 import '../unselected_tab_buttons_behavior.dart';
@@ -19,17 +17,15 @@ import '../unselected_tab_buttons_behavior.dart';
 class TabbedViewProvider {
   TabbedViewProvider(
       {required this.controller,
-      this.contentBuilder,
+      required this.contentBuilder,
       required this.tabReorderEnabled,
-      this.onTabReorder,
-      this.onTabClose,
-      this.tabCloseInterceptor,
       required this.contentClip,
-      this.tabSelectInterceptor,
       required this.unselectedTabButtonsBehavior,
-      this.closeButtonTooltip,
-      this.tabsAreaButtonsBuilder,
-      this.onTabSecondaryTap,
+      required this.closeButtonTooltip,
+      required this.tabsAreaButtonsBuilder,
+      required this.tabRemoveInterceptor,
+      required this.tabSelectInterceptor,
+      required this.onTabSecondaryTap,
       required this.onTabDrag,
       required this.draggingTabIndex,
       required this.onDraggableBuild,
@@ -37,15 +33,13 @@ class TabbedViewProvider {
       required this.onBeforeDropAccept,
       required this.dragScope,
       required this.tabBarPosition,
-      this.trailing});
+      required this.trailing});
 
   final TabbedViewController controller;
   final bool contentClip;
   final IndexedWidgetBuilder? contentBuilder;
   final bool tabReorderEnabled;
-  final OnTabReorder? onTabReorder;
-  final OnTabClose? onTabClose;
-  final TabCloseInterceptor? tabCloseInterceptor;
+  final TabRemoveInterceptor? tabRemoveInterceptor;
   final TabSelectInterceptor? tabSelectInterceptor;
   final OnTabSecondaryTap? onTabSecondaryTap;
   final UnselectedTabButtonsBehavior unselectedTabButtonsBehavior;
