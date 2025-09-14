@@ -147,9 +147,9 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
         },
         tabBarPosition: _position,
         contentBuilder: null,
-        onTabSelection: (tabData) {},
+        onTabSelection: (index, tabData) {},
         onTabClose: (index, tabData) {},
-        tabCloseInterceptor: (index, tabData) {
+        tabCloseInterceptor: (context, index, tabData) {
           if (tabData.text == 'Tab 1') {
             return false;
           }

@@ -64,6 +64,8 @@
 * Replaced `HiddenTabsMenuThemeData` with `TabbedViewMenuThemeData`.
 * `TabCloseInterceptor`
   * ̀Added the `BuildContext` attribute.
+* `OnTabSelection`
+  * ̀Added the `tabIndex` attribute.
 * Special thanks to Patrick Legacy for his great contributions to this release.
 
 ## 1.22.1

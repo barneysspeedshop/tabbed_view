@@ -29,7 +29,7 @@ void main() {
         home: Scaffold(
           body: TabbedView(
             controller: controller,
-            onTabSelection: (tabData) => onSelectionTabData = tabData,
+            onTabSelection: (index, tabData) => onSelectionTabData = tabData,
             onTabSecondaryTap: (index, tabData, details) =>
                 onSecondaryTapTabData = tabData,
             onTabClose: (index, tabData) => onTabCloseTabData = tabData,
