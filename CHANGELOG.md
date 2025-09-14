@@ -1,4 +1,4 @@
-## 2.0.0-rc.8
+## 2.0.0-rc.9
 
 * Theme
   * Refactored theming system to fully support all tab bar positions (`top`, `bottom`, `left`, `right`).
