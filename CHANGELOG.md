@@ -1,5 +1,24 @@
 ## 2.0.0-rc.9
 
+* `TabbedView`
+  * Removed the `hiddenTabsMenuItemBuilder` attribute.
+* `TabbedViewController`
+  * Moved `reorderEnable` attribute to `TabbedView`.
+  * Moved `onReorder` attribute to `TabbedView`.
+  * New methods:
+    * `selectTab(TabData tab)`
+    * `getTabByValue(dynamic value)`
+    * `selectTabByValue(dynamic value)`
+* `TabStatus`
+  * Renamed `highlighted` value to `hovered`.
+* `TabData`
+  * Renamed and refactored `buttons` attribute to `buttonsBuilder` to use the builder pattern.
+* `TabButton`
+  * The constructor was replaced by two separate constructors: `TabButton.icon` and `TabButton.menu`.
+* `TabRemoveInterceptor`
+  * ̀Added the `BuildContext` attribute.
+* `OnTabSelection`
+  * ̀Added the `tabData` attribute.
 * Theme
   * Refactored theming system to fully support all tab bar positions (`top`, `bottom`, `left`, `right`).
     * Added `TabBarPosition` enum to represent the bar positions.
@@ -19,6 +38,9 @@
       * `crossAxisFit`: Defines how the cross axis will fit within the tabs area.
       * `crossAxisAlignment`: Defines the alignment of tabs in relation to the main content.
       * `tabHeaderExtentSize`: Defines how tab headers are sized relative to each other along their extent.
+    * Removed attributes:
+      * `gapBottomBorder`
+      * `gapSideBorder`̀
   * `TabStatusThemeData`
     * Renamed `normalButtonColor` attribute to `buttonColor`.
     * Renamed `hoverButtonBackground` attribute to `hoveredButtonBackground`.
@@ -42,30 +64,8 @@
     * New attributes:
       * `border`: The border around the outer side of the tab content area, excluding the side adjacent to the tabs.
       * `borderRadius`: The radius used to round the corners.
-* Added `SideTabsLayout` enum to define how side-positioned tabs (left or right) are laid out.
-* `TabbedViewController`
-  * Moved `reorderEnable` attribute to `TabbedView`.
-  * Moved `onReorder` attribute to `TabbedView`.
-  * New methods:
-    * `selectTab(TabData tab)`
-    * `getTabByValue(dynamic value)`
-    * `selectTabByValue(dynamic value)`
-* `TabStatus`
-  * Renamed `highlighted` value to `hovered`.  
-* The `OnTabSelection` callback was changed to provide the `TabData` object instead of the tab index.
-  * From: `void Function(int? tabIndex)`
-  * To: `void Function(TabData? tabData)`
-* `TabData`
-  * Renamed and refactored `buttons` attribute to `buttonsBuilder` to use the builder pattern.
-* `TabbedView`
-  * Removed the `hiddenTabsMenuItemBuilder` attribute.
-* `TabButton`
-  * The constructor was replaced by two separate constructors: `TabButton.icon` and `TabButton.menu`.
-* Replaced `HiddenTabsMenuThemeData` with `TabbedViewMenuThemeData`.
-* `TabRemoveInterceptor`
-  * ̀Added the `BuildContext` attribute.
-* `OnTabSelection`
-  * ̀Added the `tabIndex` attribute.
+  * Added `SideTabsLayout` enum to define how side-positioned tabs (left or right) are laid out.
+  * Replaced `HiddenTabsMenuThemeData` with `TabbedViewMenuThemeData`.
 * Special thanks to Patrick Legacy for his great contributions to this release.
 
 ## 1.22.1
