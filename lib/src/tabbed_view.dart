@@ -164,9 +164,7 @@ class _TabbedViewState extends State<TabbedView> {
     int? newTabIndex = widget.controller.selectedIndex;
     if (_lastSelectedIndex != newTabIndex) {
       _lastSelectedIndex = newTabIndex;
-      if (newTabIndex != null && widget.onTabSelection != null) {
-        widget.onTabSelection!(newTabIndex, widget.controller.selectedTab);
-      }
+      widget.onTabSelection?.call(newTabIndex, widget.controller.selectedTab);
     }
 
     // rebuild
