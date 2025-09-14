@@ -62,6 +62,8 @@
 * `TabButton`
   * The constructor was replaced by two separate constructors: `TabButton.icon` and `TabButton.menu`.
 * Replaced `HiddenTabsMenuThemeData` with `TabbedViewMenuThemeData`.
+* `TabCloseInterceptor`
+  * ̀Added the `BuildContext` attribute.
 * Special thanks to Patrick Legacy for his great contributions to this release.
 
 ## 1.22.1

@@ -33,7 +33,7 @@ void main() {
             onTabSecondaryTap: (index, tabData, details) =>
                 onSecondaryTapTabData = tabData,
             onTabClose: (index, tabData) => onTabCloseTabData = tabData,
-            tabCloseInterceptor: (index, tabData) {
+            tabCloseInterceptor: (context, index, tabData) {
               closeInterceptorCalled = true;
               // Prevent closing the first tab
               return index != 0;
