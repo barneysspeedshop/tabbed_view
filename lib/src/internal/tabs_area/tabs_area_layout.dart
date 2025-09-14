@@ -279,12 +279,8 @@ class _TabsAreaLayoutRenderBox extends RenderBox
       } else {
         maxCrossAxisSize = math.max(maxCrossAxisSize, child.size.width);
         if (tabHeaderCrossAxisSize != null) {
-          // if(tabsAreaTheme.sideTabsLayout==SideTabsLayout.stacked) {
-          //  maxTabHeaderExtentSize = math.max(maxTabHeaderExtentSize, tabHeaderCrossAxisSize.height);
-          //} else {
           maxTabHeaderExtentSize =
               math.max(maxTabHeaderExtentSize, tabHeaderCrossAxisSize.width);
-          //  }
         }
       }
     }

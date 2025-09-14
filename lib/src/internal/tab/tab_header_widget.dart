@@ -10,8 +10,8 @@ import '../../theme/tab_status_theme_data.dart';
 import '../../theme/tab_theme_data.dart';
 import '../../theme/tabbed_view_theme_data.dart';
 import '../../theme/theme_widget.dart';
+import '../../theme/vertical_alignment.dart';
 import '../../unselected_tab_buttons_behavior.dart';
-import '../flow_layout.dart';
 import 'tab_button_widget.dart';
 import '../tabbed_view_provider.dart';
 
@@ -36,11 +36,18 @@ class TabHeaderWidget extends StatelessWidget {
     final TabThemeData tabTheme = theme.tab;
     List<Widget> textAndButtons = _textAndButtons(context);
 
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center;
+    if (tabTheme.verticalAlignment == VerticalAlignment.top) {
+      crossAxisAlignment = CrossAxisAlignment.start;
+    } else if (tabTheme.verticalAlignment == VerticalAlignment.bottom) {
+      crossAxisAlignment = CrossAxisAlignment.end;
+    }
     Widget textAndButtonsContainer = ClipRect(
-        child: FlowLayout(
-            children: textAndButtons,
-            firstChildFlex: true,
-            verticalAlignment: tabTheme.verticalAlignment));
+        child: IntrinsicWidth(
+            child: Row(
+                children: textAndButtons,
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: crossAxisAlignment)));
 
     final TabStatusThemeData? statusTheme = tabTheme.getTabThemeFor(status);
 
@@ -114,13 +121,15 @@ class TabHeaderWidget extends StatelessWidget {
     if (leading != null) {
       textAndButtons.add(leading);
     }
-    textAndButtons.add(Container(
-        child: Center(
-            child: SizedBox(
-                width: tab.textSize,
-                child: Text(tab.text,
-                    style: textStyle, overflow: TextOverflow.ellipsis))),
-        padding: padding));
+    textAndButtons.add(Expanded(
+        child: Container(
+      alignment: Alignment.centerLeft,
+      padding: padding,
+      child: SizedBox(
+          width: tab.textSize,
+          child: Text(tab.text,
+              style: textStyle, overflow: TextOverflow.ellipsis)),
+    )));
 
     if (buttons != null) {
       final bool enabled = provider.draggingTabIndex == null &&
