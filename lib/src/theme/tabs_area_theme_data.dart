@@ -16,8 +16,6 @@ class TabsAreaThemeData {
       this.initialGap = 0,
       this.middleGap = 0,
       double minimalFinalGap = 0,
-      this.gapBottomBorder = BorderSide.none,
-      this.gapSideBorder = BorderSide.none,
       this.crossAxisFit = TabsAreaCrossAxisFit.none,
       this.crossAxisAlignment = TabsAreaCrossAxisAlignment.inner,
       this.tabHeaderExtentBehavior = TabHeaderExtentBehavior.individual,
@@ -57,8 +55,6 @@ class TabsAreaThemeData {
 
   double initialGap;
   double middleGap;
-  BorderSide gapBottomBorder;
-  BorderSide gapSideBorder;
 
   /// Defines how the cross axis will fit within the tabs area.
   TabsAreaCrossAxisFit crossAxisFit;
@@ -128,8 +124,6 @@ class TabsAreaThemeData {
           border == other.border &&
           initialGap == other.initialGap &&
           middleGap == other.middleGap &&
-          gapBottomBorder == other.gapBottomBorder &&
-          gapSideBorder == other.gapSideBorder &&
           crossAxisFit == other.crossAxisFit &&
           crossAxisAlignment == other.crossAxisAlignment &&
           sideTabsLayout == other.sideTabsLayout &&
@@ -157,8 +151,6 @@ class TabsAreaThemeData {
         border,
         initialGap,
         middleGap,
-        gapBottomBorder,
-        gapSideBorder,
         crossAxisFit,
         crossAxisAlignment,
         sideTabsLayout,
