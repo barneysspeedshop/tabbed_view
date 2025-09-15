@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 import '../../tab_button.dart';
-import '../../tabbed_view_menu_item.dart';
+import '../../tabbed_view_menu_builder.dart';
 import '../../theme/tabbed_view_theme_data.dart';
 import '../../theme/theme_widget.dart';
 import '../menu_widget.dart';
@@ -75,10 +75,9 @@ class TabButtonWidgetState extends State<TabButtonWidget> {
           : widget.normalBackground;
     }
 
-    final List<TabbedViewMenuItem>? menuItems =
-        widget.button.menuBuilder?.call(context);
+    final TabbedViewMenuBuilder? menuBuilder = widget.button.menuBuilder;
     Widget icon;
-    if (menuItems != null) {
+    if (menuBuilder != null) {
       icon = theme.menu.menuIcon.buildIcon(color, widget.iconSize);
     } else {
       icon = widget.button.icon!.buildIcon(color, widget.iconSize);
@@ -95,13 +94,8 @@ class TabButtonWidgetState extends State<TabButtonWidget> {
       return icon;
     }
 
-    if (menuItems != null) {
-      icon = MenuWidget(
-          child: icon,
-          itemCount: menuItems.length,
-          tabIndexProvider: (index) => index,
-          textProvider: (index) => menuItems[index].text,
-          callbackBuilder: (context, index) => menuItems[index].onSelection);
+    if (menuBuilder != null) {
+      icon = MenuWidget(child: icon, menuBuilder: menuBuilder);
     } else {
       icon = GestureDetector(child: icon, onTap: widget.button.onPressed);
     }
