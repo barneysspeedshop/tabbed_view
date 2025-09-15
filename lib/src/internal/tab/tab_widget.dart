@@ -58,7 +58,7 @@ class TabWidget extends StatelessWidget {
     TabDecorationBuilder? decorationBuilder = tabTheme.decorationBuilder;
     while (decorationBuilder != null) {
       TabDecoration tabDecoration = decorationBuilder(
-          status: status, tabBarPosition: provider.tabBarPosition);
+          status: status, tabBarPosition: theme.tabsArea.position);
       if (tabDecoration.border != null || tabDecoration.color != null) {
         final BorderRadius? borderRadius = tabDecoration.borderRadius;
         if (borderRadius != null) {
@@ -81,7 +81,7 @@ class TabWidget extends StatelessWidget {
     final maxWidth = tabTheme.maxMainSize;
     if (maxWidth != null) {
       BoxConstraints constraints;
-      if (provider.tabBarPosition.isHorizontal) {
+      if (theme.tabsArea.position.isHorizontal) {
         constraints = BoxConstraints(maxWidth: maxWidth);
       } else {
         // For vertical tab bars, the constraint depends on the layout.

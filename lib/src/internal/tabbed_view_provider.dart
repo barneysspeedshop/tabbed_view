@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
-import '../tab_bar_position.dart';
 import '../tabbed_view_controller.dart';
 import '../typedefs/can_drop.dart';
 import '../typedefs/on_before_drop_accept.dart';
@@ -30,7 +29,6 @@ class TabbedViewProvider {
       required this.canDrop,
       required this.onBeforeDropAccept,
       required this.dragScope,
-      required this.tabBarPosition,
       required this.trailing});
 
   final TabbedViewController controller;
@@ -48,7 +46,6 @@ class TabbedViewProvider {
   final CanDrop? canDrop;
   final OnBeforeDropAccept? onBeforeDropAccept;
   final String? dragScope;
-  final TabBarPosition tabBarPosition;
   final Widget? trailing;
 }
 

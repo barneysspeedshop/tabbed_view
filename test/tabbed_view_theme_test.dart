@@ -18,13 +18,13 @@ void main() {
     Widget _buildTestApp(
         {required TabbedViewThemeData theme,
         required TabBarPosition position}) {
+      theme.tabsArea.position = position;
       return MaterialApp(
         home: Scaffold(
           body: TabbedViewTheme(
             data: theme,
             child: TabbedView(
               controller: controller,
-              tabBarPosition: position,
             ),
           ),
         ),
@@ -224,14 +224,17 @@ void main() {
       testWidgets(
           'is present and rotated when TabBarPosition is left by default',
           (WidgetTester tester) async {
+        TabbedViewThemeData theme = TabbedViewThemeData.classic();
+        theme.tabsArea.position = TabBarPosition.left;
         await tester.pumpWidget(MaterialApp(
           home: Scaffold(
-            body: TabbedView(
+              body: TabbedViewTheme(
+            data: theme,
+            child: TabbedView(
               controller: controller,
-              tabBarPosition: TabBarPosition.left,
               trailing: Text('Trailing'),
             ),
-          ),
+          )),
         ));
 
         final trailingFinder = find.text('Trailing');

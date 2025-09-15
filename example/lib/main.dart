@@ -109,6 +109,7 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
             : TabbedViewThemeData.underline(brightness: _brightness);
         break;
     }
+    theme.tabsArea.position = _position;
     theme.tabsArea.sideTabsLayout = _sideTabsLayout;
     if (_maxMainSizeEnabled) {
       theme.tab.maxMainSize = 200;
@@ -150,7 +151,6 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
               content:
                   Text('Right-clicked on tab #$index: "${tabData.text}"')));
         },
-        tabBarPosition: _position,
         contentBuilder: null,
         tabsAreaButtonsBuilder: _addButtonEnabled
             ? (context, tabsCount) {

@@ -4,7 +4,6 @@ import 'package:meta/meta.dart';
 import '../tab_bar_position.dart';
 import '../tab_data.dart';
 import '../tabbed_view_controller.dart';
-import '../theme/content_area_theme_data.dart';
 import '../theme/tabbed_view_theme_data.dart';
 import '../theme/theme_widget.dart';
 import 'tabbed_view_provider.dart';
@@ -21,7 +20,6 @@ class ContentArea extends StatelessWidget {
   Widget build(BuildContext context) {
     TabbedViewController controller = provider.controller;
     TabbedViewThemeData theme = TabbedViewTheme.of(context);
-    ContentAreaThemeData contentAreaTheme = theme.contentArea;
 
     LayoutBuilder layoutBuilder = LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
@@ -54,17 +52,16 @@ class ContentArea extends StatelessWidget {
           child: SizeChangedLayoutNotifier(child: Stack(children: children)));
 
       final Border border = _buildBorder(theme: theme);
-      final BorderRadius borderRadius =
-          _buildBorderRadius(theme: contentAreaTheme);
+      final BorderRadius borderRadius = _buildBorderRadius(theme: theme);
 
       BoxDecoration decoration = BoxDecoration(
-          color: contentAreaTheme.color,
+          color: theme.contentArea.color,
           borderRadius: borderRadius,
           border: border);
       return Container(
           child: listener,
           decoration: decoration,
-          padding: contentAreaTheme.padding);
+          padding: theme.contentArea.padding);
     });
     if (provider.contentClip) {
       return ClipRect(child: layoutBuilder);
@@ -73,9 +70,9 @@ class ContentArea extends StatelessWidget {
     return layoutBuilder;
   }
 
-  BorderRadius _buildBorderRadius({required ContentAreaThemeData theme}) {
-    final Radius radius = Radius.circular(theme.borderRadius);
-    final TabBarPosition position = provider.tabBarPosition;
+  BorderRadius _buildBorderRadius({required TabbedViewThemeData theme}) {
+    final Radius radius = Radius.circular(theme.contentArea.borderRadius);
+    final TabBarPosition position = theme.tabsArea.position;
 
     bool top = position != TabBarPosition.top;
     bool bottom = position != TabBarPosition.bottom;
@@ -98,7 +95,7 @@ class ContentArea extends StatelessWidget {
         ? theme.divider ?? BorderSide.none
         : BorderSide.none;
     final BorderSide borderSide = theme.contentArea.border ?? BorderSide.none;
-    final TabBarPosition position = provider.tabBarPosition;
+    final TabBarPosition position = theme.tabsArea.position;
 
     bool top = position != TabBarPosition.top;
     bool bottom = position != TabBarPosition.bottom;

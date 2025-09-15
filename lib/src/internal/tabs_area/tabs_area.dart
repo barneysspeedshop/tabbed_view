@@ -29,17 +29,8 @@ class TabsArea extends StatefulWidget {
 /// The [TabsArea] state.
 class _TabsAreaState extends State<TabsArea> {
   int? _hoveredIndex;
-  Key? _tabsAreaLayoutKey;
-  late bool _lastIsHorizontal;
 
   final HiddenTabs _hiddenTabs = HiddenTabs();
-
-  @override
-  void initState() {
-    super.initState();
-    _lastIsHorizontal = widget.provider.tabBarPosition.isHorizontal;
-    _tabsAreaLayoutKey = UniqueKey();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,19 +60,11 @@ class _TabsAreaState extends State<TabsArea> {
     children.add(
         TabsAreaCorner(provider: widget.provider, hiddenTabs: _hiddenTabs));
 
-    if (widget.provider.tabBarPosition.isHorizontal != _lastIsHorizontal) {
-      _lastIsHorizontal = widget.provider.tabBarPosition.isHorizontal;
-      // Changing the key to force the layout to be rebuilt.
-      _tabsAreaLayoutKey = UniqueKey();
-    }
-
     Widget tabsAreaLayout = TabsAreaLayout(
-        key: _tabsAreaLayoutKey,
         children: children,
         theme: theme,
         hiddenTabs: _hiddenTabs,
-        selectedTabIndex: controller.selectedIndex,
-        tabBarPosition: widget.provider.tabBarPosition);
+        selectedTabIndex: controller.selectedIndex);
     tabsAreaLayout = ClipRect(child: tabsAreaLayout);
 
     Widget content = tabsAreaLayout;
@@ -97,7 +80,7 @@ class _TabsAreaState extends State<TabsArea> {
 
   BorderRadius _buildBorderRadius({required TabsAreaThemeData theme}) {
     final Radius radius = Radius.circular(theme.borderRadius);
-    final TabBarPosition position = widget.provider.tabBarPosition;
+    final TabBarPosition position = theme.position;
 
     bool top = position != TabBarPosition.bottom;
     bool bottom = position != TabBarPosition.top;
@@ -114,7 +97,7 @@ class _TabsAreaState extends State<TabsArea> {
 
   Border _buildBorder({required TabsAreaThemeData theme}) {
     final BorderSide borderSide = theme.border ?? BorderSide.none;
-    final TabBarPosition position = widget.provider.tabBarPosition;
+    final TabBarPosition position = theme.position;
 
     bool top = position != TabBarPosition.bottom;
     bool bottom = position != TabBarPosition.top;

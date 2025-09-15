@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../tab_bar_position.dart';
 import 'side_tabs_layout.dart';
 import 'tab_header_extent_behavior.dart';
 import 'tabbed_view_theme_constants.dart';
@@ -19,6 +20,7 @@ class TabsAreaThemeData {
       this.crossAxisFit = TabsAreaCrossAxisFit.none,
       this.crossAxisAlignment = TabsAreaCrossAxisAlignment.inner,
       this.tabHeaderExtentBehavior = TabHeaderExtentBehavior.individual,
+      this.position = TabBarPosition.top,
       this.sideTabsLayout = SideTabsLayout.rotated,
       this.buttonsAreaDecoration,
       this.buttonsAreaPadding,
@@ -61,6 +63,9 @@ class TabsAreaThemeData {
 
   /// Defines the alignment of tabs in relation to the main content.
   TabsAreaCrossAxisAlignment crossAxisAlignment;
+
+  /// Defines the position of the tab bar. Defaults to [TabBarPosition.top].
+  TabBarPosition position;
 
   /// Defines how side-positioned tabs (left or right) are laid out.
   SideTabsLayout sideTabsLayout;
@@ -126,6 +131,7 @@ class TabsAreaThemeData {
           middleGap == other.middleGap &&
           crossAxisFit == other.crossAxisFit &&
           crossAxisAlignment == other.crossAxisAlignment &&
+          position == other.position &&
           sideTabsLayout == other.sideTabsLayout &&
           tabHeaderExtentBehavior == other.tabHeaderExtentBehavior &&
           dropColor == other.dropColor &&
@@ -153,6 +159,7 @@ class TabsAreaThemeData {
         middleGap,
         crossAxisFit,
         crossAxisAlignment,
+        position,
         sideTabsLayout,
         tabHeaderExtentBehavior,
         dropColor,

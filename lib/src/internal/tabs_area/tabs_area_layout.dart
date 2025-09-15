@@ -23,14 +23,12 @@ class TabsAreaLayout extends MultiChildRenderObjectWidget {
       required List<Widget> children,
       required this.theme,
       required this.hiddenTabs,
-      required this.selectedTabIndex,
-      required this.tabBarPosition})
+      required this.selectedTabIndex})
       : super(key: key, children: children);
 
   final TabbedViewThemeData theme;
   final HiddenTabs hiddenTabs;
   final int? selectedTabIndex;
-  final TabBarPosition tabBarPosition;
 
   @override
   _TabsAreaLayoutElement createElement() {
@@ -39,8 +37,7 @@ class TabsAreaLayout extends MultiChildRenderObjectWidget {
 
   @override
   _TabsAreaLayoutRenderBox createRenderObject(BuildContext context) {
-    return _TabsAreaLayoutRenderBox(
-        theme, hiddenTabs, selectedTabIndex, tabBarPosition);
+    return _TabsAreaLayoutRenderBox(theme, hiddenTabs, selectedTabIndex);
   }
 
   @override
@@ -50,7 +47,6 @@ class TabsAreaLayout extends MultiChildRenderObjectWidget {
     renderObject..divider = theme.isDividerWithinTabArea ? theme.divider : null;
     renderObject..hiddenTabs = hiddenTabs;
     renderObject..selectedTabIndex = selectedTabIndex;
-    renderObject..tabBarPosition = tabBarPosition;
 
     renderObject.markNeedsLayoutForSizedByParentChange();
   }
@@ -79,13 +75,12 @@ class _TabsAreaLayoutRenderBox extends RenderBox
     with
         ContainerRenderObjectMixin<RenderBox, TabsAreaLayoutParentData>,
         RenderBoxContainerDefaultsMixin<RenderBox, TabsAreaLayoutParentData> {
-  _TabsAreaLayoutRenderBox(TabbedViewThemeData theme, HiddenTabs hiddenTabs,
-      int? selectedTabIndex, TabBarPosition tabBarPosition)
+  _TabsAreaLayoutRenderBox(
+      TabbedViewThemeData theme, HiddenTabs hiddenTabs, int? selectedTabIndex)
       : this._theme = theme,
         this._divider = theme.isDividerWithinTabArea ? theme.divider : null,
         this._hiddenTabs = hiddenTabs,
-        this._selectedTabIndex = selectedTabIndex,
-        this._tabBarPosition = tabBarPosition;
+        this._selectedTabIndex = selectedTabIndex;
 
   int? _selectedTabIndex;
 
@@ -120,16 +115,7 @@ class _TabsAreaLayoutRenderBox extends RenderBox
 
   TabsAreaThemeData get tabsAreaTheme => theme.tabsArea;
 
-  TabBarPosition _tabBarPosition;
-
-  TabBarPosition get tabBarPosition => _tabBarPosition;
-
-  set tabBarPosition(TabBarPosition value) {
-    if (_tabBarPosition != value) {
-      _tabBarPosition = value;
-      markNeedsLayout();
-    }
-  }
+  TabBarPosition get tabBarPosition => theme.tabsArea.position;
 
   HiddenTabs _hiddenTabs;
 

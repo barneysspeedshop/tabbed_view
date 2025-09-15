@@ -22,28 +22,29 @@ class TabsAreaCorner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TabbedViewThemeData theme = TabbedViewTheme.of(context);
+    TabsAreaThemeData tabsAreaTheme = theme.tabsArea;
+
     final List<Widget> children = [
       TabsAreaButtonsWidget(provider: provider, hiddenTabs: hiddenTabs)
     ];
 
     if (provider.trailing != null) {
       Widget trailing = provider.trailing!;
-      if (provider.tabBarPosition.isVertical) {
+      if (theme.tabsArea.position.isVertical) {
         final TabsAreaThemeData tabsAreaTheme =
             TabbedViewTheme.of(context).tabsArea;
         if (tabsAreaTheme.sideTabsLayout == SideTabsLayout.rotated) {
           final int quarterTurns =
-              provider.tabBarPosition == TabBarPosition.left ? -1 : 1;
+              theme.tabsArea.position == TabBarPosition.left ? -1 : 1;
           trailing = RotatedBox(quarterTurns: quarterTurns, child: trailing);
         }
       }
       children.add(trailing);
     }
 
-    TabbedViewThemeData theme = TabbedViewTheme.of(context);
-    TabsAreaThemeData tabsAreaTheme = theme.tabsArea;
     Widget cornerContent;
-    if (provider.tabBarPosition.isHorizontal) {
+    if (theme.tabsArea.position.isHorizontal) {
       if (tabsAreaTheme.crossAxisFit == TabsAreaCrossAxisFit.all) {
         cornerContent = IntrinsicHeight(
             child: Row(
@@ -59,7 +60,7 @@ class TabsAreaCorner extends StatelessWidget {
     }
 
     Widget corner = Container(
-        padding: provider.tabBarPosition.isHorizontal
+        padding: theme.tabsArea.position.isHorizontal
             ? EdgeInsets.only(left: DropTabWidget.dropWidth)
             : EdgeInsets.only(top: DropTabWidget.dropWidth),
         child: cornerContent);

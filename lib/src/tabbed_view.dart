@@ -40,7 +40,6 @@ class TabbedView extends StatefulWidget {
     this.onBeforeDropAccept,
     this.dragScope,
     this.tabRemoveInterceptor,
-    this.tabBarPosition = TabBarPosition.top,
     this.trailing,
   });
 
@@ -65,9 +64,6 @@ class TabbedView extends StatefulWidget {
   final OnBeforeDropAccept? onBeforeDropAccept;
   final String? dragScope;
   final Widget? trailing;
-
-  /// Defines the position of the tab bar. Defaults to [TabBarPosition.top].
-  final TabBarPosition tabBarPosition;
 
   @override
   State<StatefulWidget> createState() => _TabbedViewState();
@@ -112,7 +108,6 @@ class _TabbedViewState extends State<TabbedView> {
         canDrop: widget.canDrop,
         onBeforeDropAccept: widget.onBeforeDropAccept,
         dragScope: widget.dragScope,
-        tabBarPosition: widget.tabBarPosition,
         trailing: widget.trailing);
     final bool tabsAreaVisible =
         widget.tabsAreaVisible ?? theme.tabsArea.visible;
@@ -126,7 +121,7 @@ class _TabbedViewState extends State<TabbedView> {
     children.add(LayoutId(id: 2, child: contentArea));
     return CustomMultiChildLayout(
         children: children,
-        delegate: _TabbedViewLayout(tabBarPosition: widget.tabBarPosition));
+        delegate: _TabbedViewLayout(tabBarPosition: theme.tabsArea.position));
   }
 
   void _onTabDrag(int? tabIndex) {

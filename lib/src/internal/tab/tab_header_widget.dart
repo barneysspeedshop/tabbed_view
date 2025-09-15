@@ -64,12 +64,12 @@ class TabHeaderWidget extends StatelessWidget {
       child: Container(child: textAndButtonsContainer, padding: padding),
     );
 
-    if (provider.tabBarPosition.isVertical &&
+    if (theme.tabsArea.position.isVertical &&
         sideTabsLayout == SideTabsLayout.rotated) {
       // Rotate the tab content
-      if (provider.tabBarPosition == TabBarPosition.left) {
+      if (theme.tabsArea.position == TabBarPosition.left) {
         widget = RotatedBox(quarterTurns: -1, child: widget);
-      } else if (provider.tabBarPosition == TabBarPosition.right) {
+      } else if (theme.tabsArea.position == TabBarPosition.right) {
         widget = RotatedBox(quarterTurns: 1, child: widget);
       }
     }

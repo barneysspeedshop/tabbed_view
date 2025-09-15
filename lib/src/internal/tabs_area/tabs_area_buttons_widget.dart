@@ -41,7 +41,7 @@ class TabsAreaButtonsWidget extends StatelessWidget {
         }
         return menus;
       });
-      if (provider.tabBarPosition == TabBarPosition.left) {
+      if (theme.tabsArea.position == TabBarPosition.left) {
         // For a left tab bar, the overflow button should be last.
         buttons.add(menuButton);
       } else {

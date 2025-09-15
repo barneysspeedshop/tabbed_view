@@ -45,6 +45,7 @@ class DropTabWidgetState extends State<DropTabWidget> {
 
   @override
   Widget build(BuildContext context) {
+    TabbedViewThemeData theme = TabbedViewTheme.of(context);
     return MouseRegion(
         onExit: (e) {
           if (!mounted) return;
@@ -66,7 +67,7 @@ class DropTabWidgetState extends State<DropTabWidget> {
               return CustomPaint(
                   foregroundPainter: _CustomPainter(
                       dropPosition: _dropPosition,
-                      tabBarPosition: widget.provider.tabBarPosition,
+                      tabBarPosition: theme.tabsArea.position,
                       dropColor: theme.tabsArea.dropColor),
                   child: widget.child);
             }
@@ -95,14 +96,13 @@ class DropTabWidgetState extends State<DropTabWidget> {
 
               final localPosition = renderBox.globalToLocal(details.offset);
 
-              final newDropPosition =
-                  widget.provider.tabBarPosition.isHorizontal
-                      ? (localPosition.dx < renderBox.size.width * ratio
-                          ? _DropPosition.before
-                          : _DropPosition.after)
-                      : (details.offset.dy < renderBox.size.height * ratio
-                          ? _DropPosition.before
-                          : _DropPosition.after);
+              final newDropPosition = theme.tabsArea.position.isHorizontal
+                  ? (localPosition.dx < renderBox.size.width * ratio
+                      ? _DropPosition.before
+                      : _DropPosition.after)
+                  : (details.offset.dy < renderBox.size.height * ratio
+                      ? _DropPosition.before
+                      : _DropPosition.after);
               if (_dropPosition != newDropPosition) {
                 setState(() {
                   _dropPosition = newDropPosition;
