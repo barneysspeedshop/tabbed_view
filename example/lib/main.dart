@@ -231,15 +231,16 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
                           onSelected: _onBrightnessSelected),
                       SizedBox(height: 16),
                       Text('TabBarPosition'),
-                      PositionsChooser(
+                      PositionChooser(
                           currentPosition: _position,
                           onSelected: _onPositionSelected),
                       SizedBox(height: 16),
                       Text('SideTabsLayout'),
                       SideTabsLayoutChooser(
-                          currentLayout: _sideTabsLayout,
-                          onSelected: _onSideTabsLayoutSelected,
-                          enabled: _position.isVertical),
+                        currentLayout: _sideTabsLayout,
+                        onSelected: _onSideTabsLayoutSelected,
+                        currentPosition: _position,
+                      ),
                       SizedBox(height: 16),
                       Text('Theme'),
                       ThemeChooser(
@@ -303,8 +304,8 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
   }
 }
 
-class PositionsChooser extends StatelessWidget {
-  const PositionsChooser(
+class PositionChooser extends StatelessWidget {
+  const PositionChooser(
       {super.key, required this.currentPosition, required this.onSelected});
 
   final TabBarPosition currentPosition;
@@ -328,10 +329,10 @@ class SideTabsLayoutChooser extends StatelessWidget {
       {super.key,
       required this.currentLayout,
       required this.onSelected,
-      required this.enabled});
+      required this.currentPosition});
 
   final SideTabsLayout currentLayout;
-  final bool enabled;
+  final TabBarPosition currentPosition;
   final Function(SideTabsLayout newLayout) onSelected;
 
   @override
@@ -340,7 +341,9 @@ class SideTabsLayoutChooser extends StatelessWidget {
       return ChoiceChip(
           label: Text(value.name),
           selected: currentLayout == value,
-          onSelected: enabled ? (selected) => onSelected(value) : null);
+          onSelected: currentPosition.isVertical
+              ? (selected) => onSelected(value)
+              : null);
     }).toList();
 
     return Wrap(spacing: 8, runSpacing: 4, children: children);

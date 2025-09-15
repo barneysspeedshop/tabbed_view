@@ -23,6 +23,7 @@
 * Theme
   * Refactored theming system to fully support all tab bar positions (`top`, `bottom`, `left`, `right`).
     * Added `TabBarPosition` enum to represent the bar positions.
+    * Added `SideTabsLayout` to define how side-positioned tabs (left or right) are laid out (rotated or stacked).
   * Renamed `Mobile` theme to `Underline`
   * Removed `Dark` theme.
   * Added brightness support.
