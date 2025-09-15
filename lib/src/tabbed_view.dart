@@ -14,7 +14,6 @@ import 'typedefs/on_before_drop_accept.dart';
 import 'typedefs/on_draggable_build.dart';
 import 'typedefs/on_tab_secondary_tap.dart';
 import 'typedefs/tab_remove_interceptor.dart';
-import 'typedefs/tab_select_interceptor.dart';
 import 'typedefs/tabs_area_buttons_builder.dart';
 import 'unselected_tab_buttons_behavior.dart';
 
@@ -40,7 +39,6 @@ class TabbedView extends StatefulWidget {
     this.canDrop,
     this.onBeforeDropAccept,
     this.dragScope,
-    this.tabSelectInterceptor,
     this.tabRemoveInterceptor,
     this.tabBarPosition = TabBarPosition.top,
     this.trailing,
@@ -57,7 +55,6 @@ class TabbedView extends StatefulWidget {
   final bool tabReorderEnabled;
 
   final TabRemoveInterceptor? tabRemoveInterceptor;
-  final TabSelectInterceptor? tabSelectInterceptor;
   final OnTabSecondaryTap? onTabSecondaryTap;
   final UnselectedTabButtonsBehavior unselectedTabButtonsBehavior;
   final String? closeButtonTooltip;
@@ -104,7 +101,6 @@ class _TabbedViewState extends State<TabbedView> {
         contentBuilder: widget.contentBuilder,
         tabReorderEnabled: widget.tabReorderEnabled,
         tabRemoveInterceptor: widget.tabRemoveInterceptor,
-        tabSelectInterceptor: widget.tabSelectInterceptor,
         contentClip: widget.contentClip,
         onTabSecondaryTap: widget.onTabSecondaryTap,
         unselectedTabButtonsBehavior: widget.unselectedTabButtonsBehavior,

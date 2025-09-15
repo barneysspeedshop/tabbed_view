@@ -182,9 +182,6 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
           }
           return true;
         },
-        tabSelectInterceptor: (newIndex) {
-          return true;
-        },
         closeButtonTooltip: 'Close this tab',
         tabsAreaVisible: true,
         contentClip: true,

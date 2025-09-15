@@ -112,7 +112,7 @@ class TabWidget extends StatelessWidget {
         onExit: (event) => updateHoveredIndex(null),
         child: provider.draggingTabIndex == null
             ? GestureDetector(
-                onTap: () => _onSelect(context, index),
+                onTap: () => provider.controller.selectedIndex = index,
                 onSecondaryTapDown: (details) {
                   if (provider.onTabSecondaryTap != null) {
                     TabData tab = provider.controller.tabs[index];
@@ -186,13 +186,6 @@ class TabWidget extends StatelessWidget {
           halfWidthDrop: true);
     }
     return widget;
-  }
-
-  void _onSelect(BuildContext context, int newTabIndex) {
-    if (provider.tabSelectInterceptor == null ||
-        provider.tabSelectInterceptor!(newTabIndex)) {
-      provider.controller.selectedIndex = newTabIndex;
-    }
   }
 }
 

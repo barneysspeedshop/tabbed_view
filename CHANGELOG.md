@@ -2,6 +2,7 @@
 
 * `TabbedView`
   * Removed the `hiddenTabsMenuItemBuilder` attribute.
+  * Removed the `tabSelectInterceptor` attribute.
 * `TabbedViewController`
   * Moved `reorderEnable` attribute to `TabbedView`.
   * Moved `onReorder` attribute to `TabbedView`.
@@ -63,8 +64,7 @@
   * `ContentAreaThemeData`
     * New attributes:
       * `border`: The border around the outer side of the tab content area, excluding the side adjacent to the tabs.
-      * `borderRadius`: The radius used to round the corners.
-  * Added `SideTabsLayout` enum to define how side-positioned tabs (left or right) are laid out.
+      * `borderRadius`: The radius used to round the corners.  
   * Replaced `HiddenTabsMenuThemeData` with `TabbedViewMenuThemeData`.
 * Special thanks to Patrick Legacy for his great contributions to this release.
 
