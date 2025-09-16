@@ -37,7 +37,9 @@ class MinimalistTheme extends TabbedViewThemeData {
         BoxDecoration(color: isLight ? colorSet[300]! : colorSet[800]!);
     tabsArea.buttonColor = buttonColor;
     tabsArea.disabledButtonColor = disabledButtonColor;
-    tabsArea.dropColor = Color.fromARGB(150, 255, 255, 255);
+    tabsArea.dropColor = isLight
+        ? const Color.fromARGB(150, 0, 0, 0)
+        : const Color.fromARGB(150, 255, 255, 255);
 
     tab.buttonsOffset = 4;
     tab.textStyle = TextStyle(fontSize: fontSize, color: fontColor);

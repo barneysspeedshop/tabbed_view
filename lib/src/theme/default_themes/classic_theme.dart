@@ -41,6 +41,9 @@ class ClassicTheme extends TabbedViewThemeData {
         border: Border.all(color: _borderColor, width: 1));
     tabsArea.buttonsAreaPadding = EdgeInsets.all(2);
     tabsArea.middleGap = -1;
+    tabsArea.dropColor = isLight
+        ? const Color.fromARGB(150, 0, 0, 0)
+        : const Color.fromARGB(150, 255, 255, 255);
 
     tab.textStyle = TextStyle(fontSize: fontSize, color: fontColor);
     tab.buttonColor = buttonColor;

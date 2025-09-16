@@ -39,6 +39,9 @@ class UnderlineTheme extends TabbedViewThemeData {
     tabsArea.buttonPadding = const EdgeInsets.all(2);
     tabsArea.border = BorderSide(color: _borderColor, width: 1);
     tabsArea.color = backgroundColor;
+    tabsArea.dropColor = isLight
+        ? const Color.fromARGB(150, 0, 0, 0)
+        : const Color.fromARGB(150, 255, 255, 255);
 
     tab.buttonColor = buttonColor;
     tab.hoveredButtonColor = hoveredButtonColor;
