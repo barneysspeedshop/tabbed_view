@@ -19,7 +19,7 @@ class UnderlineTheme extends TabbedViewThemeData {
     final Color foregroundColor = isLight ? colorSet[900]! : colorSet[100]!;
     final Color backgroundColor = isLight ? colorSet[50]! : colorSet[900]!;
     final Color buttonColor = isLight ? colorSet[700]! : colorSet[200]!;
-    final Color disabledButtonColor = isLight ? colorSet[400]! : colorSet[600]!;
+    final Color disabledButtonColor = buttonColor.withValues(alpha: .3);
     final Color hoveredButtonColor = isLight ? colorSet[900]! : colorSet[300]!;
     _hoveredColor = isLight ? colorSet[400]! : colorSet[600]!;
     _selectedColor = underlineColorSet;

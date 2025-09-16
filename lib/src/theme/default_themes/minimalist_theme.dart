@@ -21,7 +21,7 @@ class MinimalistTheme extends TabbedViewThemeData {
     _selectedColor = isLight ? colorSet[800]! : colorSet[400]!;
     _hoveredColor = isLight ? colorSet[400]! : colorSet[800]!;
     final Color buttonColor = isLight ? colorSet[800]! : colorSet[100]!;
-    final Color disabledButtonColor = isLight ? colorSet[400]! : colorSet[600]!;
+    final Color disabledButtonColor = buttonColor.withValues(alpha: .3);
     final Color fontColor = isLight ? colorSet[900]! : colorSet[100]!;
     final Color selectedFontColor = isLight ? colorSet[100]! : colorSet[900]!;
     _tabRadius = tabRadius != null ? Radius.circular(tabRadius) : null;
