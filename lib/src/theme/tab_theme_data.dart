@@ -1,120 +1,103 @@
 import 'package:flutter/material.dart';
-import 'package:tabbed_view/src/icon_provider.dart';
-import 'package:tabbed_view/src/tab_status.dart';
-import 'package:tabbed_view/src/tabbed_view_icons.dart';
-import 'package:tabbed_view/src/theme/tab_status_theme_data.dart';
-import 'package:tabbed_view/src/theme/tabbed_view_theme_constants.dart';
-import 'package:tabbed_view/src/theme/vertical_alignment.dart';
+
+import '../icon_provider.dart';
+import '../tab_bar_position.dart';
+import '../tab_status.dart';
+import '../tabbed_view_icons.dart';
+import 'tab_decoration_builder.dart';
+import 'tab_status_theme_data.dart';
+import 'tabbed_view_theme_constants.dart';
+import 'vertical_alignment.dart';
 
 /// Theme for tab.
 class TabThemeData {
+  static TabDecoration defaultBorderBuilder(
+      {required TabBarPosition tabBarPosition, required TabStatus status}) {
+    return TabDecoration();
+  }
+
   TabThemeData(
       {IconProvider? closeIcon,
-      this.normalButtonColor = Colors.black,
-      this.hoverButtonColor = Colors.black,
+      this.buttonColor = Colors.black,
+      this.hoveredButtonColor,
       this.disabledButtonColor = Colors.black12,
-      this.normalButtonBackground,
-      this.hoverButtonBackground,
+      this.buttonBackground,
+      this.hoveredButtonBackground,
       this.disabledButtonBackground,
       double buttonIconSize = TabbedViewThemeConstants.defaultIconSize,
       this.verticalAlignment = VerticalAlignment.center,
       double buttonsOffset = 0,
       this.buttonPadding,
       double buttonsGap = 0,
-      this.decoration,
+      this.decorationBuilder = TabThemeData.defaultBorderBuilder,
       this.draggingDecoration,
       this.draggingOpacity = 0.3,
-      this.innerBottomBorder,
-      this.innerTopBorder,
       this.textStyle = const TextStyle(fontSize: 13),
+      this.maxMainSize,
       this.padding,
       this.paddingWithoutButton,
-      this.margin,
-      TabStatusThemeData? selectedStatus,
-      TabStatusThemeData? highlightedStatus,
-      TabStatusThemeData? disabledStatus})
-      : this._buttonsOffset = buttonsOffset >= 0 ? buttonsOffset : 0,
-        this._buttonsGap = buttonsGap >= 0 ? buttonsGap : 0,
+      required this.selectedStatus,
+      required this.hoveredStatus})
+      : this.buttonsOffset = buttonsOffset >= 0 ? buttonsOffset : 0,
+        this.buttonsGap = buttonsGap >= 0 ? buttonsGap : 0,
         this.buttonIconSize =
             TabbedViewThemeConstants.normalize(buttonIconSize),
-        this.closeIcon = closeIcon == null
-            ? IconProvider.path(TabbedViewIcons.close)
-            : closeIcon,
-        this.selectedStatus =
-            selectedStatus != null ? selectedStatus : TabStatusThemeData(),
-        this.highlightedStatus = highlightedStatus != null
-            ? highlightedStatus
-            : TabStatusThemeData();
+        this.closeIcon = closeIcon ?? IconProvider.path(TabbedViewIcons.close);
 
-  /// Empty space to inscribe inside the [decoration]. The tab child, if any, is
-  /// placed inside this padding.
+  /// A builder for creating complex and composable tab decorators.
+  TabDecorationBuilder decorationBuilder;
+
+  /// The maximum main size of the tab.
   ///
-  /// This padding is in addition to any padding inherent in the [decoration];
-  /// see [Decoration.padding].
+  /// This will be its width when the tab is displayed horizontally,
+  /// and its height when displayed vertically.
+  double? maxMainSize;
+
+  TabStatusThemeData selectedStatus;
+  TabStatusThemeData hoveredStatus;
+
+  /// Padding for tab content
   EdgeInsetsGeometry? padding;
 
-  /// Overrides [padding] when the tab has no buttons.
   EdgeInsetsGeometry? paddingWithoutButton;
-
-  /// Empty space to surround the [decoration] and tab.
-  EdgeInsetsGeometry? margin;
 
   VerticalAlignment verticalAlignment;
 
-  /// The decoration to paint behind the tab.
-  BoxDecoration? decoration;
+  double buttonsOffset;
 
-  /// The decoration to paint behind the dragging tab.
   BoxDecoration? draggingDecoration;
-
   double draggingOpacity;
-
-  BorderSide? innerBottomBorder;
-  BorderSide? innerTopBorder;
 
   TextStyle? textStyle;
 
   double buttonIconSize;
-  Color normalButtonColor;
-  Color hoverButtonColor;
+  Color buttonColor;
+  Color? hoveredButtonColor;
   Color disabledButtonColor;
-  BoxDecoration? normalButtonBackground;
-  BoxDecoration? hoverButtonBackground;
+  BoxDecoration? buttonBackground;
+  BoxDecoration? hoveredButtonBackground;
   BoxDecoration? disabledButtonBackground;
 
   /// Icon for the close button.
   IconProvider closeIcon;
 
-  TabStatusThemeData selectedStatus;
-  TabStatusThemeData highlightedStatus;
-
-  double _buttonsOffset;
-
-  double get buttonsOffset => _buttonsOffset;
-
-  set buttonsOffset(double value) {
-    _buttonsOffset = value >= 0 ? value : 0;
-  }
-
   EdgeInsetsGeometry? buttonPadding;
 
-  double _buttonsGap;
+  double buttonsGap;
 
-  double get buttonsGap => _buttonsGap;
-
-  set buttonsGap(double value) {
-    _buttonsGap = value >= 0 ? value : 0;
-  }
-
-  /// Gets the theme of a tab according to its status.
-  TabStatusThemeData getTabThemeFor(TabStatus status) {
+  /// Gets an optional theme for a tab based on its [status].
+  ///
+  /// If a theme is returned (for [TabStatus.selected] or [TabStatus.hovered]),
+  /// its non-null properties will override the corresponding properties of the main tab theme.
+  /// For [TabStatus.normal], it returns `null` as there is no specific theme to apply.
+  TabStatusThemeData? getTabThemeFor(TabStatus status) {
     switch (status) {
       case TabStatus.normal:
-        return TabStatusThemeData.empty;
+        return null;
       case TabStatus.selected:
         return selectedStatus;
-      case TabStatus.highlighted:
-        return highlightedStatus;
+      case TabStatus.hovered:
+        return hoveredStatus;
     }
   }
 
@@ -123,53 +106,49 @@ class TabThemeData {
       identical(this, other) ||
       other is TabThemeData &&
           runtimeType == other.runtimeType &&
+          decorationBuilder == other.decorationBuilder &&
+          maxMainSize == other.maxMainSize &&
+          selectedStatus == other.selectedStatus &&
+          hoveredStatus == other.hoveredStatus &&
           padding == other.padding &&
           paddingWithoutButton == other.paddingWithoutButton &&
-          margin == other.margin &&
           verticalAlignment == other.verticalAlignment &&
-          decoration == other.decoration &&
+          buttonsOffset == other.buttonsOffset &&
           draggingDecoration == other.draggingDecoration &&
           draggingOpacity == other.draggingOpacity &&
-          innerBottomBorder == other.innerBottomBorder &&
-          innerTopBorder == other.innerTopBorder &&
           textStyle == other.textStyle &&
           buttonIconSize == other.buttonIconSize &&
-          normalButtonColor == other.normalButtonColor &&
-          hoverButtonColor == other.hoverButtonColor &&
+          buttonColor == other.buttonColor &&
+          hoveredButtonColor == other.hoveredButtonColor &&
           disabledButtonColor == other.disabledButtonColor &&
-          normalButtonBackground == other.normalButtonBackground &&
-          hoverButtonBackground == other.hoverButtonBackground &&
+          buttonBackground == other.buttonBackground &&
+          hoveredButtonBackground == other.hoveredButtonBackground &&
           disabledButtonBackground == other.disabledButtonBackground &&
           closeIcon == other.closeIcon &&
-          selectedStatus == other.selectedStatus &&
-          highlightedStatus == other.highlightedStatus &&
-          _buttonsOffset == other._buttonsOffset &&
           buttonPadding == other.buttonPadding &&
-          _buttonsGap == other._buttonsGap;
+          buttonsGap == other.buttonsGap;
 
   @override
   int get hashCode =>
+      decorationBuilder.hashCode ^
+      maxMainSize.hashCode ^
+      selectedStatus.hashCode ^
+      hoveredStatus.hashCode ^
       padding.hashCode ^
       paddingWithoutButton.hashCode ^
-      margin.hashCode ^
       verticalAlignment.hashCode ^
-      decoration.hashCode ^
+      buttonsOffset.hashCode ^
       draggingDecoration.hashCode ^
       draggingOpacity.hashCode ^
-      innerBottomBorder.hashCode ^
-      innerTopBorder.hashCode ^
       textStyle.hashCode ^
       buttonIconSize.hashCode ^
-      normalButtonColor.hashCode ^
-      hoverButtonColor.hashCode ^
+      buttonColor.hashCode ^
+      hoveredButtonColor.hashCode ^
       disabledButtonColor.hashCode ^
-      normalButtonBackground.hashCode ^
-      hoverButtonBackground.hashCode ^
+      buttonBackground.hashCode ^
+      hoveredButtonBackground.hashCode ^
       disabledButtonBackground.hashCode ^
       closeIcon.hashCode ^
-      selectedStatus.hashCode ^
-      highlightedStatus.hashCode ^
-      _buttonsOffset.hashCode ^
       buttonPadding.hashCode ^
-      _buttonsGap.hashCode;
+      buttonsGap.hashCode;
 }

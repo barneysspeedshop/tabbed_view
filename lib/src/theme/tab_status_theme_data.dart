@@ -4,45 +4,28 @@ import 'package:flutter/widgets.dart';
 /// Allows you to overwrite [TabThemeData] properties.
 class TabStatusThemeData {
   TabStatusThemeData(
-      {this.decoration,
-      this.innerTopBorder,
-      this.innerBottomBorder,
-      this.fontColor,
+      {this.fontColor,
       this.padding,
       this.paddingWithoutButton,
-      this.margin,
-      this.normalButtonColor,
-      this.hoverButtonColor,
+      this.buttonColor,
+      this.hoveredButtonColor,
       this.disabledButtonColor,
-      this.normalButtonBackground,
-      this.hoverButtonBackground,
+      this.buttonBackground,
+      this.hoveredButtonBackground,
       this.disabledButtonBackground});
 
-  static final TabStatusThemeData empty = TabStatusThemeData();
-
-  /// Empty space to inscribe inside the [decoration]. The tab child, if any, is
-  /// placed inside this padding.
-  ///
-  /// This padding is in addition to any padding inherent in the [decoration];
-  /// see [Decoration.padding].
+  /// Padding for tab content
   EdgeInsetsGeometry? padding;
 
   /// Overrides [padding] when the tab has no buttons.
   EdgeInsetsGeometry? paddingWithoutButton;
 
-  /// Empty space to surround the [decoration] and tab.
-  EdgeInsetsGeometry? margin;
-
-  /// The decoration to paint behind the tab.
-  BoxDecoration? decoration;
-  BorderSide? innerBottomBorder;
-  BorderSide? innerTopBorder;
   Color? fontColor;
-  Color? normalButtonColor;
-  Color? hoverButtonColor;
+  Color? buttonColor;
+  Color? hoveredButtonColor;
   Color? disabledButtonColor;
-  BoxDecoration? normalButtonBackground;
-  BoxDecoration? hoverButtonBackground;
+  BoxDecoration? buttonBackground;
+  BoxDecoration? hoveredButtonBackground;
   BoxDecoration? disabledButtonBackground;
 
   @override
@@ -52,31 +35,23 @@ class TabStatusThemeData {
           runtimeType == other.runtimeType &&
           padding == other.padding &&
           paddingWithoutButton == other.paddingWithoutButton &&
-          margin == other.margin &&
-          decoration == other.decoration &&
-          innerBottomBorder == other.innerBottomBorder &&
-          innerTopBorder == other.innerTopBorder &&
           fontColor == other.fontColor &&
-          normalButtonColor == other.normalButtonColor &&
-          hoverButtonColor == other.hoverButtonColor &&
+          buttonColor == other.buttonColor &&
+          hoveredButtonColor == other.hoveredButtonColor &&
           disabledButtonColor == other.disabledButtonColor &&
-          normalButtonBackground == other.normalButtonBackground &&
-          hoverButtonBackground == other.hoverButtonBackground &&
+          buttonBackground == other.buttonBackground &&
+          hoveredButtonBackground == other.hoveredButtonBackground &&
           disabledButtonBackground == other.disabledButtonBackground;
 
   @override
   int get hashCode =>
       padding.hashCode ^
       paddingWithoutButton.hashCode ^
-      margin.hashCode ^
-      decoration.hashCode ^
-      innerBottomBorder.hashCode ^
-      innerTopBorder.hashCode ^
       fontColor.hashCode ^
-      normalButtonColor.hashCode ^
-      hoverButtonColor.hashCode ^
+      buttonColor.hashCode ^
+      hoveredButtonColor.hashCode ^
       disabledButtonColor.hashCode ^
-      normalButtonBackground.hashCode ^
-      hoverButtonBackground.hashCode ^
+      buttonBackground.hashCode ^
+      hoveredButtonBackground.hashCode ^
       disabledButtonBackground.hashCode;
 }

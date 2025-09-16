@@ -1,7 +1,12 @@
 import 'dart:math' as math;
 
 import 'package:flutter/widgets.dart';
-import 'package:tabbed_view/tabbed_view.dart';
+import 'package:meta/meta.dart';
+
+import 'typedefs/tab_buttons_builder.dart';
+import 'tab_leading_builder.dart';
+import 'tab_status.dart';
+import 'theme/tab_status_theme_data.dart';
 
 /// The tab data.
 ///
@@ -13,7 +18,7 @@ import 'package:tabbed_view/tabbed_view.dart';
 ///
 /// The [closable] parameter defines whether the Close button is visible.
 ///
-/// The [buttons] parameter allows you to define extra buttons in addition
+/// The [buttonsBuilder] parameter allows you to define extra buttons in addition
 /// to the Close button.
 ///
 /// The [keepAlive] parameter indicates whether to keep the tab content widget
@@ -31,17 +36,17 @@ import 'package:tabbed_view/tabbed_view.dart';
 /// The [selectedStatusTheme] overrides the default theme to customize the
 /// appearance of the tab when it is currently selected.
 ///
-/// The [highlightedStatusTheme] overrides the default theme to change
-/// the visual look of the tab when it's in a highlighted state.
+/// The [hoveredStatusTheme] overrides the default theme to change
+/// the visual look of the tab when it's in a hovered state.
 ///
 /// See also:
 ///
 /// * [TabbedView.contentBuilder]
-class TabData extends ChangeNotifier with TabIndex {
+class TabData extends ChangeNotifier {
   TabData(
       {dynamic value,
       required String text,
-      List<TabButton>? buttons,
+      TabButtonsBuilder? buttonsBuilder,
       Widget? content,
       TabLeadingBuilder? leading,
       bool closable = true,
@@ -49,14 +54,14 @@ class TabData extends ChangeNotifier with TabIndex {
       this.draggable = true,
       this.keepAlive = false,
       this.normalStatusTheme,
-      this.highlightedStatusTheme,
+      this.hoveredStatusTheme,
       this.selectedStatusTheme})
       : _value = value,
         _text = text,
         _leading = leading,
         _closable = closable,
         _content = content,
-        _buttons = buttons,
+        _buttonsBuilder = buttonsBuilder,
         _textSize = textSize != null ? math.max(0, textSize) : null,
         key = keepAlive ? GlobalKey() : UniqueKey();
 
@@ -65,6 +70,8 @@ class TabData extends ChangeNotifier with TabIndex {
   final bool keepAlive;
 
   final bool draggable;
+
+  int _index = -1;
 
   dynamic _value;
 
@@ -77,12 +84,12 @@ class TabData extends ChangeNotifier with TabIndex {
     }
   }
 
-  List<TabButton>? _buttons;
+  TabButtonsBuilder? _buttonsBuilder;
 
-  List<TabButton>? get buttons => _buttons;
+  TabButtonsBuilder? get buttonsBuilder => _buttonsBuilder;
 
-  set buttons(List<TabButton>? buttons) {
-    _buttons = buttons;
+  set buttonsBuilder(TabButtonsBuilder? value) {
+    _buttonsBuilder = value;
     notifyListeners();
   }
 
@@ -146,7 +153,7 @@ class TabData extends ChangeNotifier with TabIndex {
 
   final TabStatusThemeData? normalStatusTheme;
   final TabStatusThemeData? selectedStatusTheme;
-  final TabStatusThemeData? highlightedStatusTheme;
+  final TabStatusThemeData? hoveredStatusTheme;
 
   /// Gets the theme of a tab according to its status.
   TabStatusThemeData? getTabThemeFor(TabStatus status) {
@@ -155,10 +162,17 @@ class TabData extends ChangeNotifier with TabIndex {
         return normalStatusTheme;
       case TabStatus.selected:
         return selectedStatusTheme;
-      case TabStatus.highlighted:
-        return highlightedStatusTheme;
+      case TabStatus.hovered:
+        return hoveredStatusTheme;
     }
   }
 
   final UniqueKey uniqueKey = UniqueKey();
+}
+
+@internal
+class TabDataHelper {
+  static int indexFrom(TabData tab) => tab._index;
+
+  static void setIndex(TabData tab, int newIndex) => tab._index = newIndex;
 }

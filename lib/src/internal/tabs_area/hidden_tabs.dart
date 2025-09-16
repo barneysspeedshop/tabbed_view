@@ -9,6 +9,7 @@ class HiddenTabs extends ChangeNotifier {
   List<int> _indexes = [];
 
   bool _hasHiddenTabs = false;
+
   bool get hasHiddenTabs => _hasHiddenTabs;
 
   List<int> get indexes {
@@ -21,7 +22,7 @@ class HiddenTabs extends ChangeNotifier {
     bool hasHiddenTabs = _indexes.isNotEmpty;
     if (_hasHiddenTabs != hasHiddenTabs) {
       _hasHiddenTabs = hasHiddenTabs;
-      Future.microtask(() => notifyListeners());
+      Future.delayed(Duration.zero, () => notifyListeners());
     }
   }
 }

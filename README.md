@@ -7,14 +7,22 @@
 
 Flutter widget inspired by the classic Desktop-style tab component. Supports customizable themes.
 
-![](https://caduandrade.github.io/tabbed_view/main_classic_v2.png)
+![](https://caduandrade.github.io/tabbed_view/classic_top_light.png)
 
-![](https://caduandrade.github.io/tabbed_view/main_dark_v2.png)
+![](https://caduandrade.github.io/tabbed_view/classic_bottom_dark.png)
 
-![](https://caduandrade.github.io/tabbed_view/main_mobile_v2.png)
+![](https://caduandrade.github.io/tabbed_view/classic_left_light.png)
 
-![](https://caduandrade.github.io/tabbed_view/main_minimalist_v2.png)
+![](https://caduandrade.github.io/tabbed_view/classic_left_stacked_light.png)
+
+![](https://caduandrade.github.io/tabbed_view/underline_top_light.png)
+
+![](https://caduandrade.github.io/tabbed_view/underline_bottom_dark.png)
+
+![](https://caduandrade.github.io/tabbed_view/minimalist_top_light.png)
+
+![](https://caduandrade.github.io/tabbed_view/minimalist_bottom_dark.png)
 
 ---
 
-See full documentation at [https://caduandrade.github.io/tabbed_view/](https://caduandrade.github.io/tabbed_view/)
+Get started quickly with the interactive demo and documentation [here](https://caduandrade.github.io/tabbed_view_demo/).

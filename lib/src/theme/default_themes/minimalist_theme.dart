@@ -1,83 +1,110 @@
 import 'package:flutter/material.dart';
-import 'package:tabbed_view/src/theme/content_area_theme_data.dart';
-import 'package:tabbed_view/src/theme/equal_heights.dart';
-import 'package:tabbed_view/src/theme/menu_theme_data.dart';
-import 'package:tabbed_view/src/theme/tab_status_theme_data.dart';
-import 'package:tabbed_view/src/theme/tab_theme_data.dart';
-import 'package:tabbed_view/src/theme/tabbed_view_theme_data.dart';
-import 'package:tabbed_view/src/theme/tabs_area_theme_data.dart';
+
+import '../../tab_bar_position.dart';
+import '../../tab_status.dart';
+import '../tab_header_extent_behavior.dart';
+import '../tab_decoration_builder.dart';
+import '../tabbed_view_theme_data.dart';
 
 /// Predefined minimalist theme builder.
-class MinimalistTheme {
-  static TabbedViewThemeData build({required MaterialColor colorSet}) {
-    return TabbedViewThemeData(
-        tabsArea: tabsAreaTheme(colorSet: colorSet),
-        tab: tabTheme(colorSet: colorSet),
-        contentArea: contentAreaTheme(colorSet: colorSet),
-        menu: menuTheme(colorSet: colorSet));
+class MinimalistTheme extends TabbedViewThemeData {
+  MinimalistTheme(
+      {required Brightness brightness,
+      required MaterialColor colorSet,
+      required double fontSize,
+      required double initialGap,
+      required double gap,
+      required double? tabRadius}) {
+    final bool isLight = brightness == Brightness.light;
+
+    _color = isLight ? colorSet[300]! : colorSet[900]!;
+    _selectedColor = isLight ? colorSet[800]! : colorSet[400]!;
+    _hoveredColor = isLight ? colorSet[400]! : colorSet[800]!;
+    final Color buttonColor = isLight ? colorSet[800]! : colorSet[100]!;
+    final Color disabledButtonColor = buttonColor.withValues(alpha: .3);
+    final Color fontColor = isLight ? colorSet[900]! : colorSet[100]!;
+    final Color selectedFontColor = isLight ? colorSet[100]! : colorSet[900]!;
+    _tabRadius = tabRadius != null ? Radius.circular(tabRadius) : null;
+
+    divider = BorderSide(color: _selectedColor, width: 4);
+
+    tabsArea.tabHeaderExtentBehavior = TabHeaderExtentBehavior.uniform;
+    tabsArea.initialGap = initialGap;
+    tabsArea.middleGap = gap;
+    tabsArea.buttonsAreaPadding = EdgeInsets.all(4);
+    tabsArea.buttonPadding = const EdgeInsets.all(4);
+    tabsArea.hoveredButtonBackground =
+        BoxDecoration(color: isLight ? colorSet[300]! : colorSet[800]!);
+    tabsArea.buttonColor = buttonColor;
+    tabsArea.disabledButtonColor = disabledButtonColor;
+    tabsArea.dropColor = isLight
+        ? const Color.fromARGB(150, 0, 0, 0)
+        : const Color.fromARGB(150, 255, 255, 255);
+
+    tab.buttonsOffset = 4;
+    tab.textStyle = TextStyle(fontSize: fontSize, color: fontColor);
+    tab.draggingDecoration = BoxDecoration(color: _color);
+    tab.padding = const EdgeInsets.fromLTRB(8, 4, 4, 4);
+    tab.paddingWithoutButton = const EdgeInsets.fromLTRB(8, 6, 8, 4);
+    tab.hoveredButtonBackground =
+        BoxDecoration(color: isLight ? colorSet[500]! : colorSet[700]!);
+    tab.buttonPadding = const EdgeInsets.all(4);
+    tab.buttonColor = buttonColor;
+    tab.disabledButtonColor = disabledButtonColor;
+    tab.decorationBuilder = _tabDecorationBuilder;
+    tab.selectedStatus.fontColor = selectedFontColor;
+    tab.selectedStatus.buttonColor = selectedFontColor;
+    tab.selectedStatus.hoveredButtonBackground =
+        BoxDecoration(color: isLight ? colorSet[700]! : colorSet[500]!);
+    tab.hoveredStatus.disabledButtonColor =
+        isLight ? colorSet[500]! : colorSet[600]!;
   }
 
-  static TabsAreaThemeData tabsAreaTheme({required MaterialColor colorSet}) {
-    return TabsAreaThemeData(
-        buttonsAreaDecoration: BoxDecoration(color: colorSet[50]!),
-        normalButtonColor: colorSet[700]!,
-        hoverButtonColor: colorSet[700]!,
-        disabledButtonColor: colorSet[300]!,
-        buttonsAreaPadding: EdgeInsets.all(2),
-        buttonPadding: const EdgeInsets.all(2),
-        hoverButtonBackground: BoxDecoration(color: colorSet[300]!),
-        equalHeights: EqualHeights.all,
-        border: Border(bottom: BorderSide(color: colorSet[700]!, width: 1)));
-  }
+  late final Radius? _tabRadius;
+  late final Color _color;
+  late final Color _selectedColor;
+  late final Color _hoveredColor;
 
-  static TabThemeData tabTheme({required MaterialColor colorSet}) {
-    return TabThemeData(
-      buttonsOffset: 4,
-      textStyle: TextStyle(color: colorSet[900]!, fontSize: 13),
-      padding: EdgeInsets.fromLTRB(6, 3, 3, 3),
-      paddingWithoutButton: EdgeInsets.fromLTRB(6, 3, 6, 3),
-      decoration: BoxDecoration(color: colorSet[50]!),
-      draggingDecoration: BoxDecoration(color: colorSet[50]!),
-      normalButtonColor: colorSet[900]!,
-      hoverButtonColor: colorSet[900]!,
-      disabledButtonColor: colorSet[400]!,
-      buttonPadding: const EdgeInsets.all(2),
-      hoverButtonBackground: BoxDecoration(color: colorSet[300]!),
-      highlightedStatus:
-          TabStatusThemeData(decoration: BoxDecoration(color: colorSet[300]!)),
-      selectedStatus: TabStatusThemeData(
-          normalButtonColor: colorSet[50]!,
-          hoverButtonColor: colorSet[50]!,
-          disabledButtonColor: colorSet[500]!,
-          hoverButtonBackground: BoxDecoration(color: colorSet[600]!),
-          fontColor: colorSet[50]!,
-          decoration: BoxDecoration(color: colorSet[700]!)),
-    );
-  }
-
-  static ContentAreaThemeData contentAreaTheme(
-      {required MaterialColor colorSet}) {
-    BorderSide borderSide = BorderSide(width: 1, color: colorSet[900]!);
-    BoxDecoration decoration = BoxDecoration(
-        color: colorSet[50]!,
-        border:
-            Border(bottom: borderSide, left: borderSide, right: borderSide));
-    BoxDecoration decorationNoTabsArea = BoxDecoration(
-        color: colorSet[50]!,
-        border: Border.all(width: 1, color: colorSet[900]!));
-    return ContentAreaThemeData(
-        decoration: decoration, decorationNoTabsArea: decorationNoTabsArea);
-  }
-
-  static TabbedViewMenuThemeData menuTheme({required MaterialColor colorSet}) {
-    return TabbedViewMenuThemeData(
-        border: Border.all(width: 1, color: colorSet[900]!),
-        margin: EdgeInsets.all(8),
-        menuItemPadding: EdgeInsets.all(8),
-        textStyle: TextStyle(color: colorSet[900]!, fontSize: 13),
-        color: colorSet[50]!,
-        hoverColor: colorSet[200]!,
-        dividerColor: colorSet[400]!,
-        dividerThickness: 1);
+  TabDecoration _tabDecorationBuilder(
+      {required TabBarPosition tabBarPosition, required TabStatus status}) {
+    Color? color;
+    switch (status) {
+      case TabStatus.selected:
+        color = _selectedColor;
+        break;
+      case TabStatus.hovered:
+        color = _hoveredColor;
+        break;
+      case TabStatus.normal:
+        color = _color;
+        break;
+    }
+    final Radius? radius = _tabRadius;
+    switch (tabBarPosition) {
+      case TabBarPosition.top:
+        return TabDecoration(
+            color: color,
+            borderRadius: radius != null
+                ? BorderRadius.only(topLeft: radius, topRight: radius)
+                : null);
+      case TabBarPosition.bottom:
+        return TabDecoration(
+            color: color,
+            borderRadius: radius != null
+                ? BorderRadius.only(bottomLeft: radius, bottomRight: radius)
+                : null);
+      case TabBarPosition.left:
+        return TabDecoration(
+            color: color,
+            borderRadius: radius != null
+                ? BorderRadius.only(topLeft: radius, bottomLeft: radius)
+                : null);
+      case TabBarPosition.right:
+        return TabDecoration(
+            color: color,
+            borderRadius: radius != null
+                ? BorderRadius.only(topRight: radius, bottomRight: radius)
+                : null);
+    }
   }
 }

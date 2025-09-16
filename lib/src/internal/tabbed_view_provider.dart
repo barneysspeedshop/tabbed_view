@@ -1,57 +1,53 @@
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
-import 'package:tabbed_view/src/tabbed_view.dart';
-import 'package:tabbed_view/src/tabbed_view_controller.dart';
-import 'package:tabbed_view/src/tabbed_view_menu_item.dart';
-import 'package:tabbed_view/src/typedefs/on_before_drop_accept.dart';
-import 'package:tabbed_view/src/typedefs/on_draggable_build.dart';
-import 'package:tabbed_view/src/typedefs/can_drop.dart';
+
+import '../tabbed_view_controller.dart';
+import '../typedefs/can_drop.dart';
+import '../typedefs/on_before_drop_accept.dart';
+import '../typedefs/on_draggable_build.dart';
+import '../typedefs/on_tab_secondary_tap.dart';
+import '../typedefs/tab_remove_interceptor.dart';
+import '../typedefs/tabs_area_buttons_builder.dart';
+import '../unselected_tab_buttons_behavior.dart';
 
 /// Propagates parameters to internal widgets.
 @internal
 class TabbedViewProvider {
   TabbedViewProvider(
       {required this.controller,
-      this.contentBuilder,
-      this.onTabClose,
-      this.tabCloseInterceptor,
+      required this.contentBuilder,
+      required this.tabReorderEnabled,
       required this.contentClip,
-      this.onTabSelection,
-      this.tabSelectInterceptor,
-      required this.selectToEnableButtons,
-      this.closeButtonTooltip,
-      this.tabsAreaButtonsBuilder,
-      required this.menuItems,
-      required this.menuItemsUpdater,
+      required this.unselectedTabButtonsBehavior,
+      required this.closeButtonTooltip,
+      required this.tabsAreaButtonsBuilder,
+      required this.tabRemoveInterceptor,
+      required this.onTabSecondaryTap,
       required this.onTabDrag,
       required this.draggingTabIndex,
       required this.onDraggableBuild,
       required this.canDrop,
       required this.onBeforeDropAccept,
-      required this.dragScope});
+      required this.dragScope,
+      required this.trailing});
 
   final TabbedViewController controller;
   final bool contentClip;
   final IndexedWidgetBuilder? contentBuilder;
-  final OnTabClose? onTabClose;
-  final TabCloseInterceptor? tabCloseInterceptor;
-  final OnTabSelection? onTabSelection;
-  final TabSelectInterceptor? tabSelectInterceptor;
-  final bool selectToEnableButtons;
+  final bool tabReorderEnabled;
+  final TabRemoveInterceptor? tabRemoveInterceptor;
+  final OnTabSecondaryTap? onTabSecondaryTap;
+  final UnselectedTabButtonsBehavior unselectedTabButtonsBehavior;
   final String? closeButtonTooltip;
   final TabsAreaButtonsBuilder? tabsAreaButtonsBuilder;
-  final List<TabbedViewMenuItem> menuItems;
-  final MenuItemsUpdater menuItemsUpdater;
   final OnTabDrag onTabDrag;
   final int? draggingTabIndex;
   final OnDraggableBuild? onDraggableBuild;
   final CanDrop? canDrop;
   final OnBeforeDropAccept? onBeforeDropAccept;
   final String? dragScope;
+  final Widget? trailing;
 }
-
-/// Updater for menu items
-typedef MenuItemsUpdater = void Function(List<TabbedViewMenuItem>);
 
 /// Event that will be triggered when the tab drag start or end.
 typedef OnTabDrag = Function(int? tabIndex);

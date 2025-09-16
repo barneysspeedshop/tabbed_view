@@ -1,8 +1,31 @@
 name: tabbed_view
 description: Flutter widget inspired by the classic Desktop-style tab component. Supports customizable themes.
-version: 1.22.1
+version: 2.0.0-rc.11
 repository: https://github.com/caduandrade/tabbed_view
 homepage: https://caduandrade.github.io/tabbed_view
+
+topics:
+  - widget
+  - layout
+  - tab
+
+screenshots:
+  - description: Classic top light
+    path: screenshots/classic_top_light.png
+  - description: Classic bottom dark
+    path: screenshots/classic_bottom_dark.png
+  - description: Classic left light
+    path: screenshots/classic_left_light.png
+  - description: Classic left stacked light
+    path: screenshots/classic_left_stacked_light.png
+  - description: Minimalist top light
+    path: screenshots/minimalist_top_light.png
+  - description: Minimalist bottom dark
+    path: screenshots/minimalist_bottom_dark.png
+  - description: Underline top light
+    path: screenshots/underline_top_light.png
+  - description: Underline bottom dark
+    path: screenshots/underline_bottom_dark.png
 
 environment:
   sdk: ">=2.19.0 <4.0.0"

@@ -1,3 +1,74 @@
+## 2.0.0-rc.11
+
+* `TabbedView`
+  * Removed the `hiddenTabsMenuItemBuilder` attribute.
+  * Removed the `tabSelectInterceptor` attribute.
+* `TabbedViewController`
+  * Moved `reorderEnable` attribute to `TabbedView`.
+  * Moved `onReorder` attribute to `TabbedView`.
+  * New methods:
+    * `selectTab(TabData tab)`
+    * `getTabByValue(dynamic value)`
+    * `selectTabByValue(dynamic value)`
+* `TabStatus`
+  * Renamed `highlighted` value to `hovered`.
+* `TabData`
+  * Renamed and refactored `buttons` attribute to `buttonsBuilder` to use the builder pattern.
+* `TabButton`
+  * The constructor was replaced by two separate constructors: `TabButton.icon` and `TabButton.menu`.
+* `TabRemoveInterceptor`
+  * ̀Added the `BuildContext` attribute.
+* `OnTabSelection`
+  * ̀Added the `tabData` attribute.
+* Theme
+  * Refactored theming system to fully support all tab bar positions (`top`, `bottom`, `left`, `right`).
+    * Added `TabBarPosition` enum to represent the bar positions.
+    * Added `SideTabsLayout` to define how side-positioned tabs (left or right) are laid out (rotated or stacked).
+  * Renamed `Mobile` theme to `Underline`
+  * Removed `Dark` theme.
+  * Added brightness support.
+  * The theme data classes are now mutable.
+  * `TabbedViewThemeData`
+    * New attributes:
+      * `divider`: The border that separates the content area from the tab bar.
+  * `TabsAreaThemeData`
+    * Renamed `normalButtonColor` attribute to `buttonColor`.
+    * Renamed `hoverButtonColor` attribute to `hoveredButtonColor`.
+    * Renamed `hoverButtonBackground` attribute to `hoveredButtonBackground`.
+    * Allowed null `hoveredButtonColor` to inherit default color.
+    * New attributes:
+      * `crossAxisFit`: Defines how the cross axis will fit within the tabs area.
+      * `crossAxisAlignment`: Defines the alignment of tabs in relation to the main content.
+      * `tabHeaderExtentSize`: Defines how tab headers are sized relative to each other along their extent.
+    * Removed attributes:
+      * `gapBottomBorder`
+      * `gapSideBorder`̀
+  * `TabStatusThemeData`
+    * Renamed `normalButtonColor` attribute to `buttonColor`.
+    * Renamed `hoverButtonBackground` attribute to `hoveredButtonBackground`.
+  * `TabThemeData`
+    * Renamed `highlightedStatus` attribute to `hoveredStatus`.
+    * Renamed `normalButtonColor` attribute to `buttonColor`.
+    * Renamed `hoverButtonColor` attribute to `hoveredButtonColor`.
+    * Renamed `hoverButtonBackground` attribute to `hoveredButtonBackground`.
+    * Allowed null `hoveredButtonColor` to inherit default color.
+  * `TabThemeData` and `TabStatusThemeData`
+    * Removed attributes:
+      * `innerBottomBorder`
+      * `innerTopBorder`
+      * `decoration`
+      * `margin`
+    * New attributes:
+      * `decorationBuilder`: A builder for creating complex and composable tab decorators.
+      * `maxMainSize`: The maximum main size of the tab.
+      * `sideTabsLayout`: Define how side-positioned tabs (left or right) are laid out.
+  * `ContentAreaThemeData`
+    * New attributes:
+      * `border`: The border around the outer side of the tab content area, excluding the side adjacent to the tabs.
+      * `borderRadius`: The radius used to round the corners.  
+  * Replaced `HiddenTabsMenuThemeData` with `TabbedViewMenuThemeData`.
+* Special thanks to Patrick Legacy for his great contributions to this release.
+
 ## 1.22.1
 
 * Bugfix

@@ -1,10 +1,11 @@
 import 'dart:collection';
 
 import 'package:flutter/widgets.dart';
-import 'package:tabbed_view/src/tab_data.dart';
 
-/// Event that will be triggered when the tab is reorder.
-typedef OnReorder = void Function(int oldIndex, int newIndex);
+import 'tab_data.dart';
+import 'typedefs/on_tab_remove.dart';
+import 'typedefs/on_tab_reorder.dart';
+import 'typedefs/on_tab_selection.dart';
 
 /// The [TabbedView] controller.
 ///
@@ -15,10 +16,9 @@ typedef OnReorder = void Function(int oldIndex, int newIndex);
 /// Remember to dispose of the [TabbedView] when it is no longer needed. This will ensure we discard any resources used by the object.
 class TabbedViewController extends ChangeNotifier {
   TabbedViewController(this._tabs,
-      {this.onReorder, this.data, bool reorderEnable = true})
-      : this._reorderEnable = reorderEnable {
+      {this.data, this.onTabSelection, this.onTabRemove, this.onTabReorder}) {
     if (_tabs.isNotEmpty) {
-      _selectedIndex = 0;
+      _selection = _Selection(data: _tabs.first, index: 0);
     }
     for (TabData tab in _tabs) {
       tab.addListener(notifyListeners);
@@ -26,45 +26,48 @@ class TabbedViewController extends ChangeNotifier {
     _updateIndexes(false);
   }
 
+  /// Callback triggered when a tab is removed.
+  OnTabRemove? onTabRemove;
+
+  /// Callback triggered when a tab is reordered.
+  OnTabReorder? onTabReorder;
+  OnTabSelection? onTabSelection;
+
   final List<TabData> _tabs;
+
   UnmodifiableListView<TabData> get tabs => UnmodifiableListView(_tabs);
 
   final dynamic data;
 
-  int? _selectedIndex;
-
-  final OnReorder? onReorder;
-
-  bool _reorderEnable;
-  bool get reorderEnable => _reorderEnable;
-  set reorderEnable(bool value) {
-    if (_reorderEnable != value) {
-      _reorderEnable = value;
-      notifyListeners();
-    }
-  }
+  _Selection _selection = _Selection(index: null, data: null);
 
   /// The selected tab index
-  int? get selectedIndex => _selectedIndex;
+  int? get selectedIndex => _selection.index;
+
+  void _updateSelection(int? tabIndex) {
+    final _Selection oldSelection = _selection;
+    _selection = _Selection(
+        data: tabIndex != null ? _tabs[tabIndex] : null, index: tabIndex);
+    if (oldSelection != _selection) {
+      onTabSelection?.call(_selection.index, _selection.data);
+    }
+  }
 
   /// Changes the index of the selection and notifies.
   set selectedIndex(int? tabIndex) {
     if (tabIndex != null) {
       _validateIndex(tabIndex);
     }
-    _selectedIndex = tabIndex;
+    _updateSelection(tabIndex);
     notifyListeners();
   }
 
   /// Gets the selected tab.
   TabData? get selectedTab =>
-      _selectedIndex != null ? _tabs[_selectedIndex!] : null;
+      selectedIndex != null ? _tabs[selectedIndex!] : null;
 
   /// Reorders a tab.
-  void reorderTab(int oldIndex, int newIndex) {
-    if (!reorderEnable) {
-      return;
-    }
+  bool reorderTab(int oldIndex, int newIndex) {
     if (_tabs.isEmpty) {
       throw ArgumentError('There are no tabs.');
     }
@@ -77,15 +80,15 @@ class TabbedViewController extends ChangeNotifier {
     final bool append = newIndex >= _tabs.length;
 
     if (oldIndex == newIndex) {
-      return;
+      return false;
     }
     if (oldIndex == newIndex - 1) {
-      return;
+      return false;
     }
 
     TabData? selectedTab;
-    if (_selectedIndex != null) {
-      selectedTab = _tabs[_selectedIndex!];
+    if (selectedIndex != null) {
+      selectedTab = _tabs[selectedIndex!];
     }
 
     TabData tabToReorder = _tabs.removeAt(oldIndex);
@@ -99,12 +102,11 @@ class TabbedViewController extends ChangeNotifier {
     }
     _updateIndexes(false);
     if (selectedTab != null) {
-      _selectedIndex = _tabs.indexOf(selectedTab);
+      _updateSelection(_tabs.indexOf(selectedTab));
     }
     notifyListeners();
-    if (onReorder != null) {
-      onReorder!(oldIndex, newIndex);
-    }
+    onTabReorder?.call(oldIndex, newIndex);
+    return true;
   }
 
   int get length => _tabs.length;
@@ -126,7 +128,7 @@ class TabbedViewController extends ChangeNotifier {
     }
     _updateIndexes(true);
     _tabs.clear();
-    _selectedIndex = null;
+    _updateSelection(null);
     addTabs(iterable);
   }
 
@@ -144,7 +146,7 @@ class TabbedViewController extends ChangeNotifier {
   void addTab(TabData tab) {
     _tabs.add(tab);
     tab.addListener(notifyListeners);
-    tab._setIndex(_tabs.length - 1);
+    TabDataHelper.setIndex(tab, _tabs.length - 1);
     _afterIncTabs();
   }
 
@@ -152,7 +154,7 @@ class TabbedViewController extends ChangeNotifier {
   /// Updates the status and notifies.
   void _afterIncTabs() {
     if (_tabs.length == 1) {
-      _selectedIndex = 0;
+      _updateSelection(0);
     }
     notifyListeners();
   }
@@ -160,29 +162,63 @@ class TabbedViewController extends ChangeNotifier {
   /// Removes a tab.
   TabData removeTab(int tabIndex) {
     _validateIndex(tabIndex);
+    final int? originalSelectedIndex = selectedIndex;
+    final TabData? originalSelectedTab = selectedTab;
+
     TabData tabData = _tabs.removeAt(tabIndex);
     tabData.removeListener(notifyListeners);
-    tabData._setIndex(-1);
+    TabDataHelper.setIndex(tabData, -1);
     _updateIndexes(false);
     if (_tabs.isEmpty) {
-      _selectedIndex = null;
-    } else if (_selectedIndex != null &&
-        (_selectedIndex == tabIndex || _selectedIndex! >= _tabs.length)) {
-      _selectedIndex = 0;
+      _updateSelection(null);
+    } else {
+      if (originalSelectedTab != null) {
+        final int newIndex = _tabs.indexOf(originalSelectedTab);
+        if (newIndex != -1) {
+          // The selected tab was not removed, so we keep it selected.
+          _updateSelection(newIndex);
+        } else if (originalSelectedIndex != null) {
+          // The selected tab was removed. Let's select the tab at the same index
+          // if possible, or the new last tab.
+          _updateSelection((originalSelectedIndex < _tabs.length)
+              ? originalSelectedIndex
+              : _tabs.length - 1);
+        }
+      }
     }
     notifyListeners();
+    onTabRemove?.call(tabData);
     return tabData;
   }
 
   /// Removes all tabs.
   void removeTabs() {
+    final removedTabs = List<TabData>.from(_tabs);
     for (TabData tab in _tabs) {
       tab.removeListener(notifyListeners);
     }
     _updateIndexes(true);
     _tabs.clear();
-    _selectedIndex = null;
+    _updateSelection(null);
     notifyListeners();
+    for (final tab in removedTabs) {
+      onTabRemove?.call(tab);
+    }
+  }
+
+  /// Selects a tab.
+  void selectTab(TabData tab) {
+    selectedIndex = TabDataHelper.indexFrom(tab);
+  }
+
+  /// Selects a tab by its value.
+  ///
+  /// Does nothing if the tab is not found.
+  void selectTabByValue(dynamic value) {
+    final index = _tabs.indexWhere((tab) => tab.value == value);
+    if (index != -1) {
+      selectedIndex = index;
+    }
   }
 
   void _validateIndex(int tabIndex) {
@@ -194,24 +230,44 @@ class TabbedViewController extends ChangeNotifier {
 
   /// Gets a tab given an index.
   TabData getTabByIndex(int index) {
+    _validateIndex(index);
     return _tabs[index];
+  }
+
+  /// Gets a tab given its value.
+  ///
+  /// The search is linear. Returns `null` if not found.
+  TabData? getTabByValue(dynamic value) {
+    for (final tab in _tabs) {
+      if (tab.value == value) {
+        return tab;
+      }
+    }
+    return null;
   }
 
   void _updateIndexes(bool clear) {
     for (int i = 0; i < _tabs.length; i++) {
       TabData tab = _tabs[i];
-      tab._setIndex(clear ? -1 : i);
+      TabDataHelper.setIndex(tab, clear ? -1 : i);
     }
   }
 }
 
-mixin TabIndex {
-  int _index = -1;
+class _Selection {
+  _Selection({required this.data, required this.index});
 
-  /// The current index in the controller.
-  int get index => _index;
+  final TabData? data;
+  final int? index;
 
-  void _setIndex(int newIndex) {
-    _index = newIndex;
-  }
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is _Selection &&
+          runtimeType == other.runtimeType &&
+          data == other.data &&
+          index == other.index;
+
+  @override
+  int get hashCode => Object.hash(data, index);
 }

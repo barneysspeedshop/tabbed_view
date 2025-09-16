@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:tabbed_view/src/tab_data.dart';
-import 'package:tabbed_view/src/tab_status.dart';
-import 'package:tabbed_view/src/theme/tab_theme_data.dart';
-import 'package:tabbed_view/src/theme/vertical_alignment.dart';
+
+import '../../tab_data.dart';
+import '../../tab_status.dart';
+import '../../theme/tab_theme_data.dart';
+import '../../theme/vertical_alignment.dart';
 
 /// The tab drag feedback widget.
 @internal
