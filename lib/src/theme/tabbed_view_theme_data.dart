@@ -56,13 +56,13 @@ class TabbedViewThemeData {
       MaterialColor? colorSet,
       double? fontSize,
       Color? borderColor,
-      double? tabBorderRadius}) {
+      double? tabRadius}) {
     return ClassicTheme(
         brightness: brightness ?? Brightness.light,
         colorSet: colorSet ?? Colors.grey,
         fontSize: fontSize ?? 13,
         borderColor: borderColor,
-        tabRadius: tabBorderRadius);
+        tabRadius: tabRadius);
   }
 
   /// Builds the predefined underline theme.
