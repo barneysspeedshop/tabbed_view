@@ -52,47 +52,47 @@ class TabbedViewThemeData {
 
   /// Builds the predefined classic theme.
   factory TabbedViewThemeData.classic(
-      {Brightness brightness = Brightness.light,
-      MaterialColor colorSet = Colors.grey,
-      double fontSize = 13,
+      {Brightness? brightness,
+      MaterialColor? colorSet,
+      double? fontSize,
       Color? borderColor,
       double? tabBorderRadius}) {
     return ClassicTheme(
-        brightness: brightness,
-        colorSet: colorSet,
-        fontSize: fontSize,
+        brightness: brightness ?? Brightness.light,
+        colorSet: colorSet ?? Colors.grey,
+        fontSize: fontSize ?? 13,
         borderColor: borderColor,
         tabRadius: tabBorderRadius);
   }
 
   /// Builds the predefined underline theme.
   factory TabbedViewThemeData.underline(
-      {Brightness brightness = Brightness.light,
-      MaterialColor colorSet = Colors.grey,
-      MaterialColor underlineColorSet = Colors.blue,
-      double fontSize = 13}) {
+      {Brightness? brightness,
+      MaterialColor? colorSet,
+      MaterialColor? underlineColorSet,
+      double? fontSize}) {
     return UnderlineTheme(
-        brightness: brightness,
-        colorSet: colorSet,
-        underlineColorSet: underlineColorSet,
-        fontSize: fontSize);
+        brightness: brightness ?? Brightness.light,
+        colorSet: colorSet ?? Colors.grey,
+        underlineColorSet: underlineColorSet ?? Colors.blue,
+        fontSize: fontSize ?? 13);
   }
 
   /// Builds the predefined minimalist theme.
   factory TabbedViewThemeData.minimalist(
-      {Brightness brightness = Brightness.light,
-      MaterialColor colorSet = Colors.grey,
-      double fontSize = 13,
-      double initialGap = 16,
-      double gap = 4,
-      double? tabRadius = 10}) {
+      {Brightness? brightness,
+      MaterialColor? colorSet,
+      double? fontSize,
+      double? initialGap,
+      double? gap,
+      double? tabRadius}) {
     return MinimalistTheme(
-        brightness: brightness,
-        colorSet: colorSet,
-        fontSize: fontSize,
-        initialGap: initialGap,
-        gap: gap,
-        tabRadius: tabRadius);
+        brightness: brightness ?? Brightness.light,
+        colorSet: colorSet ?? Colors.grey,
+        fontSize: fontSize ?? 13,
+        initialGap: initialGap ?? 16,
+        gap: gap ?? 4,
+        tabRadius: tabRadius ?? 10);
   }
 
   @override
