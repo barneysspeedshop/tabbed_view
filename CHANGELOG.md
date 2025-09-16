@@ -1,4 +1,4 @@
-## 2.0.0-rc.11
+## 2.0.0
 
 * `TabbedView`
   * Removed the `hiddenTabsMenuItemBuilder` attribute.
