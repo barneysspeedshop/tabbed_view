@@ -25,7 +25,7 @@ class ManilaFolderTabBorder extends ShapeBorder {
   Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
     Path path = Path();
     double slant = angle;
-    
+
     switch (tabBarPosition) {
       case TabBarPosition.top:
         path.moveTo(rect.left, rect.bottom);
@@ -69,24 +69,36 @@ class ManilaFolderTabBorder extends ShapeBorder {
 
     switch (tabBarPosition) {
       case TabBarPosition.top:
-        canvas.drawLine(Offset(rect.left, rect.bottom), Offset(rect.left + slant, rect.top), borderPaint); // Left
-        canvas.drawLine(Offset(rect.left + slant, rect.top), Offset(rect.right - slant, rect.top), borderPaint); // Top
-        canvas.drawLine(Offset(rect.right - slant, rect.top), Offset(rect.right, rect.bottom), borderPaint); // Right
+        canvas.drawLine(Offset(rect.left, rect.bottom),
+            Offset(rect.left + slant, rect.top), borderPaint); // Left
+        canvas.drawLine(Offset(rect.left + slant, rect.top),
+            Offset(rect.right - slant, rect.top), borderPaint); // Top
+        canvas.drawLine(Offset(rect.right - slant, rect.top),
+            Offset(rect.right, rect.bottom), borderPaint); // Right
         break;
       case TabBarPosition.bottom:
-        canvas.drawLine(Offset(rect.left, rect.top), Offset(rect.left + slant, rect.bottom), borderPaint); // Left
-        canvas.drawLine(Offset(rect.left + slant, rect.bottom), Offset(rect.right - slant, rect.bottom), borderPaint); // Bottom
-        canvas.drawLine(Offset(rect.right - slant, rect.bottom), Offset(rect.right, rect.top), borderPaint); // Right
+        canvas.drawLine(Offset(rect.left, rect.top),
+            Offset(rect.left + slant, rect.bottom), borderPaint); // Left
+        canvas.drawLine(Offset(rect.left + slant, rect.bottom),
+            Offset(rect.right - slant, rect.bottom), borderPaint); // Bottom
+        canvas.drawLine(Offset(rect.right - slant, rect.bottom),
+            Offset(rect.right, rect.top), borderPaint); // Right
         break;
       case TabBarPosition.left:
-        canvas.drawLine(Offset(rect.right, rect.top), Offset(rect.left, rect.top + slant), borderPaint); // Top
-        canvas.drawLine(Offset(rect.left, rect.top + slant), Offset(rect.left, rect.bottom - slant), borderPaint); // Left
-        canvas.drawLine(Offset(rect.left, rect.bottom - slant), Offset(rect.right, rect.bottom), borderPaint); // Bottom
+        canvas.drawLine(Offset(rect.right, rect.top),
+            Offset(rect.left, rect.top + slant), borderPaint); // Top
+        canvas.drawLine(Offset(rect.left, rect.top + slant),
+            Offset(rect.left, rect.bottom - slant), borderPaint); // Left
+        canvas.drawLine(Offset(rect.left, rect.bottom - slant),
+            Offset(rect.right, rect.bottom), borderPaint); // Bottom
         break;
       case TabBarPosition.right:
-        canvas.drawLine(Offset(rect.left, rect.top), Offset(rect.right, rect.top + slant), borderPaint); // Top
-        canvas.drawLine(Offset(rect.right, rect.top + slant), Offset(rect.right, rect.bottom - slant), borderPaint); // Right
-        canvas.drawLine(Offset(rect.right, rect.bottom - slant), Offset(rect.left, rect.bottom), borderPaint); // Bottom
+        canvas.drawLine(Offset(rect.left, rect.top),
+            Offset(rect.right, rect.top + slant), borderPaint); // Top
+        canvas.drawLine(Offset(rect.right, rect.top + slant),
+            Offset(rect.right, rect.bottom - slant), borderPaint); // Right
+        canvas.drawLine(Offset(rect.right, rect.bottom - slant),
+            Offset(rect.left, rect.bottom), borderPaint); // Bottom
         break;
     }
   }

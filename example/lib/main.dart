@@ -129,7 +129,8 @@ class TabbedViewExampleState extends State<TabbedViewExample> {
         theme: ThemeData(brightness: _brightness),
         home: Scaffold(
             appBar: AppBar(title: Text('TabbedView Example (All properties)')),
-            body: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            body:
+                Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
               _buildSettings(),
               Expanded(
                   child: Padding(
@@ -394,7 +395,8 @@ class ManilaFolderTheme extends TabbedViewThemeData {
     tab.textStyle = TextStyle(color: foregroundColor);
     tab.padding = const EdgeInsets.symmetric(vertical: 8, horizontal: 16);
 
-    tab.decorationBuilder = ({required TabStatus status, required TabBarPosition tabBarPosition}) {
+    tab.decorationBuilder =
+        ({required TabStatus status, required TabBarPosition tabBarPosition}) {
       Color? tabColor;
       Border? innerBorder;
       // This inner border "erases" the line between the selected tab and the content area.
@@ -406,7 +408,8 @@ class ManilaFolderTheme extends TabbedViewThemeData {
           innerBorder = Border(bottom: BorderSide(color: backgroundColor));
         } else if (tabBarPosition == TabBarPosition.left) {
           innerBorder = Border(right: BorderSide(color: backgroundColor));
-        } else { // right
+        } else {
+          // right
           innerBorder = Border(left: BorderSide(color: backgroundColor));
         }
       } else if (status == TabStatus.hovered) {
