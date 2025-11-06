@@ -398,19 +398,14 @@ class ManilaFolderTheme extends TabbedViewThemeData {
     tab.decorationBuilder =
         ({required TabStatus status, required TabBarPosition tabBarPosition}) {
       Color? tabColor;
-      Border? innerBorder;
       // This inner border "erases" the line between the selected tab and the content area.
       if (status == TabStatus.selected) {
         tabColor = backgroundColor;
         if (tabBarPosition == TabBarPosition.bottom) {
-          innerBorder = Border(top: BorderSide(color: backgroundColor));
         } else if (tabBarPosition == TabBarPosition.top) {
-          innerBorder = Border(bottom: BorderSide(color: backgroundColor));
         } else if (tabBarPosition == TabBarPosition.left) {
-          innerBorder = Border(right: BorderSide(color: backgroundColor));
         } else {
           // right
-          innerBorder = Border(left: BorderSide(color: backgroundColor));
         }
       } else if (status == TabStatus.hovered) {
         tabColor = hoveredColor;

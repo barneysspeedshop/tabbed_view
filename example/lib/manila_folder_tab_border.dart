@@ -3,7 +3,7 @@ import 'package:tabbed_view/tabbed_view.dart';
 
 /// A border that mimics the shape of a manila folder tab.
 class ManilaFolderTabBorder extends ShapeBorder {
-  ManilaFolderTabBorder({
+  const ManilaFolderTabBorder({
     required this.tabBarPosition,
     required this.borderSide,
     this.angle = 10.0,
